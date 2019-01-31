@@ -1,4 +1,4 @@
-# TBD
+# TrinityWayFinders
 Source Code Repo for ASE Project
 
 # Team ID
