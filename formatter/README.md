@@ -10,6 +10,7 @@ In addition, it drills deep to the front-end language Angular 6 and the backend 
 
 # Clean Code Principles Summary
 - Credits:  Clean Code - A Handbook of Agile Software Craftsmanship by Robert C. Martin
+- Credits for summary: https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29 
 
 > Code is clean if it can be understood easily – by everyone on the team. Clean code can be read and enhanced by a developer other than its original author. With understandability comes readability, changeability, extensibility and maintainability.
 
@@ -107,10 +108,3 @@ In addition, it drills deep to the front-end language Angular 6 and the backend 
 
 # Angular 6
 1. Use ATOM beautify plugin and enable the beautify on save option. Please use the instruction available [here](https://atom.io/packages/atom-beautify)
-
-
-
-
-
-
-
