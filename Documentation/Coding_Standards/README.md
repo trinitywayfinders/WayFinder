@@ -103,9 +103,9 @@ In addition, it drills deep to the front-end language Angular 6 and the backend 
 6. Opacity. The code is hard to understand.
 
 # JAVA
-1. Use the formatter available in the location <TDB>. Please refer to the following [link](https://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Freference%2Fpreferences%2Fjava%2Fcodestyle%2Fref-preferences-formatter.htm) to import the formatter into eclipse and use Ctrl + Shift + F to autoformat your code.
-2. Also make sure to import the clean-up profile available in the location <TBD>. Please refer to the following [link](). Once the code implementation is done, use Source --> Cleanup to run the cleanup wizard with the imported cleanup profile.
-3. Make sure to submit your code to SonarQube and ensure that there are no critical warning and no/very less major issues. The documentation for submitting your code to SonarQube can be found [here](...)
+1. Use the formatter available in the location [here](https://raw.githubusercontent.com/trinitywayfinders/WayFinder/master/Documentation/Coding_Standards/eclipse/wayfinder-formatter.xml). Please refer to the following [link](https://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Freference%2Fpreferences%2Fjava%2Fcodestyle%2Fref-preferences-formatter.htm) to import the formatter into eclipse and use Ctrl + Shift + F to autoformat your code.
+2. Also make sure to import the clean-up profile available in the location <TBD>. Please refer to the following [link](https://raw.githubusercontent.com/trinitywayfinders/WayFinder/master/Documentation/Coding_Standards/eclipse/wayfinder-clean-up-profile.xml). Once the code implementation is done, use Source --> Cleanup to run the cleanup wizard with the imported cleanup profile.
+3. Make sure to submit your code to SonarQube and ensure that there are no critical warning and no/very less major issues. The documentation for submitting your code to SonarQube. The instruction for SonarQube submission are available in the wiki. 
 
 # Angular 6
 1. Use ATOM beautify plugin and enable the beautify on save option. Please use the instruction available [here](https://atom.io/packages/atom-beautify)
