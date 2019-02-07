@@ -92,6 +92,7 @@ In addition, it drills deep to the front-end language Angular 6 and the backend 
 3. Fast.
 4. Independent.
 5. Repeatable.
+6. The Unit Tests should not have dependencies of network or static assets.
 
 ## Code smells
 1. Rigidity. The software is difficult to change. A small change causes a cascade of subsequent changes.
