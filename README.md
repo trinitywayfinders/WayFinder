@@ -29,3 +29,7 @@ Some of the main challenges include identifying when a user’s interests are li
 * Be highly available. The system must be fault tolerant. The system should execute even when off-line. The system must react favourably even if data from heterogeneous sources are not available;
 * Provide low latency for mobile users. This means that a decentralised architecture is likely to be most appropriate;
 * Be secure. The system should be secure from attack.
+
+
+# CODING STANDARDS
+The coding standards for this repository can be found [here](https://github.com/trinitywayfinders/WayFinder/blob/master/Documentation/Coding_Standards/README.md)
