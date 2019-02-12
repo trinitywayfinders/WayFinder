@@ -26,14 +26,12 @@ public class LibraryTest {
         try
         {
             HttpURLConnection huc = Mockito.mock(HttpURLConnection.class);
-            URL u = Mockito.mock(URL.class);
+            //URL u = Mockito.mock(URL.class);
             BufferedReader bufferedReader = Mockito.mock(BufferedReader.class);
-            
-            
             
             Mockito.when(huc.getResponseCode()).thenReturn(200);
             Mockito.when(bufferedReader.readLine()).thenReturn("OK");
-            Mockito.when(u.openConnection()).thenReturn(huc);
+            //Mockito.when(u.openConnection()).thenReturn(huc);
             
             String response = Library.GET(url,  null);
             
