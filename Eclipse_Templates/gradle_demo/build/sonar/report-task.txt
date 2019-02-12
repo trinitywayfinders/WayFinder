@@ -1,0 +1,6 @@
+projectKey=gradle_demo
+serverUrl=http://35.242.176.105
+serverVersion=7.6.0.21501
+dashboardUrl=http://35.242.176.105/dashboard?id=gradle_demo
+ceTaskId=AWjhgAAJhA7mHao2ECy0
+ceTaskUrl=http://35.242.176.105/api/ce/task?id=AWjhgAAJhA7mHao2ECy0
