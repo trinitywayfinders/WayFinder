@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      WayFinder
+    </ion-title>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Your Location</ion-label>
+        <ion-input type="text" id="startingLocation" value=""></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Destination</ion-label>
+        <ion-input type="text" id="destination"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button>Submit</button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div id="map" style="width:100%; height:100%;"></div>
+</ion-content>
+
+
+
+
+
+
+
+<!-- latitude, longitude of A and B
+  polling line (hexadecimal string) -->
