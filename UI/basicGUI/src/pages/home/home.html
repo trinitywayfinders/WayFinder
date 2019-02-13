@@ -3,18 +3,21 @@
     <ion-title>
       WayFinder
     </ion-title>
+
     <ion-list>
+
       <ion-item>
         <ion-label floating>Your Location</ion-label>
-        <ion-input type="text" id="startingLocation" value=""></ion-input>
+        <ion-input type="text" [(ngModel)]="inputLocation"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Destination</ion-label>
-        <ion-input type="text" id="destination"></ion-input>
+        <ion-input type="text" [(ngModel)]="inputDestination"></ion-input>
       </ion-item>
+
+      <button ion-button (click)="showAlert()">Submit</button>
     </ion-list>
-    <button ion-button>Submit</button>
   </ion-navbar>
 </ion-header>
 
