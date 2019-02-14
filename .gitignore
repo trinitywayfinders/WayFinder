@@ -1,2 +1,5 @@
 .DS_Store
 Code/Libraries/RESTLibrary/build/*
+Code/HighLevelAPI/.*
+Code/HighLevelAPI/gradle/*
+Code/HighLevelAPI/gradlew/*
