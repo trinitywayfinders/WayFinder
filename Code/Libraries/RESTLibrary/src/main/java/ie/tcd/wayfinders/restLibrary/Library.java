@@ -5,19 +5,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
 
 public class Library {
 
@@ -66,22 +62,5 @@ public class Library {
         HttpResponse response = client.execute(requestMethod);
         
         return response;
-        
-        /*
-        try(CloseableHttpClient httpClient = HttpClientBuilder.create().build())
-        {
-
-            HttpResponse response = httpClient.execute(requestMethod);
-            
-            return response;
-
-        } catch (IOException e)
-        {
-
-            System.out.println("IOException:" + e.getMessage());
-            return null;
-            // handle
-
-        }*/
     }
 }

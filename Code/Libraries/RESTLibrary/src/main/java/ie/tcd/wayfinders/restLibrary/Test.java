@@ -9,27 +9,22 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 
-import net.minidev.json.JSONObject;
-
 public class Test {
     public static void main(String [] args) throws IOException {
         
-        String url = "https://my-json-server.typicode.com/typicode/demo/posts";
+        String url = "https://my-json-server.typicode.com/typicode/demo/profile";
  
         Map<String,String> headers = new HashMap<String,String>();
-        headers.put("header1", "val1");
-        headers.put("header2", "val2");
-        headers.put("header3", "val3");
+        headers.put("Accept", "application/json");
                 
-        HttpEntity response = (Library.GET(url, Optional.of(headers))).getEntity();
-        //String x = response.toString();
-        //System.out.println("!!!\n"+x);
+        String json = "DATA:{\r\n" + 
+                "  \"names\": \"typicodes\"\r\n" + 
+                "}";
         
-        //JSONObject result = new JSONObject(response);
-        //HttpEntity data = response.getEntity();
-        
-        String reponseXml = EntityUtils.toString(response);
-        
+        HttpResponse response = (Library.DELETE(url, Optional.of(headers)));
+        HttpEntity responseEntity = response.getEntity();
+        String reponseXml = EntityUtils.toString(responseEntity);
+        System.out.println("\n\n"+response.getStatusLine());
         System.out.println("\n\n\nDATA:"+reponseXml);
         
     }
