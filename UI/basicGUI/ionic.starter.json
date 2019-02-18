@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "WayFinder",
+=======
+  "name": "Blank Starter",
+>>>>>>> 1d994b3e39042773fad0a626b47d21c6c1519542
   "baseref": "master",
   "tarignore": [
     ".sourcemaps",

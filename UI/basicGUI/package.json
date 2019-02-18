@@ -1,8 +1,13 @@
 {
   "name": "WayFinder",
   "version": "0.0.1",
+<<<<<<< HEAD
   "author": "TrinityWayFinders",
   "homepage": "https://github.com/trinitywayfinders",
+=======
+  "author": "Ionic Framework",
+  "homepage": "http://ionicframework.com/",
+>>>>>>> 1d994b3e39042773fad0a626b47d21c6c1519542
   "private": true,
   "scripts": {
     "start": "ionic-app-scripts serve",
@@ -37,5 +42,9 @@
     "@ionic/app-scripts": "3.2.1",
     "typescript": "~2.6.2"
   },
+<<<<<<< HEAD
   "description": "A multi-model transport routing App"
+=======
+  "description": "An Ionic project"
+>>>>>>> 1d994b3e39042773fad0a626b47d21c6c1519542
 }

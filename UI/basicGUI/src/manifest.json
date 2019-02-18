@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
   "name": "WayFinder",
   "short_name": "WayFinder",
+=======
+  "name": "Ionic",
+  "short_name": "Ionic",
+>>>>>>> 1d994b3e39042773fad0a626b47d21c6c1519542
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
@@ -10,4 +15,8 @@
   }],
   "background_color": "#4e8ef7",
   "theme_color": "#4e8ef7"
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 1d994b3e39042773fad0a626b47d21c6c1519542
