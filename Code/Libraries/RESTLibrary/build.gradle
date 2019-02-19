@@ -1,11 +1,7 @@
 buildscript {
     repositories {
         mavenCentral()
-    	flatDir {
-       		dirs 'libs'
-  		}
     }
-    
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
     }
@@ -24,6 +20,7 @@ bootJar {
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 sourceCompatibility = 1.8
@@ -31,14 +28,14 @@ targetCompatibility = 1.8
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
-    compile "org.apache.cxf:cxf-rt-rs-service-description-openapi-v3:3.2.4"
-	compile "org.webjars:swagger-ui:3.13.6"
-
-	compile 'org.apache.httpcomponents:httpcore:4.4.1'
-    compile 'org.apache.httpcomponents:httpclient:4.5.7'
-    
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-	
     testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test")
+
+	testCompile "org.mockito:mockito-core:2.4.0"
+	testCompile 'org.powermock:powermock-module-junit4:1.7.0RC2',
+            'org.powermock:powermock-api-mockito2:1.7.0RC2'
+	testImplementation 'org.mockito:mockito-core:2.7.22'  
+	
+	compile 'org.apache.httpcomponents:httpcore:4.4.1'
+    compile 'org.apache.httpcomponents:httpclient:4.5.7'
 }
