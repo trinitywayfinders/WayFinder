@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
-import org.apache.tomcat.jni.Library;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import ie.tcd.wayfinders.restLibrary.Library;
 
 
 @RestController
@@ -58,13 +59,12 @@ public class NavigationController {
         if (startLong >180 || startLong < -180 ) return new ResponseEntity<String>("Longitude of Starting point is invalid!",
                       HttpStatus.BAD_REQUEST);
        
-        //HttpResponse response = Library.GET("http://localhost:3000/path", Optional.empty());
+        HttpResponse response = Library.GET("http://localhost:3000/path", Optional.empty());
         
-        //HttpEntity responseEntity = response.getEntity();
-        //String responseXml = EntityUtils.toString(responseEntity);
+        HttpEntity responseEntity = response.getEntity();
+        String responseXml = EntityUtils.toString(responseEntity);
      
-        //return new ResponseEntity<String>(responseXml, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
-        return null;
+        return new ResponseEntity<String>(responseXml, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
     }
 
 }
