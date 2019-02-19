@@ -1,7 +1,5 @@
 package com.wayfinder.auth.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,9 +16,7 @@ import com.wayfinder.auth.service.UserService;
 
 @RestController
 @RequestMapping("/api/user")
-public class UserController {
-    Logger logger = LoggerFactory.getLogger(UserController.class);
-	
+public class UserController {	
 	@Autowired
 	private UserService userService;
 	
@@ -34,7 +30,6 @@ public class UserController {
 	
 	@PostMapping("/")
 	public @ResponseBody User registerNewUser(@RequestBody User newUser) {
-		logger.debug("Email: " + newUser.getEmail());
 		return userService.registerNewUser(newUser);
 	}
 }

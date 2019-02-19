@@ -25,6 +25,9 @@ public class DefaultUserService implements UserService {
 
 	@Override
 	public User registerNewUser(User newUser) {
-		return userRepository.save(newUser);
+		
+		User user = userRepository.save(newUser);
+		
+		return user;
 	}
 }
