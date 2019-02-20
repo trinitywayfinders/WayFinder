@@ -21,11 +21,11 @@ export class HomePage {
 
    getLocation():any{
       this.map.locate({
-      }).on('locationfound', (currentLatlng) => {
+      }).on('locationfound', (e) => {
 
-        console.log('in locationFound '+currentLatlng.latlng)
+        //console.log('in locationFound '+currentLatlng.latlng)
 
-        this.currentLatlng = currentLatlng
+        this.currentLatlng = e
 
         this.getCurrentLatLing()
       }).on('locationerror', (err) => {
@@ -34,7 +34,12 @@ export class HomePage {
   }
 
   getCurrentLatLing(){
-    alert(this.currentLatlng.latlng)
+    let alertOfLoc = this.alertCtrl.create({
+      title:"YOUR CURRENT LOCATION",
+      subTitle: "Latitude:" + this.currentLatlng.latitude+" Longitude: " +this.currentLatlng.longitude,
+      buttons:['GOT IT']
+    });
+    alertOfLoc.present();
   }
 
     ionViewDidEnter() {
@@ -46,6 +51,21 @@ export class HomePage {
       attributions: 'www.tphangout.com',
       maxZoom: 18
     }).addTo(this.map);
+
+    ///////Mark the current location
+    this.map.locate({
+      //setView: true,
+      maxZoom: 10
+    }).on('locationfound', (e) => {
+      //this.currentLatlng = e;
+      //alert(e.latlng);
+      let markerGroup = leaflet.featureGroup();
+      let marker: any = leaflet.marker([e.latitude, e.longitude])
+      markerGroup.addLayer(marker);
+      this.map.addLayer(markerGroup);
+      }).on('locationerror', (err) => {
+        alert(err.message);
+    })
 
 
     //console.log(currentLatlng)
