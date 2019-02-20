@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      WayFinder
+    </ion-title>
+
+    <ion-list>
+
+      <ion-item>
+        <ion-label floating>Your Location</ion-label>
+        <ion-input type="text" [(ngModel)]="inputLocation"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Destination</ion-label>
+        <ion-input type="text" [(ngModel)]="inputDestination"></ion-input>
+      </ion-item>
+
+      <button ion-button>Submit</button>
+
+    </ion-list>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div id="map" style="width:100%; height:100%;"></div>
+</ion-content>
+
+
+
+
+
+
+
+<!-- latitude, longitude of A and B
+  polling line (hexadecimal string) -->
