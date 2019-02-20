@@ -27,5 +27,22 @@ export class HomePage {
       attributions: 'www.tphangout.com',
       maxZoom: 18
     }).addTo(this.map);
+
+    var currentLatlng;
+    this.map.locate({
+      //setView: true,
+      maxZoom: 10
+    }).on('locationfound', (e) => {
+
+      alert(e.latlng);
+      let markerGroup = leaflet.featureGroup();
+      let marker: any = leaflet.marker([e.latitude, e.longitude]).on('click', () => {
+        alert('Current Location^^');
+      })
+      markerGroup.addLayer(marker);
+      this.map.addLayer(markerGroup);
+      }).on('locationerror', (err) => {
+        alert(err.message);
+    })
   }
 }
