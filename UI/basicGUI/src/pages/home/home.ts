@@ -26,7 +26,6 @@ export class HomePage {
    getLocation(){
      this.map.locate({
      }).once('locationfound', (e) => {
-      console.log("ONCE")
       this.currentLatlng = e.latlng
 
       let markerGroup = leaflet.featureGroup();
