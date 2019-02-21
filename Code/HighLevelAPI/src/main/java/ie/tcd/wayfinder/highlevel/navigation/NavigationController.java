@@ -38,7 +38,7 @@ public class NavigationController {
      */
 
     @GetMapping("/navigation/start/{startLong}/{startLat}/destination/{destLong}/{destLat}/")
-    public ResponseEntity<String> FindRoute(@PathVariable Float startLong, @PathVariable Float startLat, @PathVariable Float destLong, @PathVariable Float destLat) throws IOException
+    public ResponseEntity<String> findRoute(@PathVariable Float startLong, @PathVariable Float startLat, @PathVariable Float destLong, @PathVariable Float destLat) throws IOException
     {
         
         if (startLong == null || startLat == null) return new ResponseEntity<String>("Starting location cannot be empty!",
