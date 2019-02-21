@@ -25,7 +25,7 @@ public class SwaggerConfig {
     }
     
     @Bean
-    private ApiInfo apiInfo()
+    public ApiInfo apiInfo()
     {
         Contact contact2 = new Contact("Wayfinders", "", "thundyia@tcd.ie");
         return new ApiInfoBuilder().title("Trinity Wayfinders Authentication Module")
