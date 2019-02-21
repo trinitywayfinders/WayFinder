@@ -1,4 +1,10 @@
 .DS_Store
+*.project
+*.prefs
+*.lock
+*.bin
+*.classpath
+
 Code/Libraries/RESTLibrary/build/*
 Code/HighLevelAPI/.*
 Code/HighLevelAPI/gradle/*
