@@ -48,7 +48,7 @@ public class AuthorisationServerConfig extends AuthorizationServerConfigurerAdap
 		        .authorizedGrantTypes("implicit", "refresh_token", "password", "authorization_code", "client_credentials")
 		        .accessTokenValiditySeconds(1800)
 		        .scopes("FOO")
-		        .redirectUris("http://www.google.com");
+		        .redirectUris("http://localhost:8080/");
 	}
 	
 	
