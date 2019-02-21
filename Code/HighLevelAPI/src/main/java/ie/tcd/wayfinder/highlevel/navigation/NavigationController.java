@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ie.tcd.wayfinders.restLibrary.Library;
 
-
 @RestController
-@EnableAutoConfiguration
 public class NavigationController {
 
     @RequestMapping("/")
