@@ -47,7 +47,7 @@ export class HomePage {
 
       let alertOfLoc = this.alertCtrl.create({
         title:"YOUR CURRENT LOCATION",
-        subTitle: "Latitude:" + this.currentLatlng.latitude+" Longitude: " +this.currentLatlng.longitude,
+        subTitle: "Latitude:" + this.currentLatlng.lat+" Longitude: " +this.currentLatlng.lng,
         buttons:['GOT IT']
       });
     alertOfLoc.present();
