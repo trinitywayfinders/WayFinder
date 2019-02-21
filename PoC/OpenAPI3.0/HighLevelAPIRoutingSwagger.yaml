@@ -1,0 +1,160 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Trinity Wayfinders
+servers:
+  - url: http://example.swagger.io/v1
+paths:
+  /navigation/start/{startLong}/{startLat}/destination/{destLong}/{destLat}/:
+    get:
+      summary: Find route to destination
+      operationId: getRoute
+      tags:
+        - Routing
+      parameters:
+        - name: startLong
+          in: path
+          required: true
+          description: Route start longitude
+          schema:
+            type: string
+            
+        
+        - name: startLat
+          in: path
+          required: true
+          description: Route start latitude
+          schema:
+            type: string
+
+        - name: destLong
+          in: path
+          required: true
+          description: Route destination longitude
+          schema:
+            type: string
+        
+        - name: destLat
+          in: path
+          required: true
+          description: Route destination latitude
+          schema:
+            type: string
+        
+            
+      responses:
+        '200':
+          description: A single route to destination
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/Path"
+        '404':
+          description: Route not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Location:
+      required:
+        - longitude
+        - latitude
+      properties:
+        longitude:
+          type: number
+        latitude:
+          type: number
+        
+    Leg:
+      required:
+        - summary
+        - weight
+        - duration
+        - steps
+        - distance
+      properties:
+        summary:
+          type: string
+        weight:
+          type: number
+        duration:
+          type: number
+        steps:
+          type: string
+        distance:
+          type: string
+  
+    Waypoint:
+      required:
+        - hint
+        - distance
+        - name
+        - location
+      properties:
+        hint:
+          type: string
+        distance:
+          type: number
+        name:
+          type: string
+        location:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+    Route:
+      required:
+          - leg
+          - weight_name
+          - weight
+          - duration
+          - distance
+      properties:
+        leg:
+          type: array
+          items:
+            $ref: '#/components/schemas/Leg'
+        weight_name:
+          type: string
+        weight:
+          type: number
+        duration:
+          type: number
+        distance:
+          type: number
+      
+    Path:
+      required:
+        - routes
+        - waypoints
+        - code
+      properties:
+        routes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Route'
+        
+        waypoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/Waypoint'
+            
+        code:
+          type: string
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
