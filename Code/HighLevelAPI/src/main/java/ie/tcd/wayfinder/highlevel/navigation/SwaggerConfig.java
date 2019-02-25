@@ -26,9 +26,9 @@ public class SwaggerConfig {
     public ApiInfo apiInfo()
     {
         Contact contact2 = new Contact("Wayfinders", "", "thundyia@tcd.ie");
-        return new ApiInfoBuilder().title("Trinity Wayfinders Authentication Module")
-                                   .description("Authentication ReST API Documentation")
+        return new ApiInfoBuilder().title("Trinity Wayfinders High Level APIs Module")
+                                   .description("High Level APIs Documentation")
                                    .contact(contact2)
                                    .version("0.1").build();
-}
+    }
 }
