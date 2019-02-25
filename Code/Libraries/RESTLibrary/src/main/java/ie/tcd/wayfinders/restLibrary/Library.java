@@ -28,6 +28,7 @@ public class Library {
         HttpPut request = new HttpPut(URL);
 
         if (body.isPresent()) request.setEntity(new StringEntity(body.get()));
+        System.out.println("IN LIBRARY!!!!!! "+request.getEntity().toString());
         return handleRest(request, headers);
     }
 
@@ -58,7 +59,6 @@ public class Library {
         }
 
         HttpClient client = HttpClientBuilder.create().build();
-        
         HttpResponse response = client.execute(requestMethod);
         
         return response;

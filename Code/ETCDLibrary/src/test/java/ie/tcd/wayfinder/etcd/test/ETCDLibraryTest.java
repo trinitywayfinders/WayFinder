@@ -24,12 +24,6 @@ import ie.tcd.wayfinder.etcd.ETCDLibrary;
 @SpringBootTest(classes = ETCDLibrary.class)
 @AutoConfigureMockMvc
 public class ETCDLibraryTest {
-
-	
-	/*
-	 * create/remove/read directory
-	 * create update delete read key
-	 */
 	
     @Autowired
     private MockMvc mvc;
