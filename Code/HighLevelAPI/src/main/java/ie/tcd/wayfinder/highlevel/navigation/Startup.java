@@ -9,6 +9,6 @@ public class Startup {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(NavigationController.class, args);
+        SpringApplication.run(Startup.class, args);
     }
 }
