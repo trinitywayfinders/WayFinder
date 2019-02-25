@@ -22,10 +22,9 @@ public class ETCDLibrary {
 	 * remove directory
 	 * read directory
 	 * create update delete read key
-	 * 
-	 * 
-	 * 	
+	 *  	
 	 */
+	
 	public static String ReadDirectory(String directoryName) throws IOException {
 		
 		String url = (baseUrl + directoryName).trim();
@@ -41,7 +40,7 @@ public class ETCDLibrary {
 	
 	public static String DeleteDirectory(String directoryName) throws IOException {
 		
-		String url = baseUrl + directoryName;
+		String url = baseUrl + directoryName+"?dir=true";
 		
 		HttpResponse response = Library.DELETE(url, Optional.empty());
 		
@@ -54,7 +53,7 @@ public class ETCDLibrary {
 	
 	public static String CreateDirectory(String directoryName) throws IOException {
 		
-		String url = baseUrl + directoryName;
+		String url = baseUrl + directoryName + "?dir=true";
     	String object = "{\"dir\":\"true\"}";
     	
     	Map<String,String> headers = new HashMap<String,String>();
@@ -71,10 +70,13 @@ public class ETCDLibrary {
 
 	public static String CreateKey(String directoryName, String key, String value) throws IOException {
 		
-		String url = baseUrl + directoryName;
+		String url = baseUrl + directoryName + "/"+key+"?value="+value;
     	String object = "{\"value\":\""+value+"\"}";
 
-		HttpResponse response = Library.PUT(url, Optional.empty(), Optional.of(object));
+    	Map<String,String> headers = new HashMap<String,String>();
+        headers.put("value", "apple");
+    	
+		HttpResponse response = Library.PUT(url, Optional.of(headers), Optional.of(object));
 		
 		HttpEntity responseEntity = response.getEntity();
 	    String responseXml = EntityUtils.toString(responseEntity);
@@ -109,7 +111,7 @@ public class ETCDLibrary {
 
 	public static String DeleteKey(String directoryName, String key) throws IOException {
 
-		String url = baseUrl + directoryName;
+		String url = baseUrl + directoryName + "/"+key;
 
 		HttpResponse response = Library.DELETE(url, Optional.empty());
 		

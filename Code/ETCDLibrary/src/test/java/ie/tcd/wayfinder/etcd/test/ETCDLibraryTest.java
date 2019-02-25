@@ -5,8 +5,12 @@ import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
+import org.apache.http.HttpResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import ie.tcd.wayfinder.etcd.ETCDLibrary;
+import ie.tcd.wayfinders.restLibrary.Library;
 
 
 @RunWith(SpringRunner.class)
@@ -29,7 +34,7 @@ public class ETCDLibraryTest {
     private MockMvc mvc;
     
     @Test
-    public void createDirectory() {
+    public void createDirectory() throws IOException {
     	
     	String directoryName = "test";
     	String expectedOutput = "{\"key\":\"test\"}";
@@ -37,18 +42,17 @@ public class ETCDLibraryTest {
     	
     	String url = "http://etcdExample.com/v2/keys/"+directoryName;
     	
-    	String Object = "{'dir':'true'}";
+        Map<String,String> headers = new HashMap<String,String>();
+        headers.put("dir", "true");
     	
-
-    	
-    	String request = Library.PUT(url, Optional.of(Object), Optional.empty());
-    	
-    	String response = ETCDLibrary.CreateDirectory();
+    	//HttpResponse request = Library.PUT(url, Optional.of(headers), Optional.empty());
+    
+    	String response = ETCDLibrary.CreateDirectory(url);
     	assertTrue(response == expectedOutput);
     }
     
     @Test
-    public void removeDirectory() {
+    public void removeDirectory() throws IOException {
     	
     	String directoryName = "test";
     	String expectedOutput = "{\"key\":\"test\"}";
@@ -56,14 +60,14 @@ public class ETCDLibraryTest {
     	
     	String url = "http://etcdExample.com/v2/keys/"+directoryName;
     	    	
-    	String request = Library.DELETE(url, Optional.empty());
+    	HttpResponse request = Library.DELETE(url, Optional.empty());
     	
-    	String response = ETCDLibrary.DeleteDirectory();
+    	String response = ETCDLibrary.DeleteDirectory(url);
     	assertTrue(response == expectedOutput);
     }
     
     @Test
-    public void readDirectory() {
+    public void readDirectory() throws IOException {
     	
     	String directoryName = "test";
     	String expectedOutput = "{\"key\":\"test\"}";
@@ -71,9 +75,9 @@ public class ETCDLibraryTest {
     	
     	String url = "http://etcdExample.com/v2/keys/"+directoryName;
 
-    	String request = Library.GET(url, Optional.empty());
+    	HttpResponse request = Library.GET(url, Optional.empty());
     	
-    	String response = ETCDLibrary.ReadDirectory();
+    	String response = ETCDLibrary.ReadDirectory(url);
     	assertTrue(response == expectedOutput);
     }
     
@@ -90,7 +94,7 @@ public class ETCDLibraryTest {
 
     	String request = Library.PUT(url, Optional.of(object), Optional.empty());
     	
-    	String response = ETCDLibrary.CreateKey();
+    	String response = ETCDLibrary.CreateKey(url, key, value);
     	assertTrue(response == expectedOutput);
     }
     
