@@ -72,11 +72,8 @@ public class ETCDLibrary {
 		
 		String url = baseUrl + directoryName + "/"+key+"?value="+value;
     	String object = "{\"value\":\""+value+"\"}";
-
-    	Map<String,String> headers = new HashMap<String,String>();
-        headers.put("value", "apple");
     	
-		HttpResponse response = Library.PUT(url, Optional.of(headers), Optional.of(object));
+		HttpResponse response = Library.PUT(url, Optional.empty(), Optional.of(object));
 		
 		HttpEntity responseEntity = response.getEntity();
 	    String responseXml = EntityUtils.toString(responseEntity);
@@ -86,15 +83,7 @@ public class ETCDLibrary {
 
 	public static String UpdateKey(String directoryName, String key, String value) throws IOException {
 
-		String url = baseUrl + directoryName;
-    	String object = "{'value':'"+value+"'}";
-
-		HttpResponse response = Library.PUT(url, Optional.empty(), Optional.of(object));
-		
-		HttpEntity responseEntity = response.getEntity();
-	    String responseXml = EntityUtils.toString(responseEntity);
-	     
-	    return responseXml;
+		return CreateKey(directoryName, key, value);
 	}
 
 
@@ -120,5 +109,4 @@ public class ETCDLibrary {
 	     
 	    return responseXml;
 	}
-
 }

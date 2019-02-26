@@ -1,150 +1,159 @@
 package ie.tcd.wayfinder.etcd.test;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertTrue;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
-import org.apache.http.HttpResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import ie.tcd.wayfinder.etcd.ETCDLibrary;
-import ie.tcd.wayfinders.restLibrary.Library;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ETCDLibrary.class)
 @AutoConfigureMockMvc
 public class ETCDLibraryTest {
-	
-    @Autowired
+		
+	@Autowired
     private MockMvc mvc;
+	
+	String directoryName = "test";
+	String key = "testKey";
+	String value = "testValue";
     
     @Test
     public void createDirectory() throws IOException {
     	
-    	String directoryName = "test";
-    	String expectedOutput = "{\"key\":\"test\"}";
+    	String expectedOutput = "{\"action\":\"set\",\"node\":{\"key\":\"/test\",\"dir\":true";
+    	    	    	    	
+    	if(directoryExists(directoryName)) 
+    		deleteDirectory(directoryName);
     	
+    	String response = ETCDLibrary.CreateDirectory(directoryName);
+
+    	System.out.println("~"+response);
+        
+    	assertTrue(response.contains(expectedOutput));
+    }
+        
+    @Test
+    public void readDirectory() throws IOException {
+
+    	String expectedOutput = "{\"action\":\"get\",\"node\":{\"key\":\"/test\",\"dir\":true";
     	
-    	String url = "http://etcdExample.com/v2/keys/"+directoryName;
+    	if(!directoryExists(directoryName))
+    		createDirectory(directoryName);
     	
-        Map<String,String> headers = new HashMap<String,String>();
-        headers.put("dir", "true");
-    	
-    	//HttpResponse request = Library.PUT(url, Optional.of(headers), Optional.empty());
-    
-    	String response = ETCDLibrary.CreateDirectory(url);
-    	assertTrue(response == expectedOutput);
+    	String response = ETCDLibrary.ReadDirectory(directoryName);
+    	System.out.println("~"+response);
+        
+    	assertTrue(response.contains(expectedOutput));
     }
     
     @Test
     public void removeDirectory() throws IOException {
     	
-    	String directoryName = "test";
-    	String expectedOutput = "{\"key\":\"test\"}";
+    	String expectedOutput = "{\"action\":\"delete\",\"node\":{\"key\":\"/test\",\"dir\":true,\"";
     	
+    	if(!directoryExists(directoryName))
+    		createDirectory(directoryName);
     	
-    	String url = "http://etcdExample.com/v2/keys/"+directoryName;
-    	    	
-    	HttpResponse request = Library.DELETE(url, Optional.empty());
-    	
-    	String response = ETCDLibrary.DeleteDirectory(url);
-    	assertTrue(response == expectedOutput);
+    	String response = ETCDLibrary.DeleteDirectory(directoryName);
+    	assertTrue(response.contains(expectedOutput));
     }
     
     @Test
-    public void readDirectory() throws IOException {
+    public void createKey() throws IOException {
+    	String expectedOutput = "{\"action\":\"set\",\"node\":{\"key\":\"/test/testKey\",\"value\":\"testValue\"";
     	
-    	String directoryName = "test";
-    	String expectedOutput = "{\"key\":\"test\"}";
-    	
-    	
-    	String url = "http://etcdExample.com/v2/keys/"+directoryName;
 
-    	HttpResponse request = Library.GET(url, Optional.empty());
+    	if(keyExists(directoryName, key))
+    		deleteKey(directoryName, key);
     	
-    	String response = ETCDLibrary.ReadDirectory(url);
-    	assertTrue(response == expectedOutput);
+    	String response = ETCDLibrary.CreateKey(directoryName, key, value);
+    	assertTrue(response.contains(expectedOutput));
+    	deleteKey(directoryName, key);
     }
     
     @Test
-    public void createKey() {
-
-    	String key = "testKey";
-    	String value = "testValue";
-    	String expectedOutput = "{\"testKey\":\"testValue\"}";
+    public void updateKey() throws IOException {
+    	String expectedOutput = "{\"key\":\"/test/testKey\",\"value\":\"newValue2\"";
     	
-    	String object = "{'value'='"+value+"'}";
+    	String update = "newValue2";
     	
-    	String url = "http://etcdExample.com/v2/keys/"+key;
-
-    	String request = Library.PUT(url, Optional.of(object), Optional.empty());
+    	if(!keyExists(directoryName, key))
+    		createKey(directoryName, key, value);
     	
-    	String response = ETCDLibrary.CreateKey(url, key, value);
-    	assertTrue(response == expectedOutput);
+    	String response = ETCDLibrary.UpdateKey(directoryName, key, update);
+    	
+    	System.out.println("~~~~"+response);
+    	assertTrue(response.contains(expectedOutput));
+    	deleteKey(directoryName, key);
     }
     
     @Test
-    public void updateKey() {
+    public void deleteKey() throws IOException {
+    	String expectedOutput = "{\"key\":\"/test/testKey\",\"value\":\"testValue\"";
     	
-    	String key = "testKey";
-    	String value = "testValue";
-    	String expectedOutput = "{\"testKey\":\"testValue\"}";
-    	
-    	String object = "{'value'='"+value+"'}";
-    	
-    	String url = "http://etcdExample.com/v2/keys/"+key;
 
-    	String request = Library.PUT(url, Optional.of(object), Optional.empty());
+    	if(!keyExists(directoryName, key))
+    		createKey(directoryName, key, value);
     	
-    	String response = ETCDLibrary.UpdateKey();
-    	assertTrue(response == expectedOutput);
+    	String response = ETCDLibrary.CreateKey(directoryName, key, value);
+    	assertTrue(response.contains(expectedOutput));
     }
     
     @Test
-    public void deleteKey() {
+    public void readKey() throws IOException {
+    	String expectedOutput = "{\"key\":\"/test/testKey\",\"value\":\"testValue\"";
     	
-    	String key = "testKey";
-    	String value = "testValue";
-    	String expectedOutput = "{\"testKey\":\"testValue\"}";
+    	if(!keyExists(directoryName, key))
+    		createKey(directoryName, key, value);
     	
-    	
-    	String url = "http://etcdExample.com/v2/keys/"+key;
+    	String response = ETCDLibrary.CreateKey("test", key, value);
+    
+    	System.out.println("~"+response);
+    	assertTrue(response.contains(expectedOutput));
 
-    	String request = Library.DELETE(url, Optional.empty());
+    	deleteKey(directoryName, key);
     	
-    	String response = ETCDLibrary.CreateKey();
-    	assertTrue(response == expectedOutput);
     }
     
-    @Test
-    public void readKey() {
-    	
-    	String key = "testKey";
-    	String value = "testValue";
-    	String expectedOutput = "{\"testKey\":\"testValue\"}";
-    	
-    	
-    	String url = "http://etcdExample.com/v2/keys/"+key;
+    private boolean directoryExists(String directoryName) throws IOException {
 
-    	String request = Library.GET(url, Optional.empty());
-    	
-    	String response = ETCDLibrary.CreateKey();
-    	assertTrue(response == expectedOutput);
-    	
+    	String response = ETCDLibrary.ReadDirectory(directoryName);
+    	if(response.contains("{\"action\":\"get\",\"node\":{\"key\":\"/"+directoryName+"\",\"dir\":true"))
+    		return true;
+    	return false;
     }
+    
+    private boolean keyExists(String directoryName, String key) throws IOException {
+
+    	String response = ETCDLibrary.ReadKey(directoryName, key);
+    	if(response.contains("{\"action\":\"set\",\"node\":{\"key\":\"/"+directoryName+"/"+key+"\""))
+    		return true;
+    	return false;
+    }
+    
+    private void createDirectory(String directoryName) throws IOException { 
+    	ETCDLibrary.CreateDirectory(directoryName);
+    }
+    
+    private void deleteDirectory(String directoryName) throws IOException { 
+    	ETCDLibrary.DeleteDirectory(directoryName);
+    }
+    
+    private void createKey(String directoryName, String key, String value) throws IOException { 
+    	ETCDLibrary.CreateKey(directoryName, key, value);
+    }
+    
+    private void deleteKey(String directoryName, String key) throws IOException { 
+    	ETCDLibrary.DeleteKey(directoryName, key);
+    }
+    
+    
+    
 }

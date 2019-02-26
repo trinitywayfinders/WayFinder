@@ -17,8 +17,8 @@ public class Test {
 	
 	public static void main(String [] args) throws IOException {
 		
-		System.out.println("Running main");
-		String getDirectory;
+		//System.out.println("Running main");
+		//String getDirectory;
 		
 		//getDirectory = ETCDLibrary.CreateDirectory("appleDirectory");
 		//System.out.println("~~~~~~~~~~~~~~~~"+getDirectory);
@@ -26,8 +26,8 @@ public class Test {
 		//getDirectory = ETCDLibrary.DeleteDirectory("berryfam");
 		//System.out.println("~~~~~~~~~~~~~~~~"+getDirectory);
 		
-		getDirectory = ETCDLibrary.ReadDirectory("banana");
-		System.out.println("~~~~~~~~~~~~~~~~"+getDirectory);
+		//getDirectory = ETCDLibrary.ReadDirectory("banana");
+		//System.out.println("~~~~~~~~~~~~~~~~"+getDirectory);
 		
 		
 		//getDirectory = ETCDLibrary.CreateKey("banana", "bananaSUCKS", "bananaVALUEsss");
