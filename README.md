@@ -1,6 +1,11 @@
 # TrinityWayFinders
 Source Code Repo for ASE Project
 
+# Code Quality Status
+Authentication Server: [![Quality Gate Status](http://35.242.176.105/api/project_badges/measure?project=com.wayfinder%3AAuthenticationServer&metric=alert_status)](http://35.242.176.105/dashboard?id=com.wayfinder%3AAuthenticationServer)
+
+HL API: [![Quality Gate Status](http://35.242.176.105/api/project_badges/measure?project=HighLevelAPI&metric=alert_status)](http://35.242.176.105/dashboard?id=HighLevelAPI)
+
 # Team ID
 Group 3
 
