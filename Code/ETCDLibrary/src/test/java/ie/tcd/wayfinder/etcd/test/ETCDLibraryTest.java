@@ -32,10 +32,7 @@ public class ETCDLibraryTest {
     	if(directoryExists(directoryName)) 
     		deleteDirectory(directoryName);
     	
-    	String response = ETCDLibrary.CreateDirectory(directoryName);
-
-    	System.out.println("~"+response);
-        
+    	String response = ETCDLibrary.CreateDirectory(directoryName);        
     	assertTrue(response.contains(expectedOutput));
     }
         
@@ -48,8 +45,6 @@ public class ETCDLibraryTest {
     		createDirectory(directoryName);
     	
     	String response = ETCDLibrary.ReadDirectory(directoryName);
-    	System.out.println("~"+response);
-        
     	assertTrue(response.contains(expectedOutput));
     }
     
@@ -88,8 +83,6 @@ public class ETCDLibraryTest {
     		createKey(directoryName, key, value);
     	
     	String response = ETCDLibrary.UpdateKey(directoryName, key, update);
-    	
-    	System.out.println("~~~~"+response);
     	assertTrue(response.contains(expectedOutput));
     	deleteKey(directoryName, key);
     }
@@ -114,8 +107,6 @@ public class ETCDLibraryTest {
     		createKey(directoryName, key, value);
     	
     	String response = ETCDLibrary.CreateKey("test", key, value);
-    
-    	System.out.println("~"+response);
     	assertTrue(response.contains(expectedOutput));
 
     	deleteKey(directoryName, key);

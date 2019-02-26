@@ -3,8 +3,6 @@ package ie.tcd.wayfinder.etcd;
 import ie.tcd.wayfinders.restLibrary.Library;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 import org.apache.http.HttpEntity;
@@ -13,22 +11,11 @@ import org.apache.http.util.EntityUtils;
 
 public class ETCDLibrary {
 
-
 	private static String baseUrl = "http://35.246.14.12:2379/v2/keys/";
-	
-	/*
-	 * 
-	 * create directory
-	 * remove directory
-	 * read directory
-	 * create update delete read key
-	 *  	
-	 */
-	
+		
 	public static String ReadDirectory(String directoryName) throws IOException {
 		
 		String url = (baseUrl + directoryName).trim();
-		System.out.println(url);
 		HttpResponse response = Library.GET(url, Optional.empty());
 		
 		 HttpEntity responseEntity = response.getEntity();
@@ -54,13 +41,7 @@ public class ETCDLibrary {
 	public static String CreateDirectory(String directoryName) throws IOException {
 		
 		String url = baseUrl + directoryName + "?dir=true";
-    	String object = "{\"dir\":\"true\"}";
-    	
-    	Map<String,String> headers = new HashMap<String,String>();
-        headers.put("dir", "true");
-    	
-		
-		HttpResponse response = Library.PUT(url, Optional.of(headers), Optional.of(object));
+		HttpResponse response = Library.PUT(url, Optional.empty(), Optional.empty());
 		
 		 HttpEntity responseEntity = response.getEntity();
 	     String responseXml = EntityUtils.toString(responseEntity);
@@ -71,9 +52,7 @@ public class ETCDLibrary {
 	public static String CreateKey(String directoryName, String key, String value) throws IOException {
 		
 		String url = baseUrl + directoryName + "/"+key+"?value="+value;
-    	String object = "{\"value\":\""+value+"\"}";
-    	
-		HttpResponse response = Library.PUT(url, Optional.empty(), Optional.of(object));
+		HttpResponse response = Library.PUT(url, Optional.empty(), Optional.empty());
 		
 		HttpEntity responseEntity = response.getEntity();
 	    String responseXml = EntityUtils.toString(responseEntity);
