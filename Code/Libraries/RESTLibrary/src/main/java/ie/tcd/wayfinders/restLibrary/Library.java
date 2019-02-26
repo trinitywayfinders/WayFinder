@@ -14,8 +14,6 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpParams;
 
 public class Library {
 
@@ -58,11 +56,7 @@ public class Library {
                 requestMethod.setHeader(header.getKey(), header.getValue());
             }
         }
-        
-        HttpParams params = new BasicHttpParams();
-        params.setParameter("dir", "true");
-        requestMethod.setParams(params);
-        
+       
         HttpClient client = HttpClientBuilder.create().build();
         HttpResponse response = client.execute(requestMethod);
         return response;
