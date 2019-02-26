@@ -1,4 +1,4 @@
-package com.devglan;
+package ie.tcd.springtemplate;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

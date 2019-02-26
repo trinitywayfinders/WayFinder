@@ -1,4 +1,4 @@
-package com.devglan;
+package ie.tcd.springtemplate;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
