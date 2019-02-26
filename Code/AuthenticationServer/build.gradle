@@ -19,6 +19,7 @@ plugins {
 	id 'java'
 	id 'eclipse'
 	id 'maven'
+	id "org.sonarqube" version "2.7"
 }
 
 apply plugin: 'docker'
