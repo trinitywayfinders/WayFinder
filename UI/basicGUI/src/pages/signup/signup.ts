@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import axios from 'axios';
 /**
  * Generated class for the SignupPage page.
  *
@@ -38,6 +38,11 @@ export class SignupPage {
 
 
 //GET
+//
+// headers: {
+//       'Content-Type': 'application/json',
+//       'Authorization': 'Bearer ' + this.token
+//     }
 signup(){
   console.log(this.usrname);
   console.log(this.passwd);
@@ -48,11 +53,18 @@ signup(){
   //   .catch(error => {
   //       console.log(error);
   //   });
+  var axiosConfig = {
+      headers: {
+          'Content-Type': 'application/json',
+          'accept' : '*/*',
+
+      }
+    };
     this.ax.post('http://localhost:8080/api/user/', {
-    username: this.usrname,
-    email: this.email,
-    password: this.passwd
-  }).then(resp => {
+    'username': this.usrname,
+    'email': this.email,
+    'password': this.passwd
+  }, axiosConfig).then(resp => {
     console.log(resp);
   }).catch(error => {
   console.log(error);
