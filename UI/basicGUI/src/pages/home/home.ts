@@ -27,10 +27,10 @@ export class HomePage {
      this.map.locate({
      }).once('locationfound', (e) => {
       this.currentLatlng = e.latlng
-
+      //remove the marker before adding a new one
       let markerGroup = leaflet.featureGroup();
-      if (this.marker) { // check
-        this.map.removeLayer(this.marker); // remove
+      if (this.marker) {
+        this.map.removeLayer(this.marker);
       }
       this.marker = leaflet.marker([e.latitude, e.longitude])
       markerGroup.addLayer(this.marker);
