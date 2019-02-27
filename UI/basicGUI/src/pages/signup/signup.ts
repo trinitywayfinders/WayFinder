@@ -16,6 +16,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class SignupPage {
   usrname='';
   passwd='';
+  email='';
   const ax = require('axios');
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -35,6 +36,7 @@ export class SignupPage {
   // console.log(error);
   // });
 
+
 //GET
 signup(){
   console.log(this.usrname);
@@ -46,6 +48,15 @@ signup(){
     .catch(error => {
         console.log(error);
     });
+    axios.post('35.256.14.12:8080/api/user', {
+    username: this.usrname,
+    email: this.email,
+    password: this.passwd
+  }then(resp => {
+    console.log(resp.data);
+  }).catch(error => {
+  console.log(error);
+  });
 
   }
 
