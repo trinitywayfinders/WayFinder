@@ -17,7 +17,7 @@ export class SignupPage {
   usrname='';
   passwd='';
   email='';
-  const ax = require('axios');
+  ax = require('axios');
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
