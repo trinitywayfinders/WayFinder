@@ -41,19 +41,19 @@ export class SignupPage {
 signup(){
   console.log(this.usrname);
   console.log(this.passwd);
-  this.ax.get('http://localhost:3001')
-    .then(resp => {
-        console.log(resp['data']);
-    })
-    .catch(error => {
-        console.log(error);
-    });
-    axios.post('35.256.14.12:8080/api/user', {
+  // this.ax.get('http://localhost:3001')
+  //   .then(resp => {
+  //       console.log(resp['data']);
+  //   })
+  //   .catch(error => {
+  //       console.log(error);
+  //   });
+    this.ax.post('http://localhost:8080/api/user/', {
     username: this.usrname,
     email: this.email,
     password: this.passwd
-  }then(resp => {
-    console.log(resp.data);
+  }).then(resp => {
+    console.log(resp);
   }).catch(error => {
   console.log(error);
   });
