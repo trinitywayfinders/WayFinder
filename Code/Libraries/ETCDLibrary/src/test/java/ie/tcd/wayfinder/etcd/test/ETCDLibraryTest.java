@@ -2,8 +2,6 @@ package ie.tcd.wayfinder.etcd.test;
 
 import static org.junit.Assert.assertTrue;
 import java.io.IOException;
-
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;

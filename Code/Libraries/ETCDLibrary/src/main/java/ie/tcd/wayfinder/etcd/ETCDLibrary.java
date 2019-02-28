@@ -1,10 +1,8 @@
 package ie.tcd.wayfinder.etcd;
 
 import ie.tcd.wayfinders.restLibrary.Library;
-
 import java.io.IOException;
 import java.util.Optional;
-
 import org.apache.http.HttpResponse;
 
 public class ETCDLibrary {
@@ -14,31 +12,26 @@ public class ETCDLibrary {
 	public HttpResponse ReadDirectory(String directoryName) throws IOException {
 		
 		String url = (baseUrl + directoryName).trim();
-		HttpResponse response = Library.GET(url, Optional.empty());
-		return response;
+		return Library.GET(url, Optional.empty());
 		
 	}
 	
 	public HttpResponse DeleteDirectory(String directoryName) throws IOException {
 		
 		String url = baseUrl + directoryName+"?dir=true";
-		HttpResponse response = Library.DELETE(url, Optional.empty());
-		return response;
-	
+		return Library.DELETE(url, Optional.empty());
 	}
 	
 	public HttpResponse CreateDirectory(String directoryName) throws IOException {
 		
 		String url = baseUrl + directoryName + "?dir=true";
-		HttpResponse response = Library.PUT(url, Optional.empty(), Optional.empty());
-		return response;
+		return Library.PUT(url, Optional.empty(), Optional.empty());
 	}
 
 	public HttpResponse CreateKey(String directoryName, String key, String value) throws IOException {
 		
 		String url = baseUrl + directoryName + "/"+key+"?value="+value;
-		HttpResponse response = Library.PUT(url, Optional.empty(), Optional.empty());
-		return response;
+		return Library.PUT(url, Optional.empty(), Optional.empty());
 	}
 
 	public HttpResponse UpdateKey(String directoryName, String key, String value) throws IOException {
@@ -49,14 +42,12 @@ public class ETCDLibrary {
 	public HttpResponse ReadKey(String directoryName, String key) throws IOException {
 		
 		String url = baseUrl + directoryName;
-		HttpResponse response = Library.GET(url, Optional.empty()); 
-	    return response;
+		return Library.GET(url, Optional.empty()); 
 	}
 
 	public HttpResponse DeleteKey(String directoryName, String key) throws IOException {
 
 		String url = baseUrl + directoryName + "/"+key;
-		HttpResponse response = Library.DELETE(url, Optional.empty());
-		return response;
+		return Library.DELETE(url, Optional.empty());
 	}
 }
