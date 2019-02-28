@@ -1,14 +1,16 @@
 package ie.tcd.wayfind.lowlevel.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.Optional;
 
+import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +28,7 @@ public class LowLevelRouteController {
     private static String apiKey = "AIzaSyB2NHLaqVDF0uSmuNBMXI3DVsUanzdRD7Q";
     
 	@PostMapping("/api/route")
-	public String retriveRoute(@RequestBody UserRouteRequest request) {
+	public ResponseEntity<String> retriveRoute(@RequestBody UserRouteRequest request) {
 		
 		logger.debug("Origin: " + request.getOrigin());
 		logger.debug("Destinnation: " + request.getDestination());
@@ -42,7 +44,9 @@ public class LowLevelRouteController {
 		try {
 			UriComponentsBuilder.newInstance();
 			uri = UriComponentsBuilder.fromUriString(endpoint).queryParams(params).build();
-			response = Library.GET(URLEncoder.encode(uri.toString(), "UTF-8"), Optional.empty());
+			String uriString = uri.toString();
+			String uriEncoded = URIUtil.encodeQuery(uriString.toString(), "UTF-8");
+			response = Library.GET(uriEncoded, Optional.empty());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -57,6 +61,6 @@ public class LowLevelRouteController {
 			e.printStackTrace();
 		}
 		
-		return responseBody;
+		return new ResponseEntity<String>(responseBody, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
 	}
 }

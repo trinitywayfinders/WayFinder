@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LowLevelApiApplication {
+public class RouteApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LowLevelApiApplication.class, args);
+		SpringApplication.run(RouteApiApplication.class, args);
 	}
 
 }

@@ -3,7 +3,7 @@ pluginManagement {
 		gradlePluginPortal()
 	}
 }
-rootProject.name = 'LowLevelAPI'
+rootProject.name = 'RouteAPI'
 
 include "RESTLibrary"
 project(":RESTLibrary").projectDir = new File("../Libraries/RESTLibrary")
