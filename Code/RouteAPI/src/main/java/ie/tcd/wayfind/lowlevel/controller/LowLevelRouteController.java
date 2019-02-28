@@ -1,6 +1,7 @@
 package ie.tcd.wayfind.lowlevel.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.Optional;
 
 import org.apache.http.HttpResponse;
@@ -41,7 +42,7 @@ public class LowLevelRouteController {
 		try {
 			UriComponentsBuilder.newInstance();
 			uri = UriComponentsBuilder.fromUriString(endpoint).queryParams(params).build();
-			response = Library.GET(uri.toString(), Optional.empty());
+			response = Library.GET(URLEncoder.encode(uri.toString(), "UTF-8"), Optional.empty());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

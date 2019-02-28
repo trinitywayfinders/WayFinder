@@ -1,5 +1,6 @@
 package ie.tcd.wayfind.lowlevel.request;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.util.LinkedMultiValueMap;
@@ -17,6 +18,14 @@ public class UserRouteRequest {
 	@JsonProperty("mode")
 	private TravelMode mode;
 	
+	@JsonCreator
+	public UserRouteRequest(@JsonProperty("origin") String origin, @JsonProperty("destination") String destination, @JsonProperty("mode") TravelMode mode) {
+		super();
+		this.origin = origin;
+		this.destination = destination;
+		this.mode = mode;
+	}
+
 	public String getOrigin() {
 		return origin;
 	}
