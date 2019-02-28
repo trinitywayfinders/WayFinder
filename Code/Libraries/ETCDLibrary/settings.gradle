@@ -9,4 +9,4 @@
 
 rootProject.name = 'ETCDLibrary'
 include "REST"
-project(":REST").projectDir = new File("../Libraries/RESTLibrary");
+project(":REST").projectDir = new File("../RESTLibrary");
