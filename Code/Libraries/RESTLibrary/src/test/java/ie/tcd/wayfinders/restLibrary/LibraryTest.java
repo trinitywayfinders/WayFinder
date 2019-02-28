@@ -8,7 +8,6 @@ import java.util.Optional;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.StatusLine;
 import org.junit.Test;
 import org.powermock.api.mockito.PowerMockito;
