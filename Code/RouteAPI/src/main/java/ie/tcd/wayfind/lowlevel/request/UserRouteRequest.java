@@ -38,7 +38,7 @@ public class UserRouteRequest {
 		return destination;
 	}
 	
-	public void setDestinatioin(String destination) {
+	public void setDestination(String destination) {
 		this.destination = destination;
 	}
 	
