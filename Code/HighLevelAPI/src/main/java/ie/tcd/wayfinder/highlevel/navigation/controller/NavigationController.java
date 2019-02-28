@@ -66,15 +66,15 @@ public class NavigationController {
         UserRouteRequest request = new UserRouteRequest(startLat + "," + startLong, destLat + "," + destLong, mode);
         
         String jsonRequestContent = objectMapper().writeValueAsString(request);
-        
+                
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
        
         HttpResponse response = Library.POST("http://localhost:8082/api/route", Optional.of(headers), Optional.of(jsonRequestContent));
-        
+                
          HttpEntity responseEntity = response.getEntity();
          String responseString = EntityUtils.toString(responseEntity);
-     
+                       
         return new ResponseEntity<String>(responseString, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
     }
     
