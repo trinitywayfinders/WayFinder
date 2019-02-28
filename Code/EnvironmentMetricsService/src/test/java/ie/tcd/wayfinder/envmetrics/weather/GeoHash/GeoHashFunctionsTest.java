@@ -1,11 +1,12 @@
 package ie.tcd.wayfinder.envmetrics.weather.GeoHash;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import ie.tcd.wayfinder.envmetrics.weather.GeoHash.GeoHashFunctions;
 
 public class GeoHashFunctionsTest {
 
@@ -72,16 +73,17 @@ public class GeoHashFunctionsTest {
 		GeoHashFunctionsTest.geohash.getGeoHash(lat, lng);
 	}
 
-//	    @Test
-//	    public void geohashAdjacentNeighboursCheckLength() {
-//	   	 String geohash = "gckbv";
-//	   	 assertThat(getAdjacent(geohash), hasSize(8));
-//	}
-//	    
-//	    @Test
-//	    public void geohashAdjacentNeighboursCheckEntries() {
-//	   	 String geohash = "gckbv";
-//	   	 assertThat(getAdjacent(geohash), containsInAnyOrder("gckch", "gckcj", "gckcn", "gckbu", "gckbs", "gckbt", "gckbw", "gckby"));
-//	}
+	@Test
+	public void geohashAdjacentNeighboursCheckLength() {
+		String geohash = "gckbv";
+		assertThat(GeoHashFunctionsTest.geohash.getNeighbours(geohash), hasSize(8));
+	}
+
+	@Test
+	public void geohashAdjacentNeighboursCheckEntries() {
+		String geohash = "gckbv";
+		assertThat(GeoHashFunctionsTest.geohash.getNeighbours(geohash),
+				containsInAnyOrder("gckch", "gckcj", "gckcn", "gckbu", "gckbs", "gckbt", "gckbw", "gckby"));
+	}
 
 }
