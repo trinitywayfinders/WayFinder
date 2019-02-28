@@ -60,5 +60,36 @@ export class HomePage {
       maxZoom: 18
     }).addTo(this.map);
     this.getLocation()
+    this.getPolyLine()
   }
+
+
+  getPolyLine(){
+    console.log("getPolyLine")
+    var url = "http://localhost:3000/routes"
+
+    const http = require('http')
+
+    http.get(url, (resp) => {
+      let data = '';
+
+      // A chunk of data has been recieved.
+      resp.on('data', (chunk) => {
+        data += chunk;
+        console.log(chunk)
+      });
+
+      // The whole response has been received. Print out the result.
+      resp.on('end', () => {
+        console.log(JSON.parse(data));
+      });
+
+    }).on("error", (err) => {
+      console.log("Error: " + err.message);
+    });
+
+  }
+
+
+
 }
