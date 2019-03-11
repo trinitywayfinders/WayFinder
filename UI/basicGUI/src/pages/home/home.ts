@@ -3,7 +3,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import leaflet from 'leaflet';
-
+import polyUtil  from 'polyline-encoded'
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -16,8 +16,7 @@ export class HomePage {
   currentLatlng: any;
   marker: leaflet.market
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
-  }
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController ) {}
 
   ionViewDidEnter() {
     this.loadmap();
@@ -81,7 +80,23 @@ export class HomePage {
 
       // The whole response has been received. Print out the result.
       resp.on('end', () => {
-        console.log(JSON.parse(data));
+        var jsonData = JSON.parse(data)
+
+        var map = this.map
+        jsonData.forEach(function(route) {
+              var overview_polyline = route['overview_polyline']
+              var points = overview_polyline['points']
+
+              var coordinates = polyUtil.decode(points);
+
+              var polyline = leaflet.polyline(coordinates, {
+                color: 'red',
+                weight: 10,
+                opacity: .7,
+                dashArray: '0,0',
+                lineJoin: 'round'
+              }).addTo(map)
+        })
       });
 
     }).on("error", (err) => {
