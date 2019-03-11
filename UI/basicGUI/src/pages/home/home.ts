@@ -84,8 +84,25 @@ export class HomePage {
 
         var map = this.map
         jsonData.forEach(function(route) {
-              var overview_polyline = route['overview_polyline']
-              var points = overview_polyline['points']
+              var legs = route['legs']
+
+              legs.forEach(function(leg){
+                var steps = leg['steps']
+
+                steps.forEach(function(step){
+                  var polyline = step['polyline']['points']
+                  var coordinates = polyUtil.decode(polyline);
+
+                  var polyline = leaflet.polyline(coordinates, {
+                    color: "#"+((1<<24)*Math.random()|0).toString(16),
+                    weight: 10,
+                    opacity: .7,
+                    dashArray: '0,0',
+                    lineJoin: 'round'
+                  }).addTo(map)
+                })
+              })
+              /*var points = overview_polyline['points']
 
               var coordinates = polyUtil.decode(points);
 
@@ -96,6 +113,7 @@ export class HomePage {
                 dashArray: '0,0',
                 lineJoin: 'round'
               }).addTo(map)
+              */
         })
       });
 
@@ -104,7 +122,5 @@ export class HomePage {
     });
 
   }
-
-
 
 }
