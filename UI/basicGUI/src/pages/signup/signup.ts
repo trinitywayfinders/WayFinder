@@ -16,7 +16,6 @@ export class SignupPage {
   usrname='';
   passwd='';
   passwd1='';
-  passwd2='';
   email='';
   ax = require('axios');
   constructor(public navCtrl: NavController, public navParams: NavParams,  public alertCtrl: AlertController) {
@@ -24,7 +23,7 @@ export class SignupPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignupPage');
   }
-  //alert for unmatch imput passwords
+  //alert for unmatch input passwords
   showAlert(){
     let alert = this.alertCtrl.create({
       title:"Password does not match",
@@ -40,8 +39,7 @@ signup(){
           'accept' : '*/*',
       }
     };
-    if (this.passwd1==this.passwd2){
-      this.passwd = this.passwd1;
+    if (this.passwd==this.passwd1){
       this.ax.post('http://35.246.14.12:8080/api/user/', {
       'username': this.usrname,
       'email': this.email,
