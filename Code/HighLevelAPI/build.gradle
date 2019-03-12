@@ -26,7 +26,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 group = 'com.wayfinder'
-version = '0.0.1'
+version = '0.0.1-SNAPSHOT'
 
 archivesBaseName = 'hlapi'
 
@@ -36,20 +36,20 @@ docker {
 }
 
 task buildDocker(type: Docker, dependsOn: build) {
-  push = false
-  tag = "${archivesBaseName}"
-  applicationName = jar.baseName
-  volume("/tmp")
-  addFile("build/libs/${archivesBaseName}-${version}.jar")
-  def runCommand = "java -Djava.security.egd=file:/dev/./urandom -jar /${archivesBaseName}-${version}.jar"  
-  exposePort(8081)
-  entryPoint(["sh", "-c", "${runCommand}"])
-  doFirst {
-    copy {
-      from jar
-      into stageDir
-    }
-  }
+	push = false
+	tag = "${archivesBaseName}"
+	applicationName = jar.baseName
+	volume("/tmp")
+	addFile("build/libs/${archivesBaseName}-${version}.jar")
+	def runCommand = "java -Djava.security.egd=file:/dev/./urandom -jar /${archivesBaseName}-${version}.jar"  
+	exposePort(8081)
+	entryPoint(["sh", "-c", "${runCommand}"])
+	doFirst {
+    	copy {
+			from jar
+			into stageDir
+		}
+	}
 }
 
 repositories {
