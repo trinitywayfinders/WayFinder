@@ -42,7 +42,7 @@ signup(){
     };
     if (this.passwd1==this.passwd2){
       this.passwd = this.passwd1;
-      this.ax.post('http://localhost:8080/api/user/', {
+      this.ax.post('http://35.246.14.12:8080/api/user/', {
       'username': this.usrname,
       'email': this.email,
       'password': this.passwd
