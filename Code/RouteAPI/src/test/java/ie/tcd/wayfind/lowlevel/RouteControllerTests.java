@@ -17,28 +17,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ie.tcd.wayfind.lowlevel.controller.LowLevelRouteController;
 import ie.tcd.wayfind.lowlevel.request.UserRouteRequest;
 import ie.tcd.wayfind.lowlevel.type.TravelMode;
-/*
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = LowLevelRouteController.class)
 @AutoConfigureMockMvc
 public class RouteControllerTests {
-	
+
     @Autowired
     private MockMvc mvc;
 
     @Test
     public void getRoute() throws Exception {
-    	
+
     	UserRouteRequest usr = new UserRouteRequest("Dublin", "Cork", TravelMode.walking);
 
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(usr);
-    	
+
         mvc.perform(MockMvcRequestBuilders.post("/api/route")
         	    .contentType(MediaType.APPLICATION_JSON)
         	    .content(json)
         		.accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-    } 
+    }
 }
-*/
