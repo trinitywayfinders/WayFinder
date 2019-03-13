@@ -16,12 +16,14 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import ie.tcd.wayfind.lowlevel.request.UserRouteRequest;
 import ie.tcd.wayfinders.restLibrary.Library;
 
+@EnableWebMvc
 @RestController
 public class LowLevelRouteController {
     private static final Logger logger = LoggerFactory.getLogger(LowLevelRouteController.class);

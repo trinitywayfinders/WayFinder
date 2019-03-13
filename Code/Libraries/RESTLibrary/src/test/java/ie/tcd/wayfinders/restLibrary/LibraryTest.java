@@ -34,7 +34,7 @@ public class LibraryTest {
         when(httpClient.execute(httpGet)).thenReturn(httpResponse);
 
         HttpResponse response = Library.GET(url, Optional.empty());
-        assertEquals(response.getStatusLine().getStatusCode(), 200);
+        assertEquals(200, response.getStatusLine().getStatusCode());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class LibraryTest {
                 
         
         HttpResponse response = Library.GET(url, Optional.of(headers));
-        assertEquals(response.getStatusLine().getStatusCode(), 200);
+        assertEquals(200, response.getStatusLine().getStatusCode());
     }
 
     @Test
@@ -84,7 +84,7 @@ public class LibraryTest {
                 
         
         HttpResponse response = Library.PUT(url, Optional.of(headers), Optional.empty());
-        assertEquals(response.getStatusLine().getStatusCode(), 200);
+        assertEquals(200, response.getStatusLine().getStatusCode());
     }
 
     @Test
@@ -102,7 +102,7 @@ public class LibraryTest {
         when(httpClient.execute(httpGet)).thenReturn(httpResponse);
         
         HttpResponse response = Library.PUT(url, Optional.empty(), Optional.empty());
-        assertEquals(response.getStatusLine().getStatusCode(), 200);
+        assertEquals(200, response.getStatusLine().getStatusCode());
     }
 
     @Test
@@ -124,7 +124,7 @@ public class LibraryTest {
                 "}";
         
         HttpResponse response = Library.PUT(url, Optional.empty(), Optional.of(json));
-        assertEquals(response.getStatusLine().getStatusCode(), 200);
+        assertEquals(200, response.getStatusLine().getStatusCode());
     }
 
     @Test
@@ -151,7 +151,7 @@ public class LibraryTest {
                 "}";
         
         HttpResponse response = Library.POST(url, Optional.empty(), Optional.of(json));
-        assertEquals(response.getStatusLine().getStatusCode(), 201);
+        assertEquals(201, response.getStatusLine().getStatusCode());
     }
 
     @Test
@@ -173,7 +173,7 @@ public class LibraryTest {
                 "}";
         
         HttpResponse response = Library.POST(url, Optional.empty(), Optional.of(json));
-        assertEquals(response.getStatusLine().getStatusCode(), 201);
+        assertEquals(201, response.getStatusLine().getStatusCode());
     }
 
     @Test
@@ -198,7 +198,7 @@ public class LibraryTest {
                 
         
         HttpResponse response = Library.DELETE(url, Optional.of(headers));
-        assertEquals(response.getStatusLine().getStatusCode(), 200);
+        assertEquals(200, response.getStatusLine().getStatusCode());
     }
 
     @Test
@@ -216,7 +216,7 @@ public class LibraryTest {
         when(httpClient.execute(httpGet)).thenReturn(httpResponse);
         
         HttpResponse response = Library.DELETE(url, Optional.empty());
-        assertEquals(response.getStatusLine().getStatusCode(), 200);
+        assertEquals(200, response.getStatusLine().getStatusCode());
     }
 
 }
