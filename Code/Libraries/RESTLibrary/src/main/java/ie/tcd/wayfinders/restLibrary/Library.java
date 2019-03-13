@@ -17,50 +17,44 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 public class Library {
 
-    public static HttpResponse GET(String URL, Optional<Map<String, String>> headers) throws IOException
-    {
-        HttpGet request = new HttpGet(URL);
-        return handleRest(request, headers);
-    }
+	public static HttpResponse GET(String URL, Optional<Map<String, String>> headers) throws IOException {
+		HttpGet request = new HttpGet(URL);
+		return handleRest(request, headers);
+	}
 
-    public static HttpResponse PUT(String URL, Optional<Map<String, String>> headers, Optional<String> body) throws IOException
-    {
-        HttpPut request = new HttpPut(URL);
+	public static HttpResponse PUT(String URL, Optional<Map<String, String>> headers, Optional<String> body)
+			throws IOException {
+		HttpPut request = new HttpPut(URL);
 
-        if (body.isPresent()) request.setEntity(new StringEntity(body.get()));
-        return handleRest(request, headers);
-    }
+		if (body.isPresent())
+			request.setEntity(new StringEntity(body.get()));
+		return handleRest(request, headers);
+	}
 
-    public static HttpResponse POST(String URL, Optional<Map<String, String>> headers, Optional<String> body) throws IOException
-    {
-        HttpPost request = new HttpPost(URL);
+	public static HttpResponse POST(String URL, Optional<Map<String, String>> headers, Optional<String> body)
+			throws IOException {
+		HttpPost request = new HttpPost(URL);
 
-        if (body.isPresent()) request.setEntity(new StringEntity(body.get()));
-        return handleRest(request, headers);
-    }
+		if (body.isPresent())
+			request.setEntity(new StringEntity(body.get()));
+		return handleRest(request, headers);
+	}
 
-    public static HttpResponse DELETE(String URL, Optional<Map<String, String>> headers) throws IOException
-    {
-        HttpDelete request = new HttpDelete(URL);
-        return handleRest(request, headers);
-    }
+	public static HttpResponse DELETE(String URL, Optional<Map<String, String>> headers) throws IOException {
+		HttpDelete request = new HttpDelete(URL);
+		return handleRest(request, headers);
+	}
 
-    private static HttpResponse handleRest(HttpRequestBase requestMethod, Optional<Map<String, String>> headers) throws IOException
-    {
+	private static HttpResponse handleRest(HttpRequestBase requestMethod, Optional<Map<String, String>> headers)
+			throws IOException {
 
-        if (headers.isPresent())
-        {
-            for (Entry<String, String> header : headers.get().entrySet())
-            {
-                System.out.println(header.getKey() + "\n" + header.getValue());
-                requestMethod.setHeader(header.getKey(), header.getValue());
-            }
-        }
+		if (headers.isPresent()) {
+			for (Entry<String, String> header : headers.get().entrySet()) {
+				requestMethod.setHeader(header.getKey(), header.getValue());
+			}
+		}
 
-        HttpClient client = HttpClientBuilder.create().build();
-        
-        HttpResponse response = client.execute(requestMethod);
-        
-        return response;
-    }
+		HttpClient client = HttpClientBuilder.create().build();
+		return client.execute(requestMethod);
+	}
 }
