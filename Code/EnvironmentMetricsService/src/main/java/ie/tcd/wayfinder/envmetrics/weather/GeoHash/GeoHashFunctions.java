@@ -20,6 +20,7 @@ public class GeoHashFunctions {
 	
 	public List<String> getNeighbours(String geoHash)
 	{
+		
 		return new ArrayList<>();
 	}
 }
