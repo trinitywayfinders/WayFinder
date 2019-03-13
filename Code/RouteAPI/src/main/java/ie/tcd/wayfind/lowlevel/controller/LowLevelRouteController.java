@@ -60,6 +60,8 @@ public class LowLevelRouteController {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
 		}
 		
 		return new ResponseEntity<String>(responseBody, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
