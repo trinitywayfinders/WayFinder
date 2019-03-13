@@ -14,6 +14,12 @@ buildscript {
     }
 }
 
+plugins {
+    // Apply the java-library plugin to add support for Java Library
+    id 'java-library'
+    id "org.sonarqube" version "2.7"
+}
+
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'docker'
@@ -77,4 +83,5 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("org.springframework.security:spring-security-test")
     testCompile("org.apache.httpcomponents:httpmime:4.5.7")
+    testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '4.0.0.RELEASE'
 }
