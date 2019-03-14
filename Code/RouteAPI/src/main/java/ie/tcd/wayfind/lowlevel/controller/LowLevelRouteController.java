@@ -10,6 +10,7 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,7 @@ public class LowLevelRouteController {
     private static final String endpoint = "https://maps.googleapis.com/maps/api/directions/json";
     private static String apiKey = "AIzaSyB2NHLaqVDF0uSmuNBMXI3DVsUanzdRD7Q";
     
-	@PostMapping("/api/route")
+	@PostMapping(path="/api/route", consumes={ MediaType.ALL_VALUE })
 	public ResponseEntity<String> retriveRoute(@RequestBody UserRouteRequest request) {
 		
 		logger.debug("Origin: " + request.getOrigin());
@@ -47,7 +48,7 @@ public class LowLevelRouteController {
 			UriComponentsBuilder.newInstance();
 			uri = UriComponentsBuilder.fromUriString(endpoint).queryParams(params).build();
 			String uriString = uri.toString();
-			String uriEncoded = URIUtil.encodeQuery(uriString.toString(), "UTF-8");
+			String uriEncoded = URIUtil.encodeQuery(uriString, "UTF-8");
 			response = Library.GET(uriEncoded, Optional.empty());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -57,9 +58,7 @@ public class LowLevelRouteController {
 		
 		try {
 			responseBody = EntityUtils.toString(response.getEntity(), "UTF-8");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (IOException | ParseException | NullPointerException e) {
 			e.printStackTrace();
 		}
 		
