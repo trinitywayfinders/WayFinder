@@ -1,4 +1,4 @@
-package ie.tcd.wayfinder.envmetrics.weather;
+package ie.tcd.wayfinder.envmetrics.init;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

@@ -1,4 +1,4 @@
-package ie.tcd.wayfinder.envmetrics.weather;
+package ie.tcd.wayfinder.envmetrics.init;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

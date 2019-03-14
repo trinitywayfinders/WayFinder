@@ -1,4 +1,4 @@
-package ie.tcd.wayfinder.envmetrics.weather;
+package ie.tcd.wayfinder.envmetrics.init;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,8 +29,8 @@ public class SwaggerConfig {
     public ApiInfo apiInfo()
     {
         Contact contact2 = new Contact("Wayfinders", "", "thundyia@tcd.ie");
-        return new ApiInfoBuilder().title("Trinity Wayfinders High Level APIs Module")
-                                   .description("High Level APIs Documentation")
+        return new ApiInfoBuilder().title("Trinity Wayfinders Env Metrics APIs Module")
+                                   .description("Environment Metrics APIs Documentation")
                                    .contact(contact2)
                                    .version("0.1").build();
     }
