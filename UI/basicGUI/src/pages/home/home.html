@@ -8,12 +8,11 @@
 
       <ion-item>
         <ion-label floating>Enter starting point or select on map..</ion-label>
-        <ion-input type="text" [(ngModel)]="inputLocation"></ion-input>
+        <ion-input type="text" [ngModel]="inputStartLocation" (ngModelChange)="  setInputStartLocation($event)"></ion-input>
       </ion-item>
-
       <ion-item>
         <ion-label floating>Enter destination point or select on map..</ion-label>
-        <ion-input type="text" [(ngModel)]="inputDestination"></ion-input>
+        <ion-input type="text" [ngModel]="inputDestination" (ngModelChange)=" setInputDestination($event)"></ion-input>
       </ion-item>
 
       <button ion-button (click) ="getDirections()">Get Directions</button>
