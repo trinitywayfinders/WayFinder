@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import leaflet from 'leaflet';
 import polyUtil  from 'polyline-encoded'
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -11,18 +12,15 @@ import polyUtil  from 'polyline-encoded'
 export class HomePage {
   @ViewChild('map') mapContainer: ElementRef;
   map: any;
-  inputLocation = '';
-  inputDestination = '';
-<<<<<<< HEAD
-  currentLatlng: any;
-  marker: leaflet.market
+  inputLocation = ''
+  inputDestination = ''
+  currentLatlng: any
+  marker: leaflet.marker
+  startMarker: leaflet.marker
+  destMarker: leaflet.marker
+
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController ) {}
-=======
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
-
-  }
->>>>>>> fbfb7542af858c95a1f1bc061086e2bf87b60c2b
 
   ionViewDidEnter() {
     this.loadmap();
@@ -32,6 +30,7 @@ export class HomePage {
      this.map.locate({
      }).once('locationfound', (e) => {
       this.currentLatlng = e.latlng
+
       //remove the marker before adding a new one
       let markerGroup = leaflet.featureGroup();
       if (this.marker) {
@@ -64,25 +63,33 @@ export class HomePage {
       maxZoom: 18
     }).addTo(this.map);
     this.getLocation()
-    this.getPolyLine()
+
+    var inputDestination = this.inputDestination;
+    this.map.on('click', function(e){
+      var coord = e.latlng;
+      var lat = coord.lat;
+      var lng = coord.lng;
+      console.log("You clicked the map at latitude: " + lat + " and longitude: " + lng);
+      });
   }
 
+  getDirections(){
+    console.log("GetDirections: "+this.inputLocation)
+    this.getPolyLine(this.inputLocation, this.inputDestination)
+  }
 
-  getPolyLine(){
-    console.log("getPolyLine")
-
+  //ToDo change method to take in starting lat/long and route to destination lat/long
+  getPolyLine(start, destination){
     //ToDo: change url to deployed server version
     var url = "http://localhost:3000/routes"
 
     const http = require('http')
-
     http.get(url, (resp) => {
       let data = '';
 
       // A chunk of data has been recieved.
       resp.on('data', (chunk) => {
         data += chunk;
-        console.log(chunk)
       });
 
       // The whole response has been received. Print out the result.
@@ -90,11 +97,31 @@ export class HomePage {
         var jsonData = JSON.parse(data)
 
         var map = this.map
+        var startMarker = this.startMarker
+        var destMarker = this.destMarker
+        if (startMarker) {
+          map.removeLayer(startMarker);
+        }
+        if (destMarker) {
+          map.removeLayer(destMarker);
+        }
+
         jsonData.forEach(function(route) {
               var legs = route['legs']
 
               legs.forEach(function(leg){
                 var steps = leg['steps']
+
+                var startMarkerLatLng = [steps[0]['start_location']["lat"], steps[0]['start_location']["lng"]]
+                var destMarkerLatLng = [steps[steps.length-1]['end_location']['lat'],steps[steps.length-1]['end_location']['lng']]
+
+                let markerGroup = leaflet.featureGroup()
+
+                startMarker = leaflet.marker([startMarkerLatLng[0], startMarkerLatLng[1]])
+                destMarker = leaflet.marker([destMarkerLatLng[0], destMarkerLatLng[1]])
+                markerGroup.addLayer(startMarker);
+                markerGroup.addLayer(destMarker);
+                map.addLayer(markerGroup);
 
                 steps.forEach(function(step){
                   var polyline = step['polyline']['points']
@@ -109,18 +136,6 @@ export class HomePage {
                   }).addTo(map)
                 })
               })
-              /*var points = overview_polyline['points']
-
-              var coordinates = polyUtil.decode(points);
-
-              var polyline = leaflet.polyline(coordinates, {
-                color: 'red',
-                weight: 10,
-                opacity: .7,
-                dashArray: '0,0',
-                lineJoin: 'round'
-              }).addTo(map)
-              */
         })
       });
 
@@ -129,5 +144,4 @@ export class HomePage {
     });
 
   }
-
 }
