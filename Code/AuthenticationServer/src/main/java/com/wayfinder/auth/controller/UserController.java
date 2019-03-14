@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wayfinder.auth.entity.User;
 import com.wayfinder.auth.service.UserService;
+
+@CrossOrigin(origins = {"*"})
 
 @RestController
 @RequestMapping("/api/user")
