@@ -14,6 +14,12 @@ buildscript {
     }
 }
 
+plugins {
+    // Apply the java-library plugin to add support for Java Library
+    id 'java-library'
+    id "org.sonarqube" version "2.7"
+}
+
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'docker'
@@ -26,7 +32,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 group = 'com.wayfinder'
-version = '0.0.1'
+version = '0.0.1-SNAPSHOT'
 
 archivesBaseName = 'hlapi'
 
@@ -36,20 +42,20 @@ docker {
 }
 
 task buildDocker(type: Docker, dependsOn: build) {
-  push = false
-  tag = "${archivesBaseName}"
-  applicationName = jar.baseName
-  volume("/tmp")
-  addFile("build/libs/${archivesBaseName}-${version}.jar")
-  def runCommand = "java -Djava.security.egd=file:/dev/./urandom -jar /${archivesBaseName}-${version}.jar"  
-  exposePort(8081)
-  entryPoint(["sh", "-c", "${runCommand}"])
-  doFirst {
-    copy {
-      from jar
-      into stageDir
-    }
-  }
+	push = false
+	tag = "${archivesBaseName}"
+	applicationName = jar.baseName
+	volume("/tmp")
+	addFile("build/libs/${archivesBaseName}-${version}.jar")
+	def runCommand = "java -Djava.security.egd=file:/dev/./urandom -jar /${archivesBaseName}-${version}.jar"  
+	exposePort(8081)
+	entryPoint(["sh", "-c", "${runCommand}"])
+	doFirst {
+    	copy {
+			from jar
+			into stageDir
+		}
+	}
 }
 
 repositories {
@@ -75,4 +81,7 @@ dependencies {
 	
     testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("org.springframework.security:spring-security-test")
+    testCompile("org.apache.httpcomponents:httpmime:4.5.7")
+    testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '4.0.0.RELEASE'
 }

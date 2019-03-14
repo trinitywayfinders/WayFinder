@@ -48,7 +48,7 @@ public class LowLevelRouteController {
 			UriComponentsBuilder.newInstance();
 			uri = UriComponentsBuilder.fromUriString(endpoint).queryParams(params).build();
 			String uriString = uri.toString();
-			String uriEncoded = URIUtil.encodeQuery(uriString.toString(), "UTF-8");
+			String uriEncoded = URIUtil.encodeQuery(uriString, "UTF-8");
 			response = Library.GET(uriEncoded, Optional.empty());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -58,9 +58,7 @@ public class LowLevelRouteController {
 		
 		try {
 			responseBody = EntityUtils.toString(response.getEntity(), "UTF-8");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (IOException | ParseException | NullPointerException e) {
 			e.printStackTrace();
 		}
 		

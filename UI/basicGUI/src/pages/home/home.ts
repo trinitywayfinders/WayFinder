@@ -13,10 +13,16 @@ export class HomePage {
   map: any;
   inputLocation = '';
   inputDestination = '';
+<<<<<<< HEAD
   currentLatlng: any;
   marker: leaflet.market
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController ) {}
+=======
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
+
+  }
+>>>>>>> fbfb7542af858c95a1f1bc061086e2bf87b60c2b
 
   ionViewDidEnter() {
     this.loadmap();
@@ -52,7 +58,6 @@ export class HomePage {
   }
 
   loadmap() {
-    console.log("Loading map...")
     this.map = leaflet.map("map").fitWorld();
     leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attributions: 'www.tphangout.com',
@@ -65,6 +70,8 @@ export class HomePage {
 
   getPolyLine(){
     console.log("getPolyLine")
+
+    //ToDo: change url to deployed server version
     var url = "http://localhost:3000/routes"
 
     const http = require('http')
