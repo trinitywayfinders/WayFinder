@@ -13,10 +13,8 @@ export class HomePage {
   map: any;
   inputLocation = '';
   inputDestination = '';
-  currentLatlng: any;
-  marker: leaflet.market
-
   constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
+
   }
 
   ionViewDidEnter() {
@@ -53,12 +51,10 @@ export class HomePage {
   }
 
   loadmap() {
-    console.log("Loading map...")
     this.map = leaflet.map("map").fitWorld();
     leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attributions: 'www.tphangout.com',
       maxZoom: 18
     }).addTo(this.map);
-    this.getLocation()
   }
 }

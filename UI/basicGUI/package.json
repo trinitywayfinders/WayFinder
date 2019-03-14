@@ -41,7 +41,7 @@
     "zone.js": "0.8.29"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "^3.2.2",
+    "@ionic/app-scripts": "3.2.2",
     "typescript": "~2.6.2"
   },
   "description": "A multi-model transport routing App",
