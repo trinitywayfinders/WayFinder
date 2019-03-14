@@ -148,7 +148,7 @@ public class WeatherResponse {
 			this.condition = condition;
 		} else {
 			throw new ValueNotAcceptedException(ApiResponseMessage.ERROR,
-					"The accepted pattern is " + iconPattern);
+					"The accepted pattern is " + conditionPattern);
 		}
 	}
 
