@@ -1,0 +1,58 @@
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'se.transmode.gradle:gradle-docker:1.2'
+    }
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.1.3.RELEASE'
+	id 'java'
+	id 'war'	
+    id "org.sonarqube" version "2.7"
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'docker'
+
+group = 'ie.tcd.wayfind'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+archivesBaseName = 'routeapi'
+
+docker {
+    baseImage "frolvlad/alpine-oraclejre8:slim"
+    maintainer 'Yifan Xu / Nicky Bonello "xuy7@tcd.ie / bonellon@tcd.ie"'
+}
+
+task buildDocker(type: Docker, dependsOn: build) {
+	push = false
+	tag = "${archivesBaseName}"
+	applicationName = jar.baseName
+	volume("/tmp")
+	addFile("build/libs/${archivesBaseName}-${version}.war")
+	def runCommand = "java -Djava.security.egd=file:/dev/./urandom -jar /${archivesBaseName}-${version}.war"
+	entryPoint(["sh", "-c", "${runCommand}"])
+	doFirst {
+		copy {
+			from jar
+			into stageDir
+		}
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.8'
+	implementation 'commons-httpclient:commons-httpclient:3.1'
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
+	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation project(":RESTLibrary")
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
