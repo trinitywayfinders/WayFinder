@@ -3,6 +3,10 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import leaflet from 'leaflet';
+import polyUtil  from 'polyline-encoded'
+
+import { SignupPage } from '../signup/signup';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -13,9 +17,13 @@ export class HomePage {
   map: any;
   inputLocation = '';
   inputDestination = '';
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
+  currentLatlng: any;
+  marker: leaflet.marker;
+  signupPage = SignupPage;
+  loginPage = LoginPage;
 
-  }
+
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController ) {}
 
   ionViewDidEnter() {
     this.loadmap();
@@ -51,10 +59,75 @@ export class HomePage {
   }
 
   loadmap() {
+    console.log("Loading map...")
     this.map = leaflet.map("map").fitWorld();
     leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attributions: 'www.tphangout.com',
       maxZoom: 18
     }).addTo(this.map);
+    this.getLocation()
+    this.getPolyLine()
   }
+
+
+  getPolyLine(){
+    console.log("getPolyLine")
+    var url = "http://localhost:3000/routes"
+
+    const http = require('http')
+
+    http.get(url, (resp) => {
+      let data = '';
+
+      // A chunk of data has been recieved.
+      resp.on('data', (chunk) => {
+        data += chunk;
+        console.log(chunk)
+      });
+
+      // The whole response has been received. Print out the result.
+      resp.on('end', () => {
+        var jsonData = JSON.parse(data)
+
+        var map = this.map
+        jsonData.forEach(function(route) {
+              var legs = route['legs']
+
+              legs.forEach(function(leg){
+                var steps = leg['steps']
+
+                steps.forEach(function(step){
+                  var polyline = step['polyline']['points']
+                  var coordinates = polyUtil.decode(polyline);
+
+                  var polyline = leaflet.polyline(coordinates, {
+                    color: "#"+((1<<24)*Math.random()|0).toString(16),
+                    weight: 10,
+                    opacity: .7,
+                    dashArray: '0,0',
+                    lineJoin: 'round'
+                  }).addTo(map)
+                })
+              })
+              /*var points = overview_polyline['points']
+
+              var coordinates = polyUtil.decode(points);
+
+              var polyline = leaflet.polyline(coordinates, {
+                color: 'red',
+                weight: 10,
+                opacity: .7,
+                dashArray: '0,0',
+                lineJoin: 'round'
+              }).addTo(map)
+              */
+        })
+      });
+
+    }).on("error", (err) => {
+      console.log("Error: " + err.message);
+    });
+
+  }
+
 }
