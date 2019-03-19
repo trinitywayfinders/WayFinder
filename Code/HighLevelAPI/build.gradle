@@ -36,6 +36,15 @@ version = '0.0.1-SNAPSHOT'
 
 archivesBaseName = 'hlapi'
 
+def profiles = 'dev'
+bootRun {
+  args = ["--spring.profiles.active=" + profiles]
+}
+
+test {
+   systemProperty "spring.profiles.active", profiles
+}
+
 docker {
     baseImage "frolvlad/alpine-oraclejre8:slim"
     maintainer 'Arun Thundyill Saseendran "thundyia@tcd.ie"'

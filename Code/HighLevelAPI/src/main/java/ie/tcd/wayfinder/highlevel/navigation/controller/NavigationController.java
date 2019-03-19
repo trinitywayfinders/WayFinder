@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,8 @@ import ie.tcd.wayfinders.restLibrary.Library;
 
 @RestController
 public class NavigationController {
+	@Value("${spring.route.api.url}")
+	private String routeUrl;
 
     @RequestMapping("/")
     public String index()
@@ -42,8 +45,9 @@ public class NavigationController {
      */
  
     @GetMapping("/navigation/start/{startLat}/{startLong}/destination/{destLat}/{destLong}/{mode}")
-    public ResponseEntity<String> findRoute(@PathVariable Float startLong, @PathVariable Float startLat, @PathVariable Float destLong, @PathVariable Float destLat, @PathVariable TravelMode mode) throws IOException
+    public ResponseEntity<String> findRoute(@PathVariable Float startLong, @PathVariable Float startLat, @PathVariable Float destLong, @PathVariable Float destLat, @PathVariable TravelMode mode) 
     {
+    	try {
         
         if (startLong == null || startLat == null) return new ResponseEntity<String>("Starting location cannot be empty!",
                                                                HttpStatus.BAD_REQUEST);
@@ -70,12 +74,17 @@ public class NavigationController {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
        
-        HttpResponse response = Library.POST("http://localhost:8082/api/route", Optional.of(headers), Optional.of(jsonRequestContent));
-                
-         HttpEntity responseEntity = response.getEntity();
-         String responseString = EntityUtils.toString(responseEntity);
-                       
+        HttpResponse response = Library.POST(routeUrl + "/api/route", Optional.of(headers), Optional.of(jsonRequestContent));
+        
+		HttpEntity responseEntity = response.getEntity();
+		String responseString = EntityUtils.toString(responseEntity);
+    
         return new ResponseEntity<String>(responseString, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
+    	
+    	} catch(IOException e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>("Unexpected error occured: "+e.getMessage(),  HttpStatus.valueOf(500));
+    	}
     }
     
     @Bean

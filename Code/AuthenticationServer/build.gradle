@@ -39,13 +39,18 @@ docker {
     maintainer 'Arun Thundyill Saseendran "thundyia@tcd.ie"'
 }
 
+def profiles = 'dev'
+bootRun {
+  args = ["--spring.profiles.active=" + profiles]
+}
+
 task buildDocker(type: Docker, dependsOn: build) {
   push = false
   tag = "${archivesBaseName}"
   applicationName = jar.baseName
   volume("/tmp")
   addFile("build/libs/${archivesBaseName}-${version}.jar")
-  def runCommand = "java -Djava.security.egd=file:/dev/./urandom -jar /${archivesBaseName}-${version}.jar"  
+  def runCommand = "sleep 20 && java -Djava.security.egd=file:/dev/./urandom -jar /${archivesBaseName}-${version}.jar"  
   entryPoint(["sh", "-c", "${runCommand}"])
   doFirst {
     copy {
