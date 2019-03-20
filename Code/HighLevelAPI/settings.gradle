@@ -8,5 +8,5 @@
  */
 
 rootProject.name = 'HighLevelAPI'
-include "REST"
-project(":REST").projectDir = new File("../Libraries/RESTLibrary");
+include "RESTLibrary"
+project(":RESTLibrary").projectDir = new File("../Libraries/RESTLibrary");

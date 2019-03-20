@@ -14,6 +14,12 @@ buildscript {
     }
 }
 
+plugins {
+    // Apply the java-library plugin to add support for Java Library
+    id 'java-library'
+    id "org.sonarqube" version "2.7"
+}
+
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'docker'
@@ -26,9 +32,18 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 group = 'com.wayfinder'
-version = '0.0.1'
+version = '0.0.1-SNAPSHOT'
 
 archivesBaseName = 'hlapi'
+
+def profiles = 'dev'
+bootRun {
+  args = ["--spring.profiles.active=" + profiles]
+}
+
+test {
+   systemProperty "spring.profiles.active", profiles
+}
 
 docker {
     baseImage "frolvlad/alpine-oraclejre8:slim"
@@ -36,20 +51,20 @@ docker {
 }
 
 task buildDocker(type: Docker, dependsOn: build) {
-  push = false
-  tag = "${archivesBaseName}"
-  applicationName = jar.baseName
-  volume("/tmp")
-  addFile("build/libs/${archivesBaseName}-${version}.jar")
-  def runCommand = "java -Djava.security.egd=file:/dev/./urandom -jar /${archivesBaseName}-${version}.jar"  
-  exposePort(8081)
-  entryPoint(["sh", "-c", "${runCommand}"])
-  doFirst {
-    copy {
-      from jar
-      into stageDir
-    }
-  }
+	push = false
+	tag = "${archivesBaseName}"
+	applicationName = jar.baseName
+	volume("/tmp")
+	addFile("build/libs/${archivesBaseName}-${version}.jar")
+	def runCommand = "java -Djava.security.egd=file:/dev/./urandom -jar /${archivesBaseName}-${version}.jar"  
+	exposePort(8081)
+	entryPoint(["sh", "-c", "${runCommand}"])
+	doFirst {
+    	copy {
+			from jar
+			into stageDir
+		}
+	}
 }
 
 repositories {
@@ -68,10 +83,14 @@ dependencies {
 	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.2.RELEASE'
+	implementation 'javax.activation:activation:1.1.1'
 	compile 'org.apache.httpcomponents:httpcore:4.4.1'
     compile 'org.apache.httpcomponents:httpclient:4.5.7'
-	compile project(":REST")
+	compile project(":RESTLibrary")
 	
     testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("org.springframework.security:spring-security-test")
+    testCompile("org.apache.httpcomponents:httpmime:4.5.7")
+    testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '4.0.0.RELEASE'
 }

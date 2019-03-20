@@ -1,4 +1,4 @@
-package ie.tcd.wayfinder.highlevel.navigation;
+package ie.tcd.wayfinder.highlevel.navigation.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

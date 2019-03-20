@@ -46,7 +46,7 @@ public class AuthorisationServerConfig extends AuthorizationServerConfigurerAdap
 		        .secret(passwordEncoder.encode("123456"))
 		        .autoApprove(true)
 		        .authorizedGrantTypes("implicit", "refresh_token", "password", "authorization_code", "client_credentials")
-		        .accessTokenValiditySeconds(1800)
+		        .accessTokenValiditySeconds(60 * 60 * 24 * 7)
 		        .scopes("FOO")
 		        .redirectUris("http://localhost:8080/");
 	}

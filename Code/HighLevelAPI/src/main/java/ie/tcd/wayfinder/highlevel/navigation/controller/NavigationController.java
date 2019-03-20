@@ -1,11 +1,15 @@
-package ie.tcd.wayfinder.highlevel.navigation;
+package ie.tcd.wayfinder.highlevel.navigation.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +17,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import ie.tcd.wayfinder.highlevel.navigation.request.UserRouteRequest;
+import ie.tcd.wayfinder.highlevel.navigation.type.TravelMode;
 import ie.tcd.wayfinders.restLibrary.Library;
 
 @RestController
 public class NavigationController {
+	@Value("${spring.route.api.url}")
+	private String routeUrl;
 
     @RequestMapping("/")
     public String index()
@@ -33,10 +43,11 @@ public class NavigationController {
      * return new ResponseEntity<String>("!!", HttpStatus.OK); } return new
      * ResponseEntity<String>("No ROUTES", HttpStatus.BAD_REQUEST); }
      */
-
-    @GetMapping("/navigation/start/{startLong}/{startLat}/destination/{destLong}/{destLat}/")
-    public ResponseEntity<String> findRoute(@PathVariable Float startLong, @PathVariable Float startLat, @PathVariable Float destLong, @PathVariable Float destLat) throws IOException
+ 
+    @GetMapping("/navigation/start/{startLat}/{startLong}/destination/{destLat}/{destLong}/{mode}")
+    public ResponseEntity<String> findRoute(@PathVariable Float startLong, @PathVariable Float startLat, @PathVariable Float destLong, @PathVariable Float destLat, @PathVariable TravelMode mode) 
     {
+    	try {
         
         if (startLong == null || startLat == null) return new ResponseEntity<String>("Starting location cannot be empty!",
                                                                HttpStatus.BAD_REQUEST);
@@ -55,13 +66,30 @@ public class NavigationController {
 
         if (startLong >180 || startLong < -180 ) return new ResponseEntity<String>("Longitude of Starting point is invalid!",
                       HttpStatus.BAD_REQUEST);
-       
-        HttpResponse response = Library.GET("http://localhost:3000/path", Optional.empty());
         
-        HttpEntity responseEntity = response.getEntity();
-        String responseXml = EntityUtils.toString(responseEntity);
-     
-        return new ResponseEntity<String>(responseXml, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
+        UserRouteRequest request = new UserRouteRequest(startLat + "," + startLong, destLat + "," + destLong, mode);
+        
+        String jsonRequestContent = objectMapper().writeValueAsString(request);
+                
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Content-Type", "application/json");
+       
+        HttpResponse response = Library.POST(routeUrl + "/api/route", Optional.of(headers), Optional.of(jsonRequestContent));
+        
+		HttpEntity responseEntity = response.getEntity();
+		String responseString = EntityUtils.toString(responseEntity);
+    
+        return new ResponseEntity<String>(responseString, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
+    	
+    	} catch(IOException e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>("Unexpected error occured: "+e.getMessage(),  HttpStatus.valueOf(500));
+    	}
+    }
+    
+    @Bean
+    public ObjectMapper objectMapper() {
+    	return new ObjectMapper();
     }
 
 }
