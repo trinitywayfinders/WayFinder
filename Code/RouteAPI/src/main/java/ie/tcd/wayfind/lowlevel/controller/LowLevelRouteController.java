@@ -76,6 +76,7 @@ public class LowLevelRouteController {
 			String uriString = uri.toString();
 			String uriEncoded = URIUtil.encodeQuery(uriString, "UTF-8");
 			response = Library.GET(uriEncoded, Optional.empty());
+			responseBody = EntityUtils.toString(response.getEntity(), "UTF-8");
 			
 			
 			
