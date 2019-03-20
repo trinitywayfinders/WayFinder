@@ -1,7 +1,14 @@
 package ie.tcd.wayfind.lowlevel;
 
+import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.IOException;
+
+import org.apache.http.ParseException;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +49,65 @@ public class RouteControllerTests {
     }
     
     @Test
-    public void checkDistanceOver3() {
+    public void checkRouteReturned() {
     	
-    	//UserRouteRequest usr
+    	UserRouteRequest usr = new UserRouteRequest("Dublin", "Cork", TravelMode.walking);
+    
+    	LowLevelRouteController controller = new LowLevelRouteController();
+    	
+    	String response;
+		try {
+			response = EntityUtils.toString(controller.getRoute(usr).getEntity(), "UTF-8");
+			JSONArray routes  = new JSONObject(response).getJSONArray("routes");
+	    	for(int i = 0; i < routes.length(); i++) {
+				JSONArray legs = routes.getJSONObject(i).getJSONArray("legs");
+				
+				for(int j = 0; j < legs.length(); j++) {
+					JSONObject leg = legs.getJSONObject(j);
+
+					String startLocation = leg.getString("start_address");
+					String endLocation = leg.getString("end_address");
+
+					assertTrue(startLocation.equals("Dublin, Ireland") && endLocation.equals("Cork, Ireland"));
+				}
+			}
+		} catch (ParseException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    @Test 
+    public void checkDistanceOver3() {
+    	UserRouteRequest usr = new UserRouteRequest("Dublin", "Cork", TravelMode.walking);
+        
+    	LowLevelRouteController controller = new LowLevelRouteController();
+    	
+    	String response;
+		try {
+			response = EntityUtils.toString(controller.getRoute(usr).getEntity(), "UTF-8");
+	    	assertTrue(controller.checkTotalDistanceRoute(response));
+		} catch (ParseException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    }
+    
+    @Test
+    public void checkDistanceUnder3() {
+    	UserRouteRequest usr = new UserRouteRequest("Trinity College Dublin", "Temple Bar", TravelMode.walking);
+        
+    	LowLevelRouteController controller = new LowLevelRouteController();
+    	
+    	String response;
+		try {
+			response = EntityUtils.toString(controller.getRoute(usr).getEntity(), "UTF-8");
+	    	assertTrue(!controller.checkTotalDistanceRoute(response));
+		} catch (ParseException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
     }
 }

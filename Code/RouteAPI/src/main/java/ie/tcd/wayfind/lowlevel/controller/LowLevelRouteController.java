@@ -33,8 +33,8 @@ public class LowLevelRouteController {
     private static final Logger logger = LoggerFactory.getLogger(LowLevelRouteController.class);
     private static final String endpoint = "https://maps.googleapis.com/maps/api/directions/json";
     private static String apiKey = "AIzaSyB2NHLaqVDF0uSmuNBMXI3DVsUanzdRD7Q";
-    
-    private static double segment1Distance = 3;
+
+    private static double totalDistance = 5;
     
 	@PostMapping(path="/api/route", consumes={ MediaType.ALL_VALUE })
 	public ResponseEntity<String> retriveRoute(@RequestBody UserRouteRequest request) {
@@ -42,67 +42,41 @@ public class LowLevelRouteController {
 		logger.debug("Origin: " + request.getOrigin());
 		logger.debug("Destination: " + request.getDestination());
 		logger.debug("Mode: " + request.getMode().toString());
-		
-		// Parameter check goes here
-		MultiValueMap<java.lang.String,java.lang.String> params = request.toParams();
-		params.add("key", apiKey);
-		
+
 		UriComponents uri;
-		HttpResponse response = null;
-		
-		try {
-			UriComponentsBuilder.newInstance();
-			uri = UriComponentsBuilder.fromUriString(endpoint).queryParams(params).build();
-			String uriString = uri.toString();
-			String uriEncoded = URIUtil.encodeQuery(uriString, "UTF-8");
-			response = Library.GET(uriEncoded, Optional.empty());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		HttpResponse response = getRoute(request);
 		
 		String responseBody = null;
-		String responseBody2 = null;
+		String responseBodySegment1 = null;
+		String responseBodySegment2 = null;
+		String responseBodySegment3 = null;
 		
 		try {
 			responseBody = EntityUtils.toString(response.getEntity(), "UTF-8");
+			UserRouteRequest request1 = get1stSegment(3000, responseBody, request.getMode());
+			UserRouteRequest request3 = get3rdSegment(3000, responseBody, request.getMode());
 
-			System.out.println("Distance > 3km: " + checkTotalDistanceRoute(responseBody));
+			HttpResponse responseSegment1 = getRoute(request1);
+			responseBodySegment1 = EntityUtils.toString(responseSegment1.getEntity(), "UTF-8");
 			
-			
-			UserRouteRequest[] splitJourney = splitJourney(responseBody);
-			UserRouteRequest request1 = splitJourney[0];
-			
-			MultiValueMap<java.lang.String,java.lang.String> params1 = request1.toParams();
-			params1.add("key", apiKey);
-			
-			UriComponentsBuilder.newInstance();
-			uri = UriComponentsBuilder.fromUriString(endpoint).queryParams(params1).build();
-			String uriString = uri.toString();
-			String uriEncoded = URIUtil.encodeQuery(uriString, "UTF-8");
-			response = Library.GET(uriEncoded, Optional.empty());
-			responseBody = EntityUtils.toString(response.getEntity(), "UTF-8");
-			
-			
-			UserRouteRequest request2 = splitJourney[1];
-			
-			MultiValueMap<java.lang.String,java.lang.String> params2 = request2.toParams();
-			params2.add("key", apiKey);
-			
-			UriComponentsBuilder.newInstance();
-			uri = UriComponentsBuilder.fromUriString(endpoint).queryParams(params2).build();
-			uriString = uri.toString();
-			uriEncoded = URIUtil.encodeQuery(uriString, "UTF-8");
-			response = Library.GET(uriEncoded, Optional.empty());
-			responseBody2 = EntityUtils.toString(response.getEntity(), "UTF-8");
-			
+			String endSegment1 = getSegment1EndLatLng(responseBodySegment1);
 
-			System.out.println("Distance > 3km: PART 2 " + checkTotalDistanceRoute(responseBody));
+			HttpResponse responseSegment3 = getRoute(request3);
+			responseBodySegment3 = EntityUtils.toString(responseSegment3.getEntity(), "UTF-8");
+			
+			String startSegment3 = getSegment3StartLatLng(responseBodySegment3);
+			
+			UserRouteRequest request2 = get2ndSegment(endSegment1, startSegment3, TravelMode.driving);
+			HttpResponse responseSegment2 = getRoute(request2);
+			responseBodySegment2 = EntityUtils.toString(responseSegment2.getEntity(), "UTF-8");
 			
 		} catch (IOException | ParseException | NullPointerException e) {
 			e.printStackTrace();
 		}
 		
-		return new ResponseEntity<String>(responseBody2, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
+		String x = combineRouteLegs(responseBodySegment1, responseBodySegment2, responseBodySegment3);
+		
+		return new ResponseEntity<String>(responseBodySegment3, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
 	}
 	
 	public boolean checkTotalDistanceRoute(String originalJson) {
@@ -115,15 +89,47 @@ public class LowLevelRouteController {
 			JSONObject leg = legs.getJSONObject(0);
 			int distance = leg.getJSONObject("distance").getInt("value");
 			
-			if(distance > segment1Distance*1000)
+			if(distance > totalDistance*1000)
 				return true;
 			}
 		return false; 
 		}
 		
+	public String getSegment1EndLatLng(String jsonResponse) {
+		try {
+			JSONArray routes  = new JSONObject(jsonResponse).getJSONArray("routes");
+			
+			JSONArray legs = routes.getJSONObject(0).getJSONArray("legs");
+				
+			Double lat = legs.getJSONObject(0).getJSONObject("end_location").getDouble("lat");
+			Double lng = legs.getJSONObject(0).getJSONObject("end_location").getDouble("lng");
+				
+			return Double.toString(lat)+","+Double.toString(lng);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
+	public String getSegment3StartLatLng(String jsonResponse) {
+		try {
+			JSONArray routes  = new JSONObject(jsonResponse).getJSONArray("routes");
+			
+			JSONArray legs = routes.getJSONObject(0).getJSONArray("legs");
+				
+			Double lat = legs.getJSONObject(0).getJSONObject("start_location").getDouble("lat");
+			Double lng = legs.getJSONObject(0).getJSONObject("start_location").getDouble("lng");
+					
+			return Double.toString(lat)+","+Double.toString(lng);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
-	public String getRoute(UserRouteRequest route) {
+	public HttpResponse getRoute(UserRouteRequest route) {
 		// Parameter check goes here
 		MultiValueMap<java.lang.String,java.lang.String> params = route.toParams();
 		params.add("key", apiKey);
@@ -141,16 +147,7 @@ public class LowLevelRouteController {
 			e.printStackTrace();
 		}
 		
-		String responseBody = null;
-		
-		try {
-			responseBody = EntityUtils.toString(response.getEntity(), "UTF-8");
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		return responseBody;
+		return response;
 	}
 	
 	
@@ -160,7 +157,7 @@ public class LowLevelRouteController {
 	 * 		params -> originalJson
 	 * 		returns true/false
 	 * 
-	 * 0.1 If journey < 6km get total number of steps and divide across 3 legs
+	 * 0.1 If journey < 6km do nothing. 
 	 * 
 	 * 	Need 3 methods to calculate legs ^	
 	 * 
@@ -174,14 +171,125 @@ public class LowLevelRouteController {
 	 * 
 	 * 5. Combine 3 legs 
 	 */
-//	
-//	private String sendRequest() {
-//		
-//	}
 	
+	private UserRouteRequest getUserRouteRequest(JSONObject step1, JSONObject step2, TravelMode travelMode) {
+		
+		double originalLat = step1.getJSONObject("start_location").getDouble("lat");
+		double originalLng = step1.getJSONObject("start_location").getDouble("lng");
+	
+		String originSegment1 = originalLat + "," + originalLng;
+		
+		double destinationSegment1Lat = step2.getJSONObject("start_location").getDouble("lat");
+		double destinationSegment1Lng = step2.getJSONObject("start_location").getDouble("lng");
+	
+		String destinationSegment1 = destinationSegment1Lat + "," + destinationSegment1Lng;
+		
+		return new UserRouteRequest(originSegment1, destinationSegment1, travelMode);
+		
+	}
+	
+	public UserRouteRequest get1stSegment(double segment1Length, String response, TravelMode travelMode) {
+		
+		try {
+			JSONArray routes  = new JSONObject(response).getJSONArray("routes");
+			
+			for(int i = 0; i < routes.length(); i++) {
+				JSONArray legs = routes.getJSONObject(i).getJSONArray("legs");
+				
+				for(int j = 0; j < legs.length(); j++) {
+					JSONArray steps = legs.getJSONObject(j).getJSONArray("steps");
+								
+					double totalDistance = 0.0;
+					
+					for(int k = 0; k < steps.length(); k++) {
+						JSONObject currentStep = steps.getJSONObject(k);
+						
+						int distance = currentStep.getJSONObject("distance").getInt("value");
+						totalDistance += distance;
+				
+						if(totalDistance > segment1Length) {
+							JSONObject firstStep = steps.getJSONObject(0);						
+							
+							return getUserRouteRequest(firstStep, currentStep , travelMode);
+						}
+					}
+				}
+			}
+		}
+		catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+public UserRouteRequest get3rdSegment(double segment3Length, String response, TravelMode travelMode) {
+		
+		try {
+			JSONArray routes  = new JSONObject(response).getJSONArray("routes");
+			
+			for(int i = 0; i < routes.length(); i++) {
+				JSONArray legs = routes.getJSONObject(i).getJSONArray("legs");
+				
+				for(int j = 0; j < legs.length(); j++) {
+					JSONArray steps = legs.getJSONObject(j).getJSONArray("steps");
+								
+					double totalDistance = 0.0;
+					
+					for(int k = steps.length()-1; k > 0; k--) {
+						JSONObject currentStep = steps.getJSONObject(k);
+						
+						int distance = currentStep.getJSONObject("distance").getInt("value");
+						totalDistance += distance;
+				
+						if(totalDistance > segment3Length) {
+							JSONObject lastStep = steps.getJSONObject(steps.length()-1);						
+							
+							return getUserRouteRequest(currentStep, lastStep, travelMode);
+						}
+					}
+				}
+			}
+		}
+		catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+
+	public UserRouteRequest get2ndSegment(String startLatLng, String endLatLng, TravelMode travelMode) {
+		return new UserRouteRequest(startLatLng, endLatLng, travelMode);
+	}
+	
+	public String combineRouteLegs(String response1, String response2, String response3) {
+
+		JSONArray routes1  = new JSONObject(response1).getJSONArray("routes");
+		JSONArray legsArray1 = routes1.getJSONObject(0).getJSONArray("legs");
+		
+		JSONObject leg2 = extractLegFromResponse(response2);
+		JSONObject leg3 = extractLegFromResponse(response3);
+
+		legsArray1.put(leg2);
+		legsArray1.put(leg3);
+
+		routes1.getJSONObject(0).getJSONArray("legs").remove(0);
+		routes1.getJSONObject(0).getJSONArray("legs").put(legsArray1);
+		
+		//THIS IS WHERE WE ARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		String yy = routes1.toString();
+		
+		return yy;
+	}
+	
+	private JSONObject extractLegFromResponse(String response) {
+		JSONArray routes  = new JSONObject(response).getJSONArray("routes");
+		return routes.getJSONObject(0).getJSONArray("legs").getJSONObject(0);
+	}
+	
+
 	//ToDo: Consider trips shorter than 3-6km.
 	// Split legs using steps instead of distance.
-	public UserRouteRequest[] splitJourney(String response) {
+	/*public UserRouteRequest[] splitJourney(String response) {
 		
 		System.out.println("IN SPLIT JOURNEY......");
 		try {
@@ -210,7 +318,7 @@ public class LowLevelRouteController {
 						totalDistance += currentDistance;
 						
 						//after first "segment1Distance" km split the route
-						if(totalDistance > segment1Distance) {
+						if(totalDistance > 3) {
 
 							//Get lat/lng of first step
 							JSONObject firstStep = steps.getJSONObject(0);	
@@ -247,6 +355,6 @@ public class LowLevelRouteController {
 			System.out.println("ERROR:"+e.getMessage());
 		}
 		return null;
-	}
+	}*/
 	
 }
