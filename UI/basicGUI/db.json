@@ -1,0 +1,2993 @@
+{
+   "geocoded_waypoints" : [
+      {
+         "geocoder_status" : "OK",
+         "place_id" : "ChIJx5i9fDoMZ0gR-XBjC5i0i6g",
+         "types" : [ "establishment", "lodging", "point_of_interest" ]
+      },
+      {
+         "geocoder_status" : "OK",
+         "place_id" : "ChIJq7VUGsqRREgRsP1CbMvekz4",
+         "types" : [ "beauty_salon", "establishment", "point_of_interest" ]
+      }
+   ],
+   "routes" : [
+      {
+         "bounds" : {
+            "northeast" : {
+               "lat" : 53.3435601,
+               "lng" : -6.2862806
+            },
+            "southwest" : {
+               "lat" : 51.8985143,
+               "lng" : -8.4756035
+            }
+         },
+         "copyrights" : "Map data ©2019 Google",
+         "legs" : [
+            {
+               "distance" : {
+                  "text" : "245 km",
+                  "value" : 245258
+               },
+               "duration" : {
+                  "text" : "2 days 2 hours",
+                  "value" : 181044
+               },
+               "end_address" : "30B Wilton Shopping Center, Co. Cork, Ireland",
+               "end_location" : {
+                  "lat" : 51.8985143,
+                  "lng" : -8.4756035
+               },
+               "start_address" : "53 Thomas St, Ushers, Dublin, Ireland",
+               "start_location" : {
+                  "lat" : 53.3435601,
+                  "lng" : -6.2862806
+               },
+               "steps" : [
+                  {
+                     "distance" : {
+                        "text" : "2.4 km",
+                        "value" : 2387
+                     },
+                     "duration" : {
+                        "text" : "30 mins",
+                        "value" : 1805
+                     },
+                     "end_location" : {
+                        "lat" : 53.3395516,
+                        "lng" : -6.3210359
+                     },
+                     "html_instructions" : "Head \u003cb\u003ewest\u003c/b\u003e on \u003cb\u003eJames St\u003c/b\u003e/\u003cb\u003eR810\u003c/b\u003e toward \u003cb\u003eEchlin St\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eContinue to follow R810\u003c/div\u003e",
+                     "polyline" : {
+                        "points" : "gtqdIfxje@BP?FBx@FdCDbBBd@?z@BfAD`CHt@@JDTPbA@d@FnAJv@F^P`Bd@jDZbCRtAHh@Hb@Jh@Lr@VjAf@`CFTDNBTDPRpABRLlABTBPLhA@JJfABb@@XHbBBr@Dr@@L@NDf@b@jFRxBD`@HfAFr@@TThCLxA@R@Z?P?TA\\Cv@CpA?Z?b@BvA?ZF`DBlBDvA?nADnF?@B~D@R?v@Av@Cp@At@ANA\\G~AAfA?l@?Z?T@X@ZBZ@X@H@NFd@LbB@PFt@LjBJzAFn@Df@LdB@NFp@JfAp@bFTtARjAl@dD@N?H?VAJ?REf@CVAHEj@M~@"
+                     },
+                     "start_location" : {
+                        "lat" : 53.3435601,
+                        "lng" : -6.2862806
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.9 km",
+                        "value" : 2861
+                     },
+                     "duration" : {
+                        "text" : "37 mins",
+                        "value" : 2207
+                     },
+                     "end_location" : {
+                        "lat" : 53.3234769,
+                        "lng" : -6.3527058
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eTyrconnell Rd\u003c/b\u003e/\u003cb\u003eR810\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eContinue to follow R810\u003c/div\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "e{pdInqqe@t@l@PTDDJNHLDHR\\f@`AbAhBHPlA|BR\\tBxDx@xANXFHp@bA^j@h@x@hAhBjAdB~A|BXd@z@|@PPTTNJLDPDJFBBJD`@Xf@^HFv@d@d@Xb@Tn@^nB`Al@`@n@f@DBx@~@l@r@jAtADF@BLNLPf@r@LPFLDHFJHRHPJTJTDJd@rALLBHBFP`@N\\Rj@dAdDr@lCb@jBR~@TpARvABXF`@XrBV~AZvBVbBLl@ZfBRbANz@@Jb@nCVbBj@nDJf@|C~PXrANt@Rt@ZlAtEbR\\rADNTp@Pl@DNVjAH\\|@pD"
+                     },
+                     "start_location" : {
+                        "lat" : 53.3395516,
+                        "lng" : -6.3210359
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.5 km",
+                        "value" : 1458
+                     },
+                     "duration" : {
+                        "text" : "19 mins",
+                        "value" : 1153
+                     },
+                     "end_location" : {
+                        "lat" : 53.3173687,
+                        "lng" : -6.371569999999999
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eNaas Rd\u003c/b\u003e/\u003cb\u003eR110\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eContinue to follow R110\u003c/div\u003e",
+                     "polyline" : {
+                        "points" : "wvmdIlwwe@lAnE^zAf@tB\\rARx@n@fCrB~H\\pAx@bDHZv@zCV~@d@lBv@xCp@hCDNNl@fAfEFLL^J\\FTb@hBb@lBL`@XpAH\\DNDLFPJRNXFLHJ`@d@`@d@JNJPJPHVH\\H`@F^F^DXBV@V@P?RAZAb@Ef@ATIh@?d@AH?J@L@\\BVBZDXBVL`Ab@xD"
+                     },
+                     "start_location" : {
+                        "lat" : 53.3234769,
+                        "lng" : -6.3527058
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "8.3 km",
+                        "value" : 8288
+                     },
+                     "duration" : {
+                        "text" : "1 hour 43 mins",
+                        "value" : 6168
+                     },
+                     "end_location" : {
+                        "lat" : 53.2817283,
+                        "lng" : -6.4760008
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eN7\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "qpldIhm{e@z@hHX~BNrABPHh@D^Jz@n@rEFf@\\hCf@~C^`Cv@`Ff@jDPbAF\\Np@Lj@f@rCh@pCLx@Lx@F`@Jl@FZn@bELx@`@jCVxAVxAX|AX~A@Ft@hEXvBXvBThBRhBDd@Ff@JvAJtARjDPlDJzBLvBJtANrAJz@D\\Lv@PlA^nBz@bEvAlEd@lAf@jAb@`Af@`AZf@j@fA|@`BbBtClAxBz@~Az@`BVd@Xh@l@jAt@|Ah@nAj@vALXZ|@Xr@v@~BrArEvB`IxB|Hl@~BpB|HbArDfAdEhAlE\\jAHVb@xAz@jCZx@\\|@Zt@v@fB`@t@d@`Ar@nAVd@^n@h@x@^f@j@t@\\b@f@j@PT`@^d@f@xAxAhCdC~@~@|DzDfDdDjAhAr@t@d@f@PTr@|@PT^d@`@p@V`@T`@^p@l@nAh@pAf@pAXz@Tr@Ld@V|@R|@T`AR|@PdAJp@Jl@NhALlADVFp@Fv@Fp@Dx@F|@Bh@HfBJlBX|GD~@LrCXxGHjBLlCFfAHtAB^@TD`@HbAJfALdALbAN`AF^F`@Hb@Hb@RbARv@Lh@Rr@H\\\\fA\\fA\\z@Tl@`@|@^t@d@bAlA|Bl@jAxFvK\\n@fDpGf@`AvAxCZt@f@lAd@pAVz@Tv@J\\HZJ^H^R~@ZxALt@Lx@DTLx@LbAJ`AD^JpAFv@Bf@B`@Dr@FrABh@Bz@@h@@fA?b@@z@?jA?zI@hA?Z@bA@|@@f@FfBFhAD|@NfBFz@Fd@J~@J|@XbCTdBJx@XvB|AtLNdAZ`Cf@vD`@xC"
+                     },
+                     "start_location" : {
+                        "lat" : 53.3173687,
+                        "lng" : -6.371569999999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.1 km",
+                        "value" : 144
+                     },
+                     "duration" : {
+                        "text" : "2 mins",
+                        "value" : 135
+                     },
+                     "end_location" : {
+                        "lat" : 53.2805499,
+                        "lng" : -6.4766241
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eMain St\u003c/b\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : {
+                        "points" : "yqedI~yof@T`@BHBFFFHDH@RDJIHJF@NDVHb@N^JF@J?"
+                     },
+                     "start_location" : {
+                        "lat" : 53.2817283,
+                        "lng" : -6.4760008
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "65 m",
+                        "value" : 65
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 53
+                     },
+                     "end_location" : {
+                        "lat" : 53.28019339999999,
+                        "lng" : -6.4773907
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e toward \u003cb\u003eSchool Rd\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "mjedIz}of@^nAJZDLHPJL"
+                     },
+                     "start_location" : {
+                        "lat" : 53.2805499,
+                        "lng" : -6.4766241
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.3 km",
+                        "value" : 331
+                     },
+                     "duration" : {
+                        "text" : "4 mins",
+                        "value" : 259
+                     },
+                     "end_location" : {
+                        "lat" : 53.2776665,
+                        "lng" : -6.4795802
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eSchool Rd\u003c/b\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : {
+                        "points" : "ehedItbpf@FFDBJBPDVBF@^BTB`AHRDHBNF`@Xl@l@BBTXRZXl@hA|Bb@fA"
+                     },
+                     "start_location" : {
+                        "lat" : 53.28019339999999,
+                        "lng" : -6.4773907
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.5 km",
+                        "value" : 489
+                     },
+                     "duration" : {
+                        "text" : "6 mins",
+                        "value" : 377
+                     },
+                     "end_location" : {
+                        "lat" : 53.2750243,
+                        "lng" : -6.485392399999999
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eKilteel Rd\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "mxddIjppf@zA|CbBjDjApCd@dAj@|Al@hBb@~Ah@zBZrBZnA"
+                     },
+                     "start_location" : {
+                        "lat" : 53.2776665,
+                        "lng" : -6.4795802
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "7.8 km",
+                        "value" : 7780
+                     },
+                     "duration" : {
+                        "text" : "1 hour 35 mins",
+                        "value" : 5692
+                     },
+                     "end_location" : {
+                        "lat" : 53.23286969999999,
+                        "lng" : -6.5747149
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "{gddIttqf@CJ@JBTHh@Lz@Lp@Hd@Jb@DVJ\\HVJ\\LZZ~@JRHRTf@P`@Rn@Vt@Vt@Tt@Vt@Vt@Vx@HZHZH^Lh@Ll@Jn@DXDXL`AFd@BZBZNjALx@PhAFb@Hr@Jx@Fl@Bb@Fh@H\\h@tCdAdF|@nEj@fCf@hBh@bBfB~FpArEPt@t@bDtAtFjAvE~@xDTz@L`@@FJp@BVD\\B`@Dx@LlALjAJ|@TbARdAh@`CbApEVrAd@xBd@jB\\pA\\lB?h@Ft@Fn@NpAVzAPbAXbBJl@Fd@Nn@X~@Rh@HRt@vAjArBpBtD`A|Bp@~Aj@pAbA~BJd@Jt@LvAj@xDb@lCd@~BPl@V~@JZLVVZTR`@`@n@f@d@Zn@^~@h@dAb@dAf@v@`@f@\\f@`@j@p@\\\\b@V|BxALJXX`@\\HJJPdAdBJTdBrDl@tABBFXDPDVLnATxABPNl@b@tBLh@L`@Ph@j@xAP\\LX^v@|A~CP^`@v@LTFRHZHZRbA^pBH^Jf@XnAn@zBf@vAb@jAb@~@Xl@`@z@Vh@f@|@HLNVPRTXt@n@TXNTZr@NXL\\Pj@Px@Lh@Jn@Lp@BHLp@Lb@Pz@Lt@RbABA?A@?@A@?@?@?@?@?@??@@?@@@@@@@@@D@D@@?@?@?@@@?@?@?@?@?@?@?@A@?@?B?@A@?@?@A@?@A@?@A?ABhB|FVr@^x@j@fAp@bAp@~@hAxA|@fAlA|AfArAp@x@LNlA`B`@f@PT`AjApBjC^j@f@t@t@pAZl@JXN^N\\Nf@Ld@Pj@jHdQ^x@lBhEnEfIrBrEhBbEbCbFv@|A|@vAZ^HHJJNPT\\lAxBbAnBx@dBzCpGP^HTJ^Ln@Lp@Db@Db@Fx@DVBJFZt@hC^nAjBrFvAnEv@dCx@zBhA~@\\\\"
+                     },
+                     "start_location" : {
+                        "lat" : 53.2750243,
+                        "lng" : -6.485392399999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "4.8 km",
+                        "value" : 4804
+                     },
+                     "duration" : {
+                        "text" : "59 mins",
+                        "value" : 3567
+                     },
+                     "end_location" : {
+                        "lat" : 53.1999396,
+                        "lng" : -6.6186979
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eL2019\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "m`|cI|bcg@FF^Z~@x@d@j@Zd@d@x@Vf@L\\Pd@V|@t@~CDPDJFNHTJXP^jBpDd@`Aj@bAjAfBVd@pBfDrDnGbBbDN\\LXp@nB|BtGj@fBbC`HPd@JZv@zBRl@fAvDRz@HZb@~Av@jDv@`DDXTjAVtADVJj@T`AnArD`AnCj@xAHPf@`AXb@f@h@^Zj@\\b@RNHd@T|@b@HFj@X^NzB~@HDJBLJn@d@j@d@t@j@hCtBHHtA|ATVz@`Ap@v@|BnCDH~@pA^h@b@p@jAdBZb@JPV`@DDPXHLl@z@PRRPVPHBf@R`@PZNDBFF@BBDJVRt@HVDPDHFN`@h@X\\HJJLr@|@^d@BBDFZXdAdAJHZTDDLHz@p@RPZTp@l@ZVh@d@BBTTf@b@v@t@z@v@n@l@FDNPLL\\f@JN`@j@HNfBtBLN~@jATR`@ZzDxCjAx@pBbBTR\\\\Z`@BDPZ\\t@Rj@Xr@V^BDd@d@z@x@pA`ALNf@p@RTp@v@\\d@bArAzBfBv@\\z@\\nAn@n@n@b@j@l@dAn@~A"
+                     },
+                     "start_location" : {
+                        "lat" : 53.23286969999999,
+                        "lng" : -6.5747149
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "24 m",
+                        "value" : 24
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 23
+                     },
+                     "end_location" : {
+                        "lat" : 53.2000189,
+                        "lng" : -6.619027600000001
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eR410\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "srucIzukg@O`A"
+                     },
+                     "start_location" : {
+                        "lat" : 53.1999396,
+                        "lng" : -6.6186979
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "5.6 km",
+                        "value" : 5606
+                     },
+                     "duration" : {
+                        "text" : "1 hour 8 mins",
+                        "value" : 4091
+                     },
+                     "end_location" : {
+                        "lat" : 53.173458,
+                        "lng" : -6.685692299999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eL2023\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "csucI|wkg@hAd@v@b@~KpGHHbA`AbAjAd@p@Zd@dArBtApDZhA`@fBb@fA^t@v@bAbAhAdBzCnBjDvBbDrAhBn@x@b@\\j@`@zB`BV^T`@N`@J^x@jEt@`DVxAh@nCXlAf@fBV|@Vt@N^NZX^TTRPRNLXH\\Fd@N`BJzBRtBV~Bh@`GHr@Dp@D`A@j@Dj@D\\Fp@Jj@H`@R|@F`@Nn@J^JTTf@V`@rAfBTZd@t@h@dARf@J`@R`ATlAPhAl@pDX`Bb@`CPr@Rt@d@bB`@rA|@hDx@zDj@dC|@dDXhAFX@L@JBz@BfADlAJlBLhCD~A@j@@f@A^A\\CVC`@A\\@h@F|@LzAPlBH|@B\\?\\?d@CVAV@f@@V@RHd@Pp@b@|At@pC`@bB`@hBP|@FXVpANt@Hf@Ff@Dn@Dj@@fBHh@Lp@h@dBTt@`@vA^hAP^Rf@V^h@`Ah@|@Vd@\\l@t@|An@|A~@|A`BbCbApBl@|Av@xBj@~BX|A\\tBDLRv@JZN\\Zn@Xn@f@z@\\f@V\\NXRZP^FPDTH^BVBN@N@R?N@\\?ZAz@I|C?`@?Z@Z@`@@\\D^D^Fd@DZlAzEh@|BVvAh@bDT`AXpAXpAh@pCLl@@F@H@H@^"
+                     },
+                     "start_location" : {
+                        "lat" : 53.2000189,
+                        "lng" : -6.619027600000001
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "4.8 km",
+                        "value" : 4815
+                     },
+                     "duration" : {
+                        "text" : "59 mins",
+                        "value" : 3524
+                     },
+                     "end_location" : {
+                        "lat" : 53.1426707,
+                        "lng" : -6.7334741
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eR448\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "cmpcIpxxg@xDv@r@LvB\\dFdA|Ab@d@PZN^PbB`Ab@^nB`BbCtBdB`B`@h@nErEv@|@RXHNJPVf@hArCl@rBtBzGJT^t@v@xAb@v@PZBDLRbDzErDhFzAvBpAdBxBxCzBxDzC|FtJtRVf@Rb@Pf@Tp@l@|BRr@DR`@~AjAlEXbAnB~GdBvFvBbHdAhEl@tD`@vCTlAVxAJ`@BFh@v@`AzAfBlCNVNXJVJTlAvCnAnBtAzBfAfBpBfEZ|@Nf@ZrAn@~BR|@^lA\\dAFLp@hBNVLTLRNRZZ~@hA`@l@f@z@j@pAh@jA`EhJrAzBZj@Td@Tf@\\z@n@lB^hAHPFPJRp@tAd@|@FJHLpA~Bh@t@"
+                     },
+                     "start_location" : {
+                        "lat" : 53.173458,
+                        "lng" : -6.685692299999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.8 km",
+                        "value" : 2760
+                     },
+                     "duration" : {
+                        "text" : "34 mins",
+                        "value" : 2050
+                     },
+                     "end_location" : {
+                        "lat" : 53.12209360000001,
+                        "lng" : -6.7536529
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e to stay on \u003cb\u003eR448\u003c/b\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : {
+                        "points" : "uljcIdcbh@TRr@hAjB|CdAzAPVzB|Cp@t@TV|@|@tBnBlChBd@Zz@b@f@XxAr@hBr@l@NxBl@ZJLLlBVxCb@fCb@TDH@JBLFJFZNHJ|@lANRPVHLJNr@p@d@d@|ArAt@t@HJHFFJDHDHJZAzAEfD?Z@P@TBTJX^z@Xh@R`@x@jA`AlAvAbBFHlAlAXZbBfBvBhCvA~APPPPxBfB|ChBxCdAvBnA^TlBrAnCxCl@p@PVT^h@|@R`@xBtD"
+                     },
+                     "start_location" : {
+                        "lat" : 53.1426707,
+                        "lng" : -6.7334741
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.9 km",
+                        "value" : 908
+                     },
+                     "duration" : {
+                        "text" : "12 mins",
+                        "value" : 726
+                     },
+                     "end_location" : {
+                        "lat" : 53.11702829999999,
+                        "lng" : -6.764298399999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e to stay on \u003cb\u003eR448\u003c/b\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : {
+                        "points" : "alfcIhafh@NRBFN\\^~@`AnCRr@Pf@Ph@FNFP\\`AlArDTr@Nn@Rb@fEfMrB~Fb@fATj@Tl@Xl@~BlFx@fB^r@"
+                     },
+                     "start_location" : {
+                        "lat" : 53.12209360000001,
+                        "lng" : -6.7536529
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "19.3 km",
+                        "value" : 19321
+                     },
+                     "duration" : {
+                        "text" : "3 hours 53 mins",
+                        "value" : 13957
+                     },
+                     "end_location" : {
+                        "lat" : 52.9950554,
+                        "lng" : -6.9618544
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eR418\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "mlecIzchh@bBrCdDhFdCnDfA~AnDpF~CxEhBfCpBjC|CnEzA~B|B`CvCjDtAjBxFhHbAjAzBjBxFjDvExChEr@dEx@XJf@X~@h@n@h@Zd@Zj@d@hA\\bA`@fBRhAjBzK|AlJxAxHjDnM\\pAfEzQd@dBp@lChAnE`FlQ`GbPr@lBjGtQdOfb@l@`BfEtLdJbWbDvI|DdLjHpR`BpEbAtCtG`RhA`DvDnKL^nHlSNd@lE`M`BlEvEpM^bAfK~XnFjOlInUjNv`@lGpQ|CnIxDnKr@nBtBzF`IlTNb@fB|EdE`LpC`IdAtCXt@Nd@~E~LfAlDpEhM`GfP~AjEvA|DtBxF`@~@xAfDnA`CfAvBv@lAd@n@bAjAnBrBrJ`JlHrGfRtPxW`V|EpE|V~TbHjG`GbFtDbDrEzDnD|CfDtCpC`CdB|A|@p@`@Zh@ZdAZnAZjEv@tAZr@Tv@Zx@j@v@p@v@`Ah@|@z@nBj@bB`BrFb@`Bz@~C|@fDh@lBJZFXlHvNjLfThIbOpGtLbEtHtGrLzHjN|EhJl@fAXn@r@rA|B~DdNzVt@vArElIpDxGhBfDxEpINXf@bA|JpQPZrDvGp@fA|ArC\\l@f@`AP\\jGbLfCxEhBbDnBbDPTTR"
+                     },
+                     "start_location" : {
+                        "lat" : 53.11702829999999,
+                        "lng" : -6.764298399999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "47 m",
+                        "value" : 47
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 40
+                     },
+                     "end_location" : {
+                        "lat" : 52.9946776,
+                        "lng" : -6.9621244
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eDublin Rd\u003c/b\u003e/\u003cb\u003eR418\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "crmbIpvni@NPLLRNFBP@"
+                     },
+                     "start_location" : {
+                        "lat" : 52.9950554,
+                        "lng" : -6.9618544
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.1 km",
+                        "value" : 2068
+                     },
+                     "duration" : {
+                        "text" : "26 mins",
+                        "value" : 1537
+                     },
+                     "end_location" : {
+                        "lat" : 52.9905137,
+                        "lng" : -6.9918499
+                     },
+                     "html_instructions" : "At the roundabout, take the \u003cb\u003e1st\u003c/b\u003e exit onto \u003cb\u003eDublin Rd\u003c/b\u003e/\u003cb\u003eN78\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eContinue to follow N78\u003c/div\u003e",
+                     "maneuver" : "roundabout-left",
+                     "polyline" : {
+                        "points" : "wombIfxni@BH@D@B@B@BBBBB@@BBD@HRBJF^Hf@Hr@Ft@H|AFbBHtCD~@@b@@z@D|AJvBPlEFnAJnBLvCJjCHfBPpDRjDN`CH|AHpAJrAJnBDj@Dt@FlAHdC@\\@r@BpA@fAF`BD`B@fA@Z?Z?PA@?@A??@A??@?@?@A??@?@?@?@?@?@?@?@?@@??@?@?@@??@@@Bt@HJPrCJbBFz@Dn@VfDPxBNlAN|@Hn@DVPnABTVlBFl@`@`DHj@Hn@H|@HvAFpANzBFf@j@vELz@N~@F^Jn@VbAJXJZPX"
+                     },
+                     "start_location" : {
+                        "lat" : 52.9946776,
+                        "lng" : -6.9621244
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "11.6 km",
+                        "value" : 11591
+                     },
+                     "duration" : {
+                        "text" : "2 hours 25 mins",
+                        "value" : 8679
+                     },
+                     "end_location" : {
+                        "lat" : 52.9080823,
+                        "lng" : -7.0880396
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eN78\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "uulbI`rti@BLNVLRdB~BhAvArD~ELNlAdBNXb@v@b@z@`BzCd@|@Th@x@~AHNd@hADJPb@t@|BPl@\\fANf@BFN`@\\~@v@hBh@jAl@pAVRn@|@Zd@Z^t@x@j@l@^^XZ|AxAp@p@fAjAj@l@bBrBj@t@f@p@r@fAp@dAp@jAb@r@`@t@x@`Bv@~Aj@lAVf@`@fAd@fAlAlD\\~@r@nBh@pAb@bAr@tAp@lAb@p@V^\\f@j@r@h@f@jAhAnAz@`DbBf@ZpHbEr@`@lAp@pAv@fCvA~@h@t@b@VLd@Vd@Xl@Zz@b@jAn@r@^r@^l@\\|@f@x@b@xBnAl@Zl@Z^Rp@Zv@d@lB~@xFvCdCrAfAr@d@\\PNx@r@pBjBhAlAfAvAnArArBxB`BdBh@l@FFNNjDrDbBdBzBzBrBvB|@z@jAlA|AzAnBpBhAfAdAdAbAbAlAlAdAfAdAdAjAjAbAbAfAfA`@`@|AdBzB|BtIvIdCjCbKjKv@x@r@t@X^FH`BhBTVxCrDTXhCrCZ\\l@v@nAvAn@t@d@d@v@|@n@r@j@n@`@d@vElFZ^dAhAl@n@bAhAfAjA^b@p@x@f@h@`@d@tA|Al@p@rAxA~AfB~@bAdCvCxAfBbChC|ChDdAjAtC|Cr@x@v@`AX`@Xb@Zl@R`@NZTr@Tx@LZV`Al@bDb@vB\\fBXrABHLb@Pd@N`@\\p@T\\V\\d@l@r@z@nArAXTPJRJRHPDTBT@b@Bl@?v@At@CrAGzAGz@CnACh@AlAAz@@x@DdANp@L~@TTHTRRLRL^XZVj@h@f@h@PNbCrCzClDj@r@hGnHjArAfCxCvAbBl@v@j@v@RZNXP`@JVL\\Tn@b@vARt@Ll@Nn@P~@N~@Lt@Jb@Nr@Rz@J^Lb@L^Rf@\\n@R^\\l@f@v@Z`@t@~@lC|ClBxBnAtAjBvBtFnGfAlAh@l@h@p@NTP`@HVJXL`@H\\Hd@Hh@Hr@DdADf@@d@@n@BdEDxCBt@DjAJlCNpCHlAHp@@NDRDPH^JZJ^Pb@Tb@NZT^\\f@xAjB"
+                     },
+                     "start_location" : {
+                        "lat" : 52.9905137,
+                        "lng" : -6.9918499
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "5.8 km",
+                        "value" : 5814
+                     },
+                     "duration" : {
+                        "text" : "1 hour 13 mins",
+                        "value" : 4360
+                     },
+                     "end_location" : {
+                        "lat" : 52.8890542,
+                        "lng" : -7.160563900000001
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e (signs for \u003cb\u003eThe Swan\u003c/b\u003e/\u003cb\u003eAbbeyleix\u003c/b\u003e)",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "or|aIfkgj@LdAHf@\\vBDTLl@VnAh@xBPj@J^Vv@JVX~@\\nAFXDTDVFX@R@J@P@PB|@?^?n@GpB?b@AjAAjC@~CCzCCrA?XGbCGvBA~@AhB@p@@l@B^^~ETrBJ~@PjAF\\Lj@n@jDBLTrANl@@FDJFPBFLZNZZl@|AjCv@rA`BvC\\h@z@rAl@|@nAtAjAhAHFlKzJv@x@d@h@PRf@l@NTRTV\\RZ`@p@JNTb@NXP`@L^JXDTDTHd@DXDZN~AHv@@T@P?T@\\A\\?XErAA^?l@?x@@`@@j@FdA@PBp@@^JpCDpB?hAAjAAx@Al@Cf@Gt@Gl@KlAOrAIz@AT?P?P@RB^B^PlBJfAJtABLJz@BXDb@DTLv@ZtAf@bC`@jBH`@f@|BBLfA~ErBnJz@jE\\|ANr@Jj@Rz@|ApGFTHXFVJf@DVBRBT@H?D?F@N?F@L?RAT?JARIt@In@Gf@G\\IXSf@a@~@q@bB{@bCSx@[hAOt@AXAT?T?L@P@RBPDTPn@Nn@HVL^d@|@RZ`@p@NTFNHVH\\Ff@Fb@J~@@\\BV?R?P?ZAVEVERGRIRMNQPEFEDCFEJCJCNEV?RAJ?FCv@Cp@?P?N?H?N@NBd@BXRxBVpBZjCb@bDDR@HDNFTNb@Vx@Rv@VdAHRFRN`@Tj@HPDHJLRTj@h@JJTRXVNNZ^Xb@d@tANj@HRJXVp@`@bAHRLXFNRl@Rl@v@~Bf@xAj@xAVn@dBzDhBpDt@~AbAdCb@vA`@nABHb@~@BDDFBBND"
+                     },
+                     "start_location" : {
+                        "lat" : 52.9080823,
+                        "lng" : -7.0880396
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "5.6 km",
+                        "value" : 5603
+                     },
+                     "duration" : {
+                        "text" : "1 hour 9 mins",
+                        "value" : 4121
+                     },
+                     "end_location" : {
+                        "lat" : 52.9031447,
+                        "lng" : -7.237175
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eR430\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "q{xaInpuj@m@pA_AfBS^EJGNGRELAJAHCN?HCPAZ?^Ad@?`A?RAl@?LAPEXCv@AtA@VBTDRDTFTNZPb@Ph@Lh@BTDZBb@@`@@`@@f@@z@BtCBd@Bp@LfB@TDl@FrBB~AA\\Ef@AXCXEXARGZADCJGXCJEJM^_@`AUd@GPGPOZKVGNKTMZKVO^Q^Uf@MZMZMVSd@KVO`@IPMXQ`@SZMNIJGJEFKJ?@IJWd@]p@O\\Ob@Mb@I\\Kh@EZQpAId@Gb@MfAU~AId@Id@GZMd@GRO^IPMTQXQXQXo@tAQ`@Kb@Of@Or@EVGx@O~BMvA[nDa@|DYvDKtAUtDI`BE`AEbAAp@EdA?l@?b@AfB?nC@zA?rB?hC?bBAtAAl@Ah@W|IKvCIpBKzBGdAIpAEv@OfBObBO~AM|AMvAQvAIt@QxAMdA[`CWxB[bCY`CUxBSbBMr@I\\Ud@e@|@Wd@[d@[\\y@z@_@\\u@v@MVKTUd@e@bA]z@IL[t@O`@Ut@M`@Qn@Ol@Kf@Sx@Kj@I\\SbAG`@EZIx@WpCc@lEOxAARg@|ECRMt@It@QjAIn@Gh@QfAKt@OhAMdAEVWlCCp@C\\Ad@?`@Br@@v@@d@?`@AVAXCf@CTEb@EXEZKx@E`@CZCd@A`@?LAVGp@Ap@?DANA^GlAEdAAl@GlACbAGrAEdBIpBIxCGtAKpDCf@CdAIpAEzAEpAEt@G`AGr@IfAI|@Cd@IfAGn@En@MnBcA|L[fE"
+                     },
+                     "start_location" : {
+                        "lat" : 52.8890542,
+                        "lng" : -7.160563900000001
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.2 km",
+                        "value" : 200
+                     },
+                     "duration" : {
+                        "text" : "3 mins",
+                        "value" : 170
+                     },
+                     "end_location" : {
+                        "lat" : 52.90151119999999,
+                        "lng" : -7.238416300000001
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "ss{aIjodk@^Xb@ZZTTNDDf@^f@^VPHDNJVPTLXP"
+                     },
+                     "start_location" : {
+                        "lat" : 52.9031447,
+                        "lng" : -7.237175
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.0 km",
+                        "value" : 1049
+                     },
+                     "duration" : {
+                        "text" : "15 mins",
+                        "value" : 902
+                     },
+                     "end_location" : {
+                        "lat" : 52.90055410000001,
+                        "lng" : -7.253836
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "mi{aIbwdk@BL@LBP@TDn@B\\Bl@@ZBb@Bf@?Z?b@?PANEZG`@CXANCR?P?T@d@?X@j@?XAv@?XAl@?b@?h@@h@@p@?Z@p@@t@Bf@Bz@F`ADp@Dn@Br@B^@^@^?P?NBb@D^F|@Fj@Db@@XFr@Dr@Bb@Bd@Br@Bv@@\\@h@BV@XD`@D^Fh@Ff@Bl@@f@B`ABx@@\\?h@@^@l@?^@x@?V@\\Bj@BT@ZBl@?PA\\C^"
+                     },
+                     "start_location" : {
+                        "lat" : 52.90151119999999,
+                        "lng" : -7.238416300000001
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.8 km",
+                        "value" : 1780
+                     },
+                     "duration" : {
+                        "text" : "21 mins",
+                        "value" : 1262
+                     },
+                     "end_location" : {
+                        "lat" : 52.8931074,
+                        "lng" : -7.272236200000001
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "mc{aInwgk@CLMt@I`@GZQ|@UdAQ~@Mv@Kf@Gf@G\\Gf@APAT?X?Z?h@?`@C|@?`@Ax@Ab@?VAb@@^@d@@VBXB`@B^DTD`@BXBL@NBZFb@BZD`@@\\B^BXDb@Df@DZFf@Fb@F`@D`@D`@BRD`@DTDRFXDPDPFXFRHTDLHLJPLRHNHPHXDJHRTb@HPHPTh@bCtGp@nBd@~A|@lC~AtFPl@^p@jA~B\\l@d@l@VLRFTDh@Cp@Gj@I`@I\\KXMVMVEN?XDTDJFPJ\\DRBPDNBLBLHLHJDLHJJPFHFJNNTBNRbADRNLLFLJ"
+                     },
+                     "start_location" : {
+                        "lat" : 52.90055410000001,
+                        "lng" : -7.253836
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "89 m",
+                        "value" : 89
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 76
+                     },
+                     "end_location" : {
+                        "lat" : 52.8934653,
+                        "lng" : -7.2734234
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "}tyaInjkk@SnAMj@e@nB"
+                     },
+                     "start_location" : {
+                        "lat" : 52.8931074,
+                        "lng" : -7.272236200000001
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.4 km",
+                        "value" : 433
+                     },
+                     "duration" : {
+                        "text" : "6 mins",
+                        "value" : 386
+                     },
+                     "end_location" : {
+                        "lat" : 52.8906802,
+                        "lng" : -7.277607000000001
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "ewyaIzqkk@H@R?HATCRBTPJPVf@l@~An@dBN^N\\HTPd@Td@BDFJHNT^R^LVN^n@nA^j@^l@P^Pn@"
+                     },
+                     "start_location" : {
+                        "lat" : 52.8934653,
+                        "lng" : -7.2734234
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.6 km",
+                        "value" : 2635
+                     },
+                     "duration" : {
+                        "text" : "31 mins",
+                        "value" : 1887
+                     },
+                     "end_location" : {
+                        "lat" : 52.87250520000001,
+                        "lng" : -7.2987775
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "weyaI`llk@\\BPDLBLBVDXDZFZDZBNBJBZDJ@VFh@JTH`@LLDTDJ@VDVDNBTFRHNHLDNLXVd@j@RTNRRTTVDDPNp@f@zBbAVPTJVNd@VTNLLB@VPTNTHFB~@\\`Bj@ZNh@Vh@FTB^FXBb@Df@?f@G|@MZDNDDDFDFFDFFJDJDHBJDLBR@V@N?P@N?R@`@?N@H?F@F@FBLBLDPZ|@DJFTFRBJJj@Jx@N~@Nx@Jr@RrADVF\\DTDVFTLXHPDHR^PVRZ^n@bAnAhArAf@j@j@r@h@h@X\\b@vALd@X|@Tv@V|@^tAR|@TnADNBHFLDHLPHHLJRNNLLPPR`AvAZd@HLHNJPVf@\\n@TXZb@`@n@PZNTZ^j@j@d@b@TXNPPTJLJVLXTl@Vj@FNJNTVh@p@d@v@Xd@Tf@b@~@^n@PZJLLPLPFJDHDJBJBHBRBLBTB\\"
+                     },
+                     "start_location" : {
+                        "lat" : 52.8906802,
+                        "lng" : -7.277607000000001
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "40 m",
+                        "value" : 40
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 31
+                     },
+                     "end_location" : {
+                        "lat" : 52.87265559999999,
+                        "lng" : -7.2993151
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eHeywood Village\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "etuaIjppk@?XCNY`A"
+                     },
+                     "start_location" : {
+                        "lat" : 52.87250520000001,
+                        "lng" : -7.2987775
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.6 km",
+                        "value" : 559
+                     },
+                     "duration" : {
+                        "text" : "6 mins",
+                        "value" : 387
+                     },
+                     "end_location" : {
+                        "lat" : 52.8730991,
+                        "lng" : -7.307355899999999
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eChapel St\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "cuuaIvspk@G`@CVCPE`BEr@KhBGp@Gh@G\\EREVGNGPKTENIZGTCREPAPARAN?PAb@?^@j@BxB@t@L`CHfBJtBBf@@VB\\@T@N?N?L?NAX@`@"
+                     },
+                     "start_location" : {
+                        "lat" : 52.87265559999999,
+                        "lng" : -7.2993151
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.1 km",
+                        "value" : 123
+                     },
+                     "duration" : {
+                        "text" : "2 mins",
+                        "value" : 110
+                     },
+                     "end_location" : {
+                        "lat" : 52.874053,
+                        "lng" : -7.3082767
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eStanhope St\u003c/b\u003e/\u003cb\u003eR432\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "{wuaI~erk@OPWVMLSPSPYXGF[XUTKH"
+                     },
+                     "start_location" : {
+                        "lat" : 52.8730991,
+                        "lng" : -7.307355899999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "43 m",
+                        "value" : 43
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 32
+                     },
+                     "end_location" : {
+                        "lat" : 52.8740213,
+                        "lng" : -7.3089115
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e toward \u003cb\u003eBride St\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "y}uaIvkrk@BbA@x@"
+                     },
+                     "start_location" : {
+                        "lat" : 52.874053,
+                        "lng" : -7.3082767
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "55 m",
+                        "value" : 55
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 43
+                     },
+                     "end_location" : {
+                        "lat" : 52.8745042,
+                        "lng" : -7.309078100000001
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e toward \u003cb\u003eBride St\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "s}uaItork@_@JGBw@P"
+                     },
+                     "start_location" : {
+                        "lat" : 52.8740213,
+                        "lng" : -7.3089115
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "4.5 km",
+                        "value" : 4452
+                     },
+                     "duration" : {
+                        "text" : "53 mins",
+                        "value" : 3190
+                     },
+                     "end_location" : {
+                        "lat" : 52.8609844,
+                        "lng" : -7.3692344
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eBride St\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "s`vaIvprk@XzGJdCDdB?f@AZCZGl@Ir@o@bFG^CNCRC`@AVAX?\\A`@Bv@B`AD`BFpBDrCDhD@pAH|BJzGBfBBlABxA@`@Dz@Fl@Hv@D`@BRBNFVV`AFZBTBVB\\@TBTJ|@Nv@Np@Np@ZrAn@lCh@xB\\pAb@fBT~@Jb@Z`Ah@nAZr@b@~@`@r@Xd@b@v@LTHHFHNJ`@\\VRRNRVHLLRNVn@rAz@nBn@tAj@tAx@nBv@dBp@|Ap@|Ah@lAj@vA\\x@Pb@HTDRDTJh@X~A`@bCZhBb@jCz@xE^zCL`ANdAPjAVbBZfC~@`HVnBLv@N`AHt@ZvBRxAVnBX|BNdARjBNfAPpAL`AJl@Lz@Nt@PpAJ~@TlBTrAHn@Lv@n@vEr@tFTtBThC^~CV`CNxAJhAN|APxBDd@Hx@NhA@JJhAJbANdAJ`AXtBn@~GXhD^|D\\fDLjAFv@Dd@?@BTBT?L@P"
+                     },
+                     "start_location" : {
+                        "lat" : 52.8745042,
+                        "lng" : -7.309078100000001
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "7 m",
+                        "value" : 7
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 6
+                     },
+                     "end_location" : {
+                        "lat" : 52.8609194,
+                        "lng" : -7.3692218
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e toward \u003cb\u003eN77\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "clsaIth~k@JA"
+                     },
+                     "start_location" : {
+                        "lat" : 52.8609844,
+                        "lng" : -7.3692344
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "75 m",
+                        "value" : 75
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 57
+                     },
+                     "end_location" : {
+                        "lat" : 52.86052189999999,
+                        "lng" : -7.3700927
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e toward \u003cb\u003eN77\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "wksaIrh~k@JTLTP\\Td@DJBJ?H@J@N"
+                     },
+                     "start_location" : {
+                        "lat" : 52.8609194,
+                        "lng" : -7.3692218
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.5 km",
+                        "value" : 2486
+                     },
+                     "duration" : {
+                        "text" : "30 mins",
+                        "value" : 1824
+                     },
+                     "end_location" : {
+                        "lat" : 52.8461382,
+                        "lng" : -7.3951859
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eN77\u003c/b\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : {
+                        "points" : "gisaI`n~k@NTPTXd@Vb@Vf@Rb@LXL\\L\\JXNb@f@zAd@rAL`@FRFRDNJd@DRFXLr@F^Hr@Fh@Df@@X@PHrABrABh@@r@BpABhADvBFvB@`AFlCFfCDbAFfAFdAHn@Dh@DZFd@PlAJh@Ll@VfARv@Ph@Pj@N`@L\\Rf@Rb@P^LTHPRZXd@PXZb@TVPR\\\\LLJJvCfChJvHjDzCzCtC`DtClDzC`ElDbBzAb@^j@j@fBfBPVRRh@j@jArAXZPTNRZf@FJVf@Rd@"
+                     },
+                     "start_location" : {
+                        "lat" : 52.86052189999999,
+                        "lng" : -7.3700927
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.8 km",
+                        "value" : 2808
+                     },
+                     "duration" : {
+                        "text" : "35 mins",
+                        "value" : 2092
+                     },
+                     "end_location" : {
+                        "lat" : 52.8370076,
+                        "lng" : -7.432717899999999
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eR639\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "kopaI|jcl@NXPZXj@DH^x@b@r@HPlAvBHN`@t@~@`B\\l@PPLLRNTNbAr@l@h@XTZ^V^PVPXLXLZJXDPBJBFHd@\\hBNz@d@lCZdBBP|@jFt@vDFZjDxSBRHb@Lt@VlBPnAFl@Db@NpB\\dFx@pLl@tIp@jJt@jKf@nGDj@V|DFt@Fz@\\|ExBx[zAlWBl@Hx@D^"
+                     },
+                     "start_location" : {
+                        "lat" : 52.8461382,
+                        "lng" : -7.3951859
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "12.3 km",
+                        "value" : 12267
+                     },
+                     "duration" : {
+                        "text" : "2 hours 31 mins",
+                        "value" : 9062
+                     },
+                     "end_location" : {
+                        "lat" : 52.7558571,
+                        "lng" : -7.5512709
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "ivnaInujl@B`@BRRvAP~@Nx@Np@`B~FTz@rC|JPh@pDpLHLPj@|FhT|E`QzCzKdA`ExI`[fAxDnD`MhA~DvAfF~@hDlAnElAhEvAnFX`ARl@v@pBf@nA\\p@d@~@|@~AzCvFdJ`QpCjFpCtFtDfHNNLRxAjCr@pAl@hATb@b@z@t@xApCzFBLBNt@~AzI~PhDzGbE~HzErJ|GjNnCzFpM|W`B`D~@jBzMrXdA|B~BzEbAxBXn@zAzCx@zAn@jAbAdBlDpEZ`@@@FHnFxHX\\V^n@x@jCjDTZ`C`Dr@`AlAbBt@~@X^xAlBRVHHrCxDX`@`BtBrC|DtAhBlCdDfDlEpHzJbC`DpBxCPXrA~ApAbB|@jAfA|Ad@p@d@j@xC~D|@tAb@l@vBpC|AtBz@jAtDtEt@`AbCbDzApBrAhBbF~GfAxAhBbCfDjEtBhCJNb@j@tA|ARXv@`A`@j@zAjB~@~@t@n@pAbAfCjB\\Vn@b@jCnBhBlAz@j@j@`@rHfFtDhCvDrChFtD~CzBPLjAx@|JfHpBtAnBvAnE~CTPnDdC`D~Bh@`@PLzG~EVRdGhEnHjF@@"
+                     },
+                     "start_location" : {
+                        "lat" : 52.8370076,
+                        "lng" : -7.432717899999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "5.0 km",
+                        "value" : 4977
+                     },
+                     "duration" : {
+                        "text" : "1 hour 1 min",
+                        "value" : 3646
+                     },
+                     "end_location" : {
+                        "lat" : 52.7178863,
+                        "lng" : -7.587534400000001
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "c{~`Ilzam@DNlClBt@j@j@`@x@l@dCjBjCrBfBnAbAt@FD`CbBrA`AtAbAJETL`An@xAdAz@l@dBlA~@p@z@l@fFlDJHFPFDjA~@vBpAl@b@~BzAz@l@pBzAvDlCVFHFxMpJvX|R\\V|UxPnBtA|NrK|C|BpDjC~@p@?DAD@D?D?D@D?B@D@B@DBB@BBBFFB@B@@@B@B?B?@?BA@?BA@C@ABC@CBIlBbBhAt@nDbCjJfGd@\\z@jAd@jAbAvCFHDNnAnExHpRlAzCpD`JpDxIv@nBt@fB"
+                     },
+                     "start_location" : {
+                        "lat" : 52.7558571,
+                        "lng" : -7.5512709
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.8 km",
+                        "value" : 2782
+                     },
+                     "duration" : {
+                        "text" : "35 mins",
+                        "value" : 2072
+                     },
+                     "end_location" : {
+                        "lat" : 52.70218089999999,
+                        "lng" : -7.619621599999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "ymw`I`}hm@BPpAbDfApCJXpAbDr@fBfCrGzAdElFbOxGzQdC`HlAlDTj@jDtJv@zBrMd^~A~DHHpE`MdAtCv@pBDLb@dA~@zBZp@tCnGlC|F`GtL`@z@"
+                     },
+                     "start_location" : {
+                        "lat" : 52.7178863,
+                        "lng" : -7.587534400000001
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.9 km",
+                        "value" : 888
+                     },
+                     "duration" : {
+                        "text" : "10 mins",
+                        "value" : 617
+                     },
+                     "end_location" : {
+                        "lat" : 52.6967191,
+                        "lng" : -7.629166099999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : {
+                        "points" : "skt`Ireom@F@nDdHlAbCJh@zGxMdEpHnBxDN^tAfDj@vAn@nBPl@JZ"
+                     },
+                     "start_location" : {
+                        "lat" : 52.70218089999999,
+                        "lng" : -7.619621599999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.2 km",
+                        "value" : 215
+                     },
+                     "duration" : {
+                        "text" : "3 mins",
+                        "value" : 158
+                     },
+                     "end_location" : {
+                        "lat" : 52.69571879999999,
+                        "lng" : -7.631891500000001
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : {
+                        "points" : "ois`Ihaqm@P\\Rl@Pn@Tx@VbAh@zBv@hD"
+                     },
+                     "start_location" : {
+                        "lat" : 52.6967191,
+                        "lng" : -7.629166099999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "93 m",
+                        "value" : 93
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 72
+                     },
+                     "end_location" : {
+                        "lat" : 52.695058,
+                        "lng" : -7.631053700000001
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "gcs`Ihrqm@\\]`@c@R[LOLURc@"
+                     },
+                     "start_location" : {
+                        "lat" : 52.69571879999999,
+                        "lng" : -7.631891500000001
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "3.6 km",
+                        "value" : 3582
+                     },
+                     "duration" : {
+                        "text" : "43 mins",
+                        "value" : 2608
+                     },
+                     "end_location" : {
+                        "lat" : 52.676154,
+                        "lng" : -7.672594600000001
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "c_s`I`mqm@~AtEZ`AHZLl@Jd@F^BTDVB\\Bd@Bh@FpAFtCPtFHtBTxGBh@F`ADj@@L@PDZTx@pChIvFtPxBlG~CbJnBzFlCzHzEfNzApE\\~@h@~Ad@tAjCpHTr@`@`Af@bAd@`Ah@z@fBrClAlB~DtGrEjHlB~CtCxEjAhBpAbCPZNZd@bAd@bAdA|Bz@dBVl@R\\NXh@jA~AhDnAnCDFnApCdBjDNZf@hA`@x@DJBB@D?B@D@D?F?@@BA@?@?B?@ABADCD"
+                     },
+                     "start_location" : {
+                        "lat" : 52.695058,
+                        "lng" : -7.631053700000001
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.8 km",
+                        "value" : 775
+                     },
+                     "duration" : {
+                        "text" : "10 mins",
+                        "value" : 574
+                     },
+                     "end_location" : {
+                        "lat" : 52.6713499,
+                        "lng" : -7.680883699999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "}ho`Itpym@dBfCt@jAx@nABDZdAtAtCd@`A`BjD^x@vAbDrJfT"
+                     },
+                     "start_location" : {
+                        "lat" : 52.676154,
+                        "lng" : -7.672594600000001
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.3 km",
+                        "value" : 2302
+                     },
+                     "duration" : {
+                        "text" : "28 mins",
+                        "value" : 1689
+                     },
+                     "end_location" : {
+                        "lat" : 52.65723509999999,
+                        "lng" : -7.705823499999998
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : {
+                        "points" : "}jn`Ind{m@LLnGbNpBhEZl@`@z@tBdE|AtC`BfDDTzBdFhAtCjDfIrCdGdCfF`EtIfKxTv@`B|AfD~ErK@@hB~DpAjCjEnId@|@"
+                     },
+                     "start_location" : {
+                        "lat" : 52.6713499,
+                        "lng" : -7.680883699999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.2 km",
+                        "value" : 1182
+                     },
+                     "duration" : {
+                        "text" : "14 mins",
+                        "value" : 855
+                     },
+                     "end_location" : {
+                        "lat" : 52.6499612,
+                        "lng" : -7.718549299999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "wrk`Ij``n@BR|BjFxArD~IdS~BjEH@^t@rAnChCtFvBfEnG`MbBbD"
+                     },
+                     "start_location" : {
+                        "lat" : 52.65723509999999,
+                        "lng" : -7.705823499999998
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.3 km",
+                        "value" : 1287
+                     },
+                     "duration" : {
+                        "text" : "16 mins",
+                        "value" : 948
+                     },
+                     "end_location" : {
+                        "lat" : 52.6422451,
+                        "lng" : -7.7327366
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "gej`I|obn@@NfBlErEzKpDnIHHrE`KdEhJ`G`M~EdKnClG"
+                     },
+                     "start_location" : {
+                        "lat" : 52.6499612,
+                        "lng" : -7.718549299999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.3 km",
+                        "value" : 1254
+                     },
+                     "duration" : {
+                        "text" : "15 mins",
+                        "value" : 915
+                     },
+                     "end_location" : {
+                        "lat" : 52.634766,
+                        "lng" : -7.7466132
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "auh`Irhen@F`@zD|IzEvKJH`DnHDHvCxGHPd@~@jCbGTj@jKdVjAfCDHz@dB"
+                     },
+                     "start_location" : {
+                        "lat" : 52.6422451,
+                        "lng" : -7.7327366
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.8 km",
+                        "value" : 826
+                     },
+                     "duration" : {
+                        "text" : "10 mins",
+                        "value" : 613
+                     },
+                     "end_location" : {
+                        "lat" : 52.6294853,
+                        "lng" : -7.755180800000001
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : {
+                        "points" : "ifg`Ih_hn@H?bExIhA|B|ArCJRxEdJDTxB`EzGzLf@v@"
+                     },
+                     "start_location" : {
+                        "lat" : 52.634766,
+                        "lng" : -7.7466132
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "5.9 km",
+                        "value" : 5865
+                     },
+                     "duration" : {
+                        "text" : "1 hour 11 mins",
+                        "value" : 4279
+                     },
+                     "end_location" : {
+                        "lat" : 52.5907121,
+                        "lng" : -7.8132028
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "ief`Iztin@BLjBnD~EvIHF~CvF~PnZxEbIvEtIbBtChDfGbB|ClBfDtBxDxAlCTn@~B|DrCbEhCdEVb@d@n@\\l@bDpEdEtGjMxRlH~KhAdBfAbBzApBTZbCvDjCfE`DbF|BjDbBpC|BtDzCxE~AlChH`LV\\tHpLxGpK~C|EhB|Cf@j@fG~IxBhDzB`DjDhFz@pAzIjMrBdDHRVl@Rn@XdA\\|ATbBRjBFbAFtAFlB"
+                     },
+                     "start_location" : {
+                        "lat" : 52.6294853,
+                        "lng" : -7.755180800000001
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "4.2 km",
+                        "value" : 4162
+                     },
+                     "duration" : {
+                        "text" : "50 mins",
+                        "value" : 3005
+                     },
+                     "end_location" : {
+                        "lat" : 52.5621168,
+                        "lng" : -7.848283099999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : {
+                        "points" : "}r~_In_un@Dj@FrABXHlBNbE@V@J?H@J@V@HB\\BbADfAHnAXjCTfBJp@ZlAh@zAt@xA~@pAnAfB`AdAjA`AnAv@jBv@jChAx@\\vBv@bAb@z@Rz@NpARx@Dv@Dl@?rA@t@?L?fBJv@Vd@Ll@Zf@Zl@j@tAhB`AzAhApBj@dAjAvBlA`ChAzBfArBhArB|@dBlBpDTb@R^nA|B`CrEhC~ExC|FnCfF~C|FR`@j@dANRx@fAvB`CpAtAdD`D`G|FxFvFlIpIlFpFbC~B`AfA`AfAlApA~C`D"
+                     },
+                     "start_location" : {
+                        "lat" : 52.5907121,
+                        "lng" : -7.8132028
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "5.8 km",
+                        "value" : 5814
+                     },
+                     "duration" : {
+                        "text" : "1 hour 11 mins",
+                        "value" : 4251
+                     },
+                     "end_location" : {
+                        "lat" : 52.5173849,
+                        "lng" : -7.8867047
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "g`y_Ivz{n@FLvB~BfFnF\\\\`@HtDpCtB|AxAhAPLzAdAtB~AnAjApDlDvG`ItG|HvDrEtGlHbElE|C|CxAxAhDpD`DjDnDjDpF`GhAz@zBbA~@BFRDFDFDDDBFBD@F?FADCZjAx@|BFPR^@BNTRT|@fAhAjAxAvAbDjDdDfDpExEn@j@dC|Bt@n@VT~A|Aj@h@PTj@|@f@z@~@hBn@lAn@jA\\h@^j@b@r@\\`@Z^d@`@t@b@p@T`AT`ALxALhAHlAH|@@`AFvAHZF^Jd@Nx@d@|@h@r@j@d@\\l@b@j@b@h@f@^f@b@l@h@bA`@~@rBdEvAvCdGxMbAlBd@t@f@t@j@l@h@b@`Al@p@Xt@Vt@Nr@@x@CjAGr@Gd@EjAKlD]p@Gb@GVErAQf@Gt@M\\KDA\\Md@QHCHCHEJARLHHb@d@fAlA^M"
+                     },
+                     "start_location" : {
+                        "lat" : 52.5621168,
+                        "lng" : -7.848283099999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.4 km",
+                        "value" : 384
+                     },
+                     "duration" : {
+                        "text" : "5 mins",
+                        "value" : 274
+                     },
+                     "end_location" : {
+                        "lat" : 52.51560869999999,
+                        "lng" : -7.8914467
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eMain St\u003c/b\u003e/\u003cb\u003eR639\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eContinue to follow R639\u003c/div\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "shp_Izjco@p@tAXf@HNNXN\\N^J\\Ld@HVBJJ^Rp@Ln@Lp@PbA^`CNjBB`@Nb@@FFNHNLR"
+                     },
+                     "start_location" : {
+                        "lat" : 52.5173849,
+                        "lng" : -7.8867047
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.4 km",
+                        "value" : 1376
+                     },
+                     "duration" : {
+                        "text" : "18 mins",
+                        "value" : 1106
+                     },
+                     "end_location" : {
+                        "lat" : 52.5034248,
+                        "lng" : -7.8905074
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eLower Gate Square\u003c/b\u003e/\u003cb\u003eR639\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eGo through 1 roundabout\u003c/div\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "q}o_Iphdo@XSp@i@VOTMZKt@Qp@Kt@EhAIx@Cj@?|@D\\D^FdC`@HBpARn@HlAJtAJ@@?@?@?@@??@?@@@?@@??@@??@@?@@@?@?@?@?@??A@?@A@A?A@??A?A@??A?A@A?An@AbBCn@CnBEnA?T?^?|AGfBEd@AB?tAErACTATA\\CXAXCv@IZCZGNC|@Of@M\\GVG`@Gz@K"
+                     },
+                     "start_location" : {
+                        "lat" : 52.51560869999999,
+                        "lng" : -7.8914467
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.7 km",
+                        "value" : 678
+                     },
+                     "duration" : {
+                        "text" : "8 mins",
+                        "value" : 484
+                     },
+                     "end_location" : {
+                        "lat" : 52.49844160000001,
+                        "lng" : -7.8868444
+                     },
+                     "html_instructions" : "At the roundabout, take the \u003cb\u003e2nd\u003c/b\u003e exit onto \u003cb\u003eCahir Rd\u003c/b\u003e/\u003cb\u003eN74\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eGo through 1 roundabout\u003c/div\u003e",
+                     "maneuver" : "roundabout-left",
+                     "polyline" : {
+                        "points" : "kqm_Itbdo@AG?C@C?C?C?A@C?C@A@C?A@C@A@A@A@ABCDA@AB?@?@@@?@?@@@@@@@@@@@@@@@@?B@B@DhHsArCk@hASj@O^K^Q`Ag@h@a@j@k@EIAE?CAC?C?CAC?C?C?C@E?GBI?A@C@C@A@C@A@A@A@AB?@A@?B?@?@?@?B?@@@@DB^yAV}@V}@`@wA"
+                     },
+                     "start_location" : {
+                        "lat" : 52.5034248,
+                        "lng" : -7.8905074
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "10.9 km",
+                        "value" : 10881
+                     },
+                     "duration" : {
+                        "text" : "2 hours 10 mins",
+                        "value" : 7822
+                     },
+                     "end_location" : {
+                        "lat" : 52.4041594,
+                        "lng" : -7.896573
+                     },
+                     "html_instructions" : "At the roundabout, take the \u003cb\u003e1st\u003c/b\u003e exit onto \u003cb\u003eN74\u003c/b\u003e/\u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "roundabout-left",
+                     "polyline" : {
+                        "points" : "grl_Ivkco@BBB?@@@?@?@?B?@?@A@?@A@A@A@A@C@A@A@C@Eb@h@d@|@^z@^z@b@~@Vf@T\\NTVXRTPLPNVLXNj@Rn@P?G@C?C@A?C@C@A@C@A@A@A@A@A@A@AD?D?B?@@B@@?@@@B@@@@@B?@@B@B?@@B?B@B?B?B?B?DAF~DbA~BThBJjBJ`CNrAJvD`@lE`@pD\\|CZz@HlD\\~Eb@~D`@rCZpGn@fD^nCZfCV~@HhABbABnBIdBI|BOvE[jBDz@DjEh@xEp@xARzBVnCF`B@nDJtDFxDKbBClCWjAO`@Gj@KlAWlD_Ah@Ov@W`@Qd@S|@_@d@SZM^SZQZS\\W~@}@\\Yj@e@pAgAbA_A`BwAbAq@~@g@d@Qb@IzBu@h@Oh@MfBc@\\IpA]|Am@lAo@`CyAhDqBdAo@nAq@hAm@hAe@v@SdAQhBKlCY|AYTIp@UrA{@jIqEhCsAhCuAbAg@`A]h@Oh@Iz@?j@CbDBfEBjFCjI^~@PhBPx@BpA@pAFp@Lv@R\\Jd@Nn@RXFXLfAh@~@d@f@Rx@ZjB\\lAV`LfCb@L`ATv@TXL`@PnAr@bBbAb@VZN^Pv@T~@Px@TNFfATlDz@xA\\pAVvAZhBRbEF~ADf@Av@@`@Dn@H\\H\\Hb@NbD`BxAj@d@LXHb@F^Fv@DhADnCFR?rVl@j@FZD`@FVFTFd@RXJbAp@x@j@hAbAxAvAjAhA~@r@bI|FpWnQVNb@T`@PjA^r@L~K`BtC\\bCZjAN`@FNB"
+                     },
+                     "start_location" : {
+                        "lat" : 52.49844160000001,
+                        "lng" : -7.8868444
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.3 km",
+                        "value" : 1265
+                     },
+                     "duration" : {
+                        "text" : "15 mins",
+                        "value" : 901
+                     },
+                     "end_location" : {
+                        "lat" : 52.3994301,
+                        "lng" : -7.911174399999998
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "_ez~Hpheo@LJzBb@j@Rf@Rz@^b@Rh@\\d@Z`Av@RBHJt@`A^j@b@z@p@|A`@dAf@fBf@~BRlAd@`EDt@Dp@Bn@Bz@AlBC|AK~DEtAA~@Ax@?^@N?n@BbAHrBPlB^|ER~B\\~F"
+                     },
+                     "start_location" : {
+                        "lat" : 52.4041594,
+                        "lng" : -7.896573
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.3 km",
+                        "value" : 286
+                     },
+                     "duration" : {
+                        "text" : "4 mins",
+                        "value" : 212
+                     },
+                     "end_location" : {
+                        "lat" : 52.3971557,
+                        "lng" : -7.912731399999999
+                     },
+                     "html_instructions" : "At the roundabout, take the \u003cb\u003e1st\u003c/b\u003e exit onto \u003cb\u003eN24\u003c/b\u003e",
+                     "maneuver" : "roundabout-left",
+                     "polyline" : {
+                        "points" : "mgy~Hxcho@H?D@@?B@BBB@@BBB@BBD@D@B?D@D?F@D?HAF`@HRBTFh@PZLNFj@Xd@Tp@`@nBtA"
+                     },
+                     "start_location" : {
+                        "lat" : 52.3994301,
+                        "lng" : -7.911174399999998
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.1 km",
+                        "value" : 2090
+                     },
+                     "duration" : {
+                        "text" : "26 mins",
+                        "value" : 1577
+                     },
+                     "end_location" : {
+                        "lat" : 52.3880844,
+                        "lng" : -7.935916199999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eN24\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "gyx~Hpmho@@F@@v@l@d@^j@`@r@f@|@n@RNdBlANJJBdPhLxAlAjAlA`AhAf@r@`@p@d@x@h@bAd@fAh@vA\\hA`@xAV`AZ|AN|@PhAPtAHr@JjAJdBDz@DlABx@@~@?v@ArAAhBIlEGjCGzCCzBCfBAdAAdB@dA@dA@`ABx@Br@Bl@B^B`@FVLtADd@NlAT~ARjAJd@Jf@Lj@HXH\\Nf@DJDHPV"
+                     },
+                     "start_location" : {
+                        "lat" : 52.3971557,
+                        "lng" : -7.912731399999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.7 km",
+                        "value" : 1669
+                     },
+                     "duration" : {
+                        "text" : "21 mins",
+                        "value" : 1280
+                     },
+                     "end_location" : {
+                        "lat" : 52.3748517,
+                        "lng" : -7.9458442
+                     },
+                     "html_instructions" : "At the roundabout, take the \u003cb\u003e3rd\u003c/b\u003e exit onto \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "roundabout-left",
+                     "polyline" : {
+                        "points" : "o`w~Hn~lo@FCF?B@B@DBDDDDBHBD@D?D@J?H@DAH?D?BAFABXpADNDPDJRb@b@z@R`@dAfBZf@\\b@RXd@h@f@j@BHxIjH|LjJbFnDjDbBdCt@pEfAf@JF@^Hb@LhNbDfBr@"
+                     },
+                     "start_location" : {
+                        "lat" : 52.3880844,
+                        "lng" : -7.935916199999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "3.8 km",
+                        "value" : 3823
+                     },
+                     "duration" : {
+                        "text" : "47 mins",
+                        "value" : 2820
+                     },
+                     "end_location" : {
+                        "lat" : 52.3567238,
+                        "lng" : -7.992995499999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "ymt~Hn|no@Z\\z@f@|ArAbA~@RRnAjB`AzATd@Tf@\\z@Xr@d@pAz@jDVx@b@fBxCxM|@bEhArFv@rDfEfRf@xBjEvSNNxCjM\\|ARr@DRrBpJNp@|EdTpA`GHj@h@`Ct@~Cn@fCJb@vLj`@Tj@bAtCjGlRnB`GrAdEh@lBdBfGp@hCXzAv@fE~@rF"
+                     },
+                     "start_location" : {
+                        "lat" : 52.3748517,
+                        "lng" : -7.9458442
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.5 km",
+                        "value" : 527
+                     },
+                     "duration" : {
+                        "text" : "7 mins",
+                        "value" : 404
+                     },
+                     "end_location" : {
+                        "lat" : 52.354681,
+                        "lng" : -7.9999093
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "o|p~Hfcxo@?ZLz@|AvKXvBdAvGLl@Jj@NZVhAV~@Vz@h@vAn@pA"
+                     },
+                     "start_location" : {
+                        "lat" : 52.3567238,
+                        "lng" : -7.992995499999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.2 km",
+                        "value" : 191
+                     },
+                     "duration" : {
+                        "text" : "3 mins",
+                        "value" : 158
+                     },
+                     "end_location" : {
+                        "lat" : 52.3551396,
+                        "lng" : -8.0023559
+                     },
+                     "html_instructions" : "At the roundabout, take the \u003cb\u003e1st\u003c/b\u003e exit and stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "roundabout-left",
+                     "polyline" : {
+                        "points" : "wop~Hlnyo@CBAB?@A@ADCH?DAB?BAD?D?L@H@F?D@DBB@D@DBBBBBBDBc@rBCLCFI`@AFK`@e@pC"
+                     },
+                     "start_location" : {
+                        "lat" : 52.354681,
+                        "lng" : -7.9999093
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "6.7 km",
+                        "value" : 6679
+                     },
+                     "duration" : {
+                        "text" : "1 hour 22 mins",
+                        "value" : 4894
+                     },
+                     "end_location" : {
+                        "lat" : 52.3252386,
+                        "lng" : -8.0869435
+                     },
+                     "html_instructions" : "At the roundabout, take the \u003cb\u003e1st\u003c/b\u003e exit and stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "roundabout-left",
+                     "polyline" : {
+                        "points" : "srp~Hv}yo@DFDH@DBF@J@N?F?DAD?DAFADxBpBlAlAhAvAf@r@x@vA`AlBv@rBxAzEpGzUHVpCtKxApFtBnHzFbRlAbEf@nB|A~FfCnJbBhGfD`MxBvIfBrGjFbSrKta@jSfy@vBdJ|AtHz@~D`@lB|@`EjAbGf@xBpE`UdDrPxBxK`@nBdDdPzFxX~Otw@tC~LlDjQr@rD"
+                     },
+                     "start_location" : {
+                        "lat" : 52.3551396,
+                        "lng" : -8.0023559
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.1 km",
+                        "value" : 127
+                     },
+                     "duration" : {
+                        "text" : "2 mins",
+                        "value" : 98
+                     },
+                     "end_location" : {
+                        "lat" : 52.32473350000001,
+                        "lng" : -8.088572299999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : {
+                        "points" : "wwj~Hjnjp@HBHX`@nB^pBNdA"
+                     },
+                     "start_location" : {
+                        "lat" : 52.3252386,
+                        "lng" : -8.0869435
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.5 km",
+                        "value" : 1524
+                     },
+                     "duration" : {
+                        "text" : "18 mins",
+                        "value" : 1053
+                     },
+                     "end_location" : {
+                        "lat" : 52.31149869999999,
+                        "lng" : -8.0831216
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "qtj~Hpxjp@hAw@hAe@vCcAHEVINGFC^Mj@S`DaAzCq@tAYx@Oj@Gz@Q|@ShA[`Ai@RILEf@Gf@Ep@Gn@ItAYp@St@KlAGlB[jB]xA]^Mn@[z@e@rBcA`CmAVOxBmAbAk@b@SHCHA"
+                     },
+                     "start_location" : {
+                        "lat" : 52.32473350000001,
+                        "lng" : -8.088572299999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "3.3 km",
+                        "value" : 3260
+                     },
+                     "duration" : {
+                        "text" : "40 mins",
+                        "value" : 2429
+                     },
+                     "end_location" : {
+                        "lat" : 52.2927253,
+                        "lng" : -8.0981819
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "{ah~Hnvip@Ex@Cz@Ct@?~@?j@@r@LpCJvBJ~ARlDF`@VnBp@|DX~BRjB\\xCHl@Lh@~@tCn@jBVj@Zj@x@rATh@Lb@DNBRLz@NhAHl@NjAVzANhANtAHlABr@?xA@tADpAFx@Hj@Jh@Z`Ab@z@n@|@LLHRNf@Pn@Hb@D\\Bl@BfAJdBJlADXH`@L^R\\\\Zn@h@|@jAp@`AHHTAn@Ih@GZ?tAHd@B^Ez@W\\KNId@WLCHAF?J@v@\\t@XVJNFPDT?`@Cl@M\\IPCzBe@|@QtCe@VGRGLI^YZUVWh@g@XYTSNKj@Oh@EXIZMXQ`@Ur@UZMXO\\Y`@o@f@eAd@_ATUx@i@l@a@\\WVWt@w@ZWTQXM~@Y\\KVOnAi@hBo@hBk@d@OTEFCFEDIBK@KCQCQCOAOAS"
+                     },
+                     "start_location" : {
+                        "lat" : 52.31149869999999,
+                        "lng" : -8.0831216
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.6 km",
+                        "value" : 2637
+                     },
+                     "duration" : {
+                        "text" : "31 mins",
+                        "value" : 1886
+                     },
+                     "end_location" : {
+                        "lat" : 52.2701183,
+                        "lng" : -8.100086899999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "qld~Hrtlp@z@P`@JL@P?RCJEVKf@UPGf@G\\CVGRKPMPO\\]`@a@PKJEHAJ@FBNJLNTX\\b@n@x@VXRRPNZHZBV@TGPKHKFKLUNWPSNITCb@F`@@d@Ev@Qn@Oh@MNCN?JFHJDLH\\Lj@FPN^Rd@PXJLJJNFF@N?p@WZKb@Ej@Eb@IXKd@M`@O^MXEZCZATGd@SZORG^G`@CZ?Z@VF\\Jl@Jb@@ZAT?`@Bl@Nj@LTBP?b@Ef@M^GV?ZBf@Pd@N\\JJBH?RRn@j@t@p@XPTFT?d@AjBAZDVJtAd@`B`@z@LjBFtANpATl@NbARn@@Z?zAKhAArA?x@BzB@nDHt@?v@@`@E"
+                     },
+                     "start_location" : {
+                        "lat" : 52.2927253,
+                        "lng" : -8.0981819
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "3.1 km",
+                        "value" : 3087
+                     },
+                     "duration" : {
+                        "text" : "38 mins",
+                        "value" : 2298
+                     },
+                     "end_location" : {
+                        "lat" : 52.264803,
+                        "lng" : -8.1442364
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eR665\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "g_`~Hp`mp@?^@x@?dD?bCAjB@j@@TBL@LFRRp@f@rAZx@p@vBN~@D\\Lz@Fv@HlADlBJpEHdFNrFBtAJzDH|CJ`DLhENhFFvALjDHbCLzBd@jF\\nDL`BbB`QvDvb@XhCRtBHv@Dn@NzDb@`Kn@lPzBdh@DhA@d@FTBJDN@LN|@"
+                     },
+                     "start_location" : {
+                        "lat" : 52.2701183,
+                        "lng" : -8.100086899999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "3.4 km",
+                        "value" : 3448
+                     },
+                     "duration" : {
+                        "text" : "47 mins",
+                        "value" : 2791
+                     },
+                     "end_location" : {
+                        "lat" : 52.2478495,
+                        "lng" : -8.176570699999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "_~~}Hntup@HAD?D@B@DFz@bAHFDBFDPJzAbAl@n@NPPVFLHRHXF^RpA\\pBDZHv@PxADb@Hh@DZNp@l@rCh@`Cb@hBP|@Jh@L`@HLHN`@l@p@pApAnBn@`Af@x@Xd@x@~At@nAj@nAJVHRDLHb@TxAJh@Pv@Lj@Pl@Rn@JVN`@BHFPHRFLHLR\\|@nAT\\NVJZL`@V~@ZjABHf@xBNj@HRPj@Zv@Xp@Tf@\\l@Zp@LVHZd@dCDPBVBL?T@ZDTFV@V?jACzFLjCPvIDhA@NBp@@HDh@ZtEH~@Bl@HfAJfCDbANrDHhBJbEDp@Df@Hb@j@|Cj@rCt@lDlA~ENj@N\\PPb@Rn@LpBf@VD^BXAVCt@Q~Bu@dDk@dBWn@KRGVKZUd@c@X]`AqAR]Z_@VYt@o@"
+                     },
+                     "start_location" : {
+                        "lat" : 52.264803,
+                        "lng" : -8.1442364
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "8.7 km",
+                        "value" : 8703
+                     },
+                     "duration" : {
+                        "text" : "1 hour 41 mins",
+                        "value" : 6068
+                     },
+                     "end_location" : {
+                        "lat" : 52.1823057,
+                        "lng" : -8.235364800000001
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "at{}Hp~{p@JDF@JHHHFHNRJNZ^RBL?TAXGNELCLAN@^DVJPDb@PXP\\Z`@f@h@`A\\n@\\t@Td@JRJLNPNLVJ^LRL|Ah@RHJFXR\\ZRTj@r@f@n@PRJL`@ZZRNJh@Lf@NTHPJNHLHVRJJJNNVNRXh@n@rAf@jA^r@ZTNHPFXFTDb@Dd@@^Bt@Dp@BJ?jGv@tADdA?|@Bb@@XBdB\\jAPl@PvA^p@Lj@BbAPhBZtDd@rBVlBXj@DTDdARh@J~ATj@JbAXdCn@~Bz@bBp@`A^xAh@VLRHjA`@`A\\^RdAh@hAn@~BvA|@h@rAx@~EjClBhAtAx@tC|A~FzDvBrAxAv@l@d@zAbAtB~A|@r@h@f@zApALH`Ar@n@b@`@\\f@j@l@h@`At@VN|CnBf@Zx@j@lIhF|FpDZP~B|AjAz@fAz@t@h@r@p@RRl@h@pBvAjAdAjC`CpE`E|AxAZ\\`@h@pAxA`BhBjExErFpGzCdEnD|E~A`C`DdFzBxDFLBF?J\\vCb@`Ff@fF`@nEXdCLbAb@bCpApFf@jBf@`BxBvEbCjFr@dAx@v@vBlB~BtBxAjAl@d@NNd@h@X^f@r@|BzDBHnC|DT^LVN^j@|A`@`ARf@d@tAb@|A`@jBnAtEb@bAXj@v@|Ax@rA\\d@l@r@l@l@^V`Af@z@^^Jt@LnAPj@F~@Bh@?v@Dp@Fr@KJFLHPP`@n@z@~A^p@NRPJb@N"
+                     },
+                     "start_location" : {
+                        "lat" : 52.2478495,
+                        "lng" : -8.176570699999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.1 km",
+                        "value" : 1107
+                     },
+                     "duration" : {
+                        "text" : "14 mins",
+                        "value" : 847
+                     },
+                     "end_location" : {
+                        "lat" : 52.17584,
+                        "lng" : -8.2453576
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eCoach Rd\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "mzn}H~mgq@lAHj@B\\JTJVPZb@\\d@PVt@jAtAnBr@hAjCpDNTP|@JbA@|AAbDAzA@hAJjAFZDNLVPR\\P|FnC~At@`@Rj@ZNJLNJVJZH^Db@Fp@Dr@?XBd@BVBRFNFJLN"
+                     },
+                     "start_location" : {
+                        "lat" : 52.1823057,
+                        "lng" : -8.235364800000001
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.3 km",
+                        "value" : 265
+                     },
+                     "duration" : {
+                        "text" : "3 mins",
+                        "value" : 193
+                     },
+                     "end_location" : {
+                        "lat" : 52.1761405,
+                        "lng" : -8.2491611
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eMain St\u003c/b\u003e/\u003cb\u003eR667\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "_rm}Hnliq@Oh@Ij@Ij@CRGdAGlACjBAlD@rD"
+                     },
+                     "start_location" : {
+                        "lat" : 52.17584,
+                        "lng" : -8.2453576
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.0 km",
+                        "value" : 1030
+                     },
+                     "duration" : {
+                        "text" : "12 mins",
+                        "value" : 695
+                     },
+                     "end_location" : {
+                        "lat" : 52.169477,
+                        "lng" : -8.258890000000001
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eNew Rd\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "{sm}Hfdjq@vBjCl@r@dApAbBnBlBdB|A|@fC|Az@j@d@Z`@\\Zd@Zh@Z~@VdAXbAr@fCVz@dAbC~AtD|@bCr@~AZx@FVB^Ad@CZ"
+                     },
+                     "start_location" : {
+                        "lat" : 52.1761405,
+                        "lng" : -8.2491611
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.6 km",
+                        "value" : 577
+                     },
+                     "duration" : {
+                        "text" : "8 mins",
+                        "value" : 470
+                     },
+                     "end_location" : {
+                        "lat" : 52.1649666,
+                        "lng" : -8.2617522
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "gjl}H`alq@p@?n@C~@GpBSf@Ap@Bf@H`AVf@Rb@Td@\\b@d@n@~@rAhCxAxCx@dB"
+                     },
+                     "start_location" : {
+                        "lat" : 52.169477,
+                        "lng" : -8.258890000000001
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.8 km",
+                        "value" : 819
+                     },
+                     "duration" : {
+                        "text" : "11 mins",
+                        "value" : 652
+                     },
+                     "end_location" : {
+                        "lat" : 52.16044890000001,
+                        "lng" : -8.270371799999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eGo through 2 roundabouts\u003c/div\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : {
+                        "points" : "ank}H|rlq@JDrChGt@zAfApBBR\\d@HJPTRXVVPNRLAF?BAB?B?B?FBN@D@D@B@@@BBB@@@BB@@@@?B@@?B@@?B?@AB?DCX`ANb@DNDLV|@\\fACBA@?@A@?@A@?@A@?B?@A@?@?B?@?@?B?@?@?B?@@F@D?@@@?@@@@@?@@?@@?@@?@@@?@@@?@?@?DA@|@Bl@Bd@NpAJVNb@`@z@Zl@hAdBdBrC"
+                     },
+                     "start_location" : {
+                        "lat" : 52.1649666,
+                        "lng" : -8.2617522
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.8 km",
+                        "value" : 2756
+                     },
+                     "duration" : {
+                        "text" : "34 mins",
+                        "value" : 2028
+                     },
+                     "end_location" : {
+                        "lat" : 52.1378053,
+                        "lng" : -8.275263499999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : {
+                        "points" : "yqj}Hxhnq@HBfBtCv@nA|BzDBJdHtLnFdJdCrDLLVV`@Z^VjBx@tE~AtAb@j@Nv@Lt@HF?V@bCAbKi@jEOhBIrA?XAPCLCPGNG^Qj@[`GiDPMzAq@zCoAtAi@vBy@PCjAUn@MJAHAL?F?L@T@NDRDP@N?ZCTE|@QpA[zA]LEJ?fAOXAHBrAWzAUXEHC|BI"
+                     },
+                     "start_location" : {
+                        "lat" : 52.16044890000001,
+                        "lng" : -8.270371799999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "24 m",
+                        "value" : 24
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 23
+                     },
+                     "end_location" : {
+                        "lat" : 52.1377961,
+                        "lng" : -8.275607899999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eMcCurtain St\u003c/b\u003e/\u003cb\u003ePatrick St\u003c/b\u003e/\u003cb\u003eR639\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eContinue to follow McCurtain St/R639\u003c/div\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "idf}Hjgoq@@d@?^"
+                     },
+                     "start_location" : {
+                        "lat" : 52.1378053,
+                        "lng" : -8.275263499999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "41 m",
+                        "value" : 41
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 49
+                     },
+                     "end_location" : {
+                        "lat" : 52.13742999999999,
+                        "lng" : -8.2756249
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eNew Market St\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "gdf}Hpioq@hA@"
+                     },
+                     "start_location" : {
+                        "lat" : 52.1377961,
+                        "lng" : -8.275607899999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "93 m",
+                        "value" : 93
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 69
+                     },
+                     "end_location" : {
+                        "lat" : 52.1374138,
+                        "lng" : -8.2769858
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eConnolly St\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "}af}Hrioq@?\\BrF"
+                     },
+                     "start_location" : {
+                        "lat" : 52.13742999999999,
+                        "lng" : -8.2756249
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.2 km",
+                        "value" : 172
+                     },
+                     "duration" : {
+                        "text" : "3 mins",
+                        "value" : 178
+                     },
+                     "end_location" : {
+                        "lat" : 52.1359536,
+                        "lng" : -8.277696199999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eKevin Barry Hill\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "yaf}Hdroq@`@AFBHFFFDHDHDD@BBB@@PFzDnA"
+                     },
+                     "start_location" : {
+                        "lat" : 52.1374138,
+                        "lng" : -8.2769858
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.4 km",
+                        "value" : 383
+                     },
+                     "duration" : {
+                        "text" : "5 mins",
+                        "value" : 293
+                     },
+                     "end_location" : {
+                        "lat" : 52.1339305,
+                        "lng" : -8.2807815
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eDevlin St\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "uxe}Hrvoq@xJdCB@@B@@@D@pABbBDtCBfC"
+                     },
+                     "start_location" : {
+                        "lat" : 52.1359536,
+                        "lng" : -8.277696199999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "3.0 km",
+                        "value" : 3002
+                     },
+                     "duration" : {
+                        "text" : "39 mins",
+                        "value" : 2329
+                     },
+                     "end_location" : {
+                        "lat" : 52.1097198,
+                        "lng" : -8.273304899999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eCork Rd\u003c/b\u003e/\u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "ale}Hzipq@p@GrDg@p@ITGVIPGPGf@Sb@WVMj@]VQx@g@b@YPOJGnA_Al@a@NIrAcAt@g@d@SVMFCDA^IVC`BEp@@LBDBJJRB\\J^JRHd@TbClA~AdAl@\\t@Tl@Lj@@z@Dp@Ef@Gd@It@WxCiAlBm@vA]hCa@z@I|@InCQlFa@v@GRCTGt@UjAg@`Ag@pAw@v@k@z@q@b@e@Za@nAkC\\y@Xy@XcAFUFSJk@DUDY@?@?@?@?@?@A@??A@A@A@A@A@C?A@A?A@A?C@G?G?A?C?A?C?AAA?C?AAA?CAA?AAAAA?AAAAACAP_AX_BD]Zo@BEBA@A@A@A@A@A?A@A?A@C@A?A@G?I?A?C?A?C?C?AACACBGHm@JKHGLCJ?N?NFp@\\zAt@b@RjCjA^PlAd@zAf@bAXl@Nx@PXDl@Bl@?ZC"
+                     },
+                     "start_location" : {
+                        "lat" : 52.1339305,
+                        "lng" : -8.2807815
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "3.2 km",
+                        "value" : 3166
+                     },
+                     "duration" : {
+                        "text" : "38 mins",
+                        "value" : 2296
+                     },
+                     "end_location" : {
+                        "lat" : 52.08224209999999,
+                        "lng" : -8.278613699999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "wt`}Hb{nq@HDXCd@MfAYn@St@Y`Aa@x@_@zAq@\\MVInBc@vK?lB?r@EFE`CApGU~@Cr@@`ALh@Jh@Rj@R`@TPHNJTRj@h@BGBEBCBCBABABAB?B?B?B?DBB@BBBBBB@D@DBD?D@D@D?F?D?F?HAF~@h@r@`@b@XXVDDvArAxAxAlAlAhA|@l@`@NFn@Z^PTHh@Nr@NpAPpDXzFb@dBNJ@lEZN@`D\\dGdAjBXfJzAdBXbBZb@JlCj@~Dd@tFn@`@B"
+                     },
+                     "start_location" : {
+                        "lat" : 52.1097198,
+                        "lng" : -8.273304899999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.9 km",
+                        "value" : 852
+                     },
+                     "duration" : {
+                        "text" : "11 mins",
+                        "value" : 633
+                     },
+                     "end_location" : {
+                        "lat" : 52.0758081,
+                        "lng" : -8.283954099999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "_i{|Hh|oq@HHlHlATBR@VDND\\LZL`@XFDLL~AfBD@xBhDdAnBLTZf@|@jBrAbEXj@NRJNj@p@LJRL\\JPDX?bA]TI"
+                     },
+                     "start_location" : {
+                        "lat" : 52.08224209999999,
+                        "lng" : -8.278613699999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.9 km",
+                        "value" : 874
+                     },
+                     "duration" : {
+                        "text" : "11 mins",
+                        "value" : 641
+                     },
+                     "end_location" : {
+                        "lat" : 52.0682376,
+                        "lng" : -8.2806409
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eMain St\u003c/b\u003e/\u003cb\u003eR639\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eContinue to follow R639\u003c/div\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "y`z|Ht}pq@D@jBk@\\MXKdC}@pA[f@M|DcAd@Kp@Q|@YzAk@tB{@~@_@DMrMwE"
+                     },
+                     "start_location" : {
+                        "lat" : 52.0758081,
+                        "lng" : -8.283954099999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.0 km",
+                        "value" : 1983
+                     },
+                     "duration" : {
+                        "text" : "26 mins",
+                        "value" : 1587
+                     },
+                     "end_location" : {
+                        "lat" : 52.05700909999999,
+                        "lng" : -8.299493999999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "oqx|H~hpq@FB`EsA\\IDArAWn@At@D~@LvBx@bC`BL?PLvDvCdAnAp@`A`ArBl@zBVzANbApBdNfBjLh@`DLh@R|@Nr@pAhFjBtGnCvIVv@~BrHbE|MXdA"
+                     },
+                     "start_location" : {
+                        "lat" : 52.0682376,
+                        "lng" : -8.2806409
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.7 km",
+                        "value" : 2695
+                     },
+                     "duration" : {
+                        "text" : "34 mins",
+                        "value" : 2017
+                     },
+                     "end_location" : {
+                        "lat" : 52.039156,
+                        "lng" : -8.322992299999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : {
+                        "points" : "ikv|Hx~sq@HJ|DtO?R|@nDHZV~@Vn@P^Rb@T^VZh@f@AF?BAB?B?@?B@B?B?B@B?@@B?@@B@B?@DD@@@@@@@?B@@?@?@?@?B?@ABARrANx@F^DVBJHb@TpAABA?A@A@A@A@?@ABA@?@AB?@?BA@?B?B?@?B?@?B?B@D?@@B?@@@?@@B@@?@@@@@@?@@@@@?@?D@?Z?X@ZBV@NBVDPDNV~@d@vAbArCv@hBzA|CfBbDpDdGPVpApBXd@|AtBZ^Z^z@|@n@d@hAr@p@^d@Xx@\\dE|A|Bx@d@\\v@d@dA~@jAjA`C|BrT`Tl@n@dAx@f@Zr@\\t@TbATpAT"
+                     },
+                     "start_location" : {
+                        "lat" : 52.05700909999999,
+                        "lng" : -8.299493999999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.2 km",
+                        "value" : 2186
+                     },
+                     "duration" : {
+                        "text" : "29 mins",
+                        "value" : 1710
+                     },
+                     "end_location" : {
+                        "lat" : 52.0214484,
+                        "lng" : -8.3349463
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "w{r|Htqxq@NJjEj@fCV~BXLE|El@v@JvAPpBXv@Nr@RzAf@tBv@h@Tr@\\r@d@dAx@X\\b@f@NTj@x@n@`A^p@\\l@NTz@|AnA|Bv@xAN^vAbCnAjB`@f@Z\\ZZ\\\\TNZP^RhAh@jBr@r@R`C~@~BfAz@^j@X^X`DxBzBvARLbEzDdA`A"
+                     },
+                     "start_location" : {
+                        "lat" : 52.039156,
+                        "lng" : -8.322992299999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.4 km",
+                        "value" : 426
+                     },
+                     "duration" : {
+                        "text" : "6 mins",
+                        "value" : 349
+                     },
+                     "end_location" : {
+                        "lat" : 52.0179911,
+                        "lng" : -8.3375933
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : {
+                        "points" : "amo|Hl|zq@LBHDHDVR`@Vn@`@zCpBlD`CJNfBpATNrAjA"
+                     },
+                     "start_location" : {
+                        "lat" : 52.0214484,
+                        "lng" : -8.3349463
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.4 km",
+                        "value" : 358
+                     },
+                     "duration" : {
+                        "text" : "5 mins",
+                        "value" : 311
+                     },
+                     "end_location" : {
+                        "lat" : 52.0152395,
+                        "lng" : -8.340199499999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eGleann Corráin\u003c/b\u003e/\u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "mwn|H|l{q@JRHHPPn@l@dChCp@r@~A`B`BlBPLHFH@JDJ@H?JA"
+                     },
+                     "start_location" : {
+                        "lat" : 52.0179911,
+                        "lng" : -8.3375933
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.3 km",
+                        "value" : 1279
+                     },
+                     "duration" : {
+                        "text" : "15 mins",
+                        "value" : 923
+                     },
+                     "end_location" : {
+                        "lat" : 52.005747,
+                        "lng" : -8.349505599999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eGleann Corráin\u003c/b\u003e/\u003cb\u003eR639\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eContinue to follow R639\u003c/div\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "gfn|Hf}{q@BJHVBJFJDFJPd@b@DDn@h@n@f@n@b@LFn@XzCjAt@XLBLBd@DNNJLHLNVRf@`@dAFPZ|@p@`BDLPd@Xt@v@|Ad@fAT^PXHHDFHDTLLTVd@LTPXTXxA~AX\\tAtApDlDpHnFTLRDL@LANELKVS"
+                     },
+                     "start_location" : {
+                        "lat" : 52.0152395,
+                        "lng" : -8.340199499999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.5 km",
+                        "value" : 545
+                     },
+                     "duration" : {
+                        "text" : "6 mins",
+                        "value" : 350
+                     },
+                     "end_location" : {
+                        "lat" : 52.0018264,
+                        "lng" : -8.3542515
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eCork Rd\u003c/b\u003e/\u003cb\u003eR639\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eContinue to follow R639\u003c/div\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "}jl|Hlw}q@f@hAJLR\\n@dA^f@b@h@h@n@dDpDzB`ChBpB|CnE"
+                     },
+                     "start_location" : {
+                        "lat" : 52.005747,
+                        "lng" : -8.349505599999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "3.6 km",
+                        "value" : 3597
+                     },
+                     "duration" : {
+                        "text" : "42 mins",
+                        "value" : 2522
+                     },
+                     "end_location" : {
+                        "lat" : 51.9785215,
+                        "lng" : -8.3846772
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eR639\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : {
+                        "points" : "mrk|H`u~q@HXBNZ`AJ\\Nh@Pr@TtAb@~BPv@JPfAzFJh@Lb@Nh@Rj@HVJTLVPXd@p@n@v@dAnAnSzQzA`Bn@t@\\f@\\l@Xj@Vj@Rn@Rl@Pt@Nr@Nz@RjAXfBTzAXzAZxBXbBTnBLtATjCR|BP~BX`DTdCPfBH^F\\HX@DBPDLLf@DRTr@Xr@f@pAx@vB~@pBVh@|@vAh@n@~@t@zAx@dAXN@L@\\@r@@r@AnBOz@Kl@Kv@Eh@@n@Dp@Jn@Rp@Vp@Zr@`@~AfAn@f@j@f@t@x@VX^h@DDn@z@RT\\\\LJb@^dAv@`BdA~FnDxCnBbCzAXPb@Xp@`@^N`@NFBf@Pl@L"
+                     },
+                     "start_location" : {
+                        "lat" : 52.0018264,
+                        "lng" : -8.3542515
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "7.0 km",
+                        "value" : 7027
+                     },
+                     "duration" : {
+                        "text" : "1 hour 28 mins",
+                        "value" : 5296
+                     },
+                     "end_location" : {
+                        "lat" : 51.9376099,
+                        "lng" : -8.451250699999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eR616\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "w`g|Hfsdr@@V?D@DBFDHBB`B`Dr@~A`@hAh@fBd@vANl@Ld@r@bDVzAXjA\\tAV`AV~@\\~@^jAh@dBXv@Zp@`@p@bAzA\\l@Zj@Tj@Tf@nAzC`AdAj@l@r@t@`@b@XT~@d@`A\\TJTNZTl@n@n@r@h@f@x@t@nBbBvGrHJNhAzA`BjC~@~A`A`BVd@hCvEf@~@dIpPr@|ARj@Pr@Lj@XhBF`@DXLlAxAfSj@vHFr@Fl@Jj@H^L\\NZPZhDjEl@d@VLRHTBZB^ApCEx@?r@Pr@P\\Pj@b@TPJDPBJAPCfCo@LCLAPAT@TFFBPJXVVVNVNXDH@F@L@JAD?FYz@AD?F@HBFDFBBF@HAHEj@_@NITMrBw@RCTCL?NDLFLJTRRZh@hAZn@Nf@Zp@LdA@N?PAXIj@Uz@q@fCq@dCk@xBK^AJAN@LBh@Db@DRDLBJZfAPj@ZbATt@Zj@t@lAl@|@lAtBz@|AHLZf@HL^t@`@|@Xn@f@vAX|@v@pCb@xA`A|CfAdDRx@P~@NhAJp@PlALfANdATdAH^DRBFRf@HRPZz@`Bt@xAz@zA`@~@j@pALXL\\b@bAh@rAp@bBdA|Bt@|Ap@nAdAzAdApApA`Bz@lAd@j@`A~@\\\\|BfB~AnANL\\Z`@^h@f@X\\j@t@Xl@Xn@`@jATn@Pf@^|@lC~EhAtBr@jAT\\HPTVtAxAjBxA\\V`Al@d@b@VX~@nADJT^VXJJlAx@JLHJFJJXDPn@bC"
+                     },
+                     "start_location" : {
+                        "lat" : 51.9785215,
+                        "lng" : -8.3846772
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.2 km",
+                        "value" : 1174
+                     },
+                     "duration" : {
+                        "text" : "14 mins",
+                        "value" : 850
+                     },
+                     "end_location" : {
+                        "lat" : 51.9302009,
+                        "lng" : -8.4629908
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eL2980\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "aa_|Hhsqr@Nb@FJHNHL\\b@d@n@TZJRNd@Nn@ZtARdAZvBJn@BNFRHVV^`@l@`AxA\\h@PXJJXR`@ZHHbA~@FHt@`AlA~AZ`@Zn@pBvE~@xBLV\\t@n@pAt@rA|@zAjAbBp@x@LNjBxBb@`@@D@B@D?V"
+                     },
+                     "start_location" : {
+                        "lat" : 51.9376099,
+                        "lng" : -8.451250699999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.3 km",
+                        "value" : 263
+                     },
+                     "duration" : {
+                        "text" : "4 mins",
+                        "value" : 214
+                     },
+                     "end_location" : {
+                        "lat" : 51.9281221,
+                        "lng" : -8.464812
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eKilbarry Cottages\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "wr}{Ht|sr@d@RXNRNr@h@RPJJ`B|ANPxAtAj@h@"
+                     },
+                     "start_location" : {
+                        "lat" : 51.9302009,
+                        "lng" : -8.4629908
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.7 km",
+                        "value" : 688
+                     },
+                     "duration" : {
+                        "text" : "8 mins",
+                        "value" : 463
+                     },
+                     "end_location" : {
+                        "lat" : 51.9221563,
+                        "lng" : -8.467067699999999
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eUpper Dublin Hill\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "we}{H`htr@n@f@JJPJl@`@f@Vj@XlAj@v@V^JlBf@`@D\\D\\@jAD`@@h@Av@@j@@n@DZFTDRF^JxAn@|@d@z@`@"
+                     },
+                     "start_location" : {
+                        "lat" : 51.9281221,
+                        "lng" : -8.464812
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.5 km",
+                        "value" : 524
+                     },
+                     "duration" : {
+                        "text" : "6 mins",
+                        "value" : 354
+                     },
+                     "end_location" : {
+                        "lat" : 51.9176345,
+                        "lng" : -8.4690858
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eDublin Hill Middle\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "o`|{Hdvtr@XH`@Ll@N~@Pd@Hn@HJBpBd@x@T~@XnA^XLJDLHRLr@l@\\TPJLFd@T`Bp@"
+                     },
+                     "start_location" : {
+                        "lat" : 51.9221563,
+                        "lng" : -8.467067699999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.2 km",
+                        "value" : 185
+                     },
+                     "duration" : {
+                        "text" : "2 mins",
+                        "value" : 134
+                     },
+                     "end_location" : {
+                        "lat" : 51.9160145,
+                        "lng" : -8.469645
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eDublin Hill Lower\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "ed{{Hxbur@vBb@jB`@NDJ@D@JDJDRLPB"
+                     },
+                     "start_location" : {
+                        "lat" : 51.9176345,
+                        "lng" : -8.4690858
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.1 km",
+                        "value" : 148
+                     },
+                     "duration" : {
+                        "text" : "2 mins",
+                        "value" : 95
+                     },
+                     "end_location" : {
+                        "lat" : 51.9148153,
+                        "lng" : -8.4701618
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eDublin St\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "azz{Hffur@X@l@B|@FRBHBRFXLLHBBBDBD?B@D?V"
+                     },
+                     "start_location" : {
+                        "lat" : 51.9160145,
+                        "lng" : -8.469645
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.3 km",
+                        "value" : 288
+                     },
+                     "duration" : {
+                        "text" : "3 mins",
+                        "value" : 205
+                     },
+                     "end_location" : {
+                        "lat" : 51.9127,
+                        "lng" : -8.4725017
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e to stay on \u003cb\u003eDublin St\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "srz{Hniur@PFVJZPDBLJPNPRZ^h@x@b@r@^l@N\\HLJNHNTXNPFFDDNNHHLJRP"
+                     },
+                     "start_location" : {
+                        "lat" : 51.9148153,
+                        "lng" : -8.4701618
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.2 km",
+                        "value" : 161
+                     },
+                     "duration" : {
+                        "text" : "2 mins",
+                        "value" : 118
+                     },
+                     "end_location" : {
+                        "lat" : 51.91138249999999,
+                        "lng" : -8.473463499999999
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eThomas Davis St\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "kez{Hbxur@b@^XTj@d@PLn@b@ZN`@RJDPF"
+                     },
+                     "start_location" : {
+                        "lat" : 51.9127,
+                        "lng" : -8.4725017
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.3 km",
+                        "value" : 260
+                     },
+                     "duration" : {
+                        "text" : "3 mins",
+                        "value" : 193
+                     },
+                     "end_location" : {
+                        "lat" : 51.909078,
+                        "lng" : -8.473577499999999
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eWatercourse Rd\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "c}y{Hb~ur@F@LBJ@LBJDb@NNBP@P?RAbAG|@SZGVCNAP?H?J?HBXJPJ"
+                     },
+                     "start_location" : {
+                        "lat" : 51.91138249999999,
+                        "lng" : -8.473463499999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "22 m",
+                        "value" : 22
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 22
+                     },
+                     "end_location" : {
+                        "lat" : 51.9090132,
+                        "lng" : -8.473278499999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e to stay on \u003cb\u003eWatercourse Rd\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "wny{Hz~ur@L{@"
+                     },
+                     "start_location" : {
+                        "lat" : 51.909078,
+                        "lng" : -8.473577499999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.0 km",
+                        "value" : 976
+                     },
+                     "duration" : {
+                        "text" : "12 mins",
+                        "value" : 729
+                     },
+                     "end_location" : {
+                        "lat" : 51.9004533,
+                        "lng" : -8.4725293
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eN20\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "iny{H~|ur@l@XZL^NRFVF^B^@d@An@ApAE\\Ab@Af@AfBCh@Et@ELC~@IZENGTINKROf@e@d@a@PMNGPIPGVEXAJA`@@LBL@JBPF^Np@VVHPDLBN@J@H?T?^ARE`@I^MRMPGPGNGNCPCJEFELALATAV@X@"
+                     },
+                     "start_location" : {
+                        "lat" : 51.9090132,
+                        "lng" : -8.473278499999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "72 m",
+                        "value" : 72
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 56
+                     },
+                     "end_location" : {
+                        "lat" : 51.9005034,
+                        "lng" : -8.4735736
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eLavitt's Quay\u003c/b\u003e/\u003cb\u003eR847\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "yxw{Hhxur@InE"
+                     },
+                     "start_location" : {
+                        "lat" : 51.9004533,
+                        "lng" : -8.4725293
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.1 km",
+                        "value" : 107
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 86
+                     },
+                     "end_location" : {
+                        "lat" : 51.8995459,
+                        "lng" : -8.473646499999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eHalf Moon St\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "cyw{Hx~ur@bCNZBPAJA"
+                     },
+                     "start_location" : {
+                        "lat" : 51.9005034,
+                        "lng" : -8.4735736
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.1 km",
+                        "value" : 95
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 69
+                     },
+                     "end_location" : {
+                        "lat" : 51.899175,
+                        "lng" : -8.4748883
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003ePaul St\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "esw{Hh_vr@VfADVJh@^lB"
+                     },
+                     "start_location" : {
+                        "lat" : 51.8995459,
+                        "lng" : -8.473646499999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "77 m",
+                        "value" : 77
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 55
+                     },
+                     "end_location" : {
+                        "lat" : 51.8985049,
+                        "lng" : -8.4748789
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eSt Peter and Paul Pl\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "{pw{H`gvr@v@YLAD?DAFBRFXN"
+                     },
+                     "start_location" : {
+                        "lat" : 51.899175,
+                        "lng" : -8.4748883
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "57 m",
+                        "value" : 57
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 42
+                     },
+                     "end_location" : {
+                        "lat" : 51.8985143,
+                        "lng" : -8.4756035
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eSt Patrick's St\u003c/b\u003e/\u003cb\u003eN22\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eClosed 3:00 ? 6:30 PM\u003c/div\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "slw{H~fvr@WxA?J@H@HBFDFDD@?"
+                     },
+                     "start_location" : {
+                        "lat" : 51.8985049,
+                        "lng" : -8.4748789
+                     },
+                     "travel_mode" : "WALKING"
+                  }
+               ],
+               "traffic_speed_entry" : [],
+               "via_waypoint" : []
+            },
+            {
+          "distance": {
+            "text": "2.2 km",
+            "value": 2176
+          },
+          "duration": {
+            "text": "28 mins",
+            "value": 1702
+          },
+          "end_address": "53 Thomas St, Ushers, Dublin, Ireland",
+          "end_location": {
+            "lat": 53.3435601,
+            "lng": -6.2862806
+          },
+          "start_address": "11 Henry St, North City, Dublin, Ireland",
+          "start_location": {
+            "lat": 53.3497718,
+            "lng": -6.260351399999999
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "0.3 km",
+                "value": 279
+              },
+              "duration": {
+                "text": "3 mins",
+                "value": 201
+              },
+              "end_location": {
+                "lat": 53.34913170000001,
+                "lng": -6.2644097
+              },
+              "html_instructions": "Head <b>west</b> on <b>Henry St</b> toward <b>Plás Anraí</b>",
+              "polyline": {
+                "points": "a{rdIdvee@BPNhB^vD^`F@N@JB\\Fl@LvALtA"
+              },
+              "start_location": {
+                "lat": 53.3497718,
+                "lng": -6.260351399999999
+              },
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "0.3 km",
+                "value": 297
+              },
+              "duration": {
+                "text": "4 mins",
+                "value": 218
+              },
+              "end_location": {
+                "lat": 53.3484666,
+                "lng": -6.2687446
+              },
+              "html_instructions": "Continue onto <b>Mary St</b>",
+              "polyline": {
+                "points": "awrdIpofe@Fv@`@nEZvDDl@LfBT`CFl@JzA"
+              },
+              "start_location": {
+                "lat": 53.34913170000001,
+                "lng": -6.2644097
+              },
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "9 m",
+                "value": 9
+              },
+              "duration": {
+                "text": "1 min",
+                "value": 7
+              },
+              "end_location": {
+                "lat": 53.3483878,
+                "lng": -6.268711
+              },
+              "html_instructions": "Turn <b>left</b> onto <b>Capel St</b>",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "}rrdIrjge@NE"
+              },
+              "start_location": {
+                "lat": 53.3484666,
+                "lng": -6.2687446
+              },
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "0.1 km",
+                "value": 112
+              },
+              "duration": {
+                "text": "2 mins",
+                "value": 90
+              },
+              "end_location": {
+                "lat": 53.3482514,
+                "lng": -6.2703782
+              },
+              "html_instructions": "Turn <b>right</b> onto <b>Mary Street Little</b>",
+              "maneuver": "turn-right",
+              "polyline": {
+                "points": "mrrdIljge@Bf@@T@LFnADx@D`B?T"
+              },
+              "start_location": {
+                "lat": 53.3483878,
+                "lng": -6.268711
+              },
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "0.3 km",
+                "value": 294
+              },
+              "duration": {
+                "text": "4 mins",
+                "value": 222
+              },
+              "end_location": {
+                "lat": 53.34800809999999,
+                "lng": -6.2747704
+              },
+              "html_instructions": "Continue onto <b>Mary's Ln</b>",
+              "polyline": {
+                "points": "qqrdIztge@@lDR|BDb@Bd@@j@BhDDbDB|B"
+              },
+              "start_location": {
+                "lat": 53.3482514,
+                "lng": -6.2703782
+              },
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "0.4 km",
+                "value": 445
+              },
+              "duration": {
+                "text": "6 mins",
+                "value": 382
+              },
+              "end_location": {
+                "lat": 53.34414,
+                "lng": -6.2763
+              },
+              "html_instructions": "Turn <b>left</b> onto <b>Church St</b>/<b>N1</b>/<b>R108</b><div style=\"font-size:0.9em\">Continue to follow R108</div>",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "aprdIhphe@P@PB^FR?F@H@NBJDp@TLBD@^Lr@T@@LDF@DBPFNHLFf@Rb@TRHHDDBF@PFF@FBD?NFTHNFJFd@XFB^NF@^LF@H@F@H@J?HCDC"
+              },
+              "start_location": {
+                "lat": 53.34800809999999,
+                "lng": -6.2747704
+              },
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "47 m",
+                "value": 47
+              },
+              "duration": {
+                "text": "1 min",
+                "value": 40
+              },
+              "end_location": {
+                "lat": 53.3441541,
+                "lng": -6.2770122
+              },
+              "html_instructions": "Turn <b>right</b> onto <b>Wormwood Gate</b>",
+              "maneuver": "turn-right",
+              "polyline": {
+                "points": "{wqdIzyhe@AbA?hA"
+              },
+              "start_location": {
+                "lat": 53.34414,
+                "lng": -6.2763
+              },
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "0.3 km",
+                "value": 277
+              },
+              "duration": {
+                "text": "4 mins",
+                "value": 223
+              },
+              "end_location": {
+                "lat": 53.34389059999999,
+                "lng": -6.2811137
+              },
+              "html_instructions": "Continue onto <b>Oliver Bond St</b>",
+              "polyline": {
+                "points": "}wqdIh~he@CxBAd@?H?L@v@Br@Fz@TdCNvAB\\D|@BfAARAPATAT"
+              },
+              "start_location": {
+                "lat": 53.3441541,
+                "lng": -6.2770122
+              },
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "78 m",
+                "value": 78
+              },
+              "duration": {
+                "text": "1 min",
+                "value": 68
+              },
+              "end_location": {
+                "lat": 53.3431936,
+                "lng": -6.2812356
+              },
+              "html_instructions": "Turn <b>left</b> onto <b>Bridgefoot St</b>/<b>R804</b>",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "ivqdI|wie@NDzBR"
+              },
+              "start_location": {
+                "lat": 53.34389059999999,
+                "lng": -6.2811137
+              },
+              "travel_mode": "WALKING"
+            },
+            {
+              "distance": {
+                "text": "0.3 km",
+                "value": 338
+              },
+              "duration": {
+                "text": "4 mins",
+                "value": 251
+              },
+              "end_location": {
+                "lat": 53.3435601,
+                "lng": -6.2862806
+              },
+              "html_instructions": "Turn <b>right</b> onto <b>Thomas St</b>/<b>R804</b>/<b>R810</b><div style=\"font-size:0.9em\">Continue to follow R810</div>",
+              "maneuver": "turn-right",
+              "polyline": {
+                "points": "}qqdIvxie@EVEf@AVEf@Ah@Ex@CjAGhCAv@IjDEr@IzACbAAn@?lA"
+              },
+              "start_location": {
+                "lat": 53.3431936,
+                "lng": -6.2812356
+              },
+              "travel_mode": "WALKING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        }
+         ],
+         "overview_polyline" : {
+            "points" : "gtqdIfxje@pPjsBfAb}@hNbt@pf@ji@nTdj@j~@|yDx^lnC|Efl@nXro@pp@lmB|m@z}@tI|mArf@`nAbEtbApRfu@b_@dr@xk@jgCx\\bsAhMr`@nUzOrWtw@xSti@fZhg@fzAteDjq@hhB~k@bl@`s@pw@do@rq@jd@dl@lY~l@|Nnx@~XbrA~Hhs@r_@`eAnKxq@h]pSb_@hj@jm@fdAbWfcAxf@dcAfu@pfAtZpJpI~Rry@n}@v~@~lBr`Axv@jf@drBhjEpvLdv@btBxiCfdCfl@z]~eAv{BlpBhoDvFx{@`Ctp@nEhd@z_@zgAnf@nw@zTzf@lg@l\\bcAvr@xbB~eBvfAlmA|Y~h@n[dAdd@fh@lh@l~@`WlqB`S`eAz]~l@Rfv@bTreAuCv}@ld@hcBuAhdAa\\t`B_JtfBqT~n@}MjyB~Ebp@Ttc@U`lAxCv\\dZtp@jR|EtOz`@pt@|Vd[b_AhUj\\tCn`@qIltApIzhAv^fx@zi@lfEdS`vAz{A~hBxZxdCbKbtA|{@~|C~}AjgD~dBf|CliBdcCbnBl{AhmEbaD|CnAxXxWn\\`{@||@zbClk@`qA~h@thAdOjaA`j@vyAnt@ztAr`A|sBppF|gLfpChqEzkAfiB|Ddd@fLpa@jc@zLbmA`hBjpEdrE|SzVx[hI|_@dm@f[}B`R~]p`@Dv]}@ne@aNrDuIhNhNvyBnOb|@fAhXgNpxAsn@rs@z@dd@jMjaA~Tfp@dMthAne@`SrWv@bf@bM``@pe@z]hNnb@hCxkAjFvNtx@nj@b[rMvIbSvd@fsBxr@deC|O~}@tJ|^|nCf}Kl^teBtJwBn^yIfe@oOvDxc@bSheAhFdThQ~@tc@yI|]qXzUf@bSzAh^uBro@nIhQj@HlPbGvs@rXxkErSfm@lWnl@bLxaApIlu@nZm@dWUfXpTzw@dS~wA~m@dtA|cAtm@bhAj_@d{@jUvg@bW`QzP|HhNvd@dQdPMnWpr@j`Az^bh@pDpJtZjn@~WlWvW`@jg@_OrKu@pUi@fTlOxFjLfFeBbQsKlU|Gji@sH`UeXfJ_JtYrD~p@aFrIdEvsAh^dc@dItS~[ba@wLzYyJxRrIj\\`sAxWxz@|AbGXrEz]fr@tw@vl@zm@nKhr@po@hx@ro@`gArhAtStg@~b@pg@|SjkA`YtGzTfOh_@nUxLb`@pp@t}@j^bhA`CzPfNhG~O`AzA~FrIoAQt[jZp{@xf@`aAn~@byAvh@dt@bk@lNru@ta@vv@gArJ@tJhGvD|H"
+         },
+         "summary" : "R639",
+         "warnings" : [
+            "Walking directions are in beta.    Use caution ? This route may be missing sidewalks or pedestrian paths."
+         ],
+         "waypoint_order" : []
+      }
+   ]
+}

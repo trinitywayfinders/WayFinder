@@ -12,7 +12,7 @@ import polyUtil  from 'polyline-encoded'
 export class HomePage {
   @ViewChild('map') mapContainer: ElementRef;
   map: any;
-  inputStartLocation = ''
+  inputLocation = ''
   inputDestination = ''
   currentLatlng: any
   marker: leaflet.marker
@@ -64,42 +64,18 @@ export class HomePage {
     }).addTo(this.map);
     this.getLocation()
 
-    this.map.on('click', this.onMapClickCallBack);
-  }
-
-  setInputStartLocation(input){
-      this.inputStartLocation = input
-      console.log("SETting --->"+this.inputStartLocation)
-  }
-
-  setInputDestination(input){
-    console.log("setDest1.."+input + " ..."+this.inputDestination)
-      this.inputDestination = input
-      console.log("setDest2.."+input)
-  }
-
-  onMapClickCallBack(event) {
-    var coord = event.latlng;
-    var lat = coord.lat;
-    var lng = coord.lng;
-    console.log("You clicked the map at latitude: " + lat + " and longitude: " + lng);
-
-    if(this.inputStartLocation == null){
-      this.inputStartLocation = lat+","+lng
-      console.log("SRC---"+this.inputStartLocation  )
-    }
-    else if(this.inputDestination == null){
-      this.inputDestination = lat+","+lng
-      console.log("DEST---"+this.inputDestination)
-    }
-
-        console.log(this.inputStartLocation)
-        console.log(this.inputDestination)
+    var inputDestination = this.inputDestination;
+    this.map.on('click', function(e){
+      var coord = e.latlng;
+      var lat = coord.lat;
+      var lng = coord.lng;
+      console.log("You clicked the map at latitude: " + lat + " and longitude: " + lng);
+      });
   }
 
   getDirections(){
-    console.log("GetDirections: "+this.inputStartLocation)
-    this.getPolyLine(this.inputStartLocation, this.inputDestination)
+    console.log("GetDirections: "+this.inputLocation)
+    this.getPolyLine(this.inputLocation, this.inputDestination)
   }
 
   //ToDo change method to take in starting lat/long and route to destination lat/long
@@ -135,6 +111,7 @@ export class HomePage {
 
               legs.forEach(function(leg){
                 var steps = leg['steps']
+                var color = "#"+((1<<24)*Math.random()|0).toString(16);
 
                 var startMarkerLatLng = [steps[0]['start_location']["lat"], steps[0]['start_location']["lng"]]
                 var destMarkerLatLng = [steps[steps.length-1]['end_location']['lat'],steps[steps.length-1]['end_location']['lng']]
@@ -152,7 +129,7 @@ export class HomePage {
                   var coordinates = polyUtil.decode(polyline);
 
                   var polyline = leaflet.polyline(coordinates, {
-                    color: "#"+((1<<24)*Math.random()|0).toString(16),
+                    color: color,
                     weight: 10,
                     opacity: .7,
                     dashArray: '0,0',

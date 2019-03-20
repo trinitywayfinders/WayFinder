@@ -40,4 +40,10 @@ public class RouteControllerTests {
         		.accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+    
+    @Test
+    public void checkDistanceOver3() {
+    	
+    	//UserRouteRequest usr
+    }
 }
