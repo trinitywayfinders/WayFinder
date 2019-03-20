@@ -33,6 +33,7 @@ public class LowLevelRouteController {
     private static final Logger logger = LoggerFactory.getLogger(LowLevelRouteController.class);
     private static final String endpoint = "https://maps.googleapis.com/maps/api/directions/json";
     private static String apiKey = "AIzaSyB2NHLaqVDF0uSmuNBMXI3DVsUanzdRD7Q";
+    
     private static double segment1Distance = 3;
     
 	@PostMapping(path="/api/route", consumes={ MediaType.ALL_VALUE })
@@ -60,9 +61,12 @@ public class LowLevelRouteController {
 		}
 		
 		String responseBody = null;
+		String responseBody2 = null;
 		
 		try {
 			responseBody = EntityUtils.toString(response.getEntity(), "UTF-8");
+
+			System.out.println("Distance > 3km: " + checkTotalDistanceRoute(responseBody));
 			
 			
 			UserRouteRequest[] splitJourney = splitJourney(responseBody);
@@ -79,18 +83,104 @@ public class LowLevelRouteController {
 			responseBody = EntityUtils.toString(response.getEntity(), "UTF-8");
 			
 			
+			UserRouteRequest request2 = splitJourney[1];
 			
+			MultiValueMap<java.lang.String,java.lang.String> params2 = request2.toParams();
+			params2.add("key", apiKey);
+			
+			UriComponentsBuilder.newInstance();
+			uri = UriComponentsBuilder.fromUriString(endpoint).queryParams(params2).build();
+			uriString = uri.toString();
+			uriEncoded = URIUtil.encodeQuery(uriString, "UTF-8");
+			response = Library.GET(uriEncoded, Optional.empty());
+			responseBody2 = EntityUtils.toString(response.getEntity(), "UTF-8");
+			
+
+			System.out.println("Distance > 3km: PART 2 " + checkTotalDistanceRoute(responseBody));
 			
 		} catch (IOException | ParseException | NullPointerException e) {
 			e.printStackTrace();
 		}
 		
-		return new ResponseEntity<String>(responseBody, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
+		return new ResponseEntity<String>(responseBody2, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
+	}
+	
+	public boolean checkTotalDistanceRoute(String originalJson) {
+		
+		JSONArray routes  = new JSONObject(originalJson).getJSONArray("routes");
+		
+		for(int i = 0; i < routes.length(); i++) {
+			JSONArray legs = routes.getJSONObject(i).getJSONArray("legs");
+			
+			JSONObject leg = legs.getJSONObject(0);
+			int distance = leg.getJSONObject("distance").getInt("value");
+			
+			if(distance > segment1Distance*1000)
+				return true;
+			}
+		return false; 
+		}
+		
+	
+	
+	public String getRoute(UserRouteRequest route) {
+		// Parameter check goes here
+		MultiValueMap<java.lang.String,java.lang.String> params = route.toParams();
+		params.add("key", apiKey);
+		
+		UriComponents uri;
+		HttpResponse response = null;
+		
+		try {
+			UriComponentsBuilder.newInstance();
+			uri = UriComponentsBuilder.fromUriString(endpoint).queryParams(params).build();
+			String uriString = uri.toString();
+			String uriEncoded = URIUtil.encodeQuery(uriString, "UTF-8");
+			response = Library.GET(uriEncoded, Optional.empty());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		String responseBody = null;
+		
+		try {
+			responseBody = EntityUtils.toString(response.getEntity(), "UTF-8");
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return responseBody;
 	}
 	
 	
+	/*
+	 * 
+	 * 0. Checks total distance of route. If journey > 6km split by distance
+	 * 		params -> originalJson
+	 * 		returns true/false
+	 * 
+	 * 0.1 If journey < 6km get total number of steps and divide across 3 legs
+	 * 
+	 * 	Need 3 methods to calculate legs ^	
+	 * 
+	 * 
+	 * 1. return 1st leg of journey (double Distance, originalJsonRoute) -> return userRouteRequest object (origin, destination (of 1st leg), mode)
+	 * 2. return 3rd leg of journey (double Distance, originalJsonRoute) -> return userRouteRequest object (origin (of 3rd leg), destination (of 3rd leg), mode)
+	 * 3. return 2nd leg of journey ( startLocation (end of 1st leg), endLocation (start of 3rd leg), originalJson) -> return userRouteRequest object (origin (of 2nd leg), destination (of 2nd leg), mode)
+	 * 
+	 * 
+	 * 4. send UserRouteRequest to google  (userRouteRequest) -> returns jsonRoute
+	 * 
+	 * 5. Combine 3 legs 
+	 */
+//	
+//	private String sendRequest() {
+//		
+//	}
 	
-	
+	//ToDo: Consider trips shorter than 3-6km.
+	// Split legs using steps instead of distance.
 	public UserRouteRequest[] splitJourney(String response) {
 		
 		System.out.println("IN SPLIT JOURNEY......");
