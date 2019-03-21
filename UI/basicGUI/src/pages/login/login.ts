@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the LoginPage page.
  *
@@ -18,6 +19,7 @@ export class LoginPage {
     password: string;
     form: any;
     httpOptions: any;
+    storage: Storage;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient) {
     }
@@ -27,13 +29,10 @@ export class LoginPage {
     }
 
     login() {
-        console.log("username: " + this.username);
-        console.log("password: " + this.password);
-
         this.form = new FormData();
         this.form.set('grant_type', 'password');
-        this.form.set('username', 'nicky');
-        this.form.set('password', 'pasword');
+        this.form.set('username', this.username);
+        this.form.set('password', this.password);
         this.form.set('client_id', 'web-app');
 
         // axios({
@@ -59,7 +58,7 @@ export class LoginPage {
 
         this.httpOptions = {
             headers: new HttpHeaders({
-                'Content-Type': 'multipart/form-data;charset=UTF-8',
+                // 'Content-Type': 'multipart/form-data;charset=UTF-8',
                 'Accept': 'application/json;charset=UTF-8',
                 'Authorization': 'Basic d2ViLWFwcDoxMjM0NTY=',
             })
@@ -67,6 +66,15 @@ export class LoginPage {
         console.log(this.form)
         this.http.post('http://localhost:8080/oauth/token', this.form, this.httpOptions).subscribe((response) => {
             console.log(response);
+            console.log(typeof response);
+
+            console.log(response.access_token);
+            console.log(response.refresh_token);
+
+            // this.storage.set('refresh_token', response.refresh_token);
+            // this.storage.set('access_token', response.access_token);
+
+            this.navCtrl.popToRoot();
         });
 
     }

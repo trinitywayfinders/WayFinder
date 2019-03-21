@@ -23,7 +23,6 @@ public class SimpleCorsFilter implements Filter{
 			throws IOException, ServletException {
 		HttpServletResponse resp = (HttpServletResponse) response;
 		HttpServletRequest req = (HttpServletRequest) request;
-//		System.out.println(request.get);
 		resp.setHeader("Access-Control-Allow-Origin", "*");
 		resp.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE");
 		resp.setHeader("Access-Control-Max-Age", "3600");
