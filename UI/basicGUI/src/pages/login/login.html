@@ -11,5 +11,17 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label floating>Username</ion-label>
+            <ion-input type="text" [(ngModel)]="username"></ion-input>
+        </ion-item>
 
+        <ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+
+        <button ion-button (click) = "login()">login</button>
+    </ion-list>
 </ion-content>

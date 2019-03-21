@@ -3,8 +3,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import leaflet from 'leaflet';
-import polyUtil  from 'polyline-encoded'
-
+import polyUtil  from 'polyline-encoded';
 import { SignupPage } from '../signup/signup';
 import { LoginPage } from '../login/login';
 
