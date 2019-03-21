@@ -45,11 +45,10 @@ public class LowLevelRouteController {
 	@PostMapping(path="/api/route", consumes={ MediaType.ALL_VALUE })
 	public ResponseEntity<String> retriveRoute(@RequestBody UserRouteRequest request) {
 			
-		logger.debug("Origin: " + request.getOrigin());
-		logger.debug("Destination: " + request.getDestination());
-		logger.debug("Mode: " + request.getMode().toString());
+		logger.debug("Origin: %s",request.getOrigin());
+		logger.debug("Destination: %s", request.getDestination());
+		logger.debug("Mode: %s", request.getMode().toString());
 
-		UriComponents uri;
 		HttpResponse response = getRoute(request);
 		
 		String responseBody = null;
@@ -114,7 +113,7 @@ public class LowLevelRouteController {
 			return Double.toString(lat)+","+Double.toString(lng);
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			logger.error("getSegment1EndLatLng Error: " + e.getMessage());
 			return null;
 		}
 	}
@@ -131,7 +130,7 @@ public class LowLevelRouteController {
 			return Double.toString(lat)+","+Double.toString(lng);
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			logger.error("getSegment3StartLatLng Error: " + e.getMessage());
 			return null;
 		}
 	}
@@ -151,33 +150,11 @@ public class LowLevelRouteController {
 			String uriEncoded = URIUtil.encodeQuery(uriString, "UTF-8");
 			response = Library.GET(uriEncoded, Optional.empty());
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("getRoute Error: " + e.getMessage());
 		}
 		
 		return response;
 	}
-	
-	
-	/*
-	 * 
-	 * 0. Checks total distance of route. If journey > 6km split by distance
-	 * 		params -> originalJson
-	 * 		returns true/false
-	 * 
-	 * 0.1 If journey < 6km do nothing. 
-	 * 
-	 * 	Need 3 methods to calculate legs ^	
-	 * 
-	 * 
-	 * 1. return 1st leg of journey (double Distance, originalJsonRoute) -> return userRouteRequest object (origin, destination (of 1st leg), mode)
-	 * 2. return 3rd leg of journey (double Distance, originalJsonRoute) -> return userRouteRequest object (origin (of 3rd leg), destination (of 3rd leg), mode)
-	 * 3. return 2nd leg of journey ( startLocation (end of 1st leg), endLocation (start of 3rd leg), originalJson) -> return userRouteRequest object (origin (of 2nd leg), destination (of 2nd leg), mode)
-	 * 
-	 * 
-	 * 4. send UserRouteRequest to google  (userRouteRequest) -> returns jsonRoute
-	 * 
-	 * 5. Combine 3 legs 
-	 */
 	
 	private UserRouteRequest getUserRouteRequest(JSONObject step1, JSONObject step2, TravelMode travelMode) {
 		
@@ -224,7 +201,7 @@ public class LowLevelRouteController {
 			}
 		}
 		catch (JSONException e) {
-			e.printStackTrace();
+			logger.error("get1stSegment Error: " + e.getMessage());
 		}
 		return null;
 	}
@@ -258,7 +235,7 @@ public UserRouteRequest get3rdSegment(double segment3Length, String response, Tr
 			}
 		}
 		catch (JSONException e) {
-			e.printStackTrace();
+			logger.error("get3rdSegment Error: " + e.getMessage());
 		}
 		return null;
 	}
