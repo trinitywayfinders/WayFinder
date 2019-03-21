@@ -33,6 +33,9 @@ public class RouteControllerTests {
     @Autowired
     private MockMvc mvc;
 
+    @Autowired
+    private LowLevelRouteController controller;
+    
     @Test
     public void getRoute() throws Exception {
 
@@ -53,7 +56,6 @@ public class RouteControllerTests {
     	
     	UserRouteRequest usr = new UserRouteRequest("Dublin", "Cork", TravelMode.walking);
     
-    	LowLevelRouteController controller = new LowLevelRouteController();
     	
     	String response;
 		try {
@@ -80,9 +82,7 @@ public class RouteControllerTests {
     @Test 
     public void checkDistanceOver3() {
     	UserRouteRequest usr = new UserRouteRequest("Dublin", "Cork", TravelMode.walking);
-        
-    	LowLevelRouteController controller = new LowLevelRouteController();
-    	
+            	
     	String response;
 		try {
 			response = EntityUtils.toString(controller.getRoute(usr).getEntity(), "UTF-8");
@@ -97,9 +97,7 @@ public class RouteControllerTests {
     @Test
     public void checkDistanceUnder3() {
     	UserRouteRequest usr = new UserRouteRequest("Trinity College Dublin", "Temple Bar", TravelMode.walking);
-        
-    	LowLevelRouteController controller = new LowLevelRouteController();
-    	
+            	
     	String response;
 		try {
 			response = EntityUtils.toString(controller.getRoute(usr).getEntity(), "UTF-8");

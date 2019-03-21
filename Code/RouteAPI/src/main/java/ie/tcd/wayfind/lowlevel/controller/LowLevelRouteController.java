@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +32,13 @@ import ie.tcd.wayfinders.restLibrary.Library;
 @RestController
 public class LowLevelRouteController {
     private static final Logger logger = LoggerFactory.getLogger(LowLevelRouteController.class);
-    private static final String endpoint = "https://maps.googleapis.com/maps/api/directions/json";
-    private static String apiKey = "AIzaSyB2NHLaqVDF0uSmuNBMXI3DVsUanzdRD7Q";
+   
+    
+    @Value("${routing.google.endpoint}")
+    private String endpoint;
+    
+    @Value("${routing.google.apiKey}")
+    private String apiKey;
 
     private static double totalDistance = 5;
     
@@ -74,9 +80,9 @@ public class LowLevelRouteController {
 			e.printStackTrace();
 		}
 		
-		String x = combineRouteLegs(responseBodySegment1, responseBodySegment2, responseBodySegment3);
+		String combinedRoute = combineRouteLegs(responseBodySegment1, responseBodySegment2, responseBodySegment3);
 		
-		return new ResponseEntity<String>(responseBodySegment3, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
+		return new ResponseEntity<String>(combinedRoute, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
 	}
 	
 	public boolean checkTotalDistanceRoute(String originalJson) {
@@ -94,6 +100,7 @@ public class LowLevelRouteController {
 			}
 		return false; 
 		}
+	
 		
 	public String getSegment1EndLatLng(String jsonResponse) {
 		try {
@@ -262,99 +269,24 @@ public UserRouteRequest get3rdSegment(double segment3Length, String response, Tr
 	}
 	
 	public String combineRouteLegs(String response1, String response2, String response3) {
-
-		JSONArray routes1  = new JSONObject(response1).getJSONArray("routes");
-		JSONArray legsArray1 = routes1.getJSONObject(0).getJSONArray("legs");
 		
+		JSONObject response1Json = new JSONObject(response1);
+		
+		JSONArray routes1 = response1Json.getJSONArray("routes");
+		
+		JSONArray legsArray1 = routes1.getJSONObject(0).getJSONArray("legs");
 		JSONObject leg2 = extractLegFromResponse(response2);
 		JSONObject leg3 = extractLegFromResponse(response3);
 
 		legsArray1.put(leg2);
 		legsArray1.put(leg3);
-
-		routes1.getJSONObject(0).getJSONArray("legs").remove(0);
-		routes1.getJSONObject(0).getJSONArray("legs").put(legsArray1);
 		
-		//THIS IS WHERE WE ARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		String yy = routes1.toString();
 		
-		return yy;
+		return response1Json.toString();
 	}
 	
 	private JSONObject extractLegFromResponse(String response) {
 		JSONArray routes  = new JSONObject(response).getJSONArray("routes");
 		return routes.getJSONObject(0).getJSONArray("legs").getJSONObject(0);
-	}
-	
-
-	//ToDo: Consider trips shorter than 3-6km.
-	// Split legs using steps instead of distance.
-	/*public UserRouteRequest[] splitJourney(String response) {
-		
-		System.out.println("IN SPLIT JOURNEY......");
-		try {
-			JSONArray routes  = new JSONObject(response).getJSONArray("routes");
-			
-			for(int i = 0; i < routes.length(); i++) {
-				JSONArray legs = routes.getJSONObject(i).getJSONArray("legs");
-				
-				for(int j = 0; j < legs.length(); j++) {
-					JSONArray steps = legs.getJSONObject(j).getJSONArray("steps");
-					
-					
-					double totalDistance = 0.0;
-					
-					for(int k = 0; k < steps.length(); k++) {
-						JSONObject step = steps.getJSONObject(k);
-						
-						String[] distance = step.getJSONObject("distance").getString("text").split(" ");
-						double currentDistance = Double.parseDouble(distance[0]);
-						
-						//Distance is given as km or m -> convert all to km
-						if(distance[1].equals("m")) {
-							currentDistance = currentDistance / 1000;
-						}
-						
-						totalDistance += currentDistance;
-						
-						//after first "segment1Distance" km split the route
-						if(totalDistance > 3) {
-
-							//Get lat/lng of first step
-							JSONObject firstStep = steps.getJSONObject(0);	
-							double originalLat = firstStep.getJSONObject("start_location").getDouble("lat");
-							double originalLng = firstStep.getJSONObject("start_location").getDouble("lng");
-						
-							String originSegment1 = originalLat + "," + originalLng;
-							
-							//Get lat/lng of final step
-							JSONObject lastStep = legs.getJSONObject(0);	
-							double destinationLat = lastStep.getJSONObject("end_location").getDouble("lat");
-							double destinationLng = lastStep.getJSONObject("end_location").getDouble("lng");
-						
-							String destinationSegment2 = destinationLat + "," + destinationLng;
-						
-							//Get lat/lng of "segment1Distance" km away from origin
-							double destinationSegment1Lat = step.getJSONObject("start_location").getDouble("lat");
-							double destinationSegment1Lng = step.getJSONObject("start_location").getDouble("lng");
-						
-							String destinationSegment1 = destinationSegment1Lat + "," + destinationSegment1Lng;
-							
-							//Get new routes with different travel types
-							UserRouteRequest segment1 = new UserRouteRequest( originSegment1, destinationSegment1, TravelMode.walking);
-							UserRouteRequest segment2 = new UserRouteRequest( destinationSegment1, destinationSegment2,  TravelMode.walking);
-						
-							return new UserRouteRequest[] {segment1, segment2};
-						}				
-					}
-				}
-			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("ERROR:"+e.getMessage());
-		}
-		return null;
-	}*/
-	
+	}	
 }
