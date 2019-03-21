@@ -3,6 +3,10 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import leaflet from 'leaflet';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 38f7cc8b8f15325dbe0c7f2d0195c72af20cb9a8
 import { SignupPage } from '../signup/signup';
 import { LoginPage } from '../login/login';
 
@@ -57,14 +61,17 @@ export class HomePage {
   }
 
   loadmap() {
-    console.log("Loading map...")
+    if(this.map) {
+      this.map.remove();
+    }   
     this.map = leaflet.map("map").fitWorld();
     leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attributions: 'www.tphangout.com',
       maxZoom: 18
     }).addTo(this.map);
     this.getLocation()
-    this.getPolyLine()
+
+    //this.getPolyLine()
   }
 
 
@@ -95,10 +102,10 @@ export class HomePage {
                 var steps = leg['steps']
 
                 steps.forEach(function(step){
-                  var polyline = step['polyline']['points']
-                  var coordinates = polyUtil.decode(polyline);
 
-                  var polyline = leaflet.polyline(coordinates, {
+                  var coordinates = polyUtil.decode(step['polyline']['points']);
+
+                  polyline = leaflet.polyline(coordinates, {
                     color: "#"+((1<<24)*Math.random()|0).toString(16),
                     weight: 10,
                     opacity: .7,
