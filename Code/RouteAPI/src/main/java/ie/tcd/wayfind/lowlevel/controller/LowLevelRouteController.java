@@ -42,7 +42,7 @@ public class LowLevelRouteController {
 
     private static double totalDistance = 5;
     
-	@PostMapping(path="/api/route", consumes={ MediaType.ALL_VALUE })
+	@PostMapping(path="/api/route/", consumes={ MediaType.ALL_VALUE })
 	public ResponseEntity<String> retriveRoute(@RequestBody UserRouteRequest request) {
 			
 		logger.debug("Origin: %s",request.getOrigin());
@@ -82,6 +82,38 @@ public class LowLevelRouteController {
 		String combinedRoute = combineRouteLegs(responseBodySegment1, responseBodySegment2, responseBodySegment3);
 		
 		return new ResponseEntity<String>(combinedRoute, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
+	}
+	
+	
+	/*
+	 * 1. New controller endpoint. /api/route/avoid/{lat}/{lng} 
+	 * 2. check if given latlng is on polyline for each step 
+	 * 3. If true -> get start and end location of current step
+	 * 				 get alternate routes
+	 * 				 check if given routes contain latlng
+	 * 				 If false -> check time for alternate route
+	 * 				 Replace current step with shortest alternate route
+	 * 
+	 * Solution 2:
+	 * 1. New controller endpoint. /api/route/avoid/{lat}/{lng} 
+	 * 2. Get new route from starting location to block location
+	 * 3. Get starting location of last step of new route
+	 * 4. Iterate through all steps in original route
+	 * 		-> Find step which has same starting location
+	 * 		-> Return end location of that step.
+	 * 5. Get alternate routes from blockedStep start -> blockedStep end
+	 * 6. For alternate routes compare distance/time with original step -> return all possible alternate routes.
+	 * 7. For all alternate routes -> return one with shortest (/longest?) distance/time.
+	 * 8. Replace step in original route with shortest alternate route.
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+	
+	public void Test() {
+		
+		//boolean x = isLocationOnPath();
 	}
 	
 	public boolean checkTotalDistanceRoute(String originalJson) {
