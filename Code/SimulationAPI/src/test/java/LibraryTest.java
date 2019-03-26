@@ -49,9 +49,8 @@ public class LibraryTest {
     @Autowired
     private MockMvc mvc;
     @Test
-    public void getRoute() throws Exception {
+    public void getSimulation() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/getSimulation")
-                .header("Authorization", "Bearer ")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
