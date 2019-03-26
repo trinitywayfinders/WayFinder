@@ -2,28 +2,28 @@ package ie.tcd.wayfinder.simulation.request;
 
 public class ResponseClass {
         
-      public double Lat;
-      public double Lng;
+      public double lat;
+      public double lng;
       public String reason;
 
-      public void SetVal(double lat, double lng, String reason) {
-            Lat = lat;
-            Lng = lng;
-            reason = reason;
+      public void SetVal(double latitude, double longitude, String reason) {
+            lat = latitude;
+            lng = longitude;
+            this.reason = reason;
        }
         
        public double getLat() {
-            return Lat;
+            return lat;
        }
        public double getLng() {
-            return Lng;
+            return lng;
        }
        public String getReason() {
            return reason;
        }
        
        public String toString() {
-           return this.Lat+","+this.Lng+","+this.reason;
+           return this.lat+","+this.lng+","+this.reason;
        }
         
 }
