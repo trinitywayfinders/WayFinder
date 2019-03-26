@@ -1,6 +1,7 @@
 package ie.tcd.wayfind.lowlevel.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.apache.commons.httpclient.util.URIUtil;
@@ -20,6 +21,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.util.UriComponents;
@@ -50,7 +52,7 @@ public class LowLevelRouteController {
 		logger.debug("Destination: %s", request.getDestination());
 		logger.debug("Mode: %s", request.getMode().toString());
 
-		HttpResponse response = getRoute(request);
+		HttpResponse response = getRoute(request, false);
 
 		String responseBody = null;
 		String responseBodySegment1 = null;
@@ -62,18 +64,18 @@ public class LowLevelRouteController {
 			UserRouteRequest request1 = get1stSegment(3000, responseBody, request.getMode());
 			UserRouteRequest request3 = get3rdSegment(3000, responseBody, request.getMode());
 
-			HttpResponse responseSegment1 = getRoute(request1);
+			HttpResponse responseSegment1 = getRoute(request1, false);
 			responseBodySegment1 = EntityUtils.toString(responseSegment1.getEntity(), "UTF-8");
 
 			String endSegment1 = getSegment1EndLatLng(responseBodySegment1);
 
-			HttpResponse responseSegment3 = getRoute(request3);
+			HttpResponse responseSegment3 = getRoute(request3, false);
 			responseBodySegment3 = EntityUtils.toString(responseSegment3.getEntity(), "UTF-8");
 
 			String startSegment3 = getSegment3StartLatLng(responseBodySegment3);
 
 			UserRouteRequest request2 = get2ndSegment(endSegment1, startSegment3, TravelMode.driving);
-			HttpResponse responseSegment2 = getRoute(request2);
+			HttpResponse responseSegment2 = getRoute(request2, false);
 			responseBodySegment2 = EntityUtils.toString(responseSegment2.getEntity(), "UTF-8");
 
 		} catch (IOException | ParseException | NullPointerException e) {
@@ -133,10 +135,14 @@ public class LowLevelRouteController {
 		}
 	}
 
-	public HttpResponse getRoute(UserRouteRequest route) {
+	public HttpResponse getRoute(UserRouteRequest route, boolean alternatives) {
 		MultiValueMap<java.lang.String, java.lang.String> params = route.toParams();
 		params.add("key", apiKey);
-
+		
+		if(alternatives) {
+			params.add("alternatives", "true");
+			params.add("avoid", "highways");
+		}
 		UriComponents uri;
 		HttpResponse response = null;
 
@@ -267,15 +273,19 @@ public class LowLevelRouteController {
 	 * false -> check time for alternate route Replace current step with shortest
 	 * alternate route
 	 * 
-	 * Solution 2: 1. New controller endpoint. /api/route/avoid/{lat}/{lng} 2. Get
-	 * new route from starting location to block location 3. Get starting location
-	 * of last step of new route 4. Iterate through all steps in original route ->
-	 * Find step which has same starting location -> Return end location of that
-	 * step. 5. Get alternate routes from blockedStep start -> blockedStep end 6.
-	 * For alternate routes compare distance/time with original step -> return all
-	 * possible alternate routes. 7. For all alternate routes -> return one with
-	 * shortest (/longest?) distance/time. 8. Replace step in original route with
-	 * shortest alternate route.
+	 * Solution 2: 
+	 * 1. New controller endpoint. /api/route/avoid/{lat}/{lng} 
+	 * 2. Get
+	 * new route from starting location to block location 
+	 * 3. Get starting location
+	 * of last step of new route 
+	 * 4. Iterate through all steps in original route 
+	 * 		Find step which has same starting location 
+	 * 		Return end location of that step. 
+	 * 5. Get alternate routes from blockedStep start -> blockedStep end 
+	 * 6. For alternate routes compare distance/time with original step -> return all possible alternate routes. 
+	 * 7. For all alternate routes -> return one with shortest (/longest?) distance/time. 
+	 * 8. Replace step in original route with shortest alternate route.
 	 */
 
 	@PostMapping(path="/api/route/avoid/{lat}/{lng}/", consumes={ MediaType.ALL_VALUE })
@@ -287,19 +297,58 @@ public class LowLevelRouteController {
 		UserRouteRequest originalRoute = new UserRouteRequest(request.getOrigin(), request.getDestination(), request.getMode());
 		UserRouteRequest segment1ToBlock = new UserRouteRequest(request.getOrigin(), avoidLatLng, request.getMode());
 		
-		HttpResponse originalResponse = getRoute(originalRoute);
-		HttpResponse responseToBlock = getRoute(segment1ToBlock);
+		HttpResponse originalResponse = getRoute(originalRoute, false);
+		HttpResponse responseToBlock = getRoute(segment1ToBlock, false);
+
+		HttpResponse responseToBlockSegmentStart = null;
+		HttpResponse responseFromBlockSegmentEnd = null;
 		
 		String originalResponseBody = null;
 		String responseBodyWithBlock = null;
+		String responseBodyWithAlternatives = null;
+		String responseBodyToBlockSegmentStart = null;
+		String responseBodyFromBlockSegmentEnd = null;
+		String finalRouteWithoutBlock = null;
 		
+				
 		try {
 			responseBodyWithBlock = EntityUtils.toString(responseToBlock.getEntity(), "UTF-8");
 			LatLng blockSegmentStart = getStartLatLngBlockSegment(responseBodyWithBlock);
-			
+			System.out.println("Block segment start: "+ blockSegmentStart.Lat + "  " + blockSegmentStart.Lng);
 
 			originalResponseBody = EntityUtils.toString(originalResponse.getEntity(), "UTF-8");
-			LatLng blockSegmentEnd = getEndLatLngBlockSegment(originalResponseBody, lat, lng);
+			LatLng blockSegmentEnd = getEndLatLngBlockSegment(originalResponseBody, blockSegmentStart.Lat, blockSegmentStart.Lng);
+			
+			if(blockSegmentEnd == null) {
+				return new ResponseEntity<String>(originalResponseBody, HttpStatus.valueOf(originalResponse.getStatusLine().getStatusCode()));
+			}
+			
+			System.out.println("Block segment end: "+ blockSegmentEnd.Lat + "  " + blockSegmentEnd.Lng);
+			
+			
+			//Route from startBlock to endBlock with alternatives
+			UserRouteRequest alternativeRoute = new UserRouteRequest(blockSegmentStart.toString(), blockSegmentEnd.toString(), request.getMode());
+
+			HttpResponse alternativeRouteResponse = getRoute(alternativeRoute, true);
+			responseBodyWithAlternatives = EntityUtils.toString(alternativeRouteResponse.getEntity(), "UTF-8");
+			
+			
+			
+			//Find shortest alternative without block
+			JSONObject shortestRouteLegs = getLongestAlternativeForBlockedSegment(responseBodyWithAlternatives);
+
+			//Get route from original start to start of block polyline
+			UserRouteRequest RouteToBlockStart = new UserRouteRequest(request.getOrigin(), blockSegmentStart.toString(), request.getMode());
+			responseToBlockSegmentStart = getRoute(RouteToBlockStart, false);
+			responseBodyToBlockSegmentStart = EntityUtils.toString(responseToBlockSegmentStart.getEntity(), "UTF-8");
+			
+			
+			//Get route from end of block polyline to original destination
+			UserRouteRequest RouteFromBlockEnd = new UserRouteRequest(blockSegmentEnd.toString(), request.getDestination(), request.getMode());
+			responseFromBlockSegmentEnd = getRoute(RouteFromBlockEnd, false);
+			responseBodyFromBlockSegmentEnd = EntityUtils.toString(responseFromBlockSegmentEnd.getEntity(), "UTF-8");
+			
+			finalRouteWithoutBlock = combineRouteLegs(responseBodyToBlockSegmentStart, shortestRouteLegs.toString(), responseBodyFromBlockSegmentEnd);
 			}
 			
 		catch(IOException|ParseException|
@@ -309,18 +358,20 @@ public class LowLevelRouteController {
 		e.printStackTrace();
 	}
 
-	return new ResponseEntity<String>(responseBody,HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
+	return new ResponseEntity<String>(finalRouteWithoutBlock, HttpStatus.valueOf(originalResponse.getStatusLine().getStatusCode()));
 	}
 
 	public LatLng getStartLatLngBlockSegment(String jsonResponse) {
+		
+		int stepsBefore = 0;
 		try {
 			JSONArray routes  = new JSONObject(jsonResponse).getJSONArray("routes");
 			
 			JSONArray legs = routes.getJSONObject(0).getJSONArray("legs");
 			JSONArray steps = legs.getJSONObject(0).getJSONArray("steps");
 				
-			Double lat = steps.getJSONObject(steps.length()-1).getJSONObject("start_location").getDouble("lat");
-			Double lng = steps.getJSONObject(steps.length()-1).getJSONObject("start_location").getDouble("lng");
+			Double lat = steps.getJSONObject(steps.length()-1-stepsBefore).getJSONObject("start_location").getDouble("lat");
+			Double lng = steps.getJSONObject(steps.length()-1-stepsBefore).getJSONObject("start_location").getDouble("lng");
 				
 			
 			return new LatLng(lat, lng);
@@ -331,7 +382,10 @@ public class LowLevelRouteController {
 		}
 	}
 
-	public LatLng getEndLatLngBlockSegment(String jsonResponse, String lat, String lng) {
+	public LatLng getEndLatLngBlockSegment(String jsonResponse, double lat, double lng) {
+		
+
+		int stepsAfter = 0;
 		
 		JSONArray routes  = new JSONObject(jsonResponse).getJSONArray("routes");
 		JSONArray legs = routes.getJSONObject(0).getJSONArray("legs");
@@ -340,20 +394,55 @@ public class LowLevelRouteController {
 		for(int i = 0; i < steps.length(); i++) {
 			
 			JSONObject currentStep = steps.getJSONObject(i).getJSONObject("start_location");
-			
-			if(currentStep.getDouble("lat") == Double.parseDouble(lat) && currentStep.getDouble("lng") == Double.parseDouble(lng)) {
+			if(currentStep.getDouble("lat") == lat && currentStep.getDouble("lng") == lng) {
 
-				Double endLat = steps.getJSONObject(steps.length()-1).getJSONObject("end_location").getDouble("lat");
-				Double endLng = steps.getJSONObject(steps.length()-1).getJSONObject("end_location").getDouble("lng");
+				Double endLat = steps.getJSONObject(i+1+stepsAfter).getJSONObject("end_location").getDouble("lat");
+				Double endLng = steps.getJSONObject(i+1+stepsAfter).getJSONObject("end_location").getDouble("lng");
 					
 				System.out.println(endLat+","+endLng);
 				return new LatLng(endLat, endLng);
-				
 			}
 		}
-
 		return null;
 	}
 	
+	public JSONObject getLongestAlternativeForBlockedSegment(String response) {
+		
+
+		JSONObject jsonResponse = new JSONObject(response);
+		JSONArray routes  = jsonResponse.getJSONArray("routes");
+		
+		//get first route distance
+		int longestDistance = routes.getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("distance").getInt("value");
+		int longestRoutePos = 0;
+		
+		//iterate rest (if any exist)
+		for (int i = 1; i < routes.length(); i++) {
+			JSONObject leg= routes.getJSONObject(i).getJSONArray("legs").getJSONObject(0);
+			int currentDistance = leg.getJSONObject("distance").getInt("value");
+			
+			//longest alternative should not be the original route
+			if(currentDistance > longestDistance)
+				longestRoutePos = i;
+			longestDistance = currentDistance;
+		}
+	
+		//Remove extra routes -> newRoute
+
+		ArrayList<String> list = new ArrayList<String>();  
+	    list.add(routes.get(longestRoutePos).toString());
+		
+		JSONArray newRoute = new JSONArray(list);
+		
+		//replace jsonResponse['routes'] with newRoute
+		
+		
+		for(int i=0; i < routes.length(); i++) {
+			if(i != longestRoutePos)
+				routes.remove(i);
+		}
+		
+		return jsonResponse;
+	}
 }
 

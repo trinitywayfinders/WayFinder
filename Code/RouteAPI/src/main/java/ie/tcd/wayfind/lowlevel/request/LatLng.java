@@ -10,22 +10,7 @@ public class LatLng {
 		Lng = lng;
 	}
 	
-	public double getLat() {
-		return Lat;
-	}
-	
-	public void setLat(double lat) {
-		Lat = lat;
-	}
-	public double getLng() {
-		return Lng;
-	}
-	public void setLng(double lng) {
-		Lng = lng;
-	}
-	
 	public String toString() {
 		return this.Lat+","+this.Lng;
 	}
-	
 }

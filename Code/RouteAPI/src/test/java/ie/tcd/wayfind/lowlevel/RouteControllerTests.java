@@ -59,7 +59,7 @@ public class RouteControllerTests {
     	
     	String response;
 		try {
-			response = EntityUtils.toString(controller.getRoute(usr).getEntity(), "UTF-8");
+			response = EntityUtils.toString(controller.getRoute(usr, false).getEntity(), "UTF-8");
 			JSONArray routes  = new JSONObject(response).getJSONArray("routes");
 	    	for(int i = 0; i < routes.length(); i++) {
 				JSONArray legs = routes.getJSONObject(i).getJSONArray("legs");
@@ -85,7 +85,7 @@ public class RouteControllerTests {
             	
     	String response;
 		try {
-			response = EntityUtils.toString(controller.getRoute(usr).getEntity(), "UTF-8");
+			response = EntityUtils.toString(controller.getRoute(usr, false).getEntity(), "UTF-8");
 	    	assertTrue(controller.checkTotalDistanceRoute(response));
 		} catch (ParseException | IOException e) {
 			// TODO Auto-generated catch block
@@ -100,7 +100,7 @@ public class RouteControllerTests {
             	
     	String response;
 		try {
-			response = EntityUtils.toString(controller.getRoute(usr).getEntity(), "UTF-8");
+			response = EntityUtils.toString(controller.getRoute(usr, false).getEntity(), "UTF-8");
 	    	assertTrue(!controller.checkTotalDistanceRoute(response));
 		} catch (ParseException | IOException e) {
 			// TODO Auto-generated catch block
