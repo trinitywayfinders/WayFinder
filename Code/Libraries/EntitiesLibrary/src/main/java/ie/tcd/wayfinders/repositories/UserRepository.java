@@ -1,8 +1,8 @@
-package com.wayfinder.auth.repository;
+package ie.tcd.wayfinders.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.wayfinder.auth.entity.User;
+import ie.tcd.wayfinders.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 	User findByUsername(String username);

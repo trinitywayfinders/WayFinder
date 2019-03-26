@@ -1,13 +1,16 @@
-package com.wayfinder.auth.entity;
+package ie.tcd.wayfinders.entities;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -39,6 +42,9 @@ public class User implements UserDetails {
 	@Column(name="password", nullable=false)
 	@JsonProperty("password")
 	private String password;
+	
+	@OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY, optional=false)
+	private UserPrefs userPrefs;
 		
 	public User() {
 		;

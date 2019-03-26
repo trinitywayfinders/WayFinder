@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wayfinder.auth.entity.User;
 import com.wayfinder.auth.service.UserService;
+import ie.tcd.wayfinders.entities.User;
 
 @CrossOrigin(origins = {"*"})
 

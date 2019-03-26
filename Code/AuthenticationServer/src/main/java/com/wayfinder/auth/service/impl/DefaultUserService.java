@@ -5,9 +5,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.wayfinder.auth.entity.User;
-import com.wayfinder.auth.repository.UserRepository;
 import com.wayfinder.auth.service.UserService;
+
+import ie.tcd.wayfinders.entities.User;
+import ie.tcd.wayfinders.repositories.UserRepository;
 
 @Service
 public class DefaultUserService implements UserService {
