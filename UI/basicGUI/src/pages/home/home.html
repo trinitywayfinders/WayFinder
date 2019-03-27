@@ -7,17 +7,16 @@
     <ion-list>
 
       <ion-item>
-        <ion-label floating>Your Location</ion-label>
+        <ion-label floating>Enter starting point or select on map..</ion-label>
         <ion-input type="text" [(ngModel)]="inputLocation"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label floating>Destination</ion-label>
+        <ion-label floating>Enter destination point or select on map..</ion-label>
         <ion-input type="text" [(ngModel)]="inputDestination"></ion-input>
       </ion-item>
 
-      <button ion-button>Submit</button>
-
+      <button ion-button (click) ="getDirections()">Get Directions</button>
     </ion-list>
   </ion-navbar>
 </ion-header>

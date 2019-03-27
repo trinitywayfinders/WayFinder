@@ -48,6 +48,9 @@ public class LowLevelRouteController {
 	@PostMapping(path = "/api/route/", consumes = { MediaType.ALL_VALUE })
 	public ResponseEntity<String> retriveRoute(@RequestBody UserRouteRequest request) {
 
+		//Get user data from User-Preferences API + add preferences
+		System.out.println("\n\n\nIN ROUTING API"+request.getOrigin());
+		
 		logger.debug("Origin: %s", request.getOrigin());
 		logger.debug("Destination: %s", request.getDestination());
 		logger.debug("Mode: %s", request.getMode().toString());
@@ -61,8 +64,8 @@ public class LowLevelRouteController {
 
 		try {
 			responseBody = EntityUtils.toString(response.getEntity(), "UTF-8");
-			UserRouteRequest request1 = get1stSegment(3000, responseBody, request.getMode());
-			UserRouteRequest request3 = get3rdSegment(3000, responseBody, request.getMode());
+			UserRouteRequest request1 = get1stSegment(2500, responseBody, request.getMode());
+			UserRouteRequest request3 = get3rdSegment(2500, responseBody, request.getMode());
 
 			HttpResponse responseSegment1 = getRoute(request1, false);
 			responseBodySegment1 = EntityUtils.toString(responseSegment1.getEntity(), "UTF-8");
