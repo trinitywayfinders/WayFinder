@@ -15,23 +15,16 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-    @Bean
-    public Docket api() { 
-        return new Docket(DocumentationType.SWAGGER_2)
-          .apiInfo(apiInfo())
-          .select()
-          .apis(RequestHandlerSelectors.any())
-          .paths(PathSelectors.any())
-          .build();                                           
-    }
-    
-    @Bean
-    public ApiInfo apiInfo()
-    {
-        Contact contact2 = new Contact("Wayfinders", "", "thundyia@tcd.ie");
-        return new ApiInfoBuilder().title("Trinity Wayfinders Env Metrics APIs Module")
-                                   .description("Environment Metrics APIs Documentation")
-                                   .contact(contact2)
-                                   .version("0.1").build();
-    }
+	@Bean
+	public Docket api() {
+		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.any())
+				.paths(PathSelectors.any()).build();
+	}
+
+	@Bean
+	public ApiInfo apiInfo() {
+		Contact contact2 = new Contact("Wayfinders", "", "thundyia@tcd.ie");
+		return new ApiInfoBuilder().title("Trinity Wayfinders Env Metrics APIs Module")
+				.description("Environment Metrics APIs Documentation").contact(contact2).version("0.1").build();
+	}
 }

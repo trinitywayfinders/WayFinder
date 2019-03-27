@@ -12,8 +12,8 @@ import ie.tcd.wayfinder.envmetrics.weather.model.WeatherResponse;
 @Service
 public class WeatherFromDbService {
 
-	public WeatherResponse getWeatherFromDatabase(BigDecimal latitude, BigDecimal longitude) throws ValueNotAcceptedException
-	{
+	public WeatherResponse getWeatherFromDatabase(BigDecimal latitude, BigDecimal longitude)
+			throws ValueNotAcceptedException {
 		WeatherResponse response = new WeatherResponse();
 		response.setCondition("Clear");
 		response = response.icon("11d");
@@ -23,5 +23,5 @@ public class WeatherFromDbService {
 		response.setTimestamp(System.currentTimeMillis());
 		return response;
 	}
-	
+
 }

@@ -26,6 +26,7 @@ public interface WeatherApiInterface {
 			"application/json" }, method = RequestMethod.GET)
 	ResponseEntity<WeatherResponse> getRoute(
 			@ApiParam(value = "Current latitude", required = true) @PathVariable("Lat") String lat,
-			@ApiParam(value = "Current Longitude", required = true) @PathVariable("Long") String _long) throws ValueNotAcceptedException;
+			@ApiParam(value = "Current Longitude", required = true) @PathVariable("Long") String _long)
+			throws ValueNotAcceptedException;
 
 }

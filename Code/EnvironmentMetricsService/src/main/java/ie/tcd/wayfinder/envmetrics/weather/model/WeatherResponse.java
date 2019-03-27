@@ -35,8 +35,7 @@ public class WeatherResponse {
 
 	private final String overallPattern = String.format("^(%s)|(%s)|(%s)$", WeatherResponse.GOOD, WeatherResponse.BAD,
 			WeatherResponse.UNKNOWN);
-	private final String conditionPattern = String.format(
-			"^(%s)|(%s)|(%s)|(%s)|(%s)|(%s)|(%s)|(%s)$",
+	private final String conditionPattern = String.format("^(%s)|(%s)|(%s)|(%s)|(%s)|(%s)|(%s)|(%s)$",
 			WeatherResponse.THUNDERSTORM, WeatherResponse.DRIZZLE, WeatherResponse.RAIN, WeatherResponse.SNOW,
 			WeatherResponse.ATMOSPHERE, WeatherResponse.CLEAR, WeatherResponse.CLOUDS, WeatherResponse.UNKNOWN);
 	private final String iconPattern = "^(\\d{2}(d|n))$";
@@ -193,8 +192,7 @@ public class WeatherResponse {
 		if (checkPattern(iconPattern, icon)) {
 			this.icon = icon;
 		} else {
-			throw new ValueNotAcceptedException(ApiResponseMessage.ERROR,
-					"The accepted pattern is " + iconPattern);
+			throw new ValueNotAcceptedException(ApiResponseMessage.ERROR, "The accepted pattern is " + iconPattern);
 		}
 	}
 

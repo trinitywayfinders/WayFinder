@@ -23,7 +23,7 @@ public class WeatherResponseTest {
 		response.overall(checkString);
 		assertEquals(response.getOverall(), checkString);
 	}
-	
+
 	@Test
 	public void checkOverallUnknown() throws ValueNotAcceptedException {
 		WeatherResponse response = new WeatherResponse();
@@ -85,7 +85,7 @@ public class WeatherResponseTest {
 		response.condition(checkString);
 		assertEquals(response.getCondition(), checkString);
 	}
-	
+
 	@Test
 	public void checkConditionUnknown() throws ValueNotAcceptedException {
 		WeatherResponse response = new WeatherResponse();
@@ -123,7 +123,7 @@ public class WeatherResponseTest {
 		response.icon(checkString);
 		assertEquals(response.getIcon(), checkString);
 	}
-	
+
 	@Test
 	public void checkIcon03n() throws ValueNotAcceptedException {
 		WeatherResponse response = new WeatherResponse();

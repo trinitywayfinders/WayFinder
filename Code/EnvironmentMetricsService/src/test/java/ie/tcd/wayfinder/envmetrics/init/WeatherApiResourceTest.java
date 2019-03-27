@@ -17,17 +17,14 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @AutoConfigureMockMvc(secure = true)
 
 public class WeatherApiResourceTest {
-    
-    @Autowired
-    private MockMvc mvc;
-    @Test
-    public void testApiPositive() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/api/environment/weather/12.34/34.45")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
 
-    
-    
+	@Autowired
+	private MockMvc mvc;
+
+	@Test
+	public void testApiPositive() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/api/environment/weather/12.34/34.45")
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+	}
+
 }
