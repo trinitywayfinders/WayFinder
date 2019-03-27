@@ -1,6 +1,5 @@
 package ie.tcd.wayfinder.envmetrics.weather.model;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.regex.Matcher;
 
@@ -9,7 +8,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.springframework.validation.annotation.Validated;
-import org.threeten.bp.OffsetDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -23,15 +21,31 @@ import io.swagger.annotations.ApiModelProperty;
 @Validated
 public class WeatherResponse {
 
-	private final String overallPattern = "^(Good)|(Bad)$";
-	private final String conditionPattern = "^(Thunderstorm)|(Drizzle)|(Rain)|(Snow)|(Atmosphere)|(Clear)|(Clouds)$";
-	private final String iconPattern = "^(\\d{2}d)$";
+	public static final String GOOD = "Good";
+	public static final String BAD = "Bad";
+	public static final String UNKNOWN = "Unknown";
+	public static final String THUNDERSTORM = "Thunderstorm";
+	public static final String DRIZZLE = "Drizzle";
+	public static final String RAIN = "Rain";
+	public static final String SNOW = "Snow";
+	public static final String ATMOSPHERE = "Atmosphere";
+	public static final String CLEAR = "Clear";
+	public static final String CLOUDS = "Clouds";
+	public static final String DEFAULT_ICON = "00d";
+
+	private final String overallPattern = String.format("^(%s)|(%s)|(%s)$", WeatherResponse.GOOD, WeatherResponse.BAD,
+			WeatherResponse.UNKNOWN);
+	private final String conditionPattern = String.format(
+			"^(%s)|(%s)|(%s)|(%s)|(%s)|(%s)|(%s)|(%s)$",
+			WeatherResponse.THUNDERSTORM, WeatherResponse.DRIZZLE, WeatherResponse.RAIN, WeatherResponse.SNOW,
+			WeatherResponse.ATMOSPHERE, WeatherResponse.CLEAR, WeatherResponse.CLOUDS, WeatherResponse.UNKNOWN);
+	private final String iconPattern = "^(\\d{2}(d|n))$";
 
 	@JsonProperty("latitude")
-	private BigDecimal latitude = null;
+	private float latitude = 0L;
 
 	@JsonProperty("longitude")
-	private BigDecimal longitude = null;
+	private float longitude = 0L;
 
 	@JsonProperty("overall")
 	private String overall = null;
@@ -43,9 +57,9 @@ public class WeatherResponse {
 	private String icon = null;
 
 	@JsonProperty("timestamp")
-	private OffsetDateTime timestamp = null;
+	private long timestamp = -1L;
 
-	public WeatherResponse latitude(BigDecimal latitude) {
+	public WeatherResponse latitude(float latitude) {
 		this.latitude = latitude;
 		return this;
 	}
@@ -59,15 +73,15 @@ public class WeatherResponse {
 	@NotNull
 
 	@Valid
-	public BigDecimal getLatitude() {
+	public float getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(BigDecimal latitude) {
+	public void setLatitude(float latitude) {
 		this.latitude = latitude;
 	}
 
-	public WeatherResponse longitude(BigDecimal longitude) {
+	public WeatherResponse longitude(float longitude) {
 		this.longitude = longitude;
 		return this;
 	}
@@ -81,11 +95,11 @@ public class WeatherResponse {
 	@NotNull
 
 	@Valid
-	public BigDecimal getLongitude() {
+	public float getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(BigDecimal longitude) {
+	public void setLongitude(float longitude) {
 		this.longitude = longitude;
 	}
 
@@ -157,8 +171,7 @@ public class WeatherResponse {
 			this.icon = icon;
 			return this;
 		} else {
-			throw new ValueNotAcceptedException(ApiResponseMessage.ERROR,
-					"The accepted pattern is " + iconPattern);
+			throw new ValueNotAcceptedException(ApiResponseMessage.ERROR, "The accepted pattern is " + iconPattern);
 		}
 	}
 
@@ -181,11 +194,11 @@ public class WeatherResponse {
 			this.icon = icon;
 		} else {
 			throw new ValueNotAcceptedException(ApiResponseMessage.ERROR,
-					"The accepted pattern is " + conditionPattern);
+					"The accepted pattern is " + iconPattern);
 		}
 	}
 
-	public WeatherResponse timestamp(OffsetDateTime timestamp) {
+	public WeatherResponse timestamp(long timestamp) {
 		this.timestamp = timestamp;
 		return this;
 	}
@@ -199,11 +212,11 @@ public class WeatherResponse {
 	@NotNull
 
 	@Valid
-	public OffsetDateTime getTimestamp() {
+	public long getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(OffsetDateTime timestamp) {
+	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
 	}
 
