@@ -3,7 +3,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import leaflet from 'leaflet';
-import polyUtil  from 'polyline-encoded'
+//import polyUtil  from 'polyline-encoded'
 
 @Component({
   selector: 'page-home',
@@ -19,13 +19,44 @@ export class HomePage {
   startMarker: leaflet.marker
   destMarker: leaflet.marker
   blockMarker: leaflet.marker
-
+  simMarker: leaflet.marker
+  sim: any
+  simGroup: leaflet.featureGroup
   constructor(public navCtrl: NavController, public alertCtrl: AlertController ) {}
 
   ionViewDidEnter() {
     this.loadmap();
   }
+  simulateBlock(){
+    //let simGroup = this.simGroup;
 
+    var url = "http://localhost:8080/getSimulation/";
+    let data = '';
+    const http = require('http')
+    http.get(url, (resp) => {
+      // save the JSON in data
+      resp.on('data', (chunk) => {
+        data += chunk;
+      }).on('end',()=>{
+        this.sim = JSON.parse(data);
+        this.sim = this.sim['data'];
+        if (this.simGroup){
+          this.map.removeLayer(this.simGroup);
+        }
+        let simGroup = leaflet.featureGroup();
+        var i = 0 ;
+        while( i<10 ) {
+          this.simMarker= leaflet.marker([this.sim[i]['lat'],this.sim[i]['lng']]);
+          simGroup.addLayer(this.simMarker);
+          i+=1;
+        }
+        this.map.addLayer(simGroup);
+        this.simGroup = simGroup;
+      })
+      }).on("error", (err) => {
+      console.log("Error: " + err.message);
+    });
+  }
 
   setBlock() {
     var blockMarker = this.blockMarker
@@ -46,6 +77,7 @@ export class HomePage {
 
     if (blockMarker) {
       map.removeLayer(blockMarker);
+      markerGroup.addLayer(blockMarker);
     }
 
     var treeIcon = leaflet.icon({
@@ -54,10 +86,6 @@ export class HomePage {
       //iconAnchor: [22, 94],
       //popupAnchor: [-3, -76]
     });
-
-
-
-
     let markerGroup = leaflet.featureGroup()
     console.log("Adding:::"+blockLatLng.lat)
     blockMarker = leaflet.marker([blockLatLng.lat, blockLatLng.lng]);
