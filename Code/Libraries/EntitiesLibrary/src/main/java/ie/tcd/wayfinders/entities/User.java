@@ -81,6 +81,14 @@ public class User implements UserDetails {
 	    return authorities;
 	}
 	
+	public UserPrefs getUserPrefs() {
+		return userPrefs;
+	}
+
+	public void setUserPrefs(UserPrefs userPrefs) {
+		this.userPrefs = userPrefs;
+	}
+
 	public int getUserId() {
 		return this.userId;
 	}
