@@ -153,10 +153,10 @@ public class NavigationController {
     
   //Avoid LatLng endpoint
     @GetMapping("/navigation/start/{start}/destination/{dest}/{mode}/avoid/{avoidLat}/{avoidLng}/")
-    public ResponseEntity<String> findRouteWithBlock(@PathVariable String start, @PathVariable String dest, @PathVariable TravelMode mode, @PathVariable Float avoidLat, @PathVariable Float avoidLong) throws IOException
+    public ResponseEntity<String> findRouteWithBlock(@PathVariable String start, @PathVariable String dest, @PathVariable TravelMode mode, @PathVariable Float avoidLat, @PathVariable Float avoidLng) throws IOException
     {
       
-        if (avoidLong >180 || avoidLong < -180 ) return new ResponseEntity<String>("Longitude of Block point is invalid!",
+        if (avoidLng >180 || avoidLng < -180 ) return new ResponseEntity<String>("Longitude of Block point is invalid!",
                       HttpStatus.BAD_REQUEST);
         
         if (avoidLat > 90 || avoidLat < -90) return new ResponseEntity<String>("Latitude of Block point is invalid!",
@@ -169,7 +169,7 @@ public class NavigationController {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
        
-        String endpoint = "http://localhost:8082/api/route/avoid/"+avoidLat+"/"+avoidLong+"/";
+        String endpoint = "http://localhost:8082/api/route/avoid/"+avoidLat+"/"+avoidLng+"/";
         
         HttpResponse response = Library.POST(endpoint, Optional.of(headers), Optional.of(jsonRequestContent));
                 

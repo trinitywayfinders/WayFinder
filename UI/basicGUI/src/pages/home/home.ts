@@ -18,7 +18,7 @@ export class HomePage {
   marker: leaflet.marker
   startMarker: leaflet.marker
   destMarker: leaflet.marker
-
+  blockMarker: leaflet.marker
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController ) {}
 
@@ -26,8 +26,64 @@ export class HomePage {
     this.loadmap();
   }
 
+
+  setBlock() {
+    var blockMarker = this.blockMarker
+    var map = this.map
+    var getRouteWithBlock = this.getRouteWithBlock
+    var inputLocation = this.inputLocation
+    var inputDestination = this.inputDestination
+    var startMarker = this.startMarker
+    var destMarker = this.destMarker
+
+    var onClickSetBlock = this.onClickSetBlock
+    var getRouteWithBlock = this.getRouteWithBlock
+    var drawPolyline = this.drawPolyline
+
+    map.on('click', function(e) {
+
+    var blockLatLng = e.latlng;
+
+    if (blockMarker) {
+      map.removeLayer(blockMarker);
+    }
+
+    var treeIcon = leaflet.icon({
+      //iconUrl: 'https://icon2.kisspng.com/20180331/are/kisspng-tree-plant-clip-art-cartoon-tree-5abfc6dedb2342.0180062215225177268976.jpg',
+      //iconSize: [35, 95],
+      //iconAnchor: [22, 94],
+      //popupAnchor: [-3, -76]
+    });
+
+
+
+
+    let markerGroup = leaflet.featureGroup()
+    console.log("Adding:::"+blockLatLng.lat)
+    blockMarker = leaflet.marker([blockLatLng.lat, blockLatLng.lng]);
+    markerGroup.addLayer(blockMarker);
+    console.log(map)
+    map.addLayer(markerGroup);
+    console.log("You clicked the map at latitude: " + blockLatLng.lat + " and longitude: " + blockLatLng.lng);
+
+    console.log("getting block route: "+inputLocation)
+    //getRouteWithBlock(inputLocation, inputDestination, blockLatLng.Lat, blockLatLng.Lng)
+    onClickSetBlock(map, getRouteWithBlock, blockLatLng,inputLocation, inputDestination, drawPolyline, startMarker, destMarker)
+    });
+  }
+
+  onClickSetBlock(map, getRouteWithBlock, blockLatLng, inputLocation, inputDestination, drawPolyline, startMarker, destMarker){
+
+    console.log(map)
+    console.log("You clicked the map at latitude: " + blockLatLng.lat + " and longitude: " + blockLatLng.lng);
+
+    console.log("getting block route: "+inputLocation)
+    getRouteWithBlock(inputLocation, inputDestination, blockLatLng.lat, blockLatLng.lng, drawPolyline, map, startMarker, destMarker)
+  }
+
    getLocation(){
      this.map.locate({
+       setView: true
      }).once('locationfound', (e) => {
       this.currentLatlng = e.latlng
 
@@ -60,8 +116,9 @@ export class HomePage {
     this.map = leaflet.map("map").fitWorld();
     leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attributions: 'www.tphangout.com',
-      maxZoom: 18
-    }).addTo(this.map);
+      maxZoom: 18,
+
+    }).addTo(this.map)
     this.getLocation()
 
     var inputDestination = this.inputDestination;
@@ -75,11 +132,31 @@ export class HomePage {
 
   getDirections(){
     console.log("GetDirections: "+this.inputLocation)
-    this.getPolyLine(this.inputLocation, this.inputDestination)
+    var i;
+    for (i in this.map._layers) {
+      this.map.removeLayer(this.map._layers[i])
+    }
+    leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attributions: 'www.tphangout.com',
+      maxZoom: 18
+    }).addTo(this.map);
+    //this.getLocation()
+
+    this.getRoute(this.inputLocation, this.inputDestination)
   }
 
   //ToDo change method to take in starting lat/long and route to destination lat/long
-  getPolyLine(start, destination){
+  getRoute(start, destination){
+    console.log("routing:"+start)
+    if(start == ""){
+      alert("Starting location cannot be empty!")
+      return;
+    }
+
+    if(destination == ""){
+      alert("Destination location cannot be empty!")
+      return;
+    }
     //ToDo: change url to deployed server version
     var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/walking/"
     const http = require('http')
@@ -91,67 +168,104 @@ export class HomePage {
         data += chunk;
       });
 
-
-
       // The whole response has been received. Print out the result.
       resp.on('end', () => {
-        var jsonData = JSON.parse(data)
-        console.log(jsonData);
-        var map = this.map
-        var startMarker = this.startMarker
-        var destMarker = this.destMarker
-        if (startMarker) {
-          map.removeLayer(startMarker);
-        }
-        if (destMarker) {
-          map.removeLayer(destMarker);
-        }
-
-        let markerGroup = leaflet.featureGroup()
-
-        var blockLat = 53.347802
-        var blockLng = -6.243980
-        var blockMarker = leaflet.marker([blockLat, blockLng])
-        markerGroup.addLayer(blockMarker)
-
-        jsonData = jsonData['routes']
-
-        jsonData.forEach(function(route) {
-              var legs = route['legs']
-
-              legs.forEach(function(leg){
-                var steps = leg['steps']
-                var color = "#"+((1<<24)*Math.random()|0).toString(16)
-
-                var startMarkerLatLng = [steps[0]['start_location']["lat"], steps[0]['start_location']["lng"]]
-                var destMarkerLatLng = [steps[steps.length-1]['end_location']['lat'],steps[steps.length-1]['end_location']['lng']]
-
-
-                startMarker = leaflet.marker([startMarkerLatLng[0], startMarkerLatLng[1]])
-                destMarker = leaflet.marker([destMarkerLatLng[0], destMarkerLatLng[1]])
-                markerGroup.addLayer(startMarker);
-                markerGroup.addLayer(destMarker);
-                map.addLayer(markerGroup);
-
-                steps.forEach(function(step){
-                  var polyline = step['polyline']['points']
-                  var coordinates = polyUtil.decode(polyline);
-
-                  var polyline = leaflet.polyline(coordinates, {
-                    color: color,
-                    weight: 10,
-                    opacity: .7,
-                    dashArray: '0,0',
-                    lineJoin: 'round'
-                  }).addTo(map)
-                })
-              })
-        })
+        this.drawPolyline(data, this.map, this.startMarker, this.destMarker)
       });
 
     }).on("error", (err) => {
       console.log("Error: " + err.message);
     });
-
   }
+
+  getRouteWithBlock(start, destination, blockLat, blockLng, drawPolyline, map, startMarker, destMarker){
+    var drawPolyline = drawPolyline
+
+    console.log("routing:"+start)
+    if(start == ""){
+      alert("Starting location cannot be empty!")
+      return;
+    }
+
+    if(destination == ""){
+      alert("Destination location cannot be empty!")
+      return;
+    }
+
+    if(blockLat == ""){
+      alert("Please choose a block location on the map")
+    }
+
+    if(blockLng == ""){
+      alert("Please choose a block location on the map")
+    }
+
+    //ToDo: change url to deployed server version
+    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/walking/avoid/"+blockLat+"/"+blockLng+"/"
+    const http = require('http')
+    http.get(url, (resp) => {
+      let data = '';
+
+      // A chunk of data has been recieved.
+      resp.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      // The whole response has been received. Print out the result.
+      resp.on('end', () => {
+        drawPolyline(data, map, startMarker, destMarker)
+      });
+
+    }).on("error", (err) => {
+      console.log("Error: " + err.message);
+    });
+  }
+
+  drawPolyline(data, map, startMarker, destMarker){
+    var jsonData = JSON.parse(data)
+    console.log(jsonData);
+    if (startMarker) {
+      map.removeLayer(startMarker);
+    }
+    if (destMarker) {
+      map.removeLayer(destMarker);
+    }
+
+    let markerGroup = leaflet.featureGroup()
+
+      jsonData = jsonData['routes']
+
+      jsonData.forEach(function(route) {
+            var legs = route['legs']
+
+            legs.forEach(function(leg){
+              var steps = leg['steps']
+              var color = "#"+((1<<24)*Math.random()|0).toString(16)
+
+              var startMarkerLatLng = [steps[0]['start_location']["lat"], steps[0]['start_location']["lng"]]
+              var destMarkerLatLng = [steps[steps.length-1]['end_location']['lat'],steps[steps.length-1]['end_location']['lng']]
+
+
+              startMarker = leaflet.marker([startMarkerLatLng[0], startMarkerLatLng[1]])
+              destMarker = leaflet.marker([destMarkerLatLng[0], destMarkerLatLng[1]])
+              markerGroup.addLayer(startMarker);
+              markerGroup.addLayer(destMarker);
+              map.addLayer(markerGroup);
+
+              steps.forEach(function(step){
+                var polyline = step['polyline']['points']
+                var coordinates = polyUtil.decode(polyline);
+
+                var polyline = leaflet.polyline(coordinates, {
+                  color: color,
+                  weight: 10,
+                  opacity: .7,
+                  dashArray: '0,0',
+                  lineJoin: 'round'
+                }).addTo(map)
+              })
+            })
+      })
+  }
+
 }
