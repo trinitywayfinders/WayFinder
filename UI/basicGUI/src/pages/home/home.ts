@@ -21,15 +21,15 @@ export class HomePage {
   loginPage = LoginPage;
 
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController ) {}
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController) { }
 
   ionViewDidEnter() {
     this.loadmap();
   }
 
-   getLocation(){
-     this.map.locate({
-     }).once('locationfound', (e) => {
+  getLocation() {
+    this.map.locate({
+    }).once('locationfound', (e) => {
       this.currentLatlng = e.latlng
       //remove the marker before adding a new one
       let markerGroup = leaflet.featureGroup();
@@ -40,24 +40,24 @@ export class HomePage {
       markerGroup.addLayer(this.marker);
       this.map.addLayer(markerGroup);
 
-      }).on('locationerror', (err) => {
-          console.log(err.message);
-      })
+    }).on('locationerror', (err) => {
+      console.log(err.message);
+    })
   }
 
-    showLocation(){
-      this.getLocation()
+  showLocation() {
+    this.getLocation()
 
-      let alertOfLoc = this.alertCtrl.create({
-        title:"YOUR CURRENT LOCATION",
-        subTitle: "Latitude:" + this.currentLatlng.lat+" Longitude: " +this.currentLatlng.lng,
-        buttons:['GOT IT']
-      });
+    let alertOfLoc = this.alertCtrl.create({
+      title: "YOUR CURRENT LOCATION",
+      subTitle: "Latitude:" + this.currentLatlng.lat + " Longitude: " + this.currentLatlng.lng,
+      buttons: ['GOT IT']
+    });
     alertOfLoc.present();
   }
 
   loadmap() {
-    if(this.map) {
+    if (this.map) {
       this.map.remove();
     }
     this.map = leaflet.map("map").fitWorld();
@@ -71,7 +71,7 @@ export class HomePage {
   }
 
 
-  getPolyLine(){
+  getPolyLine() {
     console.log("getPolyLine")
     var url = "http://localhost:3000/routes"
 
@@ -92,34 +92,34 @@ export class HomePage {
 
         var map = this.map
         jsonData.forEach(function(route) {
-              var legs = route['legs']
+          var legs = route['legs']
 
-              legs.forEach(function(leg){
-                var steps = leg['steps']
+          legs.forEach(function(leg) {
+            var steps = leg['steps']
 
-                steps.forEach(function(step){
+            steps.forEach(function(step) {
 
-                  var coordinates = polyUtil.decode(step['polyline']['points']);
+              var coordinates = polyUtil.decode(step['polyline']['points']);
 
-                  polyline = leaflet.polyline(coordinates, {
-                    color: "#"+((1<<24)*Math.random()|0).toString(16),
-                    weight: 10,
-                    opacity: .7,
-                    dashArray: '0,0',
-                    lineJoin: 'round'
-                  }).addTo(map)
-                })
-              })
-              /*var points = overview_polyline['points']
-              var coordinates = polyUtil.decode(points);
-              var polyline = leaflet.polyline(coordinates, {
-                color: 'red',
+              polyline = leaflet.polyline(coordinates, {
+                color: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                 weight: 10,
                 opacity: .7,
                 dashArray: '0,0',
                 lineJoin: 'round'
               }).addTo(map)
-              */
+            })
+          })
+          /*var points = overview_polyline['points']
+          var coordinates = polyUtil.decode(points);
+          var polyline = leaflet.polyline(coordinates, {
+            color: 'red',
+            weight: 10,
+            opacity: .7,
+            dashArray: '0,0',
+            lineJoin: 'round'
+          }).addTo(map)
+          */
         })
       });
 
