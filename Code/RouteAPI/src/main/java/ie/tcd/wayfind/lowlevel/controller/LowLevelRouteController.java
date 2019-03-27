@@ -27,7 +27,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import ie.tcd.wayfind.lowlevel.request.InputUserRouteRequest;
 import ie.tcd.wayfind.lowlevel.request.LatLng;
+import ie.tcd.wayfind.lowlevel.request.UserPreferences;
 import ie.tcd.wayfind.lowlevel.request.UserRouteRequest;
 import ie.tcd.wayfind.lowlevel.type.TravelMode;
 import ie.tcd.wayfinders.restLibrary.Library;
@@ -46,8 +48,11 @@ public class LowLevelRouteController {
 	private static double totalDistance = 5;
 
 	@PostMapping(path = "/api/route/", consumes = { MediaType.ALL_VALUE })
-	public ResponseEntity<String> retriveRoute(@RequestBody UserRouteRequest request) {
+	public ResponseEntity<String> retriveRoute(@RequestBody InputUserRouteRequest request) {
 
+		UserPreferences userPreferences = new UserPreferences(request.getUsername());
+		UserRouteRequest userRouteRequest = new UserRouteRequest(request.getOrigin(), request.getDestination(), request.getMode());		
+		
 		//Get user data from User-Preferences API + add preferences
 		System.out.println("\n\n\nIN ROUTING API"+request.getOrigin());
 		
@@ -55,7 +60,9 @@ public class LowLevelRouteController {
 		logger.debug("Destination: %s", request.getDestination());
 		logger.debug("Mode: %s", request.getMode().toString());
 
-		HttpResponse response = getRoute(request, false);
+		
+		
+		HttpResponse response = getRoute(userRouteRequest, false);
 
 		String responseBody = null;
 		String responseBodySegment1 = null;
@@ -292,9 +299,10 @@ public class LowLevelRouteController {
 	 */
 
 	@PostMapping(path="/api/route/avoid/{lat}/{lng}/", consumes={ MediaType.ALL_VALUE })
-	public ResponseEntity<String> retriveRouteWithBlock(@RequestBody UserRouteRequest request, @PathVariable String lat, @PathVariable String lng) {
+	public ResponseEntity<String> retriveRouteWithBlock(@RequestBody InputUserRouteRequest request, @PathVariable String lat, @PathVariable String lng) {
 		
 		String avoidLatLng = lat+","+lng;
+		
 
 
 		UserRouteRequest originalRoute = new UserRouteRequest(request.getOrigin(), request.getDestination(), request.getMode());
