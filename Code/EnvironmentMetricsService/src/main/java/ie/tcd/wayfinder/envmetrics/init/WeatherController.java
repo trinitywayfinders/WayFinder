@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value="/")
 public class WeatherController {
 
-    @RequestMapping(value="/abc", method=RequestMethod.GET)
+    @RequestMapping(value="/env", method=RequestMethod.GET)
     public String index()
     {
         return "Wayfinders Springboot Env Service!";
