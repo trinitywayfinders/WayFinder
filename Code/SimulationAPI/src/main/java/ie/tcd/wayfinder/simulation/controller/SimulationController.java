@@ -38,11 +38,11 @@ import ie.tcd.wayfinders.restLibrary.Library;
 @RequestMapping(path="/")
 public class SimulationController {
     @RequestMapping(path="/getSimulation/")
-    public ResponseEntity<List<ResponseClass>> retriveBlock() {
+    public ResponseEntity<String> retriveBlock() {
         // Parameter check goes here
         List<List<ResponseClass>> masterList = createData();
         
-        return new ResponseEntity<List<ResponseClass>>(getRandomValue(masterList), HttpStatus.OK);
+        return new ResponseEntity<String>(("{"+"\"data\":"+ getRandomValue(masterList).toString()+ "}"), HttpStatus.OK);
     }
     
     private List<ResponseClass> getRandomValue(List<List<ResponseClass>> masterList)
@@ -143,13 +143,13 @@ public class SimulationController {
         response31.SetVal(53.428962, -6.214220, "traffic jam");
         response32.SetVal(53.416898, -6.152687, "Tree on the road");
         response33.SetVal(53.447980, -6.160301, "Tree on the road");
-        response34.SetVal(53.340103, -6.248921, "Tree on the road");
+        response34.SetVal(53.340103, -6.248921, "traffic jam");
         response35.SetVal(53.345400, -6.258977, "Tree on the road");
         response36.SetVal(53.304906, -6.245537, "Tree on the road");
-        response37.SetVal(53.325010, -6.278812, "Tree on the road");
+        response37.SetVal(53.325010, -6.278812, "traffic jam");
         response38.SetVal(53.318341, -6.242724, "Tree on the road");
         response39.SetVal(52.828814, -8.296364, "Tree on the road");
-        response30.SetVal(52.873339, -8.031370, "Tree on the road");
+        response30.SetVal(52.873339, -8.031370, "traffic jam");
         
         returnResponse3.add(response31);
         returnResponse3.add(response32);

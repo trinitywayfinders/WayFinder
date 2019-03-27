@@ -23,7 +23,7 @@ public class ResponseClass {
        }
        
        public String toString() {
-           return this.lat+","+this.lng+","+this.reason;
+           return "{"+"\"lat\":"+this.lat+",\"lng\":"+this.lng+",\"reason\":\""+this.reason+"\"}";
        }
         
 }
