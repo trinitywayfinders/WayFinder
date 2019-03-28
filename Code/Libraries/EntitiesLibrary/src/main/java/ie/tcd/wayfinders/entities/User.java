@@ -58,6 +58,7 @@ public class User implements UserDetails {
 		} else {
 			this.password = password;
 		}
+		this.userPrefs = new UserPrefs();
 	}
 	
 	@JsonCreator
@@ -70,6 +71,7 @@ public class User implements UserDetails {
 		} else {
 			this.password = password;
 		}
+		this.userPrefs = new UserPrefs();
 	}
 	
 	@Override

@@ -1,4 +1,4 @@
-package com.wayfinder.userprefs;
+package ie.tcd.wayfinders.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,12 +11,11 @@ public class UserPrefs {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String username;
-    private int concernHealth;
-    private int concernSpeed;
-    private int concernCost;
-    private int concernPollutionAvoidance;
-    private int concernEmissionsReduction;
+    private int concernHealth = 1;
+    private int concernSpeed = 2;
+    private int concernCost = 3;
+    private int concernPollutionAvoidance = 4;
+    private int concernEmissionsReduction = 5;
 
     public static String USERNAME_KEY = "username";
     public static String HEALTH_KEY = "concernHealth";
@@ -27,11 +26,10 @@ public class UserPrefs {
     
     protected UserPrefs() {}
     
-	public UserPrefs(String username, int concernHealth, int concernSpeed, int concernCost,
+	public UserPrefs(int concernHealth, int concernSpeed, int concernCost,
 			int concernPollutionAvoidance, int concernEmissionsReduction) {
 		super();
 		
-		this.username = username;
 		this.concernHealth = concernHealth;
 		this.concernSpeed = concernSpeed;
 		this.concernCost = concernCost;
@@ -39,9 +37,6 @@ public class UserPrefs {
 		this.concernEmissionsReduction = concernEmissionsReduction;
 	}
 
-	public String getUsername() {
-		return username;
-	}
 	public int getConcernHealth() {
 		return concernHealth;
 	}
@@ -57,11 +52,6 @@ public class UserPrefs {
 	public int getConcernEmissionsReduction() {
 		return concernEmissionsReduction;
 	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	public void setConcernHealth(int concernHealth) {
 		this.concernHealth = concernHealth;
 	}
