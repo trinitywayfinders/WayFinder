@@ -4,7 +4,7 @@ import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import leaflet from 'leaflet';
 //import polyUtil  from 'polyline-encoded'
-
+import { SignupPage } from '../signup/signup';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -12,6 +12,7 @@ import leaflet from 'leaflet';
 export class HomePage {
   @ViewChild('map') mapContainer: ElementRef;
   map: any;
+  signupPage = SignupPage;
   inputLocation = ''
   inputDestination = ''
   currentLatlng: any
@@ -141,6 +142,9 @@ export class HomePage {
   }
 
   loadmap() {
+    if(this.map){
+      this.map.remove();
+    }
     this.map = leaflet.map("map").fitWorld();
     leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attributions: 'www.tphangout.com',
