@@ -41,8 +41,8 @@ public class NavigationController {
      * ResponseEntity<String>("No ROUTES", HttpStatus.BAD_REQUEST); }
      */
  
-    @GetMapping("/navigation/start/{startLat}/{startLong}/destination/{destLat}/{destLong}/{mode}")
-    public ResponseEntity<String> findRoute(@PathVariable Float startLong, @PathVariable Float startLat, @PathVariable Float destLong, @PathVariable Float destLat, @PathVariable TravelMode mode) throws IOException
+    @GetMapping("/navigation/start/{startLat}/{startLong}/destination/{destLat}/{destLong}/{mode}/{username}")
+    public ResponseEntity<String> findRoute(@PathVariable Float startLong, @PathVariable Float startLat, @PathVariable Float destLong, @PathVariable Float destLat, @PathVariable TravelMode mode, @PathVariable String username) throws IOException
     {
     	
     	System.out.println("\n\n\n GOT REQUEST \n\n\n");
@@ -65,7 +65,7 @@ public class NavigationController {
         if (startLong >180 || startLong < -180 ) return new ResponseEntity<String>("Longitude of Starting point is invalid!",
                       HttpStatus.BAD_REQUEST);
                 
-        UserRouteRequest request = new UserRouteRequest(startLat + "," + startLong, destLat + "," + destLong, mode);
+        UserRouteRequest request = new UserRouteRequest(startLat + "," + startLong, destLat + "," + destLong, mode, username);
         
         String jsonRequestContent = objectMapper().writeValueAsString(request);
                 
@@ -80,12 +80,12 @@ public class NavigationController {
         return new ResponseEntity<String>(responseString, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
     }
     
-    @GetMapping("/navigation/start/{start}/destination/{dest}/{mode}")
-    public ResponseEntity<String> findRoute(@PathVariable String start, @PathVariable String dest, @PathVariable TravelMode mode) throws IOException
+    @GetMapping("/navigation/start/{start}/destination/{dest}/{mode}/{username}")
+    public ResponseEntity<String> findRoute(@PathVariable String start, @PathVariable String dest, @PathVariable TravelMode mode, @PathVariable String username) throws IOException
     {
     	
     	System.out.println("\n\n\n GOT REQUEST \n\n\n");
-        UserRouteRequest request = new UserRouteRequest(start, dest, mode);
+        UserRouteRequest request = new UserRouteRequest(start, dest, mode, username);
         
         String jsonRequestContent = objectMapper().writeValueAsString(request);
                 
@@ -105,9 +105,9 @@ public class NavigationController {
     
     
   //Avoid LatLng endpoint
-    @GetMapping("/navigation/start/{startLat}/{startLong}/destination/{destLat}/{destLong}/{mode}/avoid/{avoidLat}/{avoidLng}/")
+    @GetMapping("/navigation/start/{startLat}/{startLong}/destination/{destLat}/{destLong}/{mode}/avoid/{avoidLat}/{avoidLng}/{username}")
     public ResponseEntity<String> findRouteWithBlock(@PathVariable Float startLong, @PathVariable Float startLat, @PathVariable Float destLong, @PathVariable Float destLat, 
-    		@PathVariable TravelMode mode, @PathVariable Float avoidLat, @PathVariable Float avoidLong) throws IOException
+    		@PathVariable TravelMode mode, @PathVariable Float avoidLat, @PathVariable Float avoidLong, @PathVariable String username) throws IOException
     {
         
         if (startLong == null || startLat == null) return new ResponseEntity<String>("Starting location cannot be empty!",
@@ -134,7 +134,7 @@ public class NavigationController {
         if (avoidLat > 90 || avoidLat < -90) return new ResponseEntity<String>("Latitude of Block point is invalid!",
                 HttpStatus.BAD_REQUEST);
         
-        UserRouteRequest request = new UserRouteRequest(startLat + "," + startLong, destLat + "," + destLong, mode);
+        UserRouteRequest request = new UserRouteRequest(startLat + "," + startLong, destLat + "," + destLong, mode, username);
         
         String jsonRequestContent = objectMapper().writeValueAsString(request);
                 
@@ -152,8 +152,8 @@ public class NavigationController {
     }
     
   //Avoid LatLng endpoint
-    @GetMapping("/navigation/start/{start}/destination/{dest}/{mode}/avoid/{avoidLat}/{avoidLng}/")
-    public ResponseEntity<String> findRouteWithBlock(@PathVariable String start, @PathVariable String dest, @PathVariable TravelMode mode, @PathVariable Float avoidLat, @PathVariable Float avoidLng) throws IOException
+    @GetMapping("/navigation/start/{start}/destination/{dest}/{mode}/avoid/{avoidLat}/{avoidLng}/{username}")
+    public ResponseEntity<String> findRouteWithBlock(@PathVariable String start, @PathVariable String dest, @PathVariable TravelMode mode, @PathVariable Float avoidLat, @PathVariable Float avoidLng, @PathVariable String username) throws IOException
     {
       
         if (avoidLng >180 || avoidLng < -180 ) return new ResponseEntity<String>("Longitude of Block point is invalid!",
@@ -162,7 +162,7 @@ public class NavigationController {
         if (avoidLat > 90 || avoidLat < -90) return new ResponseEntity<String>("Latitude of Block point is invalid!",
                 HttpStatus.BAD_REQUEST);
         
-        UserRouteRequest request = new UserRouteRequest(start, dest, mode);
+        UserRouteRequest request = new UserRouteRequest(start, dest, mode, username);
         
         String jsonRequestContent = objectMapper().writeValueAsString(request);
                 

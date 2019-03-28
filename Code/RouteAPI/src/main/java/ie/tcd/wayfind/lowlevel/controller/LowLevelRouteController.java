@@ -29,6 +29,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import ie.tcd.wayfind.lowlevel.request.InputUserRouteRequest;
 import ie.tcd.wayfind.lowlevel.request.LatLng;
+import ie.tcd.wayfind.lowlevel.request.TravelModeBasedOnPreference;
 import ie.tcd.wayfind.lowlevel.request.UserPreferences;
 import ie.tcd.wayfind.lowlevel.request.UserRouteRequest;
 import ie.tcd.wayfind.lowlevel.type.TravelMode;
@@ -50,8 +51,23 @@ public class LowLevelRouteController {
 	@PostMapping(path = "/api/route/", consumes = { MediaType.ALL_VALUE })
 	public ResponseEntity<String> retriveRoute(@RequestBody InputUserRouteRequest request) {
 
+		
+
+		UserRouteRequest userRouteRequest = new UserRouteRequest(request.getOrigin(), request.getDestination(), TravelMode.driving);	
+		
+		HttpResponse getDistanceResponse = getRoute(userRouteRequest, false);
+		String getDistanceResponseBody = null;
+		try {
+			getDistanceResponseBody = EntityUtils.toString(getDistanceResponse.getEntity(), "UTF-8");
+			
+		} catch (IOException | ParseException | NullPointerException e) {
+			e.printStackTrace();
+		}
+		
+		int initialDistance = getTotalDistanceRoute(getDistanceResponseBody);
+		
 		UserPreferences userPreferences = new UserPreferences(request.getUsername());
-		UserRouteRequest userRouteRequest = new UserRouteRequest(request.getOrigin(), request.getDestination(), request.getMode());		
+		TravelModeBasedOnPreference travelModeBasedOnPrefs = new TravelModeBasedOnPreference(userPreferences, initialDistance);
 		
 		//Get user data from User-Preferences API + add preferences
 		System.out.println("\n\n\nIN ROUTING API"+request.getOrigin());
@@ -60,6 +76,32 @@ public class LowLevelRouteController {
 		logger.debug("Destination: %s", request.getDestination());
 		logger.debug("Mode: %s", request.getMode().toString());
 
+		
+		/*
+		 * 
+		 * 1. Check if distance < 5k - > if yes dont split.
+		 * 
+		 * 
+		 * 1. Fix all travel modes - currently hardcoded to driving / request.GetMode()
+		 * 
+		 * 
+		 */
+		
+		if(initialDistance < 5000) {
+			
+			userRouteRequest = new UserRouteRequest(request.getOrigin(), request.getDestination(), travelModeBasedOnPrefs.Segment1Mode);	
+			
+			getDistanceResponse = getRoute(userRouteRequest, false);
+			getDistanceResponseBody = null;
+			try {
+				getDistanceResponseBody = EntityUtils.toString(getDistanceResponse.getEntity(), "UTF-8");
+				
+			} catch (IOException | ParseException | NullPointerException e) {
+				e.printStackTrace();
+			}
+
+			return new ResponseEntity<String>(getDistanceResponseBody, HttpStatus.valueOf(getDistanceResponse.getStatusLine().getStatusCode()));
+		}
 		
 		
 		HttpResponse response = getRoute(userRouteRequest, false);
@@ -71,8 +113,8 @@ public class LowLevelRouteController {
 
 		try {
 			responseBody = EntityUtils.toString(response.getEntity(), "UTF-8");
-			UserRouteRequest request1 = get1stSegment(2500, responseBody, request.getMode());
-			UserRouteRequest request3 = get3rdSegment(2500, responseBody, request.getMode());
+			UserRouteRequest request1 = get1stSegment(travelModeBasedOnPrefs.Segment1Distance, responseBody, travelModeBasedOnPrefs.Segment1Mode);
+			UserRouteRequest request3 = get3rdSegment(travelModeBasedOnPrefs.Segment3Distance, responseBody, travelModeBasedOnPrefs.Segment3Mode);
 
 			HttpResponse responseSegment1 = getRoute(request1, false);
 			responseBodySegment1 = EntityUtils.toString(responseSegment1.getEntity(), "UTF-8");
@@ -84,7 +126,7 @@ public class LowLevelRouteController {
 
 			String startSegment3 = getSegment3StartLatLng(responseBodySegment3);
 
-			UserRouteRequest request2 = get2ndSegment(endSegment1, startSegment3, TravelMode.driving);
+			UserRouteRequest request2 = get2ndSegment(endSegment1, startSegment3, travelModeBasedOnPrefs.Segment2Mode);
 			HttpResponse responseSegment2 = getRoute(request2, false);
 			responseBodySegment2 = EntityUtils.toString(responseSegment2.getEntity(), "UTF-8");
 
@@ -97,20 +139,16 @@ public class LowLevelRouteController {
 		return new ResponseEntity<String>(combinedRoute, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
 	}
 
-	public boolean checkTotalDistanceRoute(String originalJson) {
+	public int getTotalDistanceRoute(String originalJson) {
 
 		JSONArray routes = new JSONObject(originalJson).getJSONArray("routes");
 
-		for (int i = 0; i < routes.length(); i++) {
-			JSONArray legs = routes.getJSONObject(i).getJSONArray("legs");
+		JSONArray legs = routes.getJSONObject(0).getJSONArray("legs");
 
-			JSONObject leg = legs.getJSONObject(0);
-			int distance = leg.getJSONObject("distance").getInt("value");
-
-			if (distance > totalDistance * 1000)
-				return true;
-		}
-		return false;
+		JSONObject leg = legs.getJSONObject(0);
+		int distance = leg.getJSONObject("distance").getInt("value");
+		return distance;
+	
 	}
 
 	public String getSegment1EndLatLng(String jsonResponse) {
