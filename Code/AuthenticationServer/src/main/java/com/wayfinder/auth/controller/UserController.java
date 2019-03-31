@@ -2,6 +2,7 @@ package com.wayfinder.auth.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,10 +26,8 @@ public class UserController {
 	
 	@GetMapping("/me")
 	@PreAuthorize("hasAuthority('ROLE_USER')")
-	public Object getUser() {
-    	OAuth2Authentication oauth2Authentication = (OAuth2Authentication) SecurityContextHolder.getContext().getAuthentication();
-    	
-        return oauth2Authentication.getPrincipal();
+	public User getUser(@AuthenticationPrincipal User user) {    	
+        return user;
 	}
 	
 	@PostMapping("/")

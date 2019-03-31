@@ -1,9 +1,14 @@
 package ie.tcd.wayfinder.userprefs.controller;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import ie.tcd.wayfinder.userprefs.service.UserPrefsService;
+import ie.tcd.wayfinders.entities.User;
 import ie.tcd.wayfinders.entities.UserPrefs;
 import ie.tcd.wayfinders.repositories.UserPrefsRepository;
 
@@ -26,22 +32,30 @@ public class UserPrefsController {
 	@Autowired
 	private UserPrefsService userPrefsService;
 	
+//	@CrossOrigin(origins = "*")
+//	@GetMapping(path="/api/getUserPrefs")
+//    public UserPrefs getUserPrefs(@RequestBody Map<String, Object> request) {
+//		if (!request.containsKey(UserPrefs.USERNAME_KEY)) {
+//			throw new ResponseStatusException(
+//			           HttpStatus.BAD_REQUEST, "Username not provided");
+//		}
+//		String username = (String)request.get(UserPrefs.USERNAME_KEY);
+//		UserPrefs userPrefs = userPrefsService.getUserPrefsByUsername(username);
+//		if (userPrefs==null) {
+//			throw new ResponseStatusException(
+//			           HttpStatus.BAD_REQUEST, "User does not exist in DB.");
+//		}
+//		return userPrefs;
+//    }
+	
 	@CrossOrigin(origins = "*")
 	@GetMapping(path="/api/getUserPrefs")
-    public UserPrefs getUserPrefs(@RequestBody Map<String, Object> request) {
-		if (!request.containsKey(UserPrefs.USERNAME_KEY)) {
-			throw new ResponseStatusException(
-			           HttpStatus.BAD_REQUEST, "Username not provided");
-		}
-		String username = (String)request.get(UserPrefs.USERNAME_KEY);
-//		UserPrefs userPrefsObj = repo.findByUsername(username);
-		UserPrefs userPrefs = userPrefsService.getUserPrefsByUsername(username);
-		if (userPrefs==null) {
-			throw new ResponseStatusException(
-			           HttpStatus.BAD_REQUEST, "User does not exist in DB.");
-		}
-		return userPrefs;
+	@PreAuthorize("hasAuthority('ROLE_USER')")
+    public UserPrefs getUserPrefs(@AuthenticationPrincipal Principal principal) {		
+		return userPrefsService.getUserPrefsByUsername(principal.getName());
     }
+	
+	
 
 //	@CrossOrigin(origins = "*")
 //	@PostMapping(path="/api/setUserPrefs")
@@ -133,6 +147,14 @@ public class UserPrefsController {
 //		userPrefsObj = repo.findByUsername(username);
 //		return userPrefsObj;
 //    }
+	
+	@CrossOrigin(origins = "*")
+	@PostMapping(path="/api/setUserPrefs")
+	@PreAuthorize("hasAuthority('ROLE_USER')")
+	public UserPrefs setUserPrefs(@AuthenticationPrincipal Principal principal, @RequestBody UserPrefs userPrefs) {
+		return userPrefsService.setUserPrefsByUsername(principal.getName(), userPrefs);
+    }
+	
 //	
 //	@CrossOrigin(origins = "*")
 //	@PostMapping(path="/api/updateUserPrefs")

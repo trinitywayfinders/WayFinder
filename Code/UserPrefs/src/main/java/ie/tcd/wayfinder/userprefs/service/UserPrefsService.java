@@ -8,7 +8,7 @@ public interface UserPrefsService {
 	
 	UserPrefs getUserPrefsByUsername(String username);
 	
-	void setUserPrefs(User user, UserPrefs userPrefs);
+	UserPrefs setUserPrefs(User user, UserPrefs userPrefs);
 	
-	void setUserPrefsByUsername(String username, UserPrefs userPrefs);
+	UserPrefs setUserPrefsByUsername(String username, UserPrefs userPrefs);
 }

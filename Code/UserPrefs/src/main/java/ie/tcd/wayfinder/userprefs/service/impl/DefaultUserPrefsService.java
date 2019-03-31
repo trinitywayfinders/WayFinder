@@ -19,28 +19,40 @@ public class DefaultUserPrefsService implements UserPrefsService {
 	}
 	
 	@Override
-	public void setUserPrefs(User user, UserPrefs userPrefs) {
+	public UserPrefs setUserPrefs(User user, UserPrefs userPrefs) {
 		user.setUserPrefs(userPrefs);
-		userRepository.save(user);
+		
+		User updatedUser = userRepository.save(user);
+		
+		return updatedUser.getUserPrefs();
 	}
 
 	@Override
 	public UserPrefs getUserPrefsByUsername(String username) {
 		User user = userRepository.findByUsername(username);
-		
+				
 		if(user != null) {
-			return this.getUserPrefs(user);
+			UserPrefs userPrefs = this.getUserPrefs(user);
+			
+			if(userPrefs != null) {
+				System.out.println("User Prefs ID: " + userPrefs.getUserPrefsId());
+			}
+			
+			return userPrefs;
 		}
 		
 		return null;
 	}
 
 	@Override
-	public void setUserPrefsByUsername(String username, UserPrefs userPrefs) {
+	public UserPrefs setUserPrefsByUsername(String username, UserPrefs newUserPrefs) {
 		User user = userRepository.findByUsername(username);
 		
 		if(user != null) {
-			this.setUserPrefs(user, userPrefs);;
+			UserPrefs oldUserPrefs = user.getUserPrefs();
+			return this.setUserPrefs(user, oldUserPrefs.update(newUserPrefs));
 		}
+		
+		return null;
 	}
 }

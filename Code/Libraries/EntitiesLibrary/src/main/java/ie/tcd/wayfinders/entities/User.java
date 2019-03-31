@@ -43,7 +43,7 @@ public class User implements UserDetails {
 	@JsonProperty("password")
 	private String password;
 	
-	@OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY, optional=false)
+	@OneToOne(fetch=FetchType.LAZY, mappedBy="user", cascade=CascadeType.ALL)
 	private UserPrefs userPrefs;
 		
 	public User() {
@@ -58,7 +58,7 @@ public class User implements UserDetails {
 		} else {
 			this.password = password;
 		}
-		this.userPrefs = new UserPrefs();
+		this.userPrefs = new UserPrefs(this);
 	}
 	
 	@JsonCreator
@@ -71,7 +71,7 @@ public class User implements UserDetails {
 		} else {
 			this.password = password;
 		}
-		this.userPrefs = new UserPrefs();
+		this.userPrefs = new UserPrefs(this);
 	}
 	
 	@Override
@@ -84,7 +84,7 @@ public class User implements UserDetails {
 	}
 	
 	public UserPrefs getUserPrefs() {
-		return userPrefs;
+		return this.userPrefs;
 	}
 
 	public void setUserPrefs(UserPrefs userPrefs) {

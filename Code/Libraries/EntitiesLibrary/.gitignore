@@ -1,6 +1,6 @@
 HELP.md
 .gradle
-/build/
+build
 !gradle/wrapper/gradle-wrapper.jar
 
 ### STS ###
@@ -29,4 +29,4 @@ HELP.md
 ### VS Code ###
 .vscode/
 
-/bin/
+bin
