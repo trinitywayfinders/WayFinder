@@ -190,7 +190,7 @@ export class HomePage {
       return;
     }
     //ToDo: change url to deployed server version
-    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/walking/"
+    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/walking/saad"
     const http = require('http')
     http.get(url, (resp) => {
       let data = '';

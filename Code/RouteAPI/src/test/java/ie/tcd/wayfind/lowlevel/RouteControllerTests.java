@@ -86,7 +86,7 @@ public class RouteControllerTests {
     	String response;
 		try {
 			response = EntityUtils.toString(controller.getRoute(usr, false).getEntity(), "UTF-8");
-	    	assertTrue(controller.checkTotalDistanceRoute(response));
+	    	assertTrue(controller.getTotalDistanceRoute(response) > 3000);
 		} catch (ParseException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -101,7 +101,7 @@ public class RouteControllerTests {
     	String response;
 		try {
 			response = EntityUtils.toString(controller.getRoute(usr, false).getEntity(), "UTF-8");
-	    	assertTrue(!controller.checkTotalDistanceRoute(response));
+	    	assertTrue(!(controller.getTotalDistanceRoute(response) < 3000));
 		} catch (ParseException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

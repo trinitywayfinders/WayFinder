@@ -17,13 +17,17 @@ public class UserRouteRequest {
 	
 	@JsonProperty("mode")
 	private TravelMode mode;
+
+	@JsonProperty("username")
+	private String username;
 	
 	@JsonCreator
-	public UserRouteRequest(@JsonProperty("origin") String origin, @JsonProperty("destination") String destination, @JsonProperty("mode") TravelMode mode) {
+	public UserRouteRequest(@JsonProperty("origin") String origin, @JsonProperty("destination") String destination, @JsonProperty("mode") TravelMode mode, @JsonProperty("username") String username) {
 		super();
 		this.origin = origin;
 		this.destination = destination;
 		this.mode = mode;
+		this.username = username;
 	}
 
 	public String getOrigin() {
@@ -50,12 +54,17 @@ public class UserRouteRequest {
 		this.mode = mode;
 	}
 	
+	public String getUsername() {
+		return this.username;
+	}
+	
 	public MultiValueMap<java.lang.String,java.lang.String> toParams() {
 		MultiValueMap<String,String> params = new LinkedMultiValueMap<String, String>();
 		
 		params.add("origin", this.origin);
 		params.add("destination", this.destination);
 		params.add("mode", this.mode.toString());
+		params.add("username", this.username);
 		
 		return params;
 	}

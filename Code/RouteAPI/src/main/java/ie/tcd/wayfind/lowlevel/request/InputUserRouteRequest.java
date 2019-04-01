@@ -64,6 +64,7 @@ public class InputUserRouteRequest {
 		params.add("origin", this.origin);
 		params.add("destination", this.destination);
 		params.add("mode", this.mode.toString());
+		params.add("username", this.username);
 		
 		return params;
 	}

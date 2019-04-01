@@ -10,8 +10,11 @@ import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import ie.tcd.wayfind.lowlevel.type.TravelMode;
 import ie.tcd.wayfinders.restLibrary.Library;
 
 public class UserPreferences {
@@ -50,18 +53,29 @@ public class UserPreferences {
 		//call API        
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
-       
+               
         HttpResponse response;
 		try {
 			
 		    //create ObjectMapper instance
-		    ObjectMapper objectMapper = new ObjectMapper();
-		
-			response = Library.GET("http://localhost:3000/body", Optional.of(headers));
+		    
+		    RequestBody requestBody = new RequestBody(username);
+		        
+		    String jsonRequestContent = new ObjectMapper().writeValueAsString(requestBody);
+		    
+		    response = Library.POST("http://35.246.76.168:8080/api/getUserPrefs/", Optional.of(headers), Optional.of(jsonRequestContent));
 			
 	        HttpEntity responseEntity = response.getEntity();
 	        String responseString = EntityUtils.toString(responseEntity);
 	        JSONObject jsonResponse = new JSONObject(responseString);
+	        
+	        if(response.getStatusLine().getStatusCode() == 404) {
+	        	
+	        	requestBody = new RequestBody("default");
+		        jsonRequestContent = new ObjectMapper().writeValueAsString(requestBody);
+	        	
+	        	Library.POST("http://35.246.76.168:8080/api/getUserPrefs/", Optional.of(headers), Optional.of(jsonRequestContent));
+	        }
 
 	        int concernCost = jsonResponse.getInt("concernCost");
 	        int concernSpeed = jsonResponse.getInt("concernSpeed");
@@ -74,8 +88,7 @@ public class UserPreferences {
 	        	return null;
 	        }
 	        
-	        UserPreferences x = new UserPreferences(concernHealth, concernSpeed, concernCost, concernPollutionAvoidance, concernEmissionsReduction, responseUsername); 
-	        return x;
+	        return new UserPreferences(concernHealth, concernSpeed, concernCost, concernPollutionAvoidance, concernEmissionsReduction, responseUsername);
 	        
 		//create+return object
 			
@@ -85,4 +98,17 @@ public class UserPreferences {
 			return null;
 		}		
 	}
+	
+	private class RequestBody{
+
+		@JsonProperty("username")
+		String username;
+		
+
+		@JsonCreator
+		private RequestBody(String username) {
+			this.username = username;
+		}
+	}
+	
 }
