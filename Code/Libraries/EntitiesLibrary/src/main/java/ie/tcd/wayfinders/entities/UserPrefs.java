@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -45,6 +46,7 @@ public class UserPrefs {
 	
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="userId")
+	@JsonIgnore
 	private User user;
 
     public static String USERNAME_KEY = "username";
@@ -124,4 +126,11 @@ public class UserPrefs {
 		this.concernEmissionsReduction = concernEmissionsReduction;
 	}
 	
+	public User getUser() {
+		return this.user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
 }

@@ -62,7 +62,7 @@ public class User implements UserDetails {
 	}
 	
 	@JsonCreator
-	public User(@JsonProperty("userId") int userId, @JsonProperty("username") String username, @JsonProperty("email") String email, @JsonProperty("password") String password) {
+	public User(@JsonProperty("userId") int userId, @JsonProperty("username") String username, @JsonProperty("email") String email, @JsonProperty("password") String password, @JsonProperty("userPrefs") UserPrefs userPrefs) {
 		this.userId = userId;
 		this.username = username;
 		this.email = email;
@@ -71,7 +71,8 @@ public class User implements UserDetails {
 		} else {
 			this.password = password;
 		}
-		this.userPrefs = new UserPrefs(this);
+		this.userPrefs = userPrefs;
+		this.userPrefs.setUser(this);
 	}
 	
 	@Override
