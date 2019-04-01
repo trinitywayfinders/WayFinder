@@ -54,7 +54,7 @@ public class TravelModeBasedOnPreference {
 		}
 
 		else if (userPreferences.ConcernSpeed == 1) {
-			return new TravelModeBasedOnPreference(userPreferences, totalDistance, 200, 200, TravelMode.bicycling,
+			return new TravelModeBasedOnPreference(userPreferences, totalDistance, 1000, 1000, TravelMode.bicycling,
 					TravelMode.driving, TravelMode.walking);
 		}
 

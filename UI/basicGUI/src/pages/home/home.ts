@@ -3,7 +3,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import leaflet from 'leaflet';
-//import polyUtil  from 'polyline-encoded'
+import polyUtil  from 'polyline-encoded'
 import { SignupPage } from '../signup/signup';
 @Component({
   selector: 'page-home',
@@ -190,7 +190,7 @@ export class HomePage {
       return;
     }
     //ToDo: change url to deployed server version
-    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/walking/saad"
+    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/walking/john"
     const http = require('http')
     http.get(url, (resp) => {
       let data = '';
@@ -233,7 +233,7 @@ export class HomePage {
     }
 
     //ToDo: change url to deployed server version
-    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/walking/avoid/"+blockLat+"/"+blockLng+"/"
+    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/walking/avoid/"+blockLat+"/"+blockLng+"/Nicky"
     const http = require('http')
     http.get(url, (resp) => {
       let data = '';
@@ -253,7 +253,30 @@ export class HomePage {
     });
   }
 
+
+/*
+  Walking - Green
+  Driving - Red
+  Cycling - Purple
+  Transit - Blue
+
+*/
+
+
+
+
   drawPolyline(data, map, startMarker, destMarker){
+    function chooseColor(step){
+      var mode = step['travel_mode']
+      if(mode == "DRIVING")
+        return "#ff0000"
+      else if(mode == "WALKING")
+        return "#00ff2e"
+      else if(mode == "BICYCLING")
+        return "#8700ff"
+      else
+        return "#0065ff"
+    }
     var jsonData = JSON.parse(data)
     console.log(jsonData);
     if (startMarker) {
@@ -277,7 +300,6 @@ export class HomePage {
               var startMarkerLatLng = [steps[0]['start_location']["lat"], steps[0]['start_location']["lng"]]
               var destMarkerLatLng = [steps[steps.length-1]['end_location']['lat'],steps[steps.length-1]['end_location']['lng']]
 
-
               startMarker = leaflet.marker([startMarkerLatLng[0], startMarkerLatLng[1]])
               destMarker = leaflet.marker([destMarkerLatLng[0], destMarkerLatLng[1]])
               markerGroup.addLayer(startMarker);
@@ -289,7 +311,7 @@ export class HomePage {
                 var coordinates = polyUtil.decode(polyline);
 
                 var polyline = leaflet.polyline(coordinates, {
-                  color: color,
+                  color: chooseColor(step),
                   weight: 10,
                   opacity: .7,
                   dashArray: '0,0',
