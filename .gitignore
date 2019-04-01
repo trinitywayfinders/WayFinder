@@ -4,7 +4,6 @@
 *.lock
 *.bin
 *.classpath
-*.gradle
 
 Code/Libraries/RESTLibrary/build/*
 Code/HighLevelAPI/.*
