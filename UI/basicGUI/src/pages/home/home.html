@@ -1,28 +1,31 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      WayFinder
+      Trinity WayFinder
+      <ion-buttons end>
+             <button ion-button [navPush]="signupPage">SignUp</button>
+         </ion-buttons>
     </ion-title>
-
-    <ion-list>
-
-      <ion-item>
-        <ion-label floating>Your Location</ion-label>
-        <ion-input type="text" [(ngModel)]="inputLocation"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>Destination</ion-label>
-        <ion-input type="text" [(ngModel)]="inputDestination"></ion-input>
-      </ion-item>
-
-      <button ion-button>Submit</button>
-
-    </ion-list>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Enter starting point or select on map..</ion-label>
+      <ion-input type="text" [(ngModel)]="inputLocation"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Enter destination point or select on map..</ion-label>
+      <ion-input type="text" [(ngModel)]="inputDestination"></ion-input>
+    </ion-item>
+
+    <button ion-button (click) ="getDirections()">Get Directions</button>
+    <button ion-button (click)="setBlock()">Add Block</button>
+    <button ion-button (click)="simulateBlock()">Simulate Blocks</button>
+  </ion-list>
   <div id="map" style="width:100%; height:100%;"></div>
 </ion-content>
 
