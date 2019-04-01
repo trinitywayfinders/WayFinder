@@ -27,7 +27,46 @@ export class HomePage {
 
   ionViewDidEnter() {
     this.loadmap();
+    this.loadLegend();
+}
+
+loadLegend(){
+
+  function chooseColor(mode){
+    if(mode == "DRIVING")
+      return "#ff0000"
+    else if(mode == "WALKING")
+      return "#00ff2e"
+    else if(mode == "BICYCLING")
+      return "#8700ff"
+    else
+      return "#0065ff"
   }
+
+  var legend = leaflet.control({position: 'bottomright'});
+  var div;
+  legend.onAdd = function (map) {
+
+    var div = leaflet.DomUtil.create('div', 'info legend'),
+      grades = [1, 70, 80, 100],
+      labels = [],
+      modes = ["WALKING", "DRIVING", "TRANSIT", "BICYCLING"]
+
+    for (var i = 0; i < grades.length; i++) {
+      var mode = modes[i]
+
+      labels.push(
+        '<div class="color-box" style="background-color:'+chooseColor(modes[i])+';width:15px">_</div>'
+        +'<i></i> ' + modes[i]);
+    }
+
+    div.innerHTML = labels.join('<br>');
+
+    return div;
+  };
+  legend.addTo(this.map);
+}
+
   simulateBlock(){
     //let simGroup = this.simGroup;
 
@@ -140,6 +179,8 @@ export class HomePage {
       });
     alertOfLoc.present();
   }
+
+
 
   loadmap() {
     if(this.map){
@@ -261,9 +302,6 @@ export class HomePage {
   Transit - Blue
 
 */
-
-
-
 
   drawPolyline(data, map, startMarker, destMarker){
     function chooseColor(step){
