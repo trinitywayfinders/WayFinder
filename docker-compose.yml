@@ -1,0 +1,31 @@
+version: '3'
+services:
+    AuthServer:
+        image: "authserver:0.0.1"
+        links:
+            - mysql1
+        depends_on:
+            - mysql1
+
+    HighLevelAPI:
+        image: "hlapi:0.0.1-SNAPSHOT"
+        ports:
+            - "8080:8080"
+        links:
+            - RouteAPI
+            - AuthServer
+        depends_on:
+            - RouteAPI
+            - AuthServer
+
+    RouteAPI:
+        image: "routeapi:0.0.1-SNAPSHOT"
+
+    mysql1:
+        image: "mysql"
+        environment:
+            MYSQL_USER: james
+            MYSQL_PASSWORD: 123456
+            MYSQL_DATABASE: wayfinder
+            MYSQL_ROOT_PASSWORD: wayfinders
+        container_name: mysql1
