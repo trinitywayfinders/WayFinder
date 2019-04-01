@@ -62,7 +62,7 @@ signup(){
       }
     };
     if (this.passwd==this.passwd1){
-      this.ax.post('http://35.246.14.12:8080/api/user/', {
+      this.ax.post('http://35.246.76.168:8080/api/user/', {
       'username': this.usrname,
       'email': this.email,
       'password': this.passwd
@@ -91,7 +91,7 @@ signup(){
                 this.showOverAlert();
               }
               else{
-                this.ax.post('http://localhost:8080//', {
+                this.ax.post('http://35.246.76.168:8080/api/getUserPrefs', {
                   'username': this.usrname,
                   'concernCost':this.concernCost,
                   'concernEmissionReduction':this.concernEmissionReduction,
