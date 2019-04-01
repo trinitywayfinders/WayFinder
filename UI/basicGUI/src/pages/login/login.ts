@@ -19,10 +19,10 @@ export class LoginPage {
     password: string;
     form: any;
     httpOptions: any;
-    storage: Storage;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public storage: Storage) {
     }
+
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad LoginPage');
@@ -65,17 +65,31 @@ export class LoginPage {
         }
         console.log(this.form)
         this.http.post('http://localhost:8080/oauth/token', this.form, this.httpOptions).subscribe((response) => {
-            console.log(response);
-            console.log(typeof response);
-
-            console.log(response.access_token);
-            console.log(response.refresh_token);
+            console.log(response['access_token']);
+            // console.log(typeof response);
+            //
+            // console.log(response.access_token);
+            // console.log(response.refresh_token);
 
             // this.storage.set('refresh_token', response.refresh_token);
-            // this.storage.set('access_token', response.access_token);
+            console.log(response['access_token']);
+            this.storage.set('access_token', response['access_token']);
+            // console.log(response.access_token);
 
-            this.navCtrl.popToRoot();
+            // var authenticatedOptions = {
+            //     headers: new HttpHeaders({
+            //         // 'Content-Type': 'multipart/form-data;charset=UTF-8',
+            //         'Accept': 'application/json;charset=UTF-8',
+            //         'Authorization': 'Bearer ' + response['access_token'],
+            //     })
+            // }
+            //
+            // http.post('http://localhost:8080/api/me', null, authenticatedOptions).subscribe((response) => {
+            //     console.log(response);
+            //
+            //     navCtrl.popToRoot();
+            // });
+            navCtrl.popToRoot();
         });
-
     }
 }

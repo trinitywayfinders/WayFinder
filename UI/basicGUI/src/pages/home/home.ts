@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import leaflet from 'leaflet';
-
+import polyUtil from 'polyline-encoded'
 import { SignupPage } from '../signup/signup';
 import { LoginPage } from '../login/login';
 
@@ -19,7 +19,6 @@ export class HomePage {
   marker: leaflet.marker;
   signupPage = SignupPage;
   loginPage = LoginPage;
-
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController) { }
 
@@ -101,25 +100,25 @@ export class HomePage {
 
               var coordinates = polyUtil.decode(step['polyline']['points']);
 
-              polyline = leaflet.polyline(coordinates, {
+              var polyline = leaflet.polyline(coordinates, {
                 color: "#" + ((1 << 24) * Math.random() | 0).toString(16),
                 weight: 10,
                 opacity: .7,
                 dashArray: '0,0',
                 lineJoin: 'round'
-              }).addTo(map)
-            })
+            }).addTo(map)
           })
-          /*var points = overview_polyline['points']
-          var coordinates = polyUtil.decode(points);
-          var polyline = leaflet.polyline(coordinates, {
-            color: 'red',
-            weight: 10,
-            opacity: .7,
-            dashArray: '0,0',
-            lineJoin: 'round'
-          }).addTo(map)
-          */
+        })
+          // var points = overview_polyline['points']
+          // var coordinates = polyUtil.decode(points);
+          // var polyline = leaflet.polyline(coordinates, {
+          //   color: 'red',
+          //   weight: 10,
+          //   opacity: .7,
+          //   dashArray: '0,0',
+          //   lineJoin: 'round'
+          // }).addTo(map)
+
         })
       });
 

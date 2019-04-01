@@ -1,11 +1,11 @@
 <ion-header>
     <ion-navbar>
         <ion-title>Trinity WayFinder</ion-title>
-
-          <ion-buttons end>
-              <button ion-button [navPush]="loginPage">Login</button>
-              <button ion-button [navPush]="signupPage">SignUp</button>
-          </ion-buttons>
+        <!-- <ion-buttons end *ngIf="isAuthenticated == false"> -->
+        <ion-buttons end>
+          <button ion-button [navPush]="loginPage">Login</button>
+          <button ion-button [navPush]="signupPage">SignUp</button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
