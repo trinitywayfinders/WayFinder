@@ -27,6 +27,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import ie.tcd.wayfind.lowlevel.request.EnvironmentMetrics;
 import ie.tcd.wayfind.lowlevel.request.InputUserRouteRequest;
 import ie.tcd.wayfind.lowlevel.request.LatLng;
 import ie.tcd.wayfind.lowlevel.request.TravelModeBasedOnPreference;
@@ -67,7 +68,12 @@ public class LowLevelRouteController {
 		int initialDistance = getTotalDistanceRoute(getDistanceResponseBody);
 		
 		UserPreferences userPreferences = new UserPreferences(request.getUsername());
-		TravelModeBasedOnPreference travelModeBasedOnPrefs = new TravelModeBasedOnPreference(userPreferences, initialDistance);
+		
+		String[] latLng = getRouteStartLatLng(getDistanceResponseBody).split(",");
+		
+		
+		EnvironmentMetrics env = new EnvironmentMetrics(Float.parseFloat(latLng[0]), Float.parseFloat(latLng[1]));
+		TravelModeBasedOnPreference travelModeBasedOnPrefs = new TravelModeBasedOnPreference(userPreferences, initialDistance, env.getWeatherCondition());
 		
 		//Get user data from User-Preferences API + add preferences
 		System.out.println("\n\n\nIN ROUTING API"+request.getOrigin());
@@ -145,6 +151,22 @@ public class LowLevelRouteController {
 		int distance = leg.getJSONObject("distance").getInt("value");
 		return distance;
 	
+	}
+	
+	public String getRouteStartLatLng(String jsonResponse) {
+		try {
+			JSONArray routes = new JSONObject(jsonResponse).getJSONArray("routes");
+
+			JSONArray legs = routes.getJSONObject(0).getJSONArray("legs");
+
+			Double lat = legs.getJSONObject(0).getJSONObject("start_location").getDouble("lat");
+			Double lng = legs.getJSONObject(0).getJSONObject("start_location").getDouble("lng");
+
+			return Double.toString(lat) + "," + Double.toString(lng);
+		} catch (Exception e) {
+			logger.error("getSegment1EndLatLng Error: " + e.getMessage());
+			return null;
+		}
 	}
 
 	public String getSegment1EndLatLng(String jsonResponse) {
@@ -351,7 +373,11 @@ public class LowLevelRouteController {
 		int initialDistance = getTotalDistanceRoute(getDistanceResponseBody);
 		
 		UserPreferences userPreferences = new UserPreferences(request.getUsername());
-		TravelModeBasedOnPreference travelModeBasedOnPrefs = new TravelModeBasedOnPreference(userPreferences, initialDistance);
+		
+		String[] latLng = getRouteStartLatLng(getDistanceResponseBody).split(",");
+		
+		EnvironmentMetrics env = new EnvironmentMetrics(Float.parseFloat(latLng[0]), Float.parseFloat(latLng[1]));
+		TravelModeBasedOnPreference travelModeBasedOnPrefs = new TravelModeBasedOnPreference(userPreferences, initialDistance, env.getWeatherCondition());
 		
 		
 		/*

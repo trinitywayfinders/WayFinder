@@ -24,8 +24,8 @@ public class TravelModeBasedOnPreference {
 		Segment3Mode = segment3Mode;
 	}
 
-	public TravelModeBasedOnPreference(UserPreferences userPreferences, int totalDistance) {
-		TravelModeBasedOnPreference current = getTravelModeBasedOnPreference(userPreferences, totalDistance);
+	public TravelModeBasedOnPreference(UserPreferences userPreferences, int totalDistance, String badWeather) {
+		TravelModeBasedOnPreference current = getTravelModeBasedOnPreference(userPreferences, totalDistance, badWeather == "Bad" ? true : false);
 
 		UserPreferences = userPreferences;
 		TotalDistance = totalDistance;
@@ -37,29 +37,29 @@ public class TravelModeBasedOnPreference {
 	}
 
 	public TravelModeBasedOnPreference getTravelModeBasedOnPreference(UserPreferences userPreferences,
-			int totalDistance) {
-
+			int totalDistance, boolean badWeather) {
+		
 		if (totalDistance > 5000)
-			return getTravelModeMoreThan5(userPreferences, totalDistance);
+			return getTravelModeMoreThan5(userPreferences, totalDistance, badWeather);
 
-		return getTravelModeLessThan5(userPreferences, totalDistance);
+		return getTravelModeLessThan5(userPreferences, totalDistance, badWeather);
 	}
 
-	private TravelModeBasedOnPreference getTravelModeMoreThan5(UserPreferences userPreferences, int totalDistance) {
+	private TravelModeBasedOnPreference getTravelModeMoreThan5(UserPreferences userPreferences, int totalDistance, boolean badWeather) {
 
 		if (userPreferences.ConcernHealth == 1) {
 
-			return new TravelModeBasedOnPreference(userPreferences, totalDistance, 2500, 2500, TravelMode.walking,
+			return new TravelModeBasedOnPreference(userPreferences, totalDistance, 2500, 2500, badWeather ? TravelMode.driving : TravelMode.walking,
 					TravelMode.driving, TravelMode.bicycling);
 		}
 
 		else if (userPreferences.ConcernSpeed == 1) {
-			return new TravelModeBasedOnPreference(userPreferences, totalDistance, 1000, 1000, TravelMode.bicycling,
+			return new TravelModeBasedOnPreference(userPreferences, totalDistance, 1000, 1000, badWeather ? TravelMode.driving : TravelMode.bicycling,
 					TravelMode.driving, TravelMode.walking);
 		}
 
 		else if (userPreferences.ConcernCost == 1) {
-			return new TravelModeBasedOnPreference(userPreferences, totalDistance, 1000, 1000, TravelMode.bicycling,
+			return new TravelModeBasedOnPreference(userPreferences, totalDistance, 1000, 1000, badWeather ? TravelMode.driving : TravelMode.bicycling,
 					TravelMode.transit, TravelMode.walking);
 		}
 
@@ -69,12 +69,12 @@ public class TravelModeBasedOnPreference {
 		}
 
 		else
-			return new TravelModeBasedOnPreference(userPreferences, totalDistance, 2000, 2000, TravelMode.walking,
+			return new TravelModeBasedOnPreference(userPreferences, totalDistance, 2000, 2000, badWeather ? TravelMode.driving : TravelMode.walking,
 					TravelMode.transit, TravelMode.walking);
 
 	}
 
-	private TravelModeBasedOnPreference getTravelModeLessThan5(UserPreferences userPreferences, int totalDistance) {
+	private TravelModeBasedOnPreference getTravelModeLessThan5(UserPreferences userPreferences, int totalDistance, boolean badWeather) {
 
 		if (userPreferences.ConcernHealth == 1) {
 
@@ -88,7 +88,7 @@ public class TravelModeBasedOnPreference {
 		}
 
 		else if (userPreferences.ConcernCost == 1) {
-			return new TravelModeBasedOnPreference(userPreferences, totalDistance, totalDistance, 0, TravelMode.walking,
+			return new TravelModeBasedOnPreference(userPreferences, totalDistance, totalDistance, 0, badWeather ? TravelMode.driving : TravelMode.walking,
 					null, null);
 		}
 
