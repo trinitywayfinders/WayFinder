@@ -389,6 +389,31 @@ public class LowLevelRouteController {
 			return new ResponseEntity<String>(getDistanceResponseBody, HttpStatus.valueOf(getDistanceResponse.getStatusLine().getStatusCode()));
 		}
 
+		/*
+		 * 
+		 * get1stSegment 
+		 * check if block is in first segment 
+		 * 
+		 * get2ndSegment 
+		 * check if block is in second segment
+		 * 
+		 * get3rdSegment
+		 * 
+		 */
+		/*
+		String responseBody = null;
+		String responseBodySegment1 = null;
+		String responseBodySegment2 = null;
+		String responseBodySegment3 = null;
+		
+		try {
+			
+		
+		} catch (IOException | ParseException | NullPointerException e) {
+			e.printStackTrace();
+		}
+		
+		*/
 		
 
 		UserRouteRequest originalRoute = new UserRouteRequest(request.getOrigin(), request.getDestination(), request.getMode());
@@ -417,7 +442,7 @@ public class LowLevelRouteController {
 			LatLng blockSegmentEnd = getEndLatLngBlockSegment(originalResponseBody, blockSegmentStart.Lat, blockSegmentStart.Lng);
 			
 			if(blockSegmentEnd == null) {
-				return new ResponseEntity<String>(originalResponseBody, HttpStatus.valueOf(originalResponse.getStatusLine().getStatusCode()));
+				return retriveRoute(request);
 			}
 			
 			System.out.println("Block segment end: "+ blockSegmentEnd.Lat + "  " + blockSegmentEnd.Lng);
