@@ -80,11 +80,7 @@ public class LowLevelRouteController {
 		/*
 		 * 
 		 * 1. Check if distance < 5k - > if yes dont split.
-		 * 
-		 * 
-		 * 1. Fix all travel modes - currently hardcoded to driving / request.GetMode()
-		 * 
-		 * 
+		 * 2. 
 		 */
 		
 		if(initialDistance < 5000) {
@@ -341,7 +337,59 @@ public class LowLevelRouteController {
 		
 		String avoidLatLng = lat+","+lng;
 		
+		UserRouteRequest userRouteRequest = new UserRouteRequest(request.getOrigin(), request.getDestination(), TravelMode.driving);	
+		
+		HttpResponse getDistanceResponse = getRoute(userRouteRequest, false);
+		String getDistanceResponseBody = null;
+		try {
+			getDistanceResponseBody = EntityUtils.toString(getDistanceResponse.getEntity(), "UTF-8");
+			
+		} catch (IOException | ParseException | NullPointerException e) {
+			e.printStackTrace();
+		}
+		
+		int initialDistance = getTotalDistanceRoute(getDistanceResponseBody);
+		
+		UserPreferences userPreferences = new UserPreferences(request.getUsername());
+		TravelModeBasedOnPreference travelModeBasedOnPrefs = new TravelModeBasedOnPreference(userPreferences, initialDistance);
+		
+		
+		/*
+		 * 
+		 * 1. Check if distance < 5k - > if yes dont split.
+		 * 2. 
+		 
+		 new method isBlockInSegment -> returns true/false
+		 if true
+			call divideSegment..... for that segment only 
+		
+		 */
+		
+		if(initialDistance < 5000) {
+			
+ 			userRouteRequest = new UserRouteRequest(request.getOrigin(), request.getDestination(), travelModeBasedOnPrefs.Segment1Mode);	
+			
+			getDistanceResponse = getRoute(userRouteRequest, true);
+			getDistanceResponseBody = null;
+			try {
+				getDistanceResponseBody = EntityUtils.toString(getDistanceResponse.getEntity(), "UTF-8");
+				System.out.println(getDistanceResponseBody);
+				
+				JSONObject routes  = new JSONObject(getDistanceResponseBody);
+				for(int i=0; i < routes.getJSONArray("routes").length(); i++) {
+					routes.getJSONArray("routes").remove(i);
+				}
+				
+				getDistanceResponseBody = routes.toString();
+				
+			} catch (IOException | ParseException | NullPointerException e) {
+				e.printStackTrace();
+			}
 
+			return new ResponseEntity<String>(getDistanceResponseBody, HttpStatus.valueOf(getDistanceResponse.getStatusLine().getStatusCode()));
+		}
+
+		
 
 		UserRouteRequest originalRoute = new UserRouteRequest(request.getOrigin(), request.getDestination(), request.getMode());
 		UserRouteRequest segment1ToBlock = new UserRouteRequest(request.getOrigin(), avoidLatLng, request.getMode());
@@ -384,7 +432,7 @@ public class LowLevelRouteController {
 			
 			
 			//Find shortest alternative without block
-			JSONObject shortestRouteLegs = getLongestAlternativeForBlockedSegment(responseBodyWithAlternatives);
+			JSONObject longestRouteLegs = getLongestAlternativeForBlockedSegment(responseBodyWithAlternatives);
 
 			//Get route from original start to start of block polyline
 			UserRouteRequest RouteToBlockStart = new UserRouteRequest(request.getOrigin(), blockSegmentStart.toString(), request.getMode());
@@ -397,7 +445,7 @@ public class LowLevelRouteController {
 			responseFromBlockSegmentEnd = getRoute(RouteFromBlockEnd, false);
 			responseBodyFromBlockSegmentEnd = EntityUtils.toString(responseFromBlockSegmentEnd.getEntity(), "UTF-8");
 			
-			finalRouteWithoutBlock = combineRouteLegs(responseBodyToBlockSegmentStart, shortestRouteLegs.toString(), responseBodyFromBlockSegmentEnd);
+			finalRouteWithoutBlock = combineRouteLegs(responseBodyToBlockSegmentStart, longestRouteLegs.toString(), responseBodyFromBlockSegmentEnd);
 			}
 			
 		catch(IOException|ParseException|
