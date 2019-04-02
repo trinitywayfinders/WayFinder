@@ -63,6 +63,11 @@ public class UserPreferences {
 		        
 		    String jsonRequestContent = new ObjectMapper().writeValueAsString(requestBody);
 		    
+		    
+		    WE ARE HERE!!!!!!!!!
+		    getuserprefs was not started - test this tomorrow morning! :)
+			Env metrics was set up and should work (?)
+		    
 		    response = Library.POST("http://35.246.76.168:8080/api/getUserPrefs/", Optional.of(headers), Optional.of(jsonRequestContent));
 			
 	        HttpEntity responseEntity = response.getEntity();
