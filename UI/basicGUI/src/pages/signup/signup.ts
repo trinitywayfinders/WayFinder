@@ -61,22 +61,6 @@ signup(){
           'accept' : '*/*',
       }
     };
-    if (this.passwd==this.passwd1){
-      this.ax.post('http://35.246.76.168:8080/api/user/', {
-      'username': this.usrname,
-      'email': this.email,
-      'password': this.passwd
-    }, axiosConfig).then(resp => {
-      console.log(resp);
-    }).catch(error => {
-    console.log(error);
-    });
-    }
-    else{
-      this.showAlert();
-    }
-
-
     if (this.concernCost!=this.concernEmissionReduction &&
         this.concernEmissionReduction!=this.concernHealth &&
         this.concernHealth!=this.concernPollutionAvoidance &&
@@ -91,8 +75,11 @@ signup(){
                 this.showOverAlert();
               }
               else{
-                this.ax.post('http://35.246.76.168:8080/api/getUserPrefs', {
+                if (this.passwd==this.passwd1){
+                  this.ax.post('http://35.246.76.168:8080/api/user/', {
                   'username': this.usrname,
+                  'email': this.email,
+                  'password': this.passwd,
                   'concernCost':this.concernCost,
                   'concernEmissionReduction':this.concernEmissionReduction,
                   'concernHealth':this.concernHealth,
@@ -101,15 +88,18 @@ signup(){
                 }, axiosConfig).then(resp => {
                   console.log(resp);
                 }).catch(error => {
-                  console.log(error);
+                console.log(error);
                 });
+                }
+                else{
+                  this.showAlert();
+                }
+
               }
             }
             else{
               this.showDupAlert();
             }
-
-
 
   }
 }
