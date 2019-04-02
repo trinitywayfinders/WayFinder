@@ -1,10 +1,11 @@
-
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import leaflet from 'leaflet';
-import polyUtil  from 'polyline-encoded'
+import polyUtil from 'polyline-encoded'
 import { SignupPage } from '../signup/signup';
+import { LoginPage } from '../login/login';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -13,6 +14,7 @@ export class HomePage {
   @ViewChild('map') mapContainer: ElementRef;
   map: any;
   signupPage = SignupPage;
+  loginPage = LoginPage;
   inputLocation = ''
   inputDestination = ''
   currentLatlng: any
@@ -164,26 +166,26 @@ loadLegend(){
       markerGroup.addLayer(this.marker);
       this.map.addLayer(markerGroup);
 
-      }).on('locationerror', (err) => {
-          console.log(err.message);
-      })
+    }).on('locationerror', (err) => {
+      console.log(err.message);
+    })
   }
 
-    showLocation(){
-      this.getLocation()
+  showLocation() {
+    this.getLocation()
 
-      let alertOfLoc = this.alertCtrl.create({
-        title:"YOUR CURRENT LOCATION",
-        subTitle: "Latitude:" + this.currentLatlng.lat+" Longitude: " +this.currentLatlng.lng,
-        buttons:['GOT IT']
-      });
+    let alertOfLoc = this.alertCtrl.create({
+      title: "YOUR CURRENT LOCATION",
+      subTitle: "Latitude:" + this.currentLatlng.lat + " Longitude: " + this.currentLatlng.lng,
+      buttons: ['GOT IT']
+    });
     alertOfLoc.present();
   }
 
 
 
   loadmap() {
-    if(this.map){
+    if (this.map) {
       this.map.remove();
     }
     this.map = leaflet.map("map").fitWorld();
