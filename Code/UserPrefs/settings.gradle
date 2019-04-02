@@ -3,7 +3,7 @@ pluginManagement {
 		gradlePluginPortal()
 	}
 }
-rootProject.name = 'AuthenticationServer'
+rootProject.name = 'UserPrefs'
 
 include "EntitiesLibrary"
 project(":EntitiesLibrary").projectDir = new File("../Libraries/EntitiesLibrary")

@@ -1,13 +1,16 @@
-package com.wayfinder.auth.entity;
+package ie.tcd.wayfinders.entities;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -39,6 +42,9 @@ public class User implements UserDetails {
 	@Column(name="password", nullable=false)
 	@JsonProperty("password")
 	private String password;
+	
+	@OneToOne(fetch=FetchType.LAZY, mappedBy="user", cascade=CascadeType.ALL)
+	private UserPrefs userPrefs;
 		
 	public User() {
 		;
@@ -52,10 +58,11 @@ public class User implements UserDetails {
 		} else {
 			this.password = password;
 		}
+		this.userPrefs = new UserPrefs(this);
 	}
 	
 	@JsonCreator
-	public User(@JsonProperty("userId") int userId, @JsonProperty("username") String username, @JsonProperty("email") String email, @JsonProperty("password") String password) {
+	public User(@JsonProperty("userId") int userId, @JsonProperty("username") String username, @JsonProperty("email") String email, @JsonProperty("password") String password, @JsonProperty("userPrefs") UserPrefs userPrefs) {
 		this.userId = userId;
 		this.username = username;
 		this.email = email;
@@ -64,6 +71,8 @@ public class User implements UserDetails {
 		} else {
 			this.password = password;
 		}
+		this.userPrefs = userPrefs;
+		this.userPrefs.setUser(this);
 	}
 	
 	@Override
@@ -75,6 +84,14 @@ public class User implements UserDetails {
 	    return authorities;
 	}
 	
+	public UserPrefs getUserPrefs() {
+		return this.userPrefs;
+	}
+
+	public void setUserPrefs(UserPrefs userPrefs) {
+		this.userPrefs = userPrefs;
+	}
+
 	public int getUserId() {
 		return this.userId;
 	}
