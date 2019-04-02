@@ -4,6 +4,7 @@
 *.lock
 *.bin
 *.classpath
+*.class
 
 Code/Libraries/RESTLibrary/build/*
 Code/HighLevelAPI/.*
