@@ -200,7 +200,7 @@ export class HomePage {
       buttons: ['GOT IT']
     });
     alertOfLoc.present();
-    this.getWeather(this.currentLatlng.lat, this.currentLatlng.lng, '03d');
+    //this.getWeather(this.currentLatlng.lat, this.currentLatlng.lng, '03d');
   }
 
 
