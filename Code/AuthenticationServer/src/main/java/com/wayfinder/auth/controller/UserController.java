@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wayfinder.auth.service.UserService;
 import ie.tcd.wayfinders.entities.User;
 
-@CrossOrigin(origins = {"*"})
+@CrossOrigin(origins = {"*"}, allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token"})
 
 @RestController
 @RequestMapping("/api/user")

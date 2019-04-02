@@ -89,7 +89,7 @@ export class LoginPage {
             //
             //     navCtrl.popToRoot();
             // });
-            navCtrl.popToRoot();
+            this.navCtrl.popToRoot();
         });
     }
 }
