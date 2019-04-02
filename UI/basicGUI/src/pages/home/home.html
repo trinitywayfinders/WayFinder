@@ -21,9 +21,9 @@
         <ion-input type="text" [(ngModel)]="inputDestination"></ion-input>
       </ion-item>
 
-      <button ion-button>Submit</button>
-      <button ion-button (click)="showLocation()">Current Location</button>
-      <button ion-button (click)="setBlock()">Waldo</button>
+      <button ion-button (click) ="getDirections()">Get Directions</button>
+      <button ion-button (click)="setBlock()">Add Block</button>
+      <button ion-button (click)="simulateBlock()">Simulate Blocks</button>
     </ion-list>
 
     <div id="map" style="width:100%; height:100%;"></div>
