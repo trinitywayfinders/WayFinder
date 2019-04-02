@@ -23,53 +23,73 @@ export class HomePage {
   destMarker: leaflet.marker
   blockMarker: leaflet.marker
   simMarker: leaflet.marker
+  weatherMarker: leaflet.marker
   sim: any
   simGroup: leaflet.featureGroup
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController ) {}
+
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController) { }
 
   ionViewDidEnter() {
     this.loadmap();
     this.loadLegend();
-}
-
-loadLegend(){
-
-  function chooseColor(mode){
-    if(mode == "DRIVING")
-      return "#ff0000"
-    else if(mode == "WALKING")
-      return "#00ff2e"
-    else if(mode == "BICYCLING")
-      return "#8700ff"
-    else
-      return "#0065ff"
   }
 
-  var legend = leaflet.control({position: 'bottomright'});
-  var div;
-  legend.onAdd = function (map) {
 
-    var div = leaflet.DomUtil.create('div', 'info legend'),
-      grades = [1, 70, 80, 100],
-      labels = [],
-      modes = ["WALKING", "DRIVING", "TRANSIT", "BICYCLING"]
+  getWeather(startLat, startLng, iconCode) {
+    var weatherIcon = leaflet.icon({
+      iconUrl: 'http://openweathermap.org/img/w/' + iconCode + '.png',
+      iconSize: [38, 45], // size of the icon
+      iconAnchor: [22, 22], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    let markerGroup = leaflet.featureGroup();
+    if (this.weatherMarker) {
+      this.map.removeLayer(this.weatherMarker);
+    }
+    this.weatherMarker=leaflet.marker([startLat, startLng], { icon: weatherIcon});//.addTo(map);
+    markerGroup.addLayer(this.weatherMarker);
+    this.map.addLayer(markerGroup);
+  }
 
-    for (var i = 0; i < grades.length; i++) {
-      var mode = modes[i]
 
-      labels.push(
-        '<div class="color-box" style="background-color:'+chooseColor(modes[i])+';width:15px">_</div>'
-        +'<i></i> ' + modes[i]);
+  loadLegend() {
+
+    function chooseColor(mode) {
+      if (mode == "DRIVING")
+        return "#ff0000"
+      else if (mode == "WALKING")
+        return "#00ff2e"
+      else if (mode == "BICYCLING")
+        return "#8700ff"
+      else
+        return "#0065ff"
     }
 
-    div.innerHTML = labels.join('<br>');
+    var legend = leaflet.control({ position: 'bottomright' });
+    var div;
+    legend.onAdd = function(map) {
 
-    return div;
-  };
-  legend.addTo(this.map);
-}
+      var div = leaflet.DomUtil.create('div', 'info legend'),
+        grades = [1, 70, 80, 100],
+        labels = [],
+        modes = ["WALKING", "DRIVING", "TRANSIT", "BICYCLING"]
 
-  simulateBlock(){
+      for (var i = 0; i < grades.length; i++) {
+        var mode = modes[i]
+
+        labels.push(
+          '<div class="color-box" style="background-color:' + chooseColor(modes[i]) + ';width:15px">_</div>'
+          + '<i></i> ' + modes[i]);
+      }
+
+      div.innerHTML = labels.join('<br>');
+
+      return div;
+    };
+    legend.addTo(this.map);
+  }
+
+  simulateBlock() {
     //let simGroup = this.simGroup;
 
     var url = "http://localhost:8080/getSimulation/";
@@ -79,23 +99,23 @@ loadLegend(){
       // save the JSON in data
       resp.on('data', (chunk) => {
         data += chunk;
-      }).on('end',()=>{
+      }).on('end', () => {
         this.sim = JSON.parse(data);
         this.sim = this.sim['data'];
-        if (this.simGroup){
+        if (this.simGroup) {
           this.map.removeLayer(this.simGroup);
         }
         let simGroup = leaflet.featureGroup();
-        var i = 0 ;
-        while( i<10 ) {
-          this.simMarker= leaflet.marker([this.sim[i]['lat'],this.sim[i]['lng']]);
+        var i = 0;
+        while (i < 10) {
+          this.simMarker = leaflet.marker([this.sim[i]['lat'], this.sim[i]['lng']]);
           simGroup.addLayer(this.simMarker);
-          i+=1;
+          i += 1;
         }
         this.map.addLayer(simGroup);
         this.simGroup = simGroup;
       })
-      }).on("error", (err) => {
+    }).on("error", (err) => {
       console.log("Error: " + err.message);
     });
   }
@@ -115,46 +135,46 @@ loadLegend(){
 
     map.on('click', function(e) {
 
-    var blockLatLng = e.latlng;
+      var blockLatLng = e.latlng;
 
-    if (blockMarker) {
-      map.removeLayer(blockMarker);
+      if (blockMarker) {
+        map.removeLayer(blockMarker);
+        markerGroup.addLayer(blockMarker);
+      }
+
+      var treeIcon = leaflet.icon({
+        //iconUrl: 'https://icon2.kisspng.com/20180331/are/kisspng-tree-plant-clip-art-cartoon-tree-5abfc6dedb2342.0180062215225177268976.jpg',
+        //iconSize: [35, 95],
+        //iconAnchor: [22, 94],
+        //popupAnchor: [-3, -76]
+      });
+      let markerGroup = leaflet.featureGroup()
+      console.log("Adding:::" + blockLatLng.lat)
+      blockMarker = leaflet.marker([blockLatLng.lat, blockLatLng.lng]);
       markerGroup.addLayer(blockMarker);
-    }
+      console.log(map)
+      map.addLayer(markerGroup);
+      console.log("You clicked the map at latitude: " + blockLatLng.lat + " and longitude: " + blockLatLng.lng);
 
-    var treeIcon = leaflet.icon({
-      //iconUrl: 'https://icon2.kisspng.com/20180331/are/kisspng-tree-plant-clip-art-cartoon-tree-5abfc6dedb2342.0180062215225177268976.jpg',
-      //iconSize: [35, 95],
-      //iconAnchor: [22, 94],
-      //popupAnchor: [-3, -76]
-    });
-    let markerGroup = leaflet.featureGroup()
-    console.log("Adding:::"+blockLatLng.lat)
-    blockMarker = leaflet.marker([blockLatLng.lat, blockLatLng.lng]);
-    markerGroup.addLayer(blockMarker);
-    console.log(map)
-    map.addLayer(markerGroup);
-    console.log("You clicked the map at latitude: " + blockLatLng.lat + " and longitude: " + blockLatLng.lng);
-
-    console.log("getting block route: "+inputLocation)
-    //getRouteWithBlock(inputLocation, inputDestination, blockLatLng.Lat, blockLatLng.Lng)
-    onClickSetBlock(map, getRouteWithBlock, blockLatLng,inputLocation, inputDestination, drawPolyline, startMarker, destMarker)
+      console.log("getting block route: " + inputLocation)
+      //getRouteWithBlock(inputLocation, inputDestination, blockLatLng.Lat, blockLatLng.Lng)
+      onClickSetBlock(map, getRouteWithBlock, blockLatLng, inputLocation, inputDestination, drawPolyline, startMarker, destMarker)
     });
   }
 
-  onClickSetBlock(map, getRouteWithBlock, blockLatLng, inputLocation, inputDestination, drawPolyline, startMarker, destMarker){
+  onClickSetBlock(map, getRouteWithBlock, blockLatLng, inputLocation, inputDestination, drawPolyline, startMarker, destMarker) {
 
     console.log(map)
     console.log("You clicked the map at latitude: " + blockLatLng.lat + " and longitude: " + blockLatLng.lng);
 
-    console.log("getting block route: "+inputLocation)
+    console.log("getting block route: " + inputLocation)
     getRouteWithBlock(inputLocation, inputDestination, blockLatLng.lat, blockLatLng.lng, drawPolyline, map, startMarker, destMarker)
   }
 
-   getLocation(){
-     this.map.locate({
-       setView: true
-     }).once('locationfound', (e) => {
+  getLocation() {
+    this.map.locate({
+      setView: true
+    }).once('locationfound', (e) => {
       this.currentLatlng = e.latlng
 
       //remove the marker before adding a new one
@@ -180,6 +200,7 @@ loadLegend(){
       buttons: ['GOT IT']
     });
     alertOfLoc.present();
+    this.getWeather(this.currentLatlng.lat, this.currentLatlng.lng, '03d');
   }
 
 
@@ -197,16 +218,16 @@ loadLegend(){
     this.getLocation()
 
     var inputDestination = this.inputDestination;
-    this.map.on('click', function(e){
+    this.map.on('click', function(e) {
       var coord = e.latlng;
       var lat = coord.lat;
       var lng = coord.lng;
       console.log("You clicked the map at latitude: " + lat + " and longitude: " + lng);
-      });
+    });
   }
 
-  getDirections(){
-    console.log("GetDirections: "+this.inputLocation)
+  getDirections() {
+    console.log("GetDirections: " + this.inputLocation)
     var i;
     for (i in this.map._layers) {
       this.map.removeLayer(this.map._layers[i])
@@ -221,19 +242,19 @@ loadLegend(){
   }
 
   //ToDo change method to take in starting lat/long and route to destination lat/long
-  getRoute(start, destination){
-    console.log("routing:"+start)
-    if(start == ""){
+  getRoute(start, destination) {
+    console.log("routing:" + start)
+    if (start == "") {
       alert("Starting location cannot be empty!")
       return;
     }
 
-    if(destination == ""){
+    if (destination == "") {
       alert("Destination location cannot be empty!")
       return;
     }
     //ToDo: change url to deployed server version
-    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/walking/john"
+    var url = "http://localhost:8081/navigation/start/" + start + "/destination/" + destination + "/walking/john"
     const http = require('http')
     http.get(url, (resp) => {
       let data = '';
@@ -253,30 +274,30 @@ loadLegend(){
     });
   }
 
-  getRouteWithBlock(start, destination, blockLat, blockLng, drawPolyline, map, startMarker, destMarker){
+  getRouteWithBlock(start, destination, blockLat, blockLng, drawPolyline, map, startMarker, destMarker) {
     var drawPolyline = drawPolyline
 
-    console.log("routing:"+start)
-    if(start == ""){
+    console.log("routing:" + start)
+    if (start == "") {
       alert("Starting location cannot be empty!")
       return;
     }
 
-    if(destination == ""){
+    if (destination == "") {
       alert("Destination location cannot be empty!")
       return;
     }
 
-    if(blockLat == ""){
+    if (blockLat == "") {
       alert("Please choose a block location on the map")
     }
 
-    if(blockLng == ""){
+    if (blockLng == "") {
       alert("Please choose a block location on the map")
     }
 
     //ToDo: change url to deployed server version
-    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/walking/avoid/"+blockLat+"/"+blockLng+"/Nicky"
+    var url = "http://localhost:8081/navigation/start/" + start + "/destination/" + destination + "/walking/avoid/" + blockLat + "/" + blockLng + "/Nicky"
     const http = require('http')
     http.get(url, (resp) => {
       let data = '';
@@ -297,22 +318,22 @@ loadLegend(){
   }
 
 
-/*
-  Walking - Green
-  Driving - Red
-  Cycling - Purple
-  Transit - Blue
+  /*
+    Walking - Green
+    Driving - Red
+    Cycling - Purple
+    Transit - Blue
 
-*/
+  */
 
-  drawPolyline(data, map, startMarker, destMarker){
-    function chooseColor(step){
+  drawPolyline(data, map, startMarker, destMarker) {
+    function chooseColor(step) {
       var mode = step['travel_mode']
-      if(mode == "DRIVING")
+      if (mode == "DRIVING")
         return "#ff0000"
-      else if(mode == "WALKING")
+      else if (mode == "WALKING")
         return "#00ff2e"
-      else if(mode == "BICYCLING")
+      else if (mode == "BICYCLING")
         return "#8700ff"
       else
         return "#0065ff"
@@ -328,38 +349,38 @@ loadLegend(){
 
     let markerGroup = leaflet.featureGroup()
 
-      jsonData = jsonData['routes']
+    jsonData = jsonData['routes']
 
-      jsonData.forEach(function(route) {
-            var legs = route['legs']
+    jsonData.forEach(function(route) {
+      var legs = route['legs']
 
-            legs.forEach(function(leg){
-              var steps = leg['steps']
-              var color = "#"+((1<<24)*Math.random()|0).toString(16)
+      legs.forEach(function(leg) {
+        var steps = leg['steps']
+        var color = "#" + ((1 << 24) * Math.random() | 0).toString(16)
 
-              var startMarkerLatLng = [steps[0]['start_location']["lat"], steps[0]['start_location']["lng"]]
-              var destMarkerLatLng = [steps[steps.length-1]['end_location']['lat'],steps[steps.length-1]['end_location']['lng']]
+        var startMarkerLatLng = [steps[0]['start_location']["lat"], steps[0]['start_location']["lng"]]
+        var destMarkerLatLng = [steps[steps.length - 1]['end_location']['lat'], steps[steps.length - 1]['end_location']['lng']]
 
-              startMarker = leaflet.marker([startMarkerLatLng[0], startMarkerLatLng[1]])
-              destMarker = leaflet.marker([destMarkerLatLng[0], destMarkerLatLng[1]])
-              markerGroup.addLayer(startMarker);
-              markerGroup.addLayer(destMarker);
-              map.addLayer(markerGroup);
+        startMarker = leaflet.marker([startMarkerLatLng[0], startMarkerLatLng[1]])
+        destMarker = leaflet.marker([destMarkerLatLng[0], destMarkerLatLng[1]])
+        markerGroup.addLayer(startMarker);
+        markerGroup.addLayer(destMarker);
+        map.addLayer(markerGroup);
+        //getWeather(startMarkerLatLng[0], startMarkerLatLng[1], '03d');
+        steps.forEach(function(step) {
+          var polyline = step['polyline']['points']
+          var coordinates = polyUtil.decode(polyline);
 
-              steps.forEach(function(step){
-                var polyline = step['polyline']['points']
-                var coordinates = polyUtil.decode(polyline);
-
-                var polyline = leaflet.polyline(coordinates, {
-                  color: chooseColor(step),
-                  weight: 10,
-                  opacity: .7,
-                  dashArray: '0,0',
-                  lineJoin: 'round'
-                }).addTo(map)
-              })
-            })
+          var polyline = leaflet.polyline(coordinates, {
+            color: chooseColor(step),
+            weight: 10,
+            opacity: .7,
+            dashArray: '0,0',
+            lineJoin: 'round'
+          }).addTo(map)
+        })
       })
+    })
   }
 
 }
