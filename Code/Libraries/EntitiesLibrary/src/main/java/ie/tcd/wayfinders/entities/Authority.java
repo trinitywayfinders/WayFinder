@@ -1,4 +1,4 @@
-package com.wayfinder.auth.entity;
+package ie.tcd.wayfinders.entities;
 
 import org.springframework.security.core.GrantedAuthority;
 

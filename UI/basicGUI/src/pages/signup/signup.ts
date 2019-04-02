@@ -11,8 +11,8 @@ import { LoginPage } from '../login/login';
 */
 @IonicPage()
 @Component({
-  selector: 'page-signup',
-  templateUrl: 'signup.html',
+    selector: 'page-signup',
+    templateUrl: 'signup.html',
 })
 export class SignupPage {
   usrname = '';
