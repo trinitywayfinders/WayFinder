@@ -1,0 +1,86 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    	flatDir {
+       		dirs 'libs'
+  		}
+  		maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+    }
+    
+    dependencies {
+	    classpath('se.transmode.gradle:gradle-docker:1.2')
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+    }
+}
+
+plugins {
+	id "org.sonarqube" version "2.7"
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'docker'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+group = 'com.wayfinder'
+version = '0.0.1'
+
+archivesBaseName = 'environmentservice'
+
+docker {
+    baseImage "frolvlad/alpine-oraclejre8:slim"
+    maintainer 'Arun Thundyill Saseendran "thundyia@tcd.ie"'
+}
+
+task buildDocker(type: Docker, dependsOn: build) {
+  push = false
+  tag = "${archivesBaseName}"
+  applicationName = jar.baseName
+  volume("/tmp")
+  addFile("build/libs/${archivesBaseName}-${version}.jar")
+  def runCommand = "java -Djava.security.egd=file:/dev/./urandom -jar /${archivesBaseName}-${version}.jar"  
+  exposePort(8081)
+  entryPoint(["sh", "-c", "${runCommand}"])
+  doFirst {
+    copy {
+      from jar
+      into stageDir
+    }
+  }
+}
+
+repositories {
+	jcenter()
+    mavenCentral()
+    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation 'io.springfox:springfox-core:2.9.2'
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
+	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.2.RELEASE'
+	implementation 'ch.hsr:geohash:1.3.0'
+	implementation 'org.hamcrest:hamcrest-all:1.3'
+	implementation 'com.github.joschi.jackson:jackson-datatype-threetenbp:2.6.4'
+	implementation 'com.googlecode.json-simple:json-simple:1.1'
+	compile 'org.apache.httpcomponents:httpcore:4.4.1'
+    compile 'org.apache.httpcomponents:httpclient:4.5.7'
+	compile project(":REST")
+	
+    testCompile("junit:junit")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
