@@ -1,0 +1,100 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Trinity Wayfinders
+servers:
+  - url: http://example.swagger.io/v1
+paths:
+  /api/environment/weather/{Lat}/{Long}:
+    get:
+      summary: Find route to destination
+      operationId: getRoute
+      tags:
+        - Routing
+      parameters:
+        - name: Lat
+          in: path
+          required: true
+          description: Current latitude
+          schema:
+            type: string
+            
+        - name: Long
+          in: path
+          required: true
+          description: Current Longitude
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: Weather Object
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/weather"
+        '404':
+          description: Weather Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        
+components:
+  schemas:
+    weather:
+      required:
+        - latitude
+        - longitude
+        - overall
+        - condition
+        - temperature
+        - icon
+        - timestamp
+      properties:
+        latitude:
+          type: number
+          example: 12.45
+        longitude:
+          type: number
+          example: 87.92
+        overall:
+          type: string
+          pattern: '^(Good)|(Bad)$'
+          example: Good
+        condition:
+          type: string
+          pattern: '^(Thunderstorm)|(Drizzle)|(Rain)|(Snow)|(Atmosphere)|(Clear)|(Clouds)$'
+          example: Thunderstorm
+        icon:
+          type: string
+          pattern: '^(\d{2}d)$'
+          example: 01d
+        timestamp:
+          type: string
+          format: date-time
+  
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 400
+        message:
+          type: string
+          example: Bad Input

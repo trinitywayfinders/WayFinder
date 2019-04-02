@@ -2,6 +2,7 @@ package com.wayfinder.auth.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wayfinder.auth.entity.User;
 import com.wayfinder.auth.service.UserService;
+import ie.tcd.wayfinders.entities.User;
 
-@CrossOrigin(origins = {"*"})
+@CrossOrigin(origins = {"*"}, allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token"})
 
 @RestController
 @RequestMapping("/api/user")
@@ -25,10 +26,8 @@ public class UserController {
 	
 	@GetMapping("/me")
 	@PreAuthorize("hasAuthority('ROLE_USER')")
-	public Object getUser() {
-    	OAuth2Authentication oauth2Authentication = (OAuth2Authentication) SecurityContextHolder.getContext().getAuthentication();
-    	
-        return oauth2Authentication.getPrincipal();
+	public User getUser(@AuthenticationPrincipal User user) {    	
+        return user;
 	}
 	
 	@PostMapping("/")
