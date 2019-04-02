@@ -14,7 +14,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 			.requestMatchers().antMatchers("/api/**")
 		.and()
 			.authorizeRequests()
-				.antMatchers("/**").authenticated()
+				.antMatchers("/ui/**").authenticated()
 			.anyRequest().permitAll()
 		.and()
 			.cors().disable();
