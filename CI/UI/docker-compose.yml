@@ -1,0 +1,29 @@
+version: '3'
+services:
+   wayfinderui:
+     build: .
+     links:
+      - authserver
+     depends_on:
+      - authserver
+     ports:
+      - "8080:8100"
+   authserver:
+     image: "authserver:0.0.1"
+     links:
+       - mysql1
+     depends_on:
+       - mysql1
+     container_name: authserver
+     ports:
+       - "80:8080"
+
+
+   mysql1:
+     image: "mysql"
+     command: --init-file /data/application/init.sql
+     volumes:
+       - ./init.sql:/data/application/init.sql
+     environment:
+        MYSQL_ROOT_PASSWORD: wayfinders
+     container_name: mysql1

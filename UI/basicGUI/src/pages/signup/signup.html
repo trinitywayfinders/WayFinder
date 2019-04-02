@@ -7,8 +7,11 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Trinity WayFinder</ion-title>
-    <ion-list>
+  </ion-navbar>
+</ion-header>
 
+<ion-content padding>
+  <ion-list>
       <ion-item>
         <ion-label floating>Username</ion-label>
         <ion-input type="text" [(ngModel)]="usrname"></ion-input>
@@ -18,20 +21,42 @@
         <ion-label floating>Password</ion-label>
         <ion-input type="password" [(ngModel)]="passwd"></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label floating>Password Re-Enter</ion-label>
         <ion-input type="password" [(ngModel)]="passwd1"></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input type="text" [(ngModel)]="email"></ion-input>
       </ion-item>
+      <ion-navbar>
+        <ion-title>Please Rank Preference Below from 1 to 5, 1 is most concerned while 5 is the least</ion-title>
+        <ion-title>Note: use each number only once please^^</ion-title>
+      </ion-navbar>
+      <ion-item>
+        <ion-label floating>Cost</ion-label>
+        <ion-input type="text" [(ngModel)]="concernCost"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Emission</ion-label>
+        <ion-input type="text" [(ngModel)]="concernEmissionReduction"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Health</ion-label>
+        <ion-input type="text" [(ngModel)]="concernHealth"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Avoid ollution</ion-label>
+        <ion-input type="text" [(ngModel)]="concernPollutionAvoidance"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Speed</ion-label>
+        <ion-input type="text" [(ngModel)]="concernSpeed"></ion-input>
+      </ion-item>
+      
+
       <button ion-button (click) = "signup()">Sign Up</button>
-
     </ion-list>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-
 </ion-content>

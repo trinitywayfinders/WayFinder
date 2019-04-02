@@ -1,14 +1,14 @@
-package ie.tcd.wayfinder.highlevel.navigation.request;
+package ie.tcd.wayfind.lowlevel.request;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import ie.tcd.wayfinder.highlevel.navigation.type.TravelMode;
-
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-public class UserRouteRequest {
+import ie.tcd.wayfind.lowlevel.type.TravelMode;
+
+public class InputUserRouteRequest {
 	@JsonProperty("origin")
 	private String origin;
 	
@@ -17,12 +17,12 @@ public class UserRouteRequest {
 	
 	@JsonProperty("mode")
 	private TravelMode mode;
-
+	
 	@JsonProperty("username")
 	private String username;
 	
 	@JsonCreator
-	public UserRouteRequest(@JsonProperty("origin") String origin, @JsonProperty("destination") String destination, @JsonProperty("mode") TravelMode mode, @JsonProperty("username") String username) {
+	public InputUserRouteRequest(@JsonProperty("origin") String origin, @JsonProperty("destination") String destination, @JsonProperty("mode") TravelMode mode, @JsonProperty("username") String username) {
 		super();
 		this.origin = origin;
 		this.destination = destination;
