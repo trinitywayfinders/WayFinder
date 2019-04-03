@@ -50,7 +50,7 @@ task buildDocker(type: Docker, dependsOn: build) {
   applicationName = jar.baseName
   volume("/tmp")
   addFile("build/libs/${archivesBaseName}-${version}.jar")
-  def runCommand = "sleep 150 && java -Djava.security.egd=file:/dev/./urandom -jar /${archivesBaseName}-${version}.jar"  
+  def runCommand = "sleep 30 && java -Djava.security.egd=file:/dev/./urandom -jar /${archivesBaseName}-${version}.jar"  
   entryPoint(["sh", "-c", "${runCommand}"])
   doFirst {
     copy {
