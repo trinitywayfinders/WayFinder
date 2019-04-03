@@ -46,6 +46,12 @@ public class LowLevelRouteController {
 
 	@Value("${routing.google.apiKey}")
 	private String apiKey;
+	
+	@Value("${spring.environment.api.url}")
+	private String EnvironmentUrl;
+	
+	@Value("${spring.userprefs.api.url}")
+	private String UserPrefsUrl;
 
 	private static double totalDistance = 5;
 
@@ -67,13 +73,13 @@ public class LowLevelRouteController {
 		
 		int initialDistance = getTotalDistanceRoute(getDistanceResponseBody);
 		
-		UserPreferences userPreferences = new UserPreferences(request.getUsername());
+		UserPreferences userPreferences = new UserPreferences(request.getUsername(), UserPrefsUrl);
 		
 		String[] latLng = getRouteStartLatLng(getDistanceResponseBody).split(",");
 		
 		
 		EnvironmentMetrics env = new EnvironmentMetrics(Float.parseFloat(latLng[0]), Float.parseFloat(latLng[1]));
-		TravelModeBasedOnPreference travelModeBasedOnPrefs = new TravelModeBasedOnPreference(userPreferences, initialDistance, env.getWeatherCondition());
+		TravelModeBasedOnPreference travelModeBasedOnPrefs = new TravelModeBasedOnPreference(userPreferences, initialDistance, env.getWeatherCondition(EnvironmentUrl));
 		
 		//Get user data from User-Preferences API + add preferences
 		System.out.println("\n\n\nIN ROUTING API"+request.getOrigin());
@@ -372,12 +378,12 @@ public class LowLevelRouteController {
 		
 		int initialDistance = getTotalDistanceRoute(getDistanceResponseBody);
 		
-		UserPreferences userPreferences = new UserPreferences(request.getUsername());
+		UserPreferences userPreferences = new UserPreferences(request.getUsername(), UserPrefsUrl);
 		
 		String[] latLng = getRouteStartLatLng(getDistanceResponseBody).split(",");
 		
 		EnvironmentMetrics env = new EnvironmentMetrics(Float.parseFloat(latLng[0]), Float.parseFloat(latLng[1]));
-		TravelModeBasedOnPreference travelModeBasedOnPrefs = new TravelModeBasedOnPreference(userPreferences, initialDistance, env.getWeatherCondition());
+		TravelModeBasedOnPreference travelModeBasedOnPrefs = new TravelModeBasedOnPreference(userPreferences, initialDistance, env.getWeatherCondition(EnvironmentUrl));
 		
 		
 		/*

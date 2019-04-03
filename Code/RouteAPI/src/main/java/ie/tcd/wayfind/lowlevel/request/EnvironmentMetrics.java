@@ -8,6 +8,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 
 import ie.tcd.wayfinders.restLibrary.Library;
 
@@ -15,7 +16,6 @@ public class EnvironmentMetrics {
 	
 	public float Latitude;
 	public float Longitude;
-	public String url = "http://127.0.0.1:22113/api/environment/weather/";
 	
 	public EnvironmentMetrics(float latitude, float longitude) {
 		super();
@@ -23,9 +23,9 @@ public class EnvironmentMetrics {
 		Longitude = longitude;
 	}
 	
-	public String getWeatherCondition() {
+	public String getWeatherCondition(String baseUrl) {
 		
-		String url = this.url+this.Latitude+"/"+this.Longitude+"/";
+		String url = baseUrl+ "/api/environment/weather/"+this.Latitude+"/"+this.Longitude+"/";
 		
 		try {
 			HttpResponse response = Library.GET(url, Optional.empty());
