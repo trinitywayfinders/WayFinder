@@ -137,6 +137,7 @@ echo "  \  \::/ /:/      \__\::/  \  \:\        \  \:\  /:/    \  \:\/:/    \  \
 echo "   \__\/ /:/       /__/:/    \  \:\        \  \:\/:/      \  \::/      \  \:\           \  \:\     /__/:/    \  \:\/:/     \  \:\     "
 echo "     /__/:/        \__\/      \  \:\        \  \::/        \__\/        \  \:\           \__\/     \__\/      \  \::/       \  \:\    "
 echo "     \__\/                     \__\/         \__\/                       \__\/                                 \__\/         \__\/    "
+
 # Build SimulationAPI
 echo "*** Building SimulationAPI - Begin ***"
 cd Code/SimulationAPI/
@@ -146,6 +147,26 @@ echo "*** Building SimulationAPI - Completed ***"
 # Return to Root
 cd ../../
 
+echo "      ___           ___                 "
+echo "     /  /\         /__/\        ___     "
+echo "    /  /:/_        \  \:\      /  /\    "
+echo "   /  /:/ /\        \  \:\    /  /:/    "
+echo "  /  /:/_/::\   ___  \  \:\  /__/::\    "
+echo " /__/:/__\/\:\ /__/\  \__\:\ \__\/\:\__ "
+echo " \  \:\ /~~/:/ \  \:\ /  /:/    \  \:\/\\"
+echo "  \  \:\  /:/   \  \:\  /:/      \__\::/"
+echo "   \  \:\/:/     \  \:\/:/       /__/:/ "
+echo "    \  \::/       \  \::/        \__\/  "
+echo "     \__\/         \__\/                "
+
+# Build UI
+echo "*** Building GUI - Begin ***"
+cd UI/
+docker build -t wayfinderui:latest .
+echo "*** Building GUI - Completed ***"
+
+# Return to Root
+cd ../
 
 echo "              ___    _________                       .__          __             .___"
 echo " /\           \  \   \_   ___ \  ____   _____ ______ |  |   _____/  |_  ____   __| _/"
