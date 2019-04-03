@@ -23,6 +23,7 @@ export class HomePage {
   destMarker: leaflet.marker
   blockMarker: leaflet.marker
   simMarker: leaflet.marker
+  weatherMarker: leaflet.marker
   sim: any
   simGroup: leaflet.featureGroup
   constructor(public navCtrl: NavController, public alertCtrl: AlertController ) {}
@@ -121,26 +122,26 @@ export class HomePage {
       markerGroup.addLayer(this.marker);
       this.map.addLayer(markerGroup);
 
-    }).on('locationerror', (err) => {
-      console.log(err.message);
-    })
+      }).on('locationerror', (err) => {
+          console.log(err.message);
+      })
   }
 
-  showLocation() {
-    this.getLocation()
+    showLocation(){
+      this.getLocation()
 
-    let alertOfLoc = this.alertCtrl.create({
-      title: "YOUR CURRENT LOCATION",
-      subTitle: "Latitude:" + this.currentLatlng.lat + " Longitude: " + this.currentLatlng.lng,
-      buttons: ['GOT IT']
-    });
+      let alertOfLoc = this.alertCtrl.create({
+        title:"YOUR CURRENT LOCATION",
+        subTitle: "Latitude:" + this.currentLatlng.lat+" Longitude: " +this.currentLatlng.lng,
+        buttons:['GOT IT']
+      });
     alertOfLoc.present();
   }
 
 
 
   loadmap() {
-    if (this.map) {
+    if(this.map){
       this.map.remove();
     }
     this.map = leaflet.map("map").fitWorld();
@@ -188,7 +189,7 @@ export class HomePage {
       return;
     }
     //ToDo: change url to deployed server version
-    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/walking/john"
+    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/Nicky_2"
     const http = require('http')
     http.get(url, (resp) => {
       let data = '';
@@ -231,7 +232,7 @@ export class HomePage {
     }
 
     //ToDo: change url to deployed server version
-    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/walking/avoid/"+blockLat+"/"+blockLng+"/Nicky"
+    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/avoid/"+blockLat+"/"+blockLng+"/Nicky_2"
     const http = require('http')
     http.get(url, (resp) => {
       let data = '';
@@ -260,11 +261,6 @@ export class HomePage {
 
 */
 
-getWeather(startLat, startLng, iconCode){
-
-  //corresponding icon shows up
-}
-
   drawPolyline(data, map, startMarker, destMarker){
     function chooseColor(step){
       var mode = step['travel_mode']
@@ -287,8 +283,40 @@ getWeather(startLat, startLng, iconCode){
 
     let markerGroup = leaflet.featureGroup()
 
-      jsonData = jsonData['routes']
+    function getWeather(startLat, startLng) {
+        var url = "http://localhost:22113/api/environment/weather/"+startLat+"/"+startLng+"/";
+        let data = '';
+        var iconCode;
+        const http = require('http')
+        http.get(url, (resp) => {
+          // save the JSON in data
+          resp.on('data', (chunk) => {
+            data += chunk;
+          }).on('end', () => {
+            var weather = JSON.parse(data);
+            iconCode = weather['icon'];
+            var weatherIcon = leaflet.icon({
+              iconUrl: 'http://openweathermap.org/img/w/' + iconCode + '.png',
+              iconSize: [50, 82],
+              iconAnchor: [24, 81],
+              popupAnchor: [1, -34]// point from which the popup should open relative to the iconAnchor
+            });
+            let markerGroup = leaflet.featureGroup();
+            if (this.weatherMarker) {
+              this.map.removeLayer(this.weatherMarker);
+            }
+            this.weatherMarker=leaflet.marker([startLat, startLng], { icon: weatherIcon});//.addTo(map);
+            markerGroup.addLayer(this.weatherMarker);
+            this.map.addLayer(markerGroup);
+          })
+        }).on("error", (err) => {
+          console.log("Error: " + err.message);
+        });
 
+      }
+
+      jsonData = jsonData['routes']
+      //getWeather(jsonData[0]['legs'][0]['start_location']['lat'], jsonData[0]['legs'][0]['start_location']['lng']);
       jsonData.forEach(function(route) {
             var legs = route['legs']
 
