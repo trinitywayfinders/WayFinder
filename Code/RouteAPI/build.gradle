@@ -16,7 +16,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'docker'
 
 group = 'ie.tcd.wayfind'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 sourceCompatibility = '1.8'
 
 archivesBaseName = 'routeapi'
@@ -42,6 +42,7 @@ task buildDocker(type: Docker, dependsOn: build) {
 	volume("/tmp")
 	addFile("build/libs/${archivesBaseName}-${version}.war")
 	def runCommand = "java -Djava.security.egd=file:/dev/./urandom -jar /${archivesBaseName}-${version}.war"
+	exposePort(8080)
 	entryPoint(["sh", "-c", "${runCommand}"])
 	doFirst {
 		copy {
