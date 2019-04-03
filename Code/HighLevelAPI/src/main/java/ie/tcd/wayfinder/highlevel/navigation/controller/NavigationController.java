@@ -25,10 +25,10 @@ import ie.tcd.wayfinders.restLibrary.Library;
 @RestController
 public class NavigationController {
 
-    @RequestMapping("/")
-    public String index()
+    @RequestMapping("/heartbeat")
+    public ResponseEntity index()
     {
-        return "Wayfinders Springboot PoC!";
+        return new ResponseEntity<String>("OK", HttpStatus.valueOf(200));
     }
 
     /*
