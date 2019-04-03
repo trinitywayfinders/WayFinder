@@ -245,7 +245,7 @@ loadLegend(){
         headers: new HttpHeaders({
             // 'Content-Type': 'multipart/form-data;charset=UTF-8',
             'Accept': 'application/json;charset=UTF-8',
-            'Authorization': 'Bearer ' + response['access_token'],
+            'Authorization': 'Bearer ' + this.storage.get('access_token'),
         })
     }
     //ToDo: change url to deployed server version
@@ -294,7 +294,7 @@ loadLegend(){
         headers: new HttpHeaders({
             // 'Content-Type': 'multipart/form-data;charset=UTF-8',
             'Accept': 'application/json;charset=UTF-8',
-            'Authorization': 'Bearer ' + response['access_token'],
+            'Authorization': 'Bearer ' + this.storage.get('access_token'),
         })
     }
     var url = "http://35.246.76.168:8081/navigation/start/"+start+"/destination/"+destination+"/driving/avoid/"+blockLat+"/"+blockLng+"/"
