@@ -5,6 +5,9 @@ import leaflet from 'leaflet';
 import polyUtil from 'polyline-encoded'
 import { SignupPage } from '../signup/signup';
 import { LoginPage } from '../login/login';
+import { Storage } from '@ionic/storage';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 @Component({
   selector: 'page-home',
@@ -23,9 +26,11 @@ export class HomePage {
   destMarker: leaflet.marker
   blockMarker: leaflet.marker
   simMarker: leaflet.marker
+  weatherMarker: leaflet.marker
   sim: any
   simGroup: leaflet.featureGroup
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController ) {}
+
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public storage: Storage, public http: HttpClient ) {}
 
   ionViewDidEnter() {
     this.loadmap();
@@ -68,7 +73,6 @@ loadLegend(){
   };
   legend.addTo(this.map);
 }
-
   simulateBlock(){
     //let simGroup = this.simGroup;
 
@@ -108,10 +112,12 @@ loadLegend(){
     var inputDestination = this.inputDestination
     var startMarker = this.startMarker
     var destMarker = this.destMarker
+    var weatherMarker = this.weatherMarker
 
     var onClickSetBlock = this.onClickSetBlock
-    var getRouteWithBlock = this.getRouteWithBlock
+    // var getRouteWithBlock = this.getRouteWithBlock
     var drawPolyline = this.drawPolyline
+    var me = this
 
     map.on('click', function(e) {
 
@@ -119,18 +125,20 @@ loadLegend(){
 
     if (blockMarker) {
       map.removeLayer(blockMarker);
-      markerGroup.addLayer(blockMarker);
     }
 
-    var treeIcon = leaflet.icon({
-      //iconUrl: 'https://icon2.kisspng.com/20180331/are/kisspng-tree-plant-clip-art-cartoon-tree-5abfc6dedb2342.0180062215225177268976.jpg',
-      //iconSize: [35, 95],
-      //iconAnchor: [22, 94],
-      //popupAnchor: [-3, -76]
-    });
+    var greenIcon = new leaflet.Icon({
+        iconUrl: 'assets/imgs/marker-icon-2x-green.png',
+        shadowUrl: 'assets/imgs/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+      });
+
     let markerGroup = leaflet.featureGroup()
     console.log("Adding:::"+blockLatLng.lat)
-    blockMarker = leaflet.marker([blockLatLng.lat, blockLatLng.lng]);
+    blockMarker = leaflet.marker([blockLatLng.lat, blockLatLng.lng], {icon: greenIcon});
     markerGroup.addLayer(blockMarker);
     console.log(map)
     map.addLayer(markerGroup);
@@ -138,17 +146,17 @@ loadLegend(){
 
     console.log("getting block route: "+inputLocation)
     //getRouteWithBlock(inputLocation, inputDestination, blockLatLng.Lat, blockLatLng.Lng)
-    onClickSetBlock(map, getRouteWithBlock, blockLatLng,inputLocation, inputDestination, drawPolyline, startMarker, destMarker)
+    onClickSetBlock(map, getRouteWithBlock, blockLatLng,inputLocation, inputDestination, drawPolyline, startMarker, destMarker, weatherMarker, me)
     });
   }
 
-  onClickSetBlock(map, getRouteWithBlock, blockLatLng, inputLocation, inputDestination, drawPolyline, startMarker, destMarker){
+  onClickSetBlock(map, getRouteWithBlock, blockLatLng, inputLocation, inputDestination, drawPolyline, startMarker, destMarker, weatherMarker, me){
 
     console.log(map)
     console.log("You clicked the map at latitude: " + blockLatLng.lat + " and longitude: " + blockLatLng.lng);
 
     console.log("getting block route: "+inputLocation)
-    getRouteWithBlock(inputLocation, inputDestination, blockLatLng.lat, blockLatLng.lng, drawPolyline, map, startMarker, destMarker)
+    getRouteWithBlock(inputLocation, inputDestination, blockLatLng.lat, blockLatLng.lng, drawPolyline, map, startMarker, destMarker, weatherMarker, me)
   }
 
    getLocation(){
@@ -166,26 +174,26 @@ loadLegend(){
       markerGroup.addLayer(this.marker);
       this.map.addLayer(markerGroup);
 
-    }).on('locationerror', (err) => {
-      console.log(err.message);
-    })
+      }).on('locationerror', (err) => {
+          console.log(err.message);
+      })
   }
 
-  showLocation() {
-    this.getLocation()
+    showLocation(){
+      this.getLocation()
 
-    let alertOfLoc = this.alertCtrl.create({
-      title: "YOUR CURRENT LOCATION",
-      subTitle: "Latitude:" + this.currentLatlng.lat + " Longitude: " + this.currentLatlng.lng,
-      buttons: ['GOT IT']
-    });
+      let alertOfLoc = this.alertCtrl.create({
+        title:"YOUR CURRENT LOCATION",
+        subTitle: "Latitude:" + this.currentLatlng.lat+" Longitude: " +this.currentLatlng.lng,
+        buttons:['GOT IT']
+      });
     alertOfLoc.present();
   }
 
 
 
   loadmap() {
-    if (this.map) {
+    if(this.map){
       this.map.remove();
     }
     this.map = leaflet.map("map").fitWorld();
@@ -233,27 +241,45 @@ loadLegend(){
       return;
     }
     //ToDo: change url to deployed server version
-    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/walking/john"
-    const http = require('http')
-    http.get(url, (resp) => {
-      let data = '';
+    // var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/Zihan"
+    // const http = require('http')
+    // http.get(url, (resp) => {
+    //   let data = '';
+    //
+    //   // A chunk of data has been recieved.
+    //   resp.on('data', (chunk) => {
+    //     data += chunk;
+    //   });
+    //
+    //   // The whole response has been received. Print out the result.
+    //   resp.on('end', () => {
+    //     this.drawPolyline(data, this.map, this.startMarker, this.destMarker, this.weatherMarker)
+    //   });
+    //
+    // }).on("error", (err) => {
+    //   console.log("Error: " + err.message);
+    // });
+    var requestCallback = function(token, me) {
+        console.log("Token: " + token)
+        var httpOptions = {
+            headers: new HttpHeaders({
+                // 'Content-Type': 'multipart/form-data;charset=UTF-8',
+                'Accept': 'application/json;charset=UTF-8',
+                'Authorization': 'Bearer ' + token,
+            })
+        }
 
-      // A chunk of data has been recieved.
-      resp.on('data', (chunk) => {
-        data += chunk;
-      });
+        var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving"
+        me.http.get(url, httpOptions).subscribe((data) => {
+            console.log(data);
+            me.drawPolyline(data, map, me.startMarker, me.destMarker, me.weatherMarker)
+        })
+    }
 
-      // The whole response has been received. Print out the result.
-      resp.on('end', () => {
-        this.drawPolyline(data, this.map, this.startMarker, this.destMarker)
-      });
-
-    }).on("error", (err) => {
-      console.log("Error: " + err.message);
-    });
+    this.updateToken(requestCallback, this)
   }
 
-  getRouteWithBlock(start, destination, blockLat, blockLng, drawPolyline, map, startMarker, destMarker){
+  getRouteWithBlock(start, destination, blockLat, blockLng, drawPolyline, map, startMarker, destMarker, weatherMarker, me){
     var drawPolyline = drawPolyline
 
     console.log("routing:"+start)
@@ -276,26 +302,42 @@ loadLegend(){
     }
 
     //ToDo: change url to deployed server version
-    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/walking/avoid/"+blockLat+"/"+blockLng+"/Nicky"
-    const http = require('http')
-    http.get(url, (resp) => {
-      let data = '';
+    var requestCallback = function(token, me) {
+        console.log("Token: " + token)
+        var httpOptions = {
+            headers: new HttpHeaders({
+                // 'Content-Type': 'multipart/form-data;charset=UTF-8',
+                'Accept': 'application/json;charset=UTF-8',
+                'Authorization': 'Bearer ' + token,
+            })
+        }
 
-      // A chunk of data has been recieved.
-      resp.on('data', (chunk) => {
-        data += chunk;
-      });
+        var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/avoid/"+blockLat+"/"+blockLng
+        me.http.get(url, httpOptions).subscribe((data) => {
+            console.log(data);
+            me.drawPolyline(data, map, me.startMarker, me.destMarker, me.weatherMarker)
+        })
+    }
 
-      // The whole response has been received. Print out the result.
-      resp.on('end', () => {
-        drawPolyline(data, map, startMarker, destMarker)
-      });
-
-    }).on("error", (err) => {
-      console.log("Error: " + err.message);
-    });
-  }
-
+    me.updateToken(requestCallback, me)
+    // const http = require('http')
+    // http.get(url, null, httpOptions).subscribe((resp) => {
+    //   let data = '';
+    //
+    //   // A chunk of data has been recieved.
+    //   resp.on('data', (chunk) => {
+    //     data += chunk;
+    //   });
+    //
+    //   // The whole response has been received. Print out the result.
+    //   resp.on('end', () => {
+    //     drawPolyline(data, map, startMarker, destMarker, weatherMarker)
+    //   });
+  // })
+    // .on("error", (err) => {
+    //   console.log("Error: " + err.message);
+    // });
+}
 
 /*
   Walking - Green
@@ -305,7 +347,7 @@ loadLegend(){
 
 */
 
-  drawPolyline(data, map, startMarker, destMarker){
+  drawPolyline(data, map, startMarker, destMarker, weatherMarker){
     function chooseColor(step){
       var mode = step['travel_mode']
       if(mode == "DRIVING")
@@ -317,8 +359,8 @@ loadLegend(){
       else
         return "#0065ff"
     }
-    var jsonData = JSON.parse(data)
-    console.log(jsonData);
+    // var jsonData = JSON.parse(data)
+    var jsonData = data
     if (startMarker) {
       map.removeLayer(startMarker);
     }
@@ -328,12 +370,46 @@ loadLegend(){
 
     let markerGroup = leaflet.featureGroup()
 
-      jsonData = jsonData['routes']
+    function getWeather(startLat, startLng, weatherMarker, map) {
+        var url = "http://localhost:22113/api/environment/weather/"+startLat+"/"+startLng+"/";
+        let data = '';
+        var iconCode;
+        const http = require('http')
+        http.get(url, (resp) => {
+          // save the JSON in data
+          resp.on('data', (chunk) => {
+            data += chunk;
+          }).on('end', () => {
+            var weather = JSON.parse(data);
+            iconCode = weather['icon'];
+            var weatherIcon = leaflet.icon({
+              iconUrl: 'http://openweathermap.org/img/w/' + iconCode + '.png',
+              iconSize: [50, 82],
+              iconAnchor: [24, 81],
+              popupAnchor: [1, -34]// point from which the popup should open relative to the iconAnchor
+            });
+            let markerGroup = leaflet.featureGroup();
+            if (weatherMarker) {
+              map.removeLayer(weatherMarker);
+            }
+            weatherMarker=leaflet.marker([startLat, startLng], { icon: weatherIcon});//.addTo(map);
+            markerGroup.addLayer(weatherMarker);
+            map.addLayer(markerGroup);
+          })
+        }).on("error", (err) => {
+          console.log("Error: " + err.message);
+        });
 
+      }
+
+      jsonData = jsonData['routes']
+      getWeather(jsonData[0]['legs'][0]['start_location']['lat'], jsonData[0]['legs'][0]['start_location']['lng'], weatherMarker, map);
+      var me = this
       jsonData.forEach(function(route) {
             var legs = route['legs']
 
             legs.forEach(function(leg){
+
               var steps = leg['steps']
               var color = "#"+((1<<24)*Math.random()|0).toString(16)
 
@@ -344,9 +420,37 @@ loadLegend(){
               destMarker = leaflet.marker([destMarkerLatLng[0], destMarkerLatLng[1]])
               markerGroup.addLayer(startMarker);
               markerGroup.addLayer(destMarker);
-              map.addLayer(markerGroup);
+              me.map.addLayer(markerGroup);
 
               steps.forEach(function(step){
+
+                function addTransitMarker(lat, lng, transit_details, map){
+                   markerGroup = leaflet.featureGroup()
+                  console.log("Adding:::"+lat)
+
+
+                  var redIcon = new leaflet.Icon({
+                      iconUrl: 'assets/imgs/marker-icon-2x-red.png',
+                      shadowUrl: 'assets/imgs/marker-shadow.png',
+                      iconSize: [25, 41],
+                      iconAnchor: [12, 41],
+                      popupAnchor: [1, -34],
+                      shadowSize: [41, 41]
+                    });
+
+                  var transitMarker = leaflet.marker([lat, lng], {icon: redIcon}).addTo(map).on('click', function(e){
+                        alert("Transport Mode: "+transit_details['line']['vehicle']['name']+"\n"
+                      +"Stop Name: "+transit_details['departure_stop']['name']+"\n"
+                      +"Departure Time: "+transit_details['departure_time']['text']);
+                  });
+                }
+
+
+                var mode = step['travel_mode'];
+                if(mode == "TRANSIT"){
+                  addTransitMarker(step['start_location']['lat'], step['start_location']['lng'], step['transit_details'], map)
+                }
+
                 var polyline = step['polyline']['points']
                 var coordinates = polyUtil.decode(polyline);
 
@@ -356,10 +460,19 @@ loadLegend(){
                   opacity: .7,
                   dashArray: '0,0',
                   lineJoin: 'round'
-                }).addTo(map)
+              }).addTo(me.map)
               })
             })
       })
+  }
+
+   updateToken(callback, me) {
+    me.storage.get('access_token').then((token) => {
+        callback(token, me)
+    }).catch((error) => {
+        console.log(error);
+        me.navCtrl.push(LoginPage);
+     });
   }
 
 }

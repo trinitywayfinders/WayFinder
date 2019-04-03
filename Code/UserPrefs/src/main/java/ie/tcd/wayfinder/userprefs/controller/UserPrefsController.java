@@ -32,31 +32,29 @@ public class UserPrefsController {
 	@Autowired
 	private UserPrefsService userPrefsService;
 	
-//	@CrossOrigin(origins = "*")
-//	@GetMapping(path="/api/getUserPrefs")
-//    public UserPrefs getUserPrefs(@RequestBody Map<String, Object> request) {
-//		if (!request.containsKey(UserPrefs.USERNAME_KEY)) {
-//			throw new ResponseStatusException(
-//			           HttpStatus.BAD_REQUEST, "Username not provided");
-//		}
-//		String username = (String)request.get(UserPrefs.USERNAME_KEY);
-//		UserPrefs userPrefs = userPrefsService.getUserPrefsByUsername(username);
-//		if (userPrefs==null) {
-//			throw new ResponseStatusException(
-//			           HttpStatus.BAD_REQUEST, "User does not exist in DB.");
-//		}
-//		return userPrefs;
-//    }
+	@CrossOrigin(origins = "*")
+	@PostMapping(path="/api/getUserPrefs")
+    public UserPrefs getUserPrefs(@RequestBody Map<String, Object> request) {
+		if (!request.containsKey(UserPrefs.USERNAME_KEY)) {
+			throw new ResponseStatusException(
+			           HttpStatus.BAD_REQUEST, "Username not provided");
+		}
+		String username = (String)request.get(UserPrefs.USERNAME_KEY);
+		UserPrefs userPrefs = userPrefsService.getUserPrefsByUsername(username);
+		if (userPrefs==null) {
+			throw new ResponseStatusException(
+			           HttpStatus.BAD_REQUEST, "User does not exist in DB.");
+		}
+		return userPrefs;
+    }
 	
 	@CrossOrigin(origins = "*")
-	@GetMapping(path="/api/getUserPrefs")
+	@GetMapping(path="/api/ui/getUserPrefs")
 	@PreAuthorize("hasAuthority('ROLE_USER')")
-    public UserPrefs getUserPrefs(@AuthenticationPrincipal Principal principal) {		
+    public UserPrefs getUserPrefsUI(@AuthenticationPrincipal Principal principal) {		
 		return userPrefsService.getUserPrefsByUsername(principal.getName());
     }
 	
-	
-
 //	@CrossOrigin(origins = "*")
 //	@PostMapping(path="/api/setUserPrefs")
 //	public UserPrefs setUserPrefs(@RequestBody Map<String, Object> request) {
@@ -149,7 +147,7 @@ public class UserPrefsController {
 //    }
 	
 	@CrossOrigin(origins = "*")
-	@PostMapping(path="/api/setUserPrefs")
+	@PostMapping(path="/api/ui/setUserPrefs")
 	@PreAuthorize("hasAuthority('ROLE_USER')")
 	public UserPrefs setUserPrefs(@AuthenticationPrincipal Principal principal, @RequestBody UserPrefs userPrefs) {
 		return userPrefsService.setUserPrefsByUsername(principal.getName(), userPrefs);
