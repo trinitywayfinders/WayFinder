@@ -64,14 +64,8 @@ export class LoginPage {
             })
         }
         console.log(this.form)
-        this.http.post('http://localhost:8080/oauth/token', this.form, this.httpOptions).subscribe((response) => {
+        this.http.post('http://35.246.76.168:80/oauth/token', this.form, this.httpOptions).subscribe((response) => {
             console.log(response['access_token']);
-            // console.log(typeof response);
-            //
-            // console.log(response.access_token);
-            // console.log(response.refresh_token);
-
-            // this.storage.set('refresh_token', response.refresh_token);
             console.log(response['access_token']);
             this.storage.set('access_token', response['access_token']);
             // console.log(response.access_token);

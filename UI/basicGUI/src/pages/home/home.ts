@@ -2,7 +2,8 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import leaflet from 'leaflet';
-import polyUtil from 'polyline-encoded'
+import polyUtil from 'polyline-encoded';
+import { Storage } from '@ionic/storage';
 import { SignupPage } from '../signup/signup';
 import { LoginPage } from '../login/login';
 
@@ -12,6 +13,8 @@ import { LoginPage } from '../login/login';
 })
 export class HomePage {
   @ViewChild('map') mapContainer: ElementRef;
+
+
   map: any;
   signupPage = SignupPage;
   loginPage = LoginPage;
@@ -26,7 +29,8 @@ export class HomePage {
   weatherMarker: leaflet.marker
   sim: any
   simGroup: leaflet.featureGroup
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController ) {}
+
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public storage: Storage ) {}
 
   ionViewDidEnter() {
     this.loadmap();
@@ -72,7 +76,7 @@ loadLegend(){
   simulateBlock(){
     //let simGroup = this.simGroup;
 
-    var url = "http://localhost:8080/getSimulation/";
+    var url = "http://35.246.76.168:8084/getSimulation/";
     let data = '';
     const http = require('http')
     http.get(url, (resp) => {
@@ -235,10 +239,19 @@ loadLegend(){
       alert("Destination location cannot be empty!")
       return;
     }
+    console.log(this.storage.get('access_token'));
+
+    var authenticatedOptions = {
+        headers: new HttpHeaders({
+            // 'Content-Type': 'multipart/form-data;charset=UTF-8',
+            'Accept': 'application/json;charset=UTF-8',
+            'Authorization': 'Bearer ' + response['access_token'],
+        })
+    }
     //ToDo: change url to deployed server version
-    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/Zihan"
+    var url = "http://35.246.76.168:8081/navigation/start/"+start+"/destination/"+destination+"/driving/";
     const http = require('http')
-    http.get(url, (resp) => {
+    http.get(url, authenticatedOptions, (resp) => {
       let data = '';
 
       // A chunk of data has been recieved.
@@ -277,11 +290,16 @@ loadLegend(){
     if(blockLng == ""){
       alert("Please choose a block location on the map")
     }
-
-    //ToDo: change url to deployed server version
-    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/avoid/"+blockLat+"/"+blockLng+"/Zihan"
+    var authenticatedOptions = {
+        headers: new HttpHeaders({
+            // 'Content-Type': 'multipart/form-data;charset=UTF-8',
+            'Accept': 'application/json;charset=UTF-8',
+            'Authorization': 'Bearer ' + response['access_token'],
+        })
+    }
+    var url = "http://35.246.76.168:8081/navigation/start/"+start+"/destination/"+destination+"/driving/avoid/"+blockLat+"/"+blockLng+"/"
     const http = require('http')
-    http.get(url, (resp) => {
+    http.get(url, authenticatedOptions, (resp) => {
       let data = '';
 
       // A chunk of data has been recieved.
@@ -331,7 +349,7 @@ loadLegend(){
     let markerGroup = leaflet.featureGroup()
 
     function getWeather(startLat, startLng, weatherMarker, map) {
-        var url = "http://localhost:22113/api/environment/weather/"+startLat+"/"+startLng+"/";
+        var url = "http://35.246.76.168:8086/api/environment/weather/"+startLat+"/"+startLng+"/";
         let data = '';
         var iconCode;
         const http = require('http')
