@@ -1,6 +1,0 @@
-projectKey=com.wayfinder:SimulationAPI
-serverUrl=http://35.242.176.105
-serverVersion=7.6.0.21501
-dashboardUrl=http://35.242.176.105/dashboard?id=com.wayfinder%3ASimulationAPI
-ceTaskId=AWm6q9hwhA7mHao2EC0o
-ceTaskUrl=http://35.242.176.105/api/ce/task?id=AWm6q9hwhA7mHao2EC0o
