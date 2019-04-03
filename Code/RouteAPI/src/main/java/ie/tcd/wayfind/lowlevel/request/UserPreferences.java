@@ -36,9 +36,9 @@ public class UserPreferences {
 		Username = username;
 	}
 	
-	public UserPreferences(String username) {
+	public UserPreferences(String username, String url) {
 		
-		UserPreferences temp = getUserPreferences(username);
+		UserPreferences temp = getUserPreferences(username, url);
 		
 		ConcernHealth = temp.ConcernHealth;
 		ConcernSpeed = temp.ConcernSpeed;
@@ -48,7 +48,9 @@ public class UserPreferences {
 		Username = temp.Username;
 	}
 
-	private UserPreferences getUserPreferences(String username) {
+	private UserPreferences getUserPreferences(String username, String baseUrl) {
+		
+		String url = baseUrl + "/api/getUserPrefs";
 		
 		//call API        
         Map<String, String> headers = new HashMap<String, String>();
@@ -62,19 +64,22 @@ public class UserPreferences {
 		    RequestBody requestBody = new RequestBody(username);
 		        
 		    String jsonRequestContent = new ObjectMapper().writeValueAsString(requestBody);
-		    
-		    response = Library.POST("http://localhost:8083/api/getUserPrefs/", Optional.of(headers), Optional.of(jsonRequestContent));
+
+		    response = Library.POST(url, Optional.of(headers), Optional.of(jsonRequestContent));
 			
 	        HttpEntity responseEntity = response.getEntity();
 	        String responseString = EntityUtils.toString(responseEntity);
+	        System.out.println(responseString);
 	        JSONObject jsonResponse = new JSONObject(responseString);
 	        
+	        
+	        //if user doesnt exist get default prefs.
 	        if(response.getStatusLine().getStatusCode() == 404) {
 	        	
 	        	requestBody = new RequestBody("default");
 		        jsonRequestContent = new ObjectMapper().writeValueAsString(requestBody);
 	        	
-	        	Library.POST("http://35.246.76.168:8080/api/getUserPrefs/", Optional.of(headers), Optional.of(jsonRequestContent));
+	        	Library.POST(url, Optional.of(headers), Optional.of(jsonRequestContent));
 	        }
 
 	        int concernCost = jsonResponse.getInt("concernCost");
@@ -82,7 +87,7 @@ public class UserPreferences {
 	        int concernHealth = jsonResponse.getInt("concernHealth");
 	        int concernPollutionAvoidance = jsonResponse.getInt("concernPollutionAvoidance");
 	        int concernEmissionsReduction = jsonResponse.getInt("concernEmissionsReduction");
-//	        String responseUsername = jsonResponse.getString("username");
+
 	        String responseUsername = username;
 	        
 	        if(!responseUsername.equals(username)) {

@@ -21,14 +21,14 @@ services:
             - mysql1
 
     HighLevelAPI:
-        image: "hlapi:0.0.1-SNAPSHOT"
+        image: "hlapi:0.0.1"
         ports:
             - "8081:8080"
         links:
-            - RouteApi
+            - RouteAPI
             - AuthServer
         depends_on:
-            - RouteApi
+            - RouteAPI
             - AuthServer
 
     UserPrefs:
@@ -40,8 +40,8 @@ services:
      ports:
        - "8083:8080"
 
-    RouteApi:
-      image: "routeapi:0.0.1-SNAPSHOT"
+    RouteAPI:
+      image: "routeapi:0.0.1"
       ports:
         - "8085:8080"
     
@@ -53,7 +53,7 @@ services:
     EnvironmentApi:
       image: "environmentservice:0.0.1"
       ports:
-        - "8086:22113"
+        - "8086:8080"
 
     mysql1:
         image: "mysql"
