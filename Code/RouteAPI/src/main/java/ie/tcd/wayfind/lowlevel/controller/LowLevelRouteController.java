@@ -88,13 +88,6 @@ public class LowLevelRouteController {
 		logger.debug("Destination: %s", request.getDestination());
 		logger.debug("Mode: %s", request.getMode().toString());
 
-		
-		/*
-		 * 
-		 * 1. Check if distance < 5k - > if yes dont split.
-		 * 2. 
-		 */
-		
 		if(initialDistance < 5000) {
 			
 			userRouteRequest = new UserRouteRequest(request.getOrigin(), request.getDestination(), travelModeBasedOnPrefs.Segment1Mode);	
@@ -386,17 +379,6 @@ public class LowLevelRouteController {
 		TravelModeBasedOnPreference travelModeBasedOnPrefs = new TravelModeBasedOnPreference(userPreferences, initialDistance, env.getWeatherCondition(EnvironmentUrl));
 		
 		
-		/*
-		 * 
-		 * 1. Check if distance < 5k - > if yes dont split.
-		 * 2. 
-		 
-		 new method isBlockInSegment -> returns true/false
-		 if true
-			call divideSegment..... for that segment only 
-		
-		 */
-		
 		if(initialDistance < 5000) {
 			
  			userRouteRequest = new UserRouteRequest(request.getOrigin(), request.getDestination(), travelModeBasedOnPrefs.Segment1Mode);	
@@ -420,33 +402,6 @@ public class LowLevelRouteController {
 
 			return new ResponseEntity<String>(getDistanceResponseBody, HttpStatus.valueOf(getDistanceResponse.getStatusLine().getStatusCode()));
 		}
-
-		/*
-		 * 
-		 * get1stSegment 
-		 * check if block is in first segment 
-		 * 
-		 * get2ndSegment 
-		 * check if block is in second segment
-		 * 
-		 * get3rdSegment
-		 * 
-		 */
-		/*
-		String responseBody = null;
-		String responseBodySegment1 = null;
-		String responseBodySegment2 = null;
-		String responseBodySegment3 = null;
-		
-		try {
-			
-		
-		} catch (IOException | ParseException | NullPointerException e) {
-			e.printStackTrace();
-		}
-		
-		*/
-		
 
 		UserRouteRequest originalRoute = new UserRouteRequest(request.getOrigin(), request.getDestination(), request.getMode());
 		UserRouteRequest segment1ToBlock = new UserRouteRequest(request.getOrigin(), avoidLatLng, request.getMode());
