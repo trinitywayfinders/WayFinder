@@ -63,7 +63,6 @@ export class LoginPage {
                 'Authorization': 'Basic d2ViLWFwcDoxMjM0NTY=',
             })
         }
-        console.log(this.form)
         this.http.post('http://localhost:8080/oauth/token', this.form, this.httpOptions).subscribe((response) => {
             console.log(response['access_token']);
             // console.log(typeof response);
