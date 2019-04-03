@@ -453,6 +453,7 @@ function getHighLevelAPIHeartbeat(timer){
               }
               else{
                 console.log("Connecting to HighLevelAPI/heartbeat : Success")
+                timer = 5000
               }
             });
 
