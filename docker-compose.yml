@@ -1,6 +1,6 @@
 version: '3'
 services:
-    wayfinderui:
+    WayfinderUi:
      image: "wayfinderui:latest"
      links:
       - AuthServer
@@ -25,10 +25,10 @@ services:
         ports:
             - "8081:8080"
         links:
-            - RouteAPI
+            - RouteApi
             - AuthServer
         depends_on:
-            - RouteAPI
+            - RouteApi
             - AuthServer
 
     UserPrefs:
@@ -40,8 +40,20 @@ services:
      ports:
        - "8083:8080"
 
-    RouteAPI:
-        image: "routeapi:0.0.1-SNAPSHOT"
+    RouteApi:
+      image: "routeapi:0.0.1-SNAPSHOT"
+      ports:
+        - "8085:8080"
+    
+    SimulationApi:
+      image: "simulationapi:0.0.1"
+      ports:
+        - "8084:8080"
+
+    EnvironmentApi:
+      image: "environmentservice:0.0.1"
+      ports:
+        - "8086:22113"
 
     mysql1:
         image: "mysql"
