@@ -31,6 +31,7 @@ export class HomePage {
   ionViewDidEnter() {
     this.loadmap();
     this.loadLegend();
+    getHighLevelAPIHeartbeat(5000);
 }
 
 loadLegend(){
@@ -222,6 +223,8 @@ loadLegend(){
 
     this.getRoute(this.inputLocation, this.inputDestination)
   }
+
+
 
   //ToDo change method to take in starting lat/long and route to destination lat/long
   getRoute(start, destination){
@@ -425,4 +428,43 @@ loadLegend(){
       })
   }
 
+}
+
+
+function getHighLevelAPIHeartbeat(timer){
+  console.log(timer)
+
+          var url = "http://localhost:8080/heartbeat"
+          const http = require('http')
+          http.get(url, (resp) => {
+            let data = '';
+
+            // A chunk of data has been recieved.
+            resp.on('data', (chunk) => {
+              data += chunk;
+            });
+
+            resp.on('end', () => {
+              console.log(resp)
+              if(resp.statusCode != 200){
+                console.log("Connecting to HighLevelAPI/heartbeat : Failed")
+                alert("Could not establish internet connection..")
+                timer = 20000
+              }
+              else{
+                console.log("Connecting to HighLevelAPI/heartbeat : Success")
+              }
+            });
+
+          }).on("error", (err) => {
+            console.log("Connecting to HighLevelAPI/heartbeat : Failed")
+            alert("Could not establish internet connection..")
+            timer = 20000
+          });
+
+
+    setTimeout(function() {
+      getHighLevelAPIHeartbeat(timer)
+
+      }, timer);
 }
