@@ -25,10 +25,10 @@ services:
         ports:
             - "8081:8080"
         links:
-            - RouteApi
+            - RouteAPI
             - AuthServer
         depends_on:
-            - RouteApi
+            - RouteAPI
             - AuthServer
 
     UserPrefs:
@@ -40,7 +40,7 @@ services:
      ports:
        - "8083:8080"
 
-    RouteApi:
+    RouteAPI:
       image: "routeapi:0.0.1-SNAPSHOT"
       ports:
         - "8085:8080"
