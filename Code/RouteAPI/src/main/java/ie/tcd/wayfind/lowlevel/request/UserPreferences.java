@@ -63,7 +63,7 @@ public class UserPreferences {
 		        
 		    String jsonRequestContent = new ObjectMapper().writeValueAsString(requestBody);
 		    
-		    response = Library.POST("http://35.246.76.168:8080/api/getUserPrefs/", Optional.of(headers), Optional.of(jsonRequestContent));
+		    response = Library.POST("http://localhost:8083/api/getUserPrefs/", Optional.of(headers), Optional.of(jsonRequestContent));
 			
 	        HttpEntity responseEntity = response.getEntity();
 	        String responseString = EntityUtils.toString(responseEntity);
@@ -82,7 +82,8 @@ public class UserPreferences {
 	        int concernHealth = jsonResponse.getInt("concernHealth");
 	        int concernPollutionAvoidance = jsonResponse.getInt("concernPollutionAvoidance");
 	        int concernEmissionsReduction = jsonResponse.getInt("concernEmissionsReduction");
-	        String responseUsername = jsonResponse.getString("username");
+//	        String responseUsername = jsonResponse.getString("username");
+	        String responseUsername = username;
 	        
 	        if(!responseUsername.equals(username)) {
 	        	return null;

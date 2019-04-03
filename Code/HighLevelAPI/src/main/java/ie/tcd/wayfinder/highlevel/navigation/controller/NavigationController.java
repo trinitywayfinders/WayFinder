@@ -1,6 +1,7 @@
 package ie.tcd.wayfinder.highlevel.navigation.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -11,6 +12,9 @@ import org.apache.http.util.EntityUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +26,7 @@ import ie.tcd.wayfinder.highlevel.navigation.request.UserRouteRequest;
 import ie.tcd.wayfinder.highlevel.navigation.type.TravelMode;
 import ie.tcd.wayfinders.restLibrary.Library;
 
+@CrossOrigin(origins = {"*"}, allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token"})
 @RestController
 public class NavigationController {
 
@@ -41,8 +46,9 @@ public class NavigationController {
      * ResponseEntity<String>("No ROUTES", HttpStatus.BAD_REQUEST); }
      */
  
-    @GetMapping("/navigation/start/{startLat}/{startLong}/destination/{destLat}/{destLong}/{mode}/{username}")
-    public ResponseEntity<String> findRoute(@PathVariable Float startLong, @PathVariable Float startLat, @PathVariable Float destLong, @PathVariable Float destLat, @PathVariable TravelMode mode, @PathVariable String username) throws IOException
+    @GetMapping("/navigation/start/{startLat}/{startLong}/destination/{destLat}/{destLong}/{mode}")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    public ResponseEntity<String> findRoute(@AuthenticationPrincipal Principal principal, @PathVariable Float startLong, @PathVariable Float startLat, @PathVariable Float destLong, @PathVariable Float destLat, @PathVariable TravelMode mode) throws IOException
     {
     	
     	System.out.println("\n\n\n GOT REQUEST \n\n\n");
@@ -64,6 +70,8 @@ public class NavigationController {
 
         if (startLong >180 || startLong < -180 ) return new ResponseEntity<String>("Longitude of Starting point is invalid!",
                       HttpStatus.BAD_REQUEST);
+        
+        String username = principal.getName();
                 
         UserRouteRequest request = new UserRouteRequest(startLat + "," + startLong, destLat + "," + destLong, mode, username);
         
@@ -80,9 +88,12 @@ public class NavigationController {
         return new ResponseEntity<String>(responseString, HttpStatus.valueOf(response.getStatusLine().getStatusCode()));
     }
     
-    @GetMapping("/navigation/start/{start}/destination/{dest}/{mode}/{username}")
-    public ResponseEntity<String> findRoute(@PathVariable String start, @PathVariable String dest, @PathVariable TravelMode mode, @PathVariable String username) throws IOException
+    @CrossOrigin(origins = "*")
+    @GetMapping("/navigation/start/{start}/destination/{dest}/{mode}")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    public ResponseEntity<String> findRoute(@AuthenticationPrincipal Principal principal, @PathVariable String start, @PathVariable String dest, @PathVariable TravelMode mode) throws IOException
     {
+    	String username = principal.getName();
     	
     	System.out.println("\n\n\n GOT REQUEST \n\n\n");
         UserRouteRequest request = new UserRouteRequest(start, dest, mode, username);
@@ -105,10 +116,12 @@ public class NavigationController {
     
     
   //Avoid LatLng endpoint
-    @GetMapping("/navigation/start/{startLat}/{startLong}/destination/{destLat}/{destLong}/{mode}/avoid/{avoidLat}/{avoidLng}/{username}")
-    public ResponseEntity<String> findRouteWithBlock(@PathVariable Float startLong, @PathVariable Float startLat, @PathVariable Float destLong, @PathVariable Float destLat, 
-    		@PathVariable TravelMode mode, @PathVariable Float avoidLat, @PathVariable Float avoidLong, @PathVariable String username) throws IOException
+    @GetMapping("/navigation/start/{startLat}/{startLong}/destination/{destLat}/{destLong}/{mode}/avoid/{avoidLat}/{avoidLng}")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    public ResponseEntity<String> findRouteWithBlock(@AuthenticationPrincipal Principal principal, @PathVariable Float startLong, @PathVariable Float startLat, @PathVariable Float destLong, @PathVariable Float destLat, 
+    		@PathVariable TravelMode mode, @PathVariable Float avoidLat, @PathVariable Float avoidLong) throws IOException
     {
+    	String username = principal.getName();
         
         if (startLong == null || startLat == null) return new ResponseEntity<String>("Starting location cannot be empty!",
                                                                HttpStatus.BAD_REQUEST);
@@ -152,9 +165,11 @@ public class NavigationController {
     }
     
   //Avoid LatLng endpoint
-    @GetMapping("/navigation/start/{start}/destination/{dest}/{mode}/avoid/{avoidLat}/{avoidLng}/{username}")
-    public ResponseEntity<String> findRouteWithBlock(@PathVariable String start, @PathVariable String dest, @PathVariable TravelMode mode, @PathVariable Float avoidLat, @PathVariable Float avoidLng, @PathVariable String username) throws IOException
+    @GetMapping("/navigation/start/{start}/destination/{dest}/{mode}/avoid/{avoidLat}/{avoidLng}")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    public ResponseEntity<String> findRouteWithBlock(@AuthenticationPrincipal Principal principal, @PathVariable String start, @PathVariable String dest, @PathVariable TravelMode mode, @PathVariable Float avoidLat, @PathVariable Float avoidLng) throws IOException
     {
+    	String username = principal.getName();
       
         if (avoidLng >180 || avoidLng < -180 ) return new ResponseEntity<String>("Longitude of Block point is invalid!",
                       HttpStatus.BAD_REQUEST);
