@@ -27,6 +27,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import ie.tcd.wayfind.lowlevel.request.EnvironmentMetrics;
 import ie.tcd.wayfind.lowlevel.request.InputUserRouteRequest;
 import ie.tcd.wayfind.lowlevel.request.LatLng;
 import ie.tcd.wayfind.lowlevel.request.TravelModeBasedOnPreference;
@@ -45,6 +46,12 @@ public class LowLevelRouteController {
 
 	@Value("${routing.google.apiKey}")
 	private String apiKey;
+	
+	@Value("${spring.environment.api.url}")
+	private String EnvironmentUrl;
+	
+	@Value("${spring.userprefs.api.url}")
+	private String UserPrefsUrl;
 
 	private static double totalDistance = 5;
 
@@ -66,8 +73,13 @@ public class LowLevelRouteController {
 		
 		int initialDistance = getTotalDistanceRoute(getDistanceResponseBody);
 		
-		UserPreferences userPreferences = new UserPreferences(request.getUsername());
-		TravelModeBasedOnPreference travelModeBasedOnPrefs = new TravelModeBasedOnPreference(userPreferences, initialDistance);
+		UserPreferences userPreferences = new UserPreferences(request.getUsername(), UserPrefsUrl);
+		
+		String[] latLng = getRouteStartLatLng(getDistanceResponseBody).split(",");
+		
+		
+		EnvironmentMetrics env = new EnvironmentMetrics(Float.parseFloat(latLng[0]), Float.parseFloat(latLng[1]));
+		TravelModeBasedOnPreference travelModeBasedOnPrefs = new TravelModeBasedOnPreference(userPreferences, initialDistance, env.getWeatherCondition(EnvironmentUrl));
 		
 		//Get user data from User-Preferences API + add preferences
 		System.out.println("\n\n\nIN ROUTING API"+request.getOrigin());
@@ -76,17 +88,6 @@ public class LowLevelRouteController {
 		logger.debug("Destination: %s", request.getDestination());
 		logger.debug("Mode: %s", request.getMode().toString());
 
-		
-		/*
-		 * 
-		 * 1. Check if distance < 5k - > if yes dont split.
-		 * 
-		 * 
-		 * 1. Fix all travel modes - currently hardcoded to driving / request.GetMode()
-		 * 
-		 * 
-		 */
-		
 		if(initialDistance < 5000) {
 			
 			userRouteRequest = new UserRouteRequest(request.getOrigin(), request.getDestination(), travelModeBasedOnPrefs.Segment1Mode);	
@@ -149,6 +150,22 @@ public class LowLevelRouteController {
 		int distance = leg.getJSONObject("distance").getInt("value");
 		return distance;
 	
+	}
+	
+	public String getRouteStartLatLng(String jsonResponse) {
+		try {
+			JSONArray routes = new JSONObject(jsonResponse).getJSONArray("routes");
+
+			JSONArray legs = routes.getJSONObject(0).getJSONArray("legs");
+
+			Double lat = legs.getJSONObject(0).getJSONObject("start_location").getDouble("lat");
+			Double lng = legs.getJSONObject(0).getJSONObject("start_location").getDouble("lng");
+
+			return Double.toString(lat) + "," + Double.toString(lng);
+		} catch (Exception e) {
+			logger.error("getSegment1EndLatLng Error: " + e.getMessage());
+			return null;
+		}
 	}
 
 	public String getSegment1EndLatLng(String jsonResponse) {
@@ -341,7 +358,50 @@ public class LowLevelRouteController {
 		
 		String avoidLatLng = lat+","+lng;
 		
+		UserRouteRequest userRouteRequest = new UserRouteRequest(request.getOrigin(), request.getDestination(), TravelMode.driving);	
+		
+		HttpResponse getDistanceResponse = getRoute(userRouteRequest, false);
+		String getDistanceResponseBody = null;
+		try {
+			getDistanceResponseBody = EntityUtils.toString(getDistanceResponse.getEntity(), "UTF-8");
+			
+		} catch (IOException | ParseException | NullPointerException e) {
+			e.printStackTrace();
+		}
+		
+		int initialDistance = getTotalDistanceRoute(getDistanceResponseBody);
+		
+		UserPreferences userPreferences = new UserPreferences(request.getUsername(), UserPrefsUrl);
+		
+		String[] latLng = getRouteStartLatLng(getDistanceResponseBody).split(",");
+		
+		EnvironmentMetrics env = new EnvironmentMetrics(Float.parseFloat(latLng[0]), Float.parseFloat(latLng[1]));
+		TravelModeBasedOnPreference travelModeBasedOnPrefs = new TravelModeBasedOnPreference(userPreferences, initialDistance, env.getWeatherCondition(EnvironmentUrl));
+		
+		
+		if(initialDistance < 5000) {
+			
+ 			userRouteRequest = new UserRouteRequest(request.getOrigin(), request.getDestination(), travelModeBasedOnPrefs.Segment1Mode);	
+			
+			getDistanceResponse = getRoute(userRouteRequest, true);
+			getDistanceResponseBody = null;
+			try {
+				getDistanceResponseBody = EntityUtils.toString(getDistanceResponse.getEntity(), "UTF-8");
+				System.out.println(getDistanceResponseBody);
+				
+				JSONObject routes  = new JSONObject(getDistanceResponseBody);
+				for(int i=0; i < routes.getJSONArray("routes").length(); i++) {
+					routes.getJSONArray("routes").remove(i);
+				}
+				
+				getDistanceResponseBody = routes.toString();
+				
+			} catch (IOException | ParseException | NullPointerException e) {
+				e.printStackTrace();
+			}
 
+			return new ResponseEntity<String>(getDistanceResponseBody, HttpStatus.valueOf(getDistanceResponse.getStatusLine().getStatusCode()));
+		}
 
 		UserRouteRequest originalRoute = new UserRouteRequest(request.getOrigin(), request.getDestination(), request.getMode());
 		UserRouteRequest segment1ToBlock = new UserRouteRequest(request.getOrigin(), avoidLatLng, request.getMode());
@@ -369,7 +429,7 @@ public class LowLevelRouteController {
 			LatLng blockSegmentEnd = getEndLatLngBlockSegment(originalResponseBody, blockSegmentStart.Lat, blockSegmentStart.Lng);
 			
 			if(blockSegmentEnd == null) {
-				return new ResponseEntity<String>(originalResponseBody, HttpStatus.valueOf(originalResponse.getStatusLine().getStatusCode()));
+				return retriveRoute(request);
 			}
 			
 			System.out.println("Block segment end: "+ blockSegmentEnd.Lat + "  " + blockSegmentEnd.Lng);
@@ -384,7 +444,7 @@ public class LowLevelRouteController {
 			
 			
 			//Find shortest alternative without block
-			JSONObject shortestRouteLegs = getLongestAlternativeForBlockedSegment(responseBodyWithAlternatives);
+			JSONObject longestRouteLegs = getLongestAlternativeForBlockedSegment(responseBodyWithAlternatives);
 
 			//Get route from original start to start of block polyline
 			UserRouteRequest RouteToBlockStart = new UserRouteRequest(request.getOrigin(), blockSegmentStart.toString(), request.getMode());
@@ -397,7 +457,7 @@ public class LowLevelRouteController {
 			responseFromBlockSegmentEnd = getRoute(RouteFromBlockEnd, false);
 			responseBodyFromBlockSegmentEnd = EntityUtils.toString(responseFromBlockSegmentEnd.getEntity(), "UTF-8");
 			
-			finalRouteWithoutBlock = combineRouteLegs(responseBodyToBlockSegmentStart, shortestRouteLegs.toString(), responseBodyFromBlockSegmentEnd);
+			finalRouteWithoutBlock = combineRouteLegs(responseBodyToBlockSegmentStart, longestRouteLegs.toString(), responseBodyFromBlockSegmentEnd);
 			}
 			
 		catch(IOException|ParseException|

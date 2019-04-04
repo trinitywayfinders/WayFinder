@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ie.tcd.wayfind.lowlevel.controller.LowLevelRouteController;
+import ie.tcd.wayfind.lowlevel.request.InputUserRouteRequest;
 import ie.tcd.wayfind.lowlevel.request.UserRouteRequest;
 import ie.tcd.wayfind.lowlevel.type.TravelMode;
 
@@ -39,12 +40,12 @@ public class RouteControllerTests {
     @Test
     public void getRoute() throws Exception {
 
-    	UserRouteRequest usr = new UserRouteRequest("Dublin", "Cork", TravelMode.walking);
+    	InputUserRouteRequest usr = new InputUserRouteRequest("Dublin", "Temple Bar", TravelMode.walking,"Zihan");
 
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(usr);
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/route")
+        mvc.perform(MockMvcRequestBuilders.post("/api/route/")
         	    .contentType(MediaType.APPLICATION_JSON)
         	    .content(json)
         		.accept(MediaType.APPLICATION_JSON))
@@ -92,20 +93,5 @@ public class RouteControllerTests {
 			e.printStackTrace();
 		}
     	
-    }
-    
-    @Test
-    public void checkDistanceUnder3() {
-    	UserRouteRequest usr = new UserRouteRequest("Trinity College Dublin", "Temple Bar", TravelMode.walking);
-            	
-    	String response;
-		try {
-			response = EntityUtils.toString(controller.getRoute(usr, false).getEntity(), "UTF-8");
-	    	assertTrue(!(controller.getTotalDistanceRoute(response) < 3000));
-		} catch (ParseException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
     }
 }
