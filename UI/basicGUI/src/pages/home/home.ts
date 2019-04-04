@@ -241,24 +241,6 @@ loadLegend(){
       return;
     }
     //ToDo: change url to deployed server version
-    // var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/Zihan"
-    // const http = require('http')
-    // http.get(url, (resp) => {
-    //   let data = '';
-    //
-    //   // A chunk of data has been recieved.
-    //   resp.on('data', (chunk) => {
-    //     data += chunk;
-    //   });
-    //
-    //   // The whole response has been received. Print out the result.
-    //   resp.on('end', () => {
-    //     this.drawPolyline(data, this.map, this.startMarker, this.destMarker, this.weatherMarker)
-    //   });
-    //
-    // }).on("error", (err) => {
-    //   console.log("Error: " + err.message);
-    // });
     var requestCallback = function(token, me) {
         console.log("Token: " + token)
         var httpOptions = {
@@ -272,7 +254,7 @@ loadLegend(){
         var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving"
         me.http.get(url, httpOptions).subscribe((data) => {
             console.log(data);
-            me.drawPolyline(data, map, me.startMarker, me.destMarker, me.weatherMarker)
+            me.drawPolyline(data, me.map, me.startMarker, me.destMarker, me.weatherMarker)
         })
     }
 
@@ -320,23 +302,6 @@ loadLegend(){
     }
 
     me.updateToken(requestCallback, me)
-    // const http = require('http')
-    // http.get(url, null, httpOptions).subscribe((resp) => {
-    //   let data = '';
-    //
-    //   // A chunk of data has been recieved.
-    //   resp.on('data', (chunk) => {
-    //     data += chunk;
-    //   });
-    //
-    //   // The whole response has been received. Print out the result.
-    //   resp.on('end', () => {
-    //     drawPolyline(data, map, startMarker, destMarker, weatherMarker)
-    //   });
-  // })
-    // .on("error", (err) => {
-    //   console.log("Error: " + err.message);
-    // });
 }
 
 /*
@@ -468,10 +433,13 @@ loadLegend(){
 
    updateToken(callback, me) {
     me.storage.get('access_token').then((token) => {
-        callback(token, me)
+        if(token) {
+            callback(token, me)
+        } else {
+            me.navCtrl.push(LoginPage);
+        }
     }).catch((error) => {
         console.log(error);
-        me.navCtrl.push(LoginPage);
      });
   }
 
