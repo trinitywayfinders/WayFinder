@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,9 @@ import ie.tcd.wayfinders.restLibrary.Library;
 @RestController
 public class NavigationController {
 
+	@Value("${spring.route.api.url}")
+	private String RoutingUrl;
+	
     @RequestMapping("/")
     public String index()
     {
@@ -44,8 +48,6 @@ public class NavigationController {
     @GetMapping("/navigation/start/{startLat}/{startLong}/destination/{destLat}/{destLong}/{mode}/{username}")
     public ResponseEntity<String> findRoute(@PathVariable Float startLong, @PathVariable Float startLat, @PathVariable Float destLong, @PathVariable Float destLat, @PathVariable TravelMode mode, @PathVariable String username) throws IOException
     {
-    	
-    	System.out.println("\n\n\n GOT REQUEST \n\n\n");
         
         if (startLong == null || startLat == null) return new ResponseEntity<String>("Starting location cannot be empty!",
                                                                HttpStatus.BAD_REQUEST);
@@ -72,7 +74,9 @@ public class NavigationController {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
        
-        HttpResponse response = Library.POST("http://localhost:8082/api/route", Optional.of(headers), Optional.of(jsonRequestContent));
+        String url = RoutingUrl + "/api/route";
+        
+        HttpResponse response = Library.POST(url, Optional.of(headers), Optional.of(jsonRequestContent));
                 
          HttpEntity responseEntity = response.getEntity();
          String responseString = EntityUtils.toString(responseEntity);
@@ -84,7 +88,6 @@ public class NavigationController {
     public ResponseEntity<String> findRoute(@PathVariable String start, @PathVariable String dest, @PathVariable TravelMode mode, @PathVariable String username) throws IOException
     {
     	
-    	System.out.println("\n\n\n GOT REQUEST \n\n\n");
         UserRouteRequest request = new UserRouteRequest(start, dest, mode, username);
         
         String jsonRequestContent = objectMapper().writeValueAsString(request);
@@ -92,7 +95,9 @@ public class NavigationController {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
        
-        HttpResponse response = Library.POST("http://localhost:8082/api/route/", Optional.of(headers), Optional.of(jsonRequestContent));
+        String url = RoutingUrl + "/api/route";
+       
+        HttpResponse response = Library.POST(url, Optional.of(headers), Optional.of(jsonRequestContent));
                 
          HttpEntity responseEntity = response.getEntity();
          String responseString = EntityUtils.toString(responseEntity);
@@ -140,8 +145,8 @@ public class NavigationController {
                 
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
-       
-        String endpoint = "http://localhost:8082/api/route/avoid/"+avoidLat+"/"+avoidLong+"/";
+        
+        String endpoint = RoutingUrl + "/api/route/avoid/"+avoidLat+"/"+avoidLong+"/";
         
         HttpResponse response = Library.POST(endpoint, Optional.of(headers), Optional.of(jsonRequestContent));
                 
@@ -168,8 +173,8 @@ public class NavigationController {
                 
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
-       
-        String endpoint = "http://localhost:8082/api/route/avoid/"+avoidLat+"/"+avoidLng+"/";
+
+        String endpoint = RoutingUrl + "/api/route/avoid/"+avoidLat+"/"+avoidLng+"/";
         
         HttpResponse response = Library.POST(endpoint, Optional.of(headers), Optional.of(jsonRequestContent));
                 
