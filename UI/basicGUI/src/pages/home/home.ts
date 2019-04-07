@@ -76,7 +76,7 @@ loadLegend(){
   simulateBlock(){
     //let simGroup = this.simGroup;
 
-    var url = "http://localhost:8080/getSimulation/";
+    var url = "http://wayfinders.ddns.net:8080/getSimulation/";
     let data = '';
     const http = require('http')
     http.get(url, (resp) => {
@@ -241,7 +241,7 @@ loadLegend(){
       return;
     }
     //ToDo: change url to deployed server version
-    // var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/Zihan"
+    // var url = "http://wayfinders.ddns.net:8081/navigation/start/"+start+"/destination/"+destination+"/driving/Zihan"
     // const http = require('http')
     // http.get(url, (resp) => {
     //   let data = '';
@@ -269,7 +269,7 @@ loadLegend(){
             })
         }
 
-        var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving"
+        var url = "http://wayfinders.ddns.net:8081/navigation/start/"+start+"/destination/"+destination+"/driving"
         me.http.get(url, httpOptions).subscribe((data) => {
             me.drawPolyline(data, me.map, me.startMarker, me.destMarker, me.weatherMarker)
         })
@@ -311,7 +311,7 @@ loadLegend(){
     //         })
     //     }
     //
-    //     var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/avoid/"+blockLat+"/"+blockLng
+    //     var url = "http://wayfinders.ddns.net:8081/navigation/start/"+start+"/destination/"+destination+"/driving/avoid/"+blockLat+"/"+blockLng
     //     me.http.get(url, httpOptions).subscribe((data) => {
     //         console.log(data);
     //         me.drawPolyline(data, map, me.startMarker, me.destMarker, me.weatherMarker)
@@ -319,7 +319,7 @@ loadLegend(){
     // }
     //
     // me.updateToken(requestCallback, me)
-    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/avoid/"+blockLat+"/"+blockLng+"/nicky"
+    var url = "http://wayfinders.ddns.net:8081/navigation/start/"+start+"/destination/"+destination+"/driving/avoid/"+blockLat+"/"+blockLng+"/nicky"
         const http = require('http')
         http.get(url, (resp) => {
           let data = '';
@@ -371,7 +371,7 @@ loadLegend(){
     let markerGroup = leaflet.featureGroup()
 
     function getWeather(startLat, startLng, weatherMarker, map) {
-        var url = "http://localhost:22113/api/environment/weather/"+startLat+"/"+startLng+"/";
+        var url = "http://wayfinders.ddns.net:22113/api/environment/weather/"+startLat+"/"+startLng+"/";
         let data = '';
         var iconCode;
         const http = require('http')

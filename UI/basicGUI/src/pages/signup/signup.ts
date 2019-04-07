@@ -63,21 +63,6 @@ export class SignupPage {
                 'accept' : '*/*',
             }
         };
-        // if (this.passwd==this.passwd1){
-        //   this.ax.post('http://35.246.76.168:8080/api/user/', {
-        //   'username': this.usrname,
-        //   'email': this.email,
-        //   'password': this.passwd
-        // }, axiosConfig).then(resp => {
-        //   console.log(resp);
-        // }).catch(error => {
-        // console.log(error);
-        // });
-        // }
-        // else{
-        //   this.showAlert();
-        // }
-
 
         if (this.passwd == this.passwd1 &&
             this.concernCost!=this.concernEmissionReduction &&
@@ -94,21 +79,8 @@ export class SignupPage {
                         this.showOverAlert();
                     }
                     else{
-                        // this.ax.post('http://35.246.76.168:8080/api/getUserPrefs', {
-                        //   'username': this.usrname,
-                        //   'concernCost':this.concernCost,
-                        //   'concernEmissionReduction':this.concernEmissionReduction,
-                        //   'concernHealth':this.concernHealth,
-                        //   'concernPollutionAvoidance':this.concernPollutionAvoidance,
-                        //   'concernSpeed':this.concernSpeed
-                        // }, axiosConfig).then(resp => {
-                        //   console.log(resp);
-                        // }).catch(error => {
-                        //   console.log(error);
-                        // });
-
                         console.log("About to POST")
-                        this.ax.post('http://localhost:8080/api/user/', {
+                        this.ax.post('http://wayfinders.ddns.net:8080/api/user/', {
                             'username': this.usrname,
                             'password': this.passwd,
                             'email': this.email,
