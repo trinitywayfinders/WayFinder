@@ -33,6 +33,9 @@ public class NavigationController {
 	@Value("${spring.route.api.url}")
 	private String RoutingUrl;
 
+	@Value("${spring.route.api.url}")
+	private String RoutingUrl;
+	
     @RequestMapping("/")
     public String index()
     {
@@ -53,8 +56,6 @@ public class NavigationController {
     @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<String> findRoute(@AuthenticationPrincipal Principal principal, @PathVariable Float startLong, @PathVariable Float startLat, @PathVariable Float destLong, @PathVariable Float destLat, @PathVariable TravelMode mode) throws IOException
     {
-    	
-    	System.out.println("\n\n\n GOT REQUEST \n\n\n");
         
         if (startLong == null || startLat == null) return new ResponseEntity<String>("Starting location cannot be empty!",
                                                                HttpStatus.BAD_REQUEST);
@@ -83,7 +84,9 @@ public class NavigationController {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
        
-        HttpResponse response = Library.POST("http://localhost:8082/api/route", Optional.of(headers), Optional.of(jsonRequestContent));
+        String url = RoutingUrl + "/api/route";
+        
+        HttpResponse response = Library.POST(url, Optional.of(headers), Optional.of(jsonRequestContent));
                 
          HttpEntity responseEntity = response.getEntity();
          String responseString = EntityUtils.toString(responseEntity);
@@ -98,7 +101,6 @@ public class NavigationController {
     {
     	String username = principal.getName();
     	
-    	System.out.println("\n\n\n GOT REQUEST \n\n\n");
         UserRouteRequest request = new UserRouteRequest(start, dest, mode, username);
         
         String jsonRequestContent = objectMapper().writeValueAsString(request);
@@ -106,7 +108,9 @@ public class NavigationController {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
        
-        HttpResponse response = Library.POST("http://localhost:8082/api/route/", Optional.of(headers), Optional.of(jsonRequestContent));
+        String url = RoutingUrl + "/api/route";
+       
+        HttpResponse response = Library.POST(url, Optional.of(headers), Optional.of(jsonRequestContent));
                 
          HttpEntity responseEntity = response.getEntity();
          String responseString = EntityUtils.toString(responseEntity);
