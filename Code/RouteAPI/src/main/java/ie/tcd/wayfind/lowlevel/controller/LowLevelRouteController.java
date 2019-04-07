@@ -70,7 +70,7 @@ public class LowLevelRouteController {
 		} catch (IOException | ParseException | NullPointerException e) {
 			e.printStackTrace();
 		}
-		
+				
 		int initialDistance = getTotalDistanceRoute(getDistanceResponseBody);
 		
 		UserPreferences userPreferences = new UserPreferences(request.getUsername(), UserPrefsUrl);
