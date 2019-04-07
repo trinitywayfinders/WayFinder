@@ -16,6 +16,12 @@ echo " |    |   \  |  /  |  |__/ /_/ |   |        \   |  \   / "
 echo " |______  /____/|__|____/\____ |  /_______  /___|  /\_/  "
 echo "        \/                    \/          \/     \/      "
 
+# Pull Latest from Master
+echo "Pulling latest changes from Master"
+git pull
+echo "Latest Changes Available in the Server"
+
+
 # Build Auth Server
 
 echo "      ___           ___                       ___     "

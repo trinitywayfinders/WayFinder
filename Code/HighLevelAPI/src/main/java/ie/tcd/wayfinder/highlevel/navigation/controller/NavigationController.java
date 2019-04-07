@@ -32,9 +32,6 @@ import ie.tcd.wayfinders.restLibrary.Library;
 public class NavigationController {
 	@Value("${spring.route.api.url}")
 	private String RoutingUrl;
-
-	@Value("${spring.route.api.url}")
-	private String RoutingUrl;
 	
     @RequestMapping("/")
     public String index()
