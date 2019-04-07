@@ -146,17 +146,17 @@ loadLegend(){
 
     console.log("getting block route: "+inputLocation)
     //getRouteWithBlock(inputLocation, inputDestination, blockLatLng.Lat, blockLatLng.Lng)
-    onClickSetBlock(map, getRouteWithBlock, blockLatLng,inputLocation, inputDestination, drawPolyline, startMarker, destMarker, weatherMarker, me)
+    onClickSetBlock(map, getRouteWithBlock, blockLatLng,inputLocation, inputDestination, drawPolyline, startMarker, destMarker, weatherMarker)
     });
   }
 
-  onClickSetBlock(map, getRouteWithBlock, blockLatLng, inputLocation, inputDestination, drawPolyline, startMarker, destMarker, weatherMarker, me){
+  onClickSetBlock(map, getRouteWithBlock, blockLatLng, inputLocation, inputDestination, drawPolyline, startMarker, destMarker, weatherMarker){
 
     console.log(map)
     console.log("You clicked the map at latitude: " + blockLatLng.lat + " and longitude: " + blockLatLng.lng);
 
     console.log("getting block route: "+inputLocation)
-    getRouteWithBlock(inputLocation, inputDestination, blockLatLng.lat, blockLatLng.lng, drawPolyline, map, startMarker, destMarker, weatherMarker, me)
+    getRouteWithBlock(inputLocation, inputDestination, blockLatLng.lat, blockLatLng.lng, drawPolyline, map, startMarker, destMarker, weatherMarker)
   }
 
    getLocation(){
@@ -241,6 +241,24 @@ loadLegend(){
       return;
     }
     //ToDo: change url to deployed server version
+    // var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/Zihan"
+    // const http = require('http')
+    // http.get(url, (resp) => {
+    //   let data = '';
+    //
+    //   // A chunk of data has been recieved.
+    //   resp.on('data', (chunk) => {
+    //     data += chunk;
+    //   });
+    //
+    //   // The whole response has been received. Print out the result.
+    //   resp.on('end', () => {
+    //     this.drawPolyline(data, this.map, this.startMarker, this.destMarker, this.weatherMarker)
+    //   });
+    //
+    // }).on("error", (err) => {
+    //   console.log("Error: " + err.message);
+    // });
     var requestCallback = function(token, me) {
         console.log("Token: " + token)
         var httpOptions = {
@@ -253,7 +271,6 @@ loadLegend(){
 
         var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving"
         me.http.get(url, httpOptions).subscribe((data) => {
-            console.log(data);
             me.drawPolyline(data, me.map, me.startMarker, me.destMarker, me.weatherMarker)
         })
     }
@@ -284,24 +301,42 @@ loadLegend(){
     }
 
     //ToDo: change url to deployed server version
-    var requestCallback = function(token, me) {
-        console.log("Token: " + token)
-        var httpOptions = {
-            headers: new HttpHeaders({
-                // 'Content-Type': 'multipart/form-data;charset=UTF-8',
-                'Accept': 'application/json;charset=UTF-8',
-                'Authorization': 'Bearer ' + token,
-            })
-        }
+    // var requestCallback = function(token, me) {
+    //     console.log("Token: " + token)
+    //     var httpOptions = {
+    //         headers: new HttpHeaders({
+    //             // 'Content-Type': 'multipart/form-data;charset=UTF-8',
+    //             'Accept': 'application/json;charset=UTF-8',
+    //             'Authorization': 'Bearer ' + token,
+    //         })
+    //     }
+    //
+    //     var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/avoid/"+blockLat+"/"+blockLng
+    //     me.http.get(url, httpOptions).subscribe((data) => {
+    //         console.log(data);
+    //         me.drawPolyline(data, map, me.startMarker, me.destMarker, me.weatherMarker)
+    //     })
+    // }
+    //
+    // me.updateToken(requestCallback, me)
+    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/avoid/"+blockLat+"/"+blockLng+"/nicky"
+        const http = require('http')
+        http.get(url, (resp) => {
+          let data = '';
 
-        var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/avoid/"+blockLat+"/"+blockLng
-        me.http.get(url, httpOptions).subscribe((data) => {
-            console.log(data);
-            me.drawPolyline(data, map, me.startMarker, me.destMarker, me.weatherMarker)
-        })
-    }
+          // A chunk of data has been recieved.
+          resp.on('data', (chunk) => {
+            data += chunk;
+          });
 
-    me.updateToken(requestCallback, me)
+          // The whole response has been received. Print out the result.
+          resp.on('end', () => {
+            drawPolyline(JSON.parse(data), map, startMarker, destMarker, weatherMarker)
+          });
+
+        }).on("error", (err) => {
+          console.log("Error: " + err.message);
+    });
 }
 
 /*
@@ -367,9 +402,9 @@ loadLegend(){
 
       }
 
-      jsonData = jsonData['routes']
+      // jsonData = jsonData['routes']
+      var jsonData = data['routes'];
       getWeather(jsonData[0]['legs'][0]['start_location']['lat'], jsonData[0]['legs'][0]['start_location']['lng'], weatherMarker, map);
-      var me = this
       jsonData.forEach(function(route) {
             var legs = route['legs']
 
@@ -385,7 +420,7 @@ loadLegend(){
               destMarker = leaflet.marker([destMarkerLatLng[0], destMarkerLatLng[1]])
               markerGroup.addLayer(startMarker);
               markerGroup.addLayer(destMarker);
-              me.map.addLayer(markerGroup);
+              map.addLayer(markerGroup);
 
               steps.forEach(function(step){
 
@@ -425,7 +460,7 @@ loadLegend(){
                   opacity: .7,
                   dashArray: '0,0',
                   lineJoin: 'round'
-              }).addTo(me.map)
+              }).addTo(map)
               })
             })
       })
@@ -433,13 +468,10 @@ loadLegend(){
 
    updateToken(callback, me) {
     me.storage.get('access_token').then((token) => {
-        if(token) {
-            callback(token, me)
-        } else {
-            me.navCtrl.push(LoginPage);
-        }
+        callback(token, me)
     }).catch((error) => {
         console.log(error);
+        me.navCtrl.push(LoginPage);
      });
   }
 
