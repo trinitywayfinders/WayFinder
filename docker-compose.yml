@@ -7,14 +7,14 @@ services:
      depends_on:
       - AuthServer
      ports:
-      - "8080:8100"
+      - "8100:8100"
      environment:
       - IP_ADDR=${IP_ADDR}
 
     AuthServer:
         image: "authserver:0.0.1"
         ports: 
-            - "80:8080"
+            - "8080:8080"
         links:
             - mysql1
         depends_on:

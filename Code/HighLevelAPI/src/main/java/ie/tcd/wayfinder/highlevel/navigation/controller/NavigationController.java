@@ -81,8 +81,8 @@ public class NavigationController {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
        
-        String url = RoutingUrl + "/api/route";
-        
+        String url = RoutingUrl + "/api/route/";
+        System.out.println("Call made to " + url);
         HttpResponse response = Library.POST(url, Optional.of(headers), Optional.of(jsonRequestContent));
                 
          HttpEntity responseEntity = response.getEntity();
@@ -105,8 +105,8 @@ public class NavigationController {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
        
-        String url = RoutingUrl + "/api/route";
-       
+        String url = RoutingUrl + "/api/route/";
+        System.out.println("Call made to " + url);
         HttpResponse response = Library.POST(url, Optional.of(headers), Optional.of(jsonRequestContent));
                 
          HttpEntity responseEntity = response.getEntity();

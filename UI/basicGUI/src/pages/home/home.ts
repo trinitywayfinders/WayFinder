@@ -371,7 +371,7 @@ loadLegend(){
     let markerGroup = leaflet.featureGroup()
 
     function getWeather(startLat, startLng, weatherMarker, map) {
-        var url = "http://wayfinders.ddns.net:22113/api/environment/weather/"+startLat+"/"+startLng+"/";
+        var url = "http://wayfinders.ddns.net:8086/api/environment/weather/"+startLat+"/"+startLng+"/";
         let data = '';
         var iconCode;
         const http = require('http')
