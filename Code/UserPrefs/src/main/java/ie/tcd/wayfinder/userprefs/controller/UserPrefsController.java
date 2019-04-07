@@ -40,6 +40,7 @@ public class UserPrefsController {
 			           HttpStatus.BAD_REQUEST, "Username not provided");
 		}
 		String username = (String)request.get(UserPrefs.USERNAME_KEY);
+		System.out.println(username);
 		UserPrefs userPrefs = userPrefsService.getUserPrefsByUsername(username);
 		if (userPrefs==null) {
 			throw new ResponseStatusException(

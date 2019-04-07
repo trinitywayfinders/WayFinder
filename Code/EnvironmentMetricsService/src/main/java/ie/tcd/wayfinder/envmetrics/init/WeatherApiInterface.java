@@ -1,6 +1,7 @@
 package ie.tcd.wayfinder.envmetrics.init;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +17,7 @@ import io.swagger.annotations.ApiResponses;
 
 @Api(value = "WeatherApi", description = "the Weather API")
 public interface WeatherApiInterface {
-
+	@CrossOrigin(origins = {"*"}, allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token"})
 	@ApiOperation(value = "Get Weather information for Latitude and longitude", nickname = "getWeather", notes = "", response = WeatherResponse.class, tags = {})
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Weather Object", response = WeatherResponse.class),
 			@ApiResponse(code = 400, message = "Bad Request", response = Error.class),

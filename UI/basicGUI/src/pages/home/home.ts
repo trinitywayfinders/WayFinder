@@ -5,6 +5,9 @@ import leaflet from 'leaflet';
 import polyUtil from 'polyline-encoded'
 import { SignupPage } from '../signup/signup';
 import { LoginPage } from '../login/login';
+import { Storage } from '@ionic/storage';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 @Component({
   selector: 'page-home',
@@ -26,7 +29,8 @@ export class HomePage {
   weatherMarker: leaflet.marker
   sim: any
   simGroup: leaflet.featureGroup
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController ) {}
+
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public storage: Storage, public http: HttpClient ) {}
 
   ionViewDidEnter() {
     this.loadmap();
@@ -111,8 +115,9 @@ loadLegend(){
     var weatherMarker = this.weatherMarker
 
     var onClickSetBlock = this.onClickSetBlock
-    var getRouteWithBlock = this.getRouteWithBlock
+    // var getRouteWithBlock = this.getRouteWithBlock
     var drawPolyline = this.drawPolyline
+    var me = this
 
     map.on('click', function(e) {
 
@@ -236,27 +241,44 @@ loadLegend(){
       return;
     }
     //ToDo: change url to deployed server version
-    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/Zihan"
-    const http = require('http')
-    http.get(url, (resp) => {
-      let data = '';
+    // var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/Zihan"
+    // const http = require('http')
+    // http.get(url, (resp) => {
+    //   let data = '';
+    //
+    //   // A chunk of data has been recieved.
+    //   resp.on('data', (chunk) => {
+    //     data += chunk;
+    //   });
+    //
+    //   // The whole response has been received. Print out the result.
+    //   resp.on('end', () => {
+    //     this.drawPolyline(data, this.map, this.startMarker, this.destMarker, this.weatherMarker)
+    //   });
+    //
+    // }).on("error", (err) => {
+    //   console.log("Error: " + err.message);
+    // });
+    var requestCallback = function(token, me) {
+        console.log("Token: " + token)
+        var httpOptions = {
+            headers: new HttpHeaders({
+                // 'Content-Type': 'multipart/form-data;charset=UTF-8',
+                'Accept': 'application/json;charset=UTF-8',
+                'Authorization': 'Bearer ' + token,
+            })
+        }
 
-      // A chunk of data has been recieved.
-      resp.on('data', (chunk) => {
-        data += chunk;
-      });
+        var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving"
+        me.http.get(url, httpOptions).subscribe((data) => {
+            me.drawPolyline(data, me.map, me.startMarker, me.destMarker, me.weatherMarker)
+        })
+    }
 
-      // The whole response has been received. Print out the result.
-      resp.on('end', () => {
-        this.drawPolyline(data, this.map, this.startMarker, this.destMarker, this.weatherMarker)
-      });
-
-    }).on("error", (err) => {
-      console.log("Error: " + err.message);
-    });
+    this.updateToken(requestCallback, this)
   }
 
-  getRouteWithBlock(start, destination, blockLat, blockLng, drawPolyline, map, startMarker, destMarker, weatherMarker){
+  getRouteWithBlock(start, destination, blockLat, blockLng, drawPolyline, map, startMarker, destMarker, weatherMarker, me){
     var drawPolyline = drawPolyline
 
     console.log("routing:"+start)
@@ -279,26 +301,43 @@ loadLegend(){
     }
 
     //ToDo: change url to deployed server version
-    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/avoid/"+blockLat+"/"+blockLng+"/Zihan"
-    const http = require('http')
-    http.get(url, (resp) => {
-      let data = '';
+    // var requestCallback = function(token, me) {
+    //     console.log("Token: " + token)
+    //     var httpOptions = {
+    //         headers: new HttpHeaders({
+    //             // 'Content-Type': 'multipart/form-data;charset=UTF-8',
+    //             'Accept': 'application/json;charset=UTF-8',
+    //             'Authorization': 'Bearer ' + token,
+    //         })
+    //     }
+    //
+    //     var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/avoid/"+blockLat+"/"+blockLng
+    //     me.http.get(url, httpOptions).subscribe((data) => {
+    //         console.log(data);
+    //         me.drawPolyline(data, map, me.startMarker, me.destMarker, me.weatherMarker)
+    //     })
+    // }
+    //
+    // me.updateToken(requestCallback, me)
+    var url = "http://localhost:8081/navigation/start/"+start+"/destination/"+destination+"/driving/avoid/"+blockLat+"/"+blockLng+"/nicky"
+        const http = require('http')
+        http.get(url, (resp) => {
+          let data = '';
 
-      // A chunk of data has been recieved.
-      resp.on('data', (chunk) => {
-        data += chunk;
-      });
+          // A chunk of data has been recieved.
+          resp.on('data', (chunk) => {
+            data += chunk;
+          });
 
-      // The whole response has been received. Print out the result.
-      resp.on('end', () => {
-        drawPolyline(data, map, startMarker, destMarker, weatherMarker)
-      });
+          // The whole response has been received. Print out the result.
+          resp.on('end', () => {
+            drawPolyline(JSON.parse(data), map, startMarker, destMarker, weatherMarker)
+          });
 
-    }).on("error", (err) => {
-      console.log("Error: " + err.message);
+        }).on("error", (err) => {
+          console.log("Error: " + err.message);
     });
-  }
-
+}
 
 /*
   Walking - Green
@@ -320,7 +359,8 @@ loadLegend(){
       else
         return "#0065ff"
     }
-    var jsonData = JSON.parse(data)
+    // var jsonData = JSON.parse(data)
+    var jsonData = data
     if (startMarker) {
       map.removeLayer(startMarker);
     }
@@ -362,7 +402,8 @@ loadLegend(){
 
       }
 
-      jsonData = jsonData['routes']
+      // jsonData = jsonData['routes']
+      var jsonData = data['routes'];
       getWeather(jsonData[0]['legs'][0]['start_location']['lat'], jsonData[0]['legs'][0]['start_location']['lng'], weatherMarker, map);
       jsonData.forEach(function(route) {
             var legs = route['legs']
@@ -419,10 +460,19 @@ loadLegend(){
                   opacity: .7,
                   dashArray: '0,0',
                   lineJoin: 'round'
-                }).addTo(map)
+              }).addTo(map)
               })
             })
       })
+  }
+
+   updateToken(callback, me) {
+    me.storage.get('access_token').then((token) => {
+        callback(token, me)
+    }).catch((error) => {
+        console.log(error);
+        me.navCtrl.push(LoginPage);
+     });
   }
 
 }
