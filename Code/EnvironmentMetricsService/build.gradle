@@ -57,6 +57,11 @@ task buildDocker(type: Docker, dependsOn: build) {
   }
 }
 
+def profiles = 'dev'
+bootRun {
+  args = ["--spring.profiles.active=" + profiles]
+}
+
 repositories {
 	jcenter()
     mavenCentral()
@@ -79,6 +84,7 @@ dependencies {
 	implementation 'com.googlecode.json-simple:json-simple:1.1'
 	compile 'org.apache.httpcomponents:httpcore:4.4.1'
     compile 'org.apache.httpcomponents:httpclient:4.5.7'
+	compile group: 'javax.activation', name: 'activation', version: '1.1'
 	compile project(":REST")
 	
     testCompile("junit:junit")
