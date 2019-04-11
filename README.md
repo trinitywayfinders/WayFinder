@@ -1,3 +1,7 @@
+
+The Github Pages for this project can be found here
+https://trinitywayfinders.github.io/WayFinder/
+
 # TrinityWayFinders
 Source Code Repo for ASE Project
 
