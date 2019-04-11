@@ -6,11 +6,17 @@ Group 3
 
 # Team Members:
 Arun Thundyill Saseendran
+
 Saad Tariq Malik
+
 Zihan Huang
+
 Nicholas bonello
+
 Yifan Xu
+
 Mark Grennan
+
 
 # Base Requirement:
 ## Project 1: Dynamic Sustainable Wayfinding
@@ -32,4 +38,4 @@ Some of the main challenges include identifying when a user’s interests are li
 
 
 # CODING STANDARDS
-The coding standards for this repository can be found [here](https://github.com/trinitywayfinders/WayFinder/blob/master/Documentation/Coding_Standards/README.md)
+The coding standards for this repository can be found [here](https://github.com/trinitywayfinders/WayFinder/blob/master/docs/CodingStandards.md)
