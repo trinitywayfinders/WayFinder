@@ -1,3 +1,0 @@
-CREATE DATABASE IF NOT EXISTS wayfinder;
-GRANT ALL ON *.* TO root@'%';
-
