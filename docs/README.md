@@ -38,4 +38,7 @@ Some of the main challenges include identifying when a user’s interests are li
 
 
 # CODING STANDARDS
-The coding standards for this repository can be found [here](https://github.com/trinitywayfinders/WayFinder/blob/master/docs/CodingStandards.md)
+The coding standards for this repository can be found [here](CodingStandards.md)
+
+# BUILD INSTRUCTIONS
+The build instructions can be found [here](BUILD_INSTRUCTIONS.md)
