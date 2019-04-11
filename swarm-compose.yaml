@@ -1,0 +1,177 @@
+version: '3'
+services:
+    WayfinderUi:
+     image: "wayfinderui:latest"
+     deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+        window: 120s
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: continue
+        monitor: 60s
+        max_failure_ratio: 0.3
+     links:
+      - AuthServer
+     depends_on:
+      - AuthServer
+     ports:
+      - "8100:8100"
+     environment:
+      - IP_ADDR=${IP_ADDR}
+
+    AuthServer:
+        image: "authserver:0.0.1"
+        deploy:
+          mode: replicated
+          replicas: 3
+          restart_policy:
+            condition: on-failure
+            delay: 10s
+            max_attempts: 3
+            window: 120s
+          update_config:
+            parallelism: 1
+            delay: 10s
+            failure_action: continue
+            monitor: 60s
+            max_failure_ratio: 0.3
+        ports: 
+            - "8080:8080"
+        links:
+            - mysql1
+        depends_on:
+            - mysql1
+
+    HighLevelAPI:
+        image: "hlapi:0.0.1"
+        deploy:
+          mode: replicated
+          replicas: 3
+          restart_policy:
+            condition: on-failure
+            delay: 10s
+            max_attempts: 3
+            window: 120s
+          update_config:
+            parallelism: 1
+            delay: 10s
+            failure_action: continue
+            monitor: 60s
+            max_failure_ratio: 0.3
+        ports:
+            - "8081:8080"
+        links:
+            - RouteAPI
+            - AuthServer
+        depends_on:
+            - RouteAPI
+            - AuthServer
+
+    UserPrefs:
+      image: "userprefs:0.0.1"
+      deploy:
+        mode: replicated
+        replicas: 3
+        restart_policy:
+          condition: on-failure
+          delay: 10s
+          max_attempts: 3
+          window: 120s
+        update_config:
+          parallelism: 1
+          delay: 10s
+          failure_action: continue
+          monitor: 60s
+          max_failure_ratio: 0.3
+     links:
+       - mysql1
+     depends_on:
+       - mysql1
+     ports:
+       - "8083:8080"
+
+    RouteAPI:
+      image: "routeapi:0.0.1"
+      deploy:
+        mode: replicated
+        replicas: 3
+        restart_policy:
+          condition: on-failure
+          delay: 10s
+          max_attempts: 3
+          window: 120s
+        update_config:
+          parallelism: 1
+          delay: 10s
+          failure_action: continue
+          monitor: 60s
+          max_failure_ratio: 0.3
+      ports:
+        - "8085:8080"
+    
+    SimulationApi:
+      image: "simulationapi:0.0.1"
+      deploy:
+        mode: replicated
+        replicas: 3
+        restart_policy:
+          condition: on-failure
+          delay: 10s
+          max_attempts: 3
+          window: 120s
+        update_config:
+          parallelism: 1
+          delay: 10s
+          failure_action: continue
+          monitor: 60s
+          max_failure_ratio: 0.3
+      ports:
+        - "8084:8080"
+
+    EnvironmentApi:
+      image: "environmentservice:0.0.1"
+      deploy:
+        mode: replicated
+        replicas: 3
+        restart_policy:
+          condition: on-failure
+          delay: 10s
+          max_attempts: 3
+          window: 120s
+        update_config:
+          parallelism: 1
+          delay: 10s
+          failure_action: continue
+          monitor: 60s
+          max_failure_ratio: 0.3
+      ports:
+        - "8086:8080"
+
+    mysql1:
+        image: "mysql"
+        deploy:
+        mode: replicated
+        replicas: 1
+        restart_policy:
+          condition: on-failure
+          delay: 10s
+          max_attempts: 3
+          window: 120s
+        update_config:
+          parallelism: 1
+          delay: 10s
+          failure_action: continue
+          monitor: 60s
+          max_failure_ratio: 0.3
+        environment:
+            MYSQL_USER: james
+            MYSQL_PASSWORD: 123456
+            MYSQL_DATABASE: wayfinder
+            MYSQL_ROOT_PASSWORD: wayfinders
+        container_name: mysql1
