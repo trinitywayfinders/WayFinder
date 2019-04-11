@@ -33,7 +33,7 @@ $ sudo apt-get install oracle-java8-installer
 ```
 
 ## Getting the Code
-The code in the ZIP file () can be unpacked on to the system or to get the latest code, use the following command in the home directory of the user.
+The code in the ZIP file (Team3_WayFinder_Source_Code.zip) can be unpacked on to the system or to get the latest code, use the following command in the home directory of the user.
 ```bash
 $ git clone https://github.com/trinitywayfinders/WayFinder.git
 ```
