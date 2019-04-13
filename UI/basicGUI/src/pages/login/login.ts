@@ -35,26 +35,6 @@ export class LoginPage {
         this.form.set('password', this.password);
         this.form.set('client_id', 'web-app');
 
-        // axios({
-        //     method: 'POST',
-        //     url: 'http://localhost:8080/oauth/token',
-        //     headers: {
-        //         'Content-Type': 'multipart/form-data;charset=UTF-8',
-        //         'Accept': 'application/json;charset=UTF-8',
-        //         // 'Authorization': 'Basic d2ViLWFwcDoxMjM0NTY=',
-        //     },
-        //     auth: {
-        //         username: 'web-app',
-        //         password: '123456'
-        //     },
-        //     data: this.form
-        // }).then(function (response) {
-        //   console.log(response);
-        // }).catch(function (error) {
-        //   console.log(error);
-        // }).then(function () {
-        //   // always executed
-        // });
 
         this.httpOptions = {
             headers: new HttpHeaders({
@@ -63,31 +43,9 @@ export class LoginPage {
                 'Authorization': 'Basic d2ViLWFwcDoxMjM0NTY=',
             })
         }
-        this.http.post('http://localhost:8080/oauth/token', this.form, this.httpOptions).subscribe((response) => {
-            console.log(response['access_token']);
-            // console.log(typeof response);
-            //
-            // console.log(response.access_token);
-            // console.log(response.refresh_token);
-
-            // this.storage.set('refresh_token', response.refresh_token);
+        this.http.post('http://wayfinders.ddns.net:8080/oauth/token', this.form, this.httpOptions).subscribe((response) => {
             console.log(response['access_token']);
             this.storage.set('access_token', response['access_token']);
-            // console.log(response.access_token);
-
-            // var authenticatedOptions = {
-            //     headers: new HttpHeaders({
-            //         // 'Content-Type': 'multipart/form-data;charset=UTF-8',
-            //         'Accept': 'application/json;charset=UTF-8',
-            //         'Authorization': 'Bearer ' + response['access_token'],
-            //     })
-            // }
-            //
-            // http.post('http://localhost:8080/api/me', null, authenticatedOptions).subscribe((response) => {
-            //     console.log(response);
-            //
-            //     navCtrl.popToRoot();
-            // });
             this.navCtrl.popToRoot();
         });
     }

@@ -21,7 +21,6 @@ echo "Pulling latest changes from Master"
 git pull
 echo "Latest Changes Available in the Server"
 
-
 # Build Auth Server
 
 echo "      ___           ___                       ___     "
@@ -36,10 +35,10 @@ echo "   \  \:\        \  \:\/:/        \  \:\   \  \:\     "
 echo "    \  \:\        \  \::/          \__\/    \  \:\    "
 echo "     \__\/         \__\/                     \__\/    "
 
-echo "*** Building Auth Server - Begin ***"
+echo "*** Running Sonarqube Test - Auth Server - Begin ***"
 cd Code/AuthenticationServer/
-./gradlew buildDocker -x test
-echo "*** Building Auth Server - Completed ***"
+./gradlew sonarqube -x test
+echo "*** Running Sonarqube Test - Auth Server - Completed ***"
 
 
 # Return to Root
@@ -59,10 +58,10 @@ echo "    \  \:\         \__\/        \  \:\        \  \:\       \__\/  "
 echo "     \__\/                       \__\/         \__\/              "
 
 # Build HighLevel API
-echo "*** Building HighLevelAPI - Begin ***"
+echo "*** Running Sonarqube Test - HighLevelAPI - Begin ***"
 cd Code/HighLevelAPI/
-./gradlew buildDocker -x test
-echo "*** Building HighLevelAPI - Completed ***"
+./gradlew sonarqube -x test
+echo "*** Running Sonarqube Test - HighLevelAPI - Completed ***"
 
 # Return to Root
 cd ../../
@@ -80,10 +79,10 @@ echo "   \  \:\        \  \:\/:/     \  \:\/:/        \  \:\     /__/:/    \  \:
 echo "    \  \:\        \  \::/       \  \::/          \__\/     \__\/      \  \:\        \  \::/   "
 echo "     \__\/         \__\/         \__\/                                 \__\/         \__\/    "
 # Build Route API
-echo "*** Building Route Api - Begin ***"
+echo "*** Running Sonarqube Test - Route Api - Begin ***"
 cd Code/RouteAPI/
-./gradlew buildDocker -x test
-echo "*** Building Route Api - Completed ***"
+./gradlew sonarqube -x test
+echo "*** Running Sonarqube Test - Route Api - Completed ***"
 
 # Return to Root
 cd ../../
@@ -102,10 +101,10 @@ echo "    \  \::/        /__/:/       \  \::/       \  \:\        \  \:\      \ 
 echo "     \__\/         \__\/         \__\/         \__\/         \__\/       \__\/         \__\/         \__\/       \__\/    "
 
 # Build UserPrefs
-echo "*** Building UserPrefs - Begin ***"
+echo "*** Running Sonarqube Test - UserPrefs - Begin ***"
 cd Code/UserPrefs/
-./gradlew buildDocker -x test
-echo "*** Building UserPrefs - Completed ***"
+./gradlew sonarqube -x test
+echo "*** Running Sonarqube Test - UserPrefs - Completed ***"
 
 # Return to Root
 cd ../../
@@ -123,10 +122,10 @@ echo "    \  \::/       \  \:\       \__\::::/    \__\::::/      \__\/      \  \
 echo "     \__\/         \__\/           ~~~~         ~~~~                   \__\/    "
 
 # Build EnvironmentMetricsService
-echo "*** Building EnvironmentMetricsService - Begin ***"
+echo "*** Running Sonarqube Test - EnvironmentMetricsService - Begin ***"
 cd Code/EnvironmentMetricsService/
-./gradlew buildDocker -x test
-echo "*** Building EnvironmentMetricsService - Completed ***"
+./gradlew sonarqube -x test
+echo "*** Running Sonarqube Test - EnvironmentMetricsService - Completed ***"
 
 # Return to Root
 cd ../../
@@ -145,34 +144,13 @@ echo "     /__/:/        \__\/      \  \:\        \  \::/        \__\/        \ 
 echo "     \__\/                     \__\/         \__\/                       \__\/                                 \__\/         \__\/    "
 
 # Build SimulationAPI
-echo "*** Building SimulationAPI - Begin ***"
+echo "*** Running Sonarqube Test - SimulationAPI - Begin ***"
 cd Code/SimulationAPI/
-./gradlew buildDocker -x test
-echo "*** Building SimulationAPI - Completed ***"
+./gradlew sonarqube -x test
+echo "*** Running Sonarqube Test - SimulationAPI - Completed ***"
 
 # Return to Root
 cd ../../
-
-echo "      ___           ___                 "
-echo "     /  /\         /__/\        ___     "
-echo "    /  /:/_        \  \:\      /  /\    "
-echo "   /  /:/ /\        \  \:\    /  /:/    "
-echo "  /  /:/_/::\   ___  \  \:\  /__/::\    "
-echo " /__/:/__\/\:\ /__/\  \__\:\ \__\/\:\__ "
-echo " \  \:\ /~~/:/ \  \:\ /  /:/    \  \:\/\\"
-echo "  \  \:\  /:/   \  \:\  /:/      \__\::/"
-echo "   \  \:\/:/     \  \:\/:/       /__/:/ "
-echo "    \  \::/       \  \::/        \__\/  "
-echo "     \__\/         \__\/                "
-
-# Build UI
-echo "*** Building GUI - Begin ***"
-cd UI/
-docker build -t wayfinderui:latest .
-echo "*** Building GUI - Completed ***"
-
-# Return to Root
-cd ../
 
 echo "              ___    _________                       .__          __             .___"
 echo " /\           \  \   \_   ___ \  ____   _____ ______ |  |   _____/  |_  ____   __| _/"
